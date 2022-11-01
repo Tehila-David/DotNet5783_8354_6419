@@ -10,11 +10,18 @@ namespace Stage0
     {
         static int Main (string[]args)
         {
-            Console.WriteLine("Enter your name:");
-            string  username = Console.ReadLine();
-            Console.WriteLine($"{username}, welcome to my first Console application");
-            Console.ReadKey();
+            Welcome6419();
+            Welcome8354();
+
+        Console.ReadKey();
             return 0;
+        }
+         static partial void Welcome8354();
+        private static void Welcome6419()
+        {
+            Console.WriteLine("Enter your name:");
+            string username = Console.ReadLine();
+            Console.WriteLine($"{username}, welcome to my first Console application");
         }
     }
 }
