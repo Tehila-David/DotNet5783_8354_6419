@@ -2,6 +2,6 @@
 
 namespace DO;
 
-internal struct OrderItem
+public struct OrderItem
 {
 }

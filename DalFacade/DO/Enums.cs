@@ -2,6 +2,6 @@
 
 namespace DO;
 
-internal struct Enums
+public struct Enums
 {
 }

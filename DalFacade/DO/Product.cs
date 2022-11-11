@@ -2,6 +2,6 @@
 
 namespace DO;
 
-internal struct Product
+public  struct Product
 {
 }
