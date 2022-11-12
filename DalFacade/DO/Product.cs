@@ -10,25 +10,26 @@ public struct Product
     /// <summary>
     /// Unique ID of Prudct
     /// </summary>
-    public int ID ;
+    public int ID { get; set; }
     /// <summary>
     /// Name of product
     /// </summary>
-    public string Name;
+    public string Name { get; set; }
     /// <summary>
     /// Price of  Product
     /// </summary>
-    public double Price;
+    public double Price { get; set; }
     /// <summary>
     /// Category of product
     /// </summary>
-    Category Category;
+    Category Category { get; set; }
     /// <summary>
     /// Instock of product
     /// </summary>
-    public int InStock;
+    public int InStock { get; set; }
 
-    public override string ToString() => $@"
+
+public override string ToString() => $@"
     Product ID={ID}: {Name}, 
     category - {Category}
     Price: {Price}
