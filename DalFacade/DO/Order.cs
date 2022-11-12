@@ -1,8 +1,4 @@
 ﻿
-
-using System.Diagnostics;
-using System.Xml.Linq;
-
 namespace DO;
 /// <summary>
 /// struct for final order
@@ -16,28 +12,27 @@ public struct Order
     /// <summary>
     /// name of costumer
     /// </summary>
-    public string CostumerName { get; set; }
+    public string? CostumerName{ get; set; }
     /// <summary>
     /// Email of costumer
     /// </summary>
-    public string CustomerEmail { get; set; }
+    public string? CustomerEmail { get; set; }
     /// <summary>
     /// address of costumer
     /// </summary>
-    public string CustomerAdress { get; set; }
+    public string? CustomerAdress { get; set; }
     /// <summary>
     /// Date of Order
     /// </summary>
-    public DateTime OrderDate { get { return OrderDate; } set { OrderDate = DateTime.MinValue; } }
-    
+    public TimeSpan? OrderDate { get; set; }
     /// <summary>
     /// Date of shipping
     /// </summary>
-    public DateTime ShipDate { get { return ShipDate; } set { ShipDate = DateTime.MinValue; } }
+    public DateTime? ShipDate { get ;  set ; }
     /// <summary>
     /// Date of  Delivery
     /// </summary>
-    public DateTime DeliveryDate { get { return DeliveryDate; } set { DeliveryDate = DateTime.MinValue; } }
+    public DateTime? DeliveryDate { get ; set ;}
 
 
     public override string ToString() => $@"
