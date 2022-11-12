@@ -2,4 +2,4 @@
 
 namespace DO;
 
-enum Category { };
+enum Category { LAPTOP, PHONE, TABLET, SCREEN, SMART_WATCH };
