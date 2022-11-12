@@ -6,7 +6,11 @@ namespace Dal;
 internal static class DataSource
 {
 
-    internal static Product[] products = new Product[50]; 
-    internal static OrderItem[] orderItem = new OrderItem[100];
-    internal static Order[] order = new Order[200];
+    internal static Product[] arrayProducts = new Product[50]; 
+    internal static OrderItem[] arrayOrderItem = new OrderItem[100];
+    internal static Order[] arrayOrder = new Order[200];
+    DateSource()
+    {
+
+    }
 }
