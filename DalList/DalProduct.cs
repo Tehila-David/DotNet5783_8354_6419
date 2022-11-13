@@ -5,7 +5,7 @@ namespace Dal;
 
 public class DalProduct
 {
-    public int addProduct(Product add)
+    public int addProduct(Product myProduct)
     {
         int nextIndex = DataSource.Config.IndexProducts;
         if (DataSource.arrayProducts.Length == nextIndex)
@@ -14,14 +14,15 @@ public class DalProduct
         }
        for(int i = 0; i < nextIndex; i++)
         {
-           if( DataSource.arrayProducts[i].ID == add.ID)
+           if( DataSource.arrayProducts[i].ID == myProduct.ID)
             {
                 throw new Exception("This is exist in the array");
             }
 
         }
-        DataSource.arrayProducts[nextIndex]=add;
-        return add.ID;
+        DataSource.arrayProducts[nextIndex]= myProduct;
+        DataSource.Config.IndexProducts++;
+        return myProduct.ID;
     }
     public void delete(int ID)
     {
