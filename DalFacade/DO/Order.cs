@@ -24,7 +24,7 @@ public struct Order
     /// <summary>
     /// Date of Order
     /// </summary>
-    public TimeSpan? OrderDate { get; set; }
+    public DateTime? OrderDate { get; set; }
     /// <summary>
     /// Date of shipping
     /// </summary>

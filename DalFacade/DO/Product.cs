@@ -22,7 +22,7 @@ public struct Product
     /// <summary>
     /// Category of product
     /// </summary>
-    Category Category { get; set; }
+    public Category Category { get; set; }
     /// <summary>
     /// Instock of product
     /// </summary>
