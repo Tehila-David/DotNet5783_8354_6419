@@ -21,7 +21,7 @@ internal static class DataSource
 
     internal static class Config
     {
-        internal static int IndexProducts { get; set; }
+        internal static int IndexProducts { get; set; } // Actual number of products in the array - the last empty place
         internal static int IndexOrdersItem { get; set; }
         internal static int IndexOrder { get; set; }
 
