@@ -13,22 +13,22 @@ public class DalProduct
         {
             throw new Exception("The order item array is full");
         }
-       for(int i = 0; i < nextIndex; i++)
+        for (int i = 0; i < nextIndex; i++)
         {
-           if( DataSource.arrayProducts[i].ID == myProduct.ID)
+            if (DataSource.arrayProducts[i].ID == myProduct.ID)
             {
                 throw new Exception("The order item already exists");
             }
 
         }
         DataSource.arrayProducts[nextIndex] = new Product()
-        {ID = add.ID, 
-         Name = add.Name, 
-         Price = add.Price, 
-         Category = add.Category, 
-         InStock = add.InStock};
+        { ID = myProduct.ID,
+            Name = myProduct.Name,
+            Price = myProduct.Price,
+            Category = myProduct.Category,
+            InStock = myProduct.InStock };
 
-        return add.ID;
+        return myProduct.ID;
     }
     public void delete(int ID)
     {
