@@ -5,6 +5,8 @@ namespace Dal;
 
 internal static class DataSource
 {
+    
+  //public static readonly
    static  DataSource()
     {
         s_Initialize();
@@ -17,47 +19,24 @@ internal static class DataSource
     static int NumProducts { get; set; }
     static int NumOrdersItem { get; set; }
     static int NumOrders { get; set ; }
-    static void AddArrayProducts(Product myProduct)
-    {
-        if (NumProducts < 50)
-        {
-            NumProducts++;
-            arrayProducts[NumProducts] = myProduct;
-        }
-    }
-    static void AddArrayOrderItem(OrderItem myOrderItem)
-    {
-        if(NumOrdersItem < 100)
-        {
-            NumOrdersItem++;
-            arrayOrderItem[NumOrdersItem] = myOrderItem;
-        }
-    }
-    static void AddArrayOrder(Order myOrder)
-    {
-        if(NumOrders < 200)
-        {
-            NumOrders++;
-            arrayOrder[NumOrders] = myOrder;
-        }
-    }
+  
     internal static class Config
     {
-        internal const int s_startOrderNumber = 1000;
+        internal const int s_startOrderNumber = 100000;
         private static int s_nextOrderNumber = s_startOrderNumber;
         internal static int NextOrderNumber { get => ++ s_nextOrderNumber; }
     }
- static void s_Initialize()/// מאתחל את המערכים
+ static void s_Initialize()// מאתחל את המערכים
     {
-        createProducts();/// 10
-        createOrders();///20
-        createOrderItem();///40
+        createProducts();// 10
+        createOrders();//20
+        createOrderItem();//40
     }
     static void createProducts()
     {
-
+        
     }
-   static void createOrders()
+    static void createOrders()
     {
 
     }
