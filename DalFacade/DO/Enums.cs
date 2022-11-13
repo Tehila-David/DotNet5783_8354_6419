@@ -2,6 +2,4 @@
 
 namespace DO;
 
-internal struct Enums
-{
-}
+enum Category { LAPTOP, PHONE, TABLET, SCREEN, SMART_WATCH };
