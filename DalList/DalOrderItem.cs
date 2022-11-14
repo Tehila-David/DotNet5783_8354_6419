@@ -1,18 +1,17 @@
 ﻿
 
 using DO;
-using System.Reflection;
 
 namespace Dal;
 
 public class DalOrderItem
 
 {
-    public int addOrdrItem(OrderItem myOrderItem)
+    public int addOrderItem(OrderItem myOrderItem)
     {
         if(DataSource.arrayOrderItem.Length == DataSource.Config.IndexOrdersItem)
         {
-            throw new Exception("The order item array is full");
+            throw new Exception("The Order Item array is full");
         }
         for(int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
         {
@@ -26,7 +25,7 @@ public class DalOrderItem
         
         return myOrderItem.ID;
     }
-    public OrderItem getSingleOrdrItem(int id)
+    public OrderItem getSingleOrderItem(int id)
     {
         for (int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
         {
@@ -45,7 +44,7 @@ public class DalOrderItem
         }
         throw new Exception("Sorry ,this item does not exist in the array ");
     }
-    public OrderItem[] getListOfOrdrItem()
+    public OrderItem[] getListOfOrderItem()
     {
         int index = DataSource.Config.IndexOrdersItem;
         OrderItem[] newOrderItemList = new OrderItem[index];
@@ -63,7 +62,7 @@ public class DalOrderItem
         }
         return newOrderItemList;
     }
-    public void deleteOrdrItem(int id)
+    public void deleteOrderItem(int id)
     {
         int nextIndex = DataSource.Config.IndexOrdersItem;
         for (int i = 0; i < nextIndex; i++)
@@ -82,7 +81,7 @@ public class DalOrderItem
 
     }
 
-    public void updateOrdrItem(OrderItem myOrderItem)
+    public void updateOrderItem(OrderItem myOrderItem)
     {
         for(int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
         {
@@ -92,7 +91,7 @@ public class DalOrderItem
                 break;
             }
         }
-        throw new Exception("Order Item to be replaced does not exist");
+        throw new Exception("Order Item to be updated does not exist");
     }
 }
   

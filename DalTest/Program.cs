@@ -1,67 +1,70 @@
-﻿// See https://aka.ms/new-console-template for more information
-//Console.WriteLine("Hello, World!");
-
-using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
-
-
-class Program
+﻿using DO;
+using Dal;
+using DalProduct;
+internal class Program
 {
     static void Main()
     {
-        int choose;
-        Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
-        choose = Console.Read();
-        while (choose != 0)
+        int choice;
+        Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
+        choice = Console.Read();
+        while (choice != 0)
         {
-            try
+
+            switch (choose)
             {
-                switch (choose)
-                {
-                    case 0:
-                        return;
-                    case 1:
-                        subProuduct();
-                        break;
-                    case 2:
-                        subOrder();
-                        break;
-                    case 3:
-                        subOrderItem();
-                        break;
+                case 0:
+                    return;
+                case 1:
+                    subProuduct();
+                    break;
+                case 2:
+                    subOrder(); break;
+                case 3:
+                    subOrderItem();
+                    break;
 
                     default:
                         Console.WriteLine("ERROR");
                         break;
 
-                }
-                Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
-                choose = Console.Read();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("{0}", ex);
-            }
-
+            Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
+            choose = Console.Read();
         }
     }
     public static void subProuduct()
     {
-        Console.WriteLine(" Input : a - Add an object, b - Show an object by ID, c -  Show an array of object, d- Update an object , e - Delete an object");
-        char choose;
-        choose = (char)Console.Read();
-        switch (choose)
+        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
+        char choice;
+        choice = (char)Console.Read();
+        switch (choice)
         {
-            case 'a':
+            case 'a': ///add product
+                Product product = new Product();
+                Console.WriteLine("Enter product name:");
+                product.Name = Console.ReadLine();
+                Console.WriteLine("Enter product Category:");
+                product.Category = Console.ReadLine();
+                Console.WriteLine("Enter product Price:");
+                product.Price = Console.ReadLine();
+                Console.WriteLine("Enter product amount:");
+                product.InStock = Console.ReadLine();
+                int id = DalProduct.addProduct(product);
+                break;
+
+                case 'b': ///show single product
+                Console.WriteLine("Enter product ID:");
+                int idForItem = Console.ReadLine();
 
                 return;
             case 'b':
-
+                subProuduct();
                 break;
             case 'c':
-                 break;
+                subOrder(); break;
             case 'd':
-                
+                subOrderItem();
                 break;
             case 'e':
                 break;
@@ -70,55 +73,12 @@ class Program
                 break;
         }
     }
-    public static void subOrder()
-    {
-        Console.WriteLine(" Input : a - Add an object, b - Show an object by ID, c -  Show an array of object, d- Update an object , e - Delete an object");
-        char choose;
-        choose = (char)Console.Read();
-        switch (choose)
+        public static void subOrder()
         {
-            case 'a':
 
-                return;
-            case 'b':
+        }
+        public static void subOrderItem()
+        {
 
-                break;
-            case 'c':
-                 break;
-            case 'd':
-               
-                break;
-            case 'e':
-                break;
-            default:
-                Console.WriteLine("ERROR");
-                break;
         }
     }
-    public static void subOrderItem()
-    {
-        Console.WriteLine(" Input : a - Add an object, b - Show an object by ID, c -  Show an array of object, d- Update an object , e - Delete an object");
-        char choose;
-        choose = (char)Console.Read();
-        switch (choose)
-        {
-            case 'a':
-
-                return;
-            case 'b':
-
-                break;
-            case 'c':
-                break;
-            case 'd':
-               
-                break;
-            case 'e':
-                break;
-            default:
-                Console.WriteLine("ERROR");
-                break;
-        }
-    }
-
-}
