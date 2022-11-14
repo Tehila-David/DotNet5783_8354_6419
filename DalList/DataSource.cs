@@ -61,9 +61,9 @@ internal static class DataSource
         for (int i = 0; i < 12; i++)//80% ShipDatev+ 60% DeliveryDate =12
         {
             arrayOrder[i].ID = Config.NextOrderID;
-            arrayOrder[i].CostumerName = " Coustumer_" + (char)i;
+            arrayOrder[i].CustomerName = " Coustumer_" + (char)i;
             arrayOrder[i].CustomerEmail = (char)i + "@gmail.com";
-            arrayOrder[i].CustomerAdress = "address_" + (char)(i + 2);
+            arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
             arrayOrder[i].ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));// check!!!!
             arrayOrder[i].DeliveryDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
@@ -71,9 +71,9 @@ internal static class DataSource
         for (int i = 0; i < 4; i++)// only DeliveryDate = 4
         {
             arrayOrder[i].ID = Config.NextOrderID;
-            arrayOrder[i].CostumerName = " Coustumer_" + (char)i;
+            arrayOrder[i].CustomerName = " Coustumer_" + (char)i;
             arrayOrder[i].CustomerEmail = (char)i + "@gmail.com";
-            arrayOrder[i].CustomerAdress = "address_" + (char)(i + 2);
+            arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)); //check!!!!
             arrayOrder[i].ShipDate = DateTime.MinValue;
             arrayOrder[i].DeliveryDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
@@ -81,9 +81,9 @@ internal static class DataSource
         for (int i = 0; i < 4; i++)// without DeliveryDate and ShipDate = 4
         {
             arrayOrder[i].ID = Config.NextOrderID;
-            arrayOrder[i].CostumerName = " Coustumer_" + (char)i;
+            arrayOrder[i].CustomerName = " Coustumer_" + (char)i;
             arrayOrder[i].CustomerEmail = (char)i + "@gmail.com";
-            arrayOrder[i].CustomerAdress = "address_" + (char)(i + 2);
+            arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
             arrayOrder[i].ShipDate = DateTime.MinValue;
             arrayOrder[i].DeliveryDate = DateTime.MinValue;

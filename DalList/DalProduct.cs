@@ -1,6 +1,5 @@
 ﻿
 using DO;
-using System.Diagnostics;
 
 namespace Dal;
 
@@ -11,13 +10,13 @@ public class DalProduct
         int nextIndex = DataSource.Config.IndexProducts;
         if (DataSource.arrayProducts.Length == nextIndex)
         {
-            throw new Exception("The order item array is full");
+            throw new Exception("The product array is full");
         }
         for (int i = 0; i < nextIndex; i++)
         {
             if (DataSource.arrayProducts[i].ID == myProduct.ID)
             {
-                throw new Exception("The order item already exists");
+                throw new Exception("The product already exists");
             }
 
         }
@@ -29,6 +28,44 @@ public class DalProduct
             InStock = myProduct.InStock };
 
         return myProduct.ID;
+    }
+
+    public Product getSingleProduct(int id)
+    {
+        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
+        {
+            if (id == DataSource.arrayProducts[i].ID)
+            {
+                Product singleProduct = new Product()
+                {
+                    ID = DataSource.arrayProducts[i].ID,
+                    Name = DataSource.arrayProducts[i].Name,
+                    Price = DataSource.arrayProducts[i].Price,
+                    Category = DataSource.arrayProducts[i].Category,
+                    InStock = DataSource.arrayProducts[i].InStock
+                };
+                return singleProduct;
+            }
+        }
+        throw new Exception("Sorry ,this product does not exist in the array ");
+    }
+    public Product[] getListOfProducts()
+    {
+        int index = DataSource.Config.IndexProducts;
+        Product[] newProductsList = new Product[index];
+
+        for (int i = 0; i < index; i++)
+        {
+            newProductsList[i] = new Product()
+            {
+                ID = DataSource.arrayProducts[i].ID,
+                Name = DataSource.arrayProducts[i].Name,
+                Price = DataSource.arrayProducts[i].Price,
+                Category = DataSource.arrayProducts[i].Category,
+                InStock = DataSource.arrayProducts[i].InStock
+            };
+        }
+        return newProductsList;
     }
     public void delete(int ID)
     {
@@ -45,8 +82,21 @@ public class DalProduct
                 break;
             }
         }
-        throw new Exception("Sorry ,this is not exist in the array ");
+        throw new Exception("Sorry ,this product does not exist in the array ");
 
+    }
+
+    public void updateProduct(Product myProduct)
+    {
+        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
+        {
+            if (DataSource.arrayProducts[i].ID == myProduct.ID)
+            {
+                DataSource.arrayProducts[i] = myProduct;
+                break;
+            }
+        }
+        throw new Exception("Product to be updated does not exist");
     }
 
 }
