@@ -1,10 +1,11 @@
-﻿using DO;
-using Dal;
-using DalProduct;
+﻿//using DO;
+//using Dal;
+//using DalProduct;
 internal class Program
 {
     static void Main(string[] args)
     {
+        //DalProduct product;
         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
         choice = Console.Read();
@@ -62,6 +63,7 @@ internal class Program
                 case 'b': ///show single product
                 Console.WriteLine("Enter product ID:");
                 int idForItem = Console.ReadLine();
+                Product singleProduct = getSingleProduct(idForItem);
 
                 break;
                 case 'c': ///show list of products

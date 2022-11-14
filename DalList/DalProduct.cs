@@ -67,7 +67,7 @@ public class DalProduct
         }
         return newProductsList;
     }
-    public void delete(int ID)
+    public void deleteProduct(int ID)
     {
         int nextIndex = DataSource.Config.IndexProducts;
         for (int i = 0; i < nextIndex; i++)
