@@ -1,14 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-//Console.WriteLine("Hello, World!");
-
-using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
-
-//public enum OPTIONS { EXIT = '0', PRODUCT = '1', ORDER = '2', ORDERITEM = '3' };
-
-class Program
+﻿using DO;
+using Dal;
+using DalProduct;
+internal class Program
 {
-    //public enum OPTIONS {EXIT = '0', PRODUCT = '1', ORDER = '2', ORDERITEM = '3' };
     static void Main(string[] args)
     {
         int choice;
@@ -50,20 +44,31 @@ class Program
         Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
         char choice;
         choice = (char)Console.Read();
-            switch (choice)
-            {
-                case 'a':
+        switch (choice)
+        {
+            case 'a': ///add product
+                Product product = new Product();
+                Console.WriteLine("Enter product name:");
+                product.Name = Console.ReadLine();
+                Console.WriteLine("Enter product Category:");
+                product.Category = Console.ReadLine();
+                Console.WriteLine("Enter product Price:");
+                product.Price = Console.ReadLine();
+                Console.WriteLine("Enter product amount:");
+                product.InStock = Console.ReadLine();
+                int id = DalProduct.addProduct(product);
+                break;
 
-                    return;
-                case 'b':
-                    subProuduct();
-                    break;
-                case 'c':
-                    subOrder(); break;
-                case 'd':
-                    subOrderItem();
-                    break;
-                case 'e':
+                case 'b': ///show single product
+                Console.WriteLine("Enter product ID:");
+                int idForItem = Console.ReadLine();
+
+                break;
+                case 'c': ///show list of products
+                     break;
+                case 'd': ///update product
+                    break; 
+                case 'e': ///delete product
                     break;
                 default:
                     Console.WriteLine("ERROR");
@@ -72,10 +77,49 @@ class Program
     }
         public static void subOrder()
         {
-
-        }
-        public static void subOrderItem()
+        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
+        char choice;
+        choice = (char)Console.Read();
+        switch (choice)
         {
+            case 'a': ///add order
 
+                break;
+            case 'b': ///show single order
+                break;
+            case 'c': ///show list of orders
+                break;
+            case 'd': ///update order
+                break;
+            case 'e': ///delete order
+                break;
+            default:
+                Console.WriteLine("ERROR");
+                break;
         }
     }
+        public static void subOrderItem()
+        {
+        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
+        char choice;
+        choice = (char)Console.Read();
+        switch (choice)
+        {
+            case 'a': ///add order item
+
+                break;
+            case 'b': ///show single order item
+                break;
+            case 'c': ///show list of order items
+                break;
+            case 'd': ///update item
+                break;
+            case 'e': ///delete item
+                break;
+            default:
+                Console.WriteLine("ERROR");
+                break;
+        }
+    }
+    
+}
