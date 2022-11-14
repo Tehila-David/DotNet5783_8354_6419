@@ -1,5 +1,6 @@
 ﻿
 using DO;
+using System.Diagnostics;
 
 namespace Dal;
 
@@ -10,18 +11,23 @@ public class DalProduct
         int nextIndex = DataSource.Config.IndexProducts;
         if (DataSource.arrayProducts.Length == nextIndex)
         {
-            throw new Exception("Sorry ,there is no place in array ");
+            throw new Exception("The order item array is full");
         }
-       for(int i = 0; i < nextIndex; i++)
+        for (int i = 0; i < nextIndex; i++)
         {
-           if( DataSource.arrayProducts[i].ID == myProduct.ID)
+            if (DataSource.arrayProducts[i].ID == myProduct.ID)
             {
-                throw new Exception("This is exist in the array");
+                throw new Exception("The order item already exists");
             }
 
         }
-        DataSource.arrayProducts[nextIndex]= myProduct;
-        DataSource.Config.IndexProducts++;
+        DataSource.arrayProducts[nextIndex] = new Product()
+        { ID = myProduct.ID,
+            Name = myProduct.Name,
+            Price = myProduct.Price,
+            Category = myProduct.Category,
+            InStock = myProduct.InStock };
+
         return myProduct.ID;
     }
     public void delete(int ID)

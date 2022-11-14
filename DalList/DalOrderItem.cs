@@ -1,6 +1,7 @@
 ﻿
 
 using DO;
+using System.Reflection;
 
 namespace Dal;
 
@@ -11,7 +12,7 @@ public class DalOrderItem
     {
         if(DataSource.arrayOrderItem.Length == DataSource.Config.IndexOrdersItem)
         {
-            throw new Exception("The array is full");
+            throw new Exception("The order item array is full");
         }
         for(int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
         {
@@ -25,16 +26,59 @@ public class DalOrderItem
         
         return myOrderItem.ID;
     }
-    public void getSingleOrdrItem(OrderItem myOrderItem)
+    public OrderItem getSingleOrdrItem(int id)
     {
-
+        for (int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
+        {
+            if (id == DataSource.arrayOrderItem[i].ID)
+            {
+                OrderItem singleOrderItem = new OrderItem()
+                {
+                    ID = DataSource.arrayOrderItem[i].ID,
+                    ProductID = DataSource.arrayOrderItem[i].ProductID,
+                    OrderID = DataSource.arrayOrderItem[i].OrderID,
+                    Amount = DataSource.arrayOrderItem[i].Amount,
+                    Price = DataSource.arrayOrderItem[i].Price
+                };
+                return singleOrderItem;
+            }
+        }
+        throw new Exception("Sorry ,this item does not exist in the array ");
     }
-    public void getListOfOrdrItem(OrderItem myOrderItem)
+    public OrderItem[] getListOfOrdrItem()
     {
+        int index = DataSource.Config.IndexOrdersItem;
+        OrderItem[] newOrderItemList = new OrderItem[index];
 
+        for (int i = 0; i < index; i++)
+        {
+            newOrderItemList[i] = new OrderItem()   
+             {
+                    ID = DataSource.arrayOrderItem[i].ID,
+                    ProductID = DataSource.arrayOrderItem[i].ProductID,
+                    OrderID = DataSource.arrayOrderItem[i].OrderID,
+                    Amount = DataSource.arrayOrderItem[i].Amount,
+                    Price = DataSource.arrayOrderItem[i].Price
+              };
+        }
+        return newOrderItemList;
     }
-    public void deleteOrdrItem(OrderItem myOrderItem)
+    public void deleteOrdrItem(int id)
     {
+        int nextIndex = DataSource.Config.IndexOrdersItem;
+        for (int i = 0; i < nextIndex; i++)
+        {
+            if (DataSource.arrayOrderItem[i].ID == id)
+            {
+                for (int j = i; j < nextIndex - 1; j++)
+                {
+                    DataSource.arrayOrderItem[j] = DataSource.arrayOrderItem[j + 1];
+                }
+                DataSource.Config.IndexOrdersItem--;
+                break;
+            }
+        }
+        throw new Exception("Sorry ,this item does not exist in the array ");
 
     }
 
@@ -51,18 +95,4 @@ public class DalOrderItem
         throw new Exception("Order Item to be replaced does not exist");
     }
 }
-
-/* static class Config
-    {
-        internal static int IndexProducts { get; set; } // Actual number of products in the array  - the ladt empty place
-        internal static int IndexOrdersItem { get; set; } // number of items in an order
-        internal static int IndexOrder { get; set; } // the last empty space of  orders
-
-        internal const int s_startOrderID = 100000;
-        private static int s_nextOrderID = s_startOrderID;
-        internal static int NextOrderID { get => ++s_nextOrderID; }
-
-        internal const int s_startOrderItemID = 100000;
-        private static int s_nextOrderItemID = s_startOrderItemID;
-        internal static int NextOrderItemID { get => ++s_nextOrderItemID; }
-    
+  
