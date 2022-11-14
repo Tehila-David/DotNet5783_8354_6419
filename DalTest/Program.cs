@@ -1,8 +1,13 @@
-﻿
+﻿using DO;
+
+using Dal;
+
+
 class Program
 {
-    static void Main()
+    static void Main(string[] arg)
     {
+
         //DalProduct product;
         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
@@ -44,17 +49,18 @@ class Program
                 Console.WriteLine("Enter product name:");
                 product.Name = Console.ReadLine();
                 Console.WriteLine("Enter product Category:");
-                product.Category = Console.ReadLine();
+                product.Category = Console.Read();
                 Console.WriteLine("Enter product Price:");
-                product.Price = Console.ReadLine();
+                product.Price = Console.Read();
                 Console.WriteLine("Enter product amount:");
-                product.InStock = Console.ReadLine();
-                int id = DalProduct.addProduct(product);
+                product.InStock = Console.Read();
+                int id;
+                id= DalProduct.addProduct(product);
                 break;
 
             case 'b': ///show single product
                 Console.WriteLine("Enter product ID:");
-                int idForItem = Console.ReadLine();
+                int idForItem = Console.Read();
                 Product singleProduct = getSingleProduct(idForItem);
 
                 break;
@@ -80,7 +86,3 @@ class Program
 
     }
 }
-
-
-
-
