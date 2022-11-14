@@ -3,9 +3,10 @@
 //using DalProduct;
 internal class Program
 {
+    private static DalProduct dalProduct = new ();
     static void Main(string[] args)
     {
-        //DalProduct product;
+       // DalProduct product = new DalProduct();
         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
         choice = Console.Read();
@@ -18,7 +19,7 @@ internal class Program
                     case 0:
                         return;
                     case 1:
-                        subProuduct();
+                        subProduct();
                         break;
                     case 2:
                         subOrder(); break;
@@ -40,7 +41,7 @@ internal class Program
             }
         }
     }
-    public static void subProuduct()
+    public static void subProduct()
     {
         Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
         char choice;
