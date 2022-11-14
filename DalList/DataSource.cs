@@ -66,7 +66,7 @@ internal static class DataSource
             arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
             arrayOrder[i].ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));// check!!!!
-            arrayOrder[i].DeliveryDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
+            arrayOrder[i].DeliveryDate = arrayOrder[i].ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
         }
         for (int i = 0; i < 4; i++)// only DeliveryDate = 4
         {

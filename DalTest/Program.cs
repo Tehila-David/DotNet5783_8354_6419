@@ -12,14 +12,15 @@ internal class Program
         choice = Console.Read();
         while (choice != 0)
         {
-            try
+
+            switch (choose)
             {
                 switch (choice)
                 {
                     case 0:
                         return;
                     case 1:
-                        subProduct();
+                        subProuduct();
                         break;
                     case 2:
                         subOrder(); break;
@@ -41,7 +42,7 @@ internal class Program
             }
         }
     }
-    public static void subProduct()
+    public static void subProuduct()
     {
         Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
         char choice;
@@ -66,63 +67,28 @@ internal class Program
                 int idForItem = Console.ReadLine();
                 Product singleProduct = getSingleProduct(idForItem);
 
+                return;
+            case 'b':
+                subProuduct();
                 break;
-                case 'c': ///show list of products
-                     break;
-                case 'd': ///update product
-                    break; 
-                case 'e': ///delete product
-                    break;
-                default:
-                    Console.WriteLine("ERROR");
-                    break;
-            }
+            case 'c':
+                subOrder(); break;
+            case 'd':
+                subOrderItem();
+                break;
+            case 'e':
+                break;
+            default:
+                Console.WriteLine("ERROR");
+                break;
+        }
     }
         public static void subOrder()
         {
-        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
-        char choice;
-        choice = (char)Console.Read();
-        switch (choice)
-        {
-            case 'a': ///add order
 
-                break;
-            case 'b': ///show single order
-                break;
-            case 'c': ///show list of orders
-                break;
-            case 'd': ///update order
-                break;
-            case 'e': ///delete order
-                break;
-            default:
-                Console.WriteLine("ERROR");
-                break;
         }
-    }
         public static void subOrderItem()
         {
-        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
-        char choice;
-        choice = (char)Console.Read();
-        switch (choice)
-        {
-            case 'a': ///add order item
 
-                break;
-            case 'b': ///show single order item
-                break;
-            case 'c': ///show list of order items
-                break;
-            case 'd': ///update item
-                break;
-            case 'e': ///delete item
-                break;
-            default:
-                Console.WriteLine("ERROR");
-                break;
         }
     }
-    
-}
