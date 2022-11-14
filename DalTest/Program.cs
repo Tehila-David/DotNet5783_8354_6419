@@ -62,6 +62,7 @@ internal class Program
                 case 'b': ///show single product
                 Console.WriteLine("Enter product ID:");
                 int idForItem = Console.ReadLine();
+                Product singleProduct = getSingleProduct(idForItem);
 
                 break;
                 case 'c': ///show list of products
