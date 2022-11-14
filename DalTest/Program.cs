@@ -1,7 +1,5 @@
-﻿//using DO;
-//using Dal;
-//using DalProduct;
-internal class Program
+﻿
+class Program
 {
     static void Main()
     {
@@ -12,7 +10,7 @@ internal class Program
         while (choice != 0)
         {
 
-            switch (choose)
+            switch (choice)
             {
                 case 0:
                     return;
@@ -25,13 +23,13 @@ internal class Program
                     subOrderItem();
                     break;
 
-                    default:
-                        Console.WriteLine("ERROR");
-                        break;
+                default:
+                    Console.WriteLine("ERROR");
+                    break;
 
             }
             Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
-            choose = Console.Read();
+            choice = Console.Read();
         }
     }
     public static void subProuduct()
@@ -54,15 +52,13 @@ internal class Program
                 int id = DalProduct.addProduct(product);
                 break;
 
-                case 'b': ///show single product
+            case 'b': ///show single product
                 Console.WriteLine("Enter product ID:");
                 int idForItem = Console.ReadLine();
                 Product singleProduct = getSingleProduct(idForItem);
 
-                return;
-            case 'b':
-                subProuduct();
                 break;
+
             case 'c':
                 subOrder(); break;
             case 'd':
@@ -75,12 +71,16 @@ internal class Program
                 break;
         }
     }
-        public static void subOrder()
-        {
+    public static void subOrder()
+    {
 
-        }
-        public static void subOrderItem()
-        {
-
-        }
     }
+    public static void subOrderItem()
+    {
+
+    }
+}
+
+
+
+
