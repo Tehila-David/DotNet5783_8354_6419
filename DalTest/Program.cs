@@ -1,19 +1,16 @@
-﻿//using DO;
-//using Dal;
-//using DalProduct;
-internal class Program
+﻿using DO;
+namespace Dal;
+class Program
 {
-    private static DalProduct dalProduct = new ();
+    private static DalProduct product = new DalProduct();
     static void Main(string[] args)
     {
-       // DalProduct product = new DalProduct();
         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
         choice = Console.Read();
         while (choice != 0)
         {
-
-            switch (choose)
+            try
             {
                 switch (choice)
                 {
@@ -31,10 +28,9 @@ internal class Program
                     default:
                         Console.WriteLine("ERROR");
                         break;
-
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
@@ -67,14 +63,10 @@ internal class Program
                 int idForItem = Console.ReadLine();
                 Product singleProduct = getSingleProduct(idForItem);
 
-                return;
-            case 'b':
-                subProuduct();
                 break;
             case 'c':
-                subOrder(); break;
+                 break;
             case 'd':
-                subOrderItem();
                 break;
             case 'e':
                 break;

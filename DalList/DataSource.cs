@@ -1,7 +1,5 @@
 ﻿
 using DO;
-using System.Drawing;
-using System.Numerics;
 
 namespace Dal;
 
