@@ -48,7 +48,7 @@ public class DalOrder
         }
         throw new Exception("Sorry ,this Order does not exist in the array ");
     }
-    public Order[] getListOfOrders()
+    public Order[] getArrayOfOrders()
     {
         int index = DataSource.Config.IndexOrder;
         Order[] newOrderList = new Order[index];
