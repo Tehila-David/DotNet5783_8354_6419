@@ -55,7 +55,7 @@ class Program
                 Console.WriteLine("Enter product name:");
                 product.Name = Console.ReadLine();
                 Console.WriteLine("Enter product Category:");
-                product.Category = Console.Read();
+                product.Category = Console.ReadLine();
                 Console.WriteLine("Enter product Price:");
                 product.Price = Console.Read();
                 Console.WriteLine("Enter product amount:");
@@ -85,7 +85,8 @@ class Program
                 Console.WriteLine("Enter product name:");
                 product2.Name = Console.ReadLine();
                 Console.WriteLine("Enter product Category:");
-                product2.Category = Console.Read();
+                product2.Category = Console.ReadLine();
+                //product2.Category = Enum.TryParse(Console.ReadLine());
                 Console.WriteLine("Enter product Price:");
                 product2.Price = Console.Read();
                 Console.WriteLine("Enter product amount:");
