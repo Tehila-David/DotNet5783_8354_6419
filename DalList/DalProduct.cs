@@ -7,26 +7,25 @@ public class DalProduct
 {
     public static int addProduct(Product myProduct)
     {
-        int nextIndex = DataSource.Config.IndexProducts;
-        if (DataSource.arrayProducts.Length == nextIndex)
+        
+        if (DataSource.arrayProducts.Length == DataSource.Config.IndexProducts)
         {
             throw new Exception("The product array is full");
         }
-        for (int i = 0; i < nextIndex; i++)
+        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
-            if (DataSource.arrayProducts[i].ID == myProduct.ID)
+              if (DataSource.arrayProducts[i].ID == myProduct.ID)
             {
                 throw new Exception("The product already exists");
             }
-
         }
-        DataSource.arrayProducts[nextIndex] = new Product()
+        DataSource.arrayProducts[DataSource.Config.IndexProducts] = new Product()
         { ID = myProduct.ID,
             Name = myProduct.Name,
             Price = myProduct.Price,
             Category = myProduct.Category,
             InStock = myProduct.InStock };
-
+        DataSource.Config.IndexProducts++;
         return myProduct.ID;
     }
 
@@ -49,16 +48,22 @@ public class DalProduct
         }
         throw new Exception("Sorry ,this product does not exist in the array ");
     }
-    public static Product[] getArrayOfProducts()//print all elements in array
+     public static  Product[] getListOfProducts()
     {
-        int index = DataSource.Config.IndexProducts;
-        //Product[] newProductsList = new Product[index];
-
-        for (int i = 0; i < index; i++)
+       
+        Product[] newProductsList = new Product[DataSource.Config.IndexProducts];
+        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
-            DataSource.arrayProducts[i].ToString();
+            newProductsList[i] = new Product()
+            {
+                ID = DataSource.arrayProducts[i].ID,
+                Name = DataSource.arrayProducts[i].Name,
+                Price = DataSource.arrayProducts[i].Price,
+                Category = DataSource.arrayProducts[i].Category,
+                InStock = DataSource.arrayProducts[i].InStock
+            };
         }
-        return DataSource.arrayProducts;
+        return newProductsList;
     }
     public static void deleteProduct(int ID)
     {

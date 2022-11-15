@@ -94,8 +94,13 @@ class Program
                 break;
 
             case 'c':// print  array
-                DalProduct.getArrayOfProducts();
+
+                foreach (var product1 in DalProduct.getListOfProducts())
+                {
+                    Console.WriteLine(product1);
+                }
                 break;
+
             case 'd':// update product
                 Console.WriteLine("Enter product name:");
                 NewName = Console.ReadLine();
@@ -163,7 +168,7 @@ class Program
                 break;
 
             case 'c':
-                DalOrder.getArrayOfOrders();
+                //DalOrder.getArrayOfOrders();
                 break;
             case 'd':
                 Order order2 = new Order();
@@ -237,8 +242,8 @@ class Program
                 break;
 
             case 'c':
-                DalOrderItem.getArrayOfOrderItem();
-                break;
+
+               
             case 'd':
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
