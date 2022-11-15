@@ -7,7 +7,7 @@ namespace Dal;
 public class DalOrderItem
 
 {
-    public int addOrderItem(OrderItem myOrderItem)
+    public static int addOrderItem(OrderItem myOrderItem)
     {
         if(DataSource.arrayOrderItem.Length == DataSource.Config.IndexOrdersItem)
         {
@@ -25,7 +25,7 @@ public class DalOrderItem
         
         return myOrderItem.ID;
     }
-    public OrderItem getSingleOrderItem(int id)
+    public static OrderItem getSingleOrderItem(int id)
     {
         for (int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
         {
@@ -44,25 +44,18 @@ public class DalOrderItem
         }
         throw new Exception("Sorry ,this item does not exist in the array ");
     }
-    public OrderItem[] getArrayOfOrderItem()
+    public static OrderItem[] getArrayOfOrderItem()
     {
         int index = DataSource.Config.IndexOrdersItem;
         OrderItem[] newOrderItemList = new OrderItem[index];
 
         for (int i = 0; i < index; i++)
         {
-            newOrderItemList[i] = new OrderItem()   
-             {
-                    ID = DataSource.arrayOrderItem[i].ID,
-                    ProductID = DataSource.arrayOrderItem[i].ProductID,
-                    OrderID = DataSource.arrayOrderItem[i].OrderID,
-                    Amount = DataSource.arrayOrderItem[i].Amount,
-                    Price = DataSource.arrayOrderItem[i].Price
-              };
+            DataSource.arrayOrderItem[i].ToString();
         }
-        return newOrderItemList;
+        return DataSource.arrayOrderItem;
     }
-    public void deleteOrderItem(int id)
+    public static void deleteOrderItem(int id)
     {
         int nextIndex = DataSource.Config.IndexOrdersItem;
         for (int i = 0; i < nextIndex; i++)
@@ -81,7 +74,7 @@ public class DalOrderItem
 
     }
 
-    public void updateOrderItem(OrderItem myOrderItem)
+    public static void updateOrderItem(OrderItem myOrderItem)
     {
         for(int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
         {

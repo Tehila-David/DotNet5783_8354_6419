@@ -93,13 +93,19 @@ internal static class DataSource
     {
         for (int i = 0; i < 40; i++)
         {
+           
             arrayOrderItem[i].ID = Config.NextOrderID;
             arrayOrderItem[i].ProductID = random.Next(222221, 222232);
             arrayOrderItem[i].OrderID = random.Next(99999, Config.NextOrderItemID);
             arrayOrderItem[i].Amount = random.Next(0, 4);
-            var product = Array.Find(arrayProducts, element => element.ID == arrayOrderItem[i].ProductID);
-            arrayOrderItem[i].Price = product.Price * arrayOrderItem[i].Amount;
-
+            for (int j = 0; j < Config.IndexProducts; j++)
+            {
+                if (arrayProducts[j].ID == arrayOrderItem[i].ProductID)
+                {
+                    arrayOrderItem[i].Price = (double)(arrayProducts[j].Price * arrayOrderItem[i].Amount);
+                    break;
+                }
+            }  
         }
         Config.IndexOrdersItem = 40;
     }

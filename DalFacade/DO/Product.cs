@@ -18,7 +18,7 @@ public struct Product
     /// <summary>
     /// Price of  Product
     /// </summary>
-    public double Price { get; set; }
+    public double? Price { get; set; }
     /// <summary>
     /// Category of product
     /// </summary>

@@ -1,19 +1,21 @@
 ﻿using DO;
+using System;
+
 namespace Dal;
 
 
 class Program
 {
-    static void Main(string[] arg)
+    static void Main()
     {
 
         //DalProduct product;
         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
-        choice = Console.Read();
+        int.TryParse(Console.ReadLine(),out choice);
         while (choice != 0)
         {
-            try 
+            try
             {
                 switch (choice)
                 {
@@ -23,7 +25,8 @@ class Program
                         subProuduct();
                         break;
                     case 2:
-                        subOrder(); break;
+                        subOrder();
+                        break;
                     case 3:
                         subOrderItem();
                         break;
@@ -34,69 +37,94 @@ class Program
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(ex.Message);
             }
-           
+
             Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
-            choice = Console.Read();
+            int.TryParse(Console.ReadLine(), out choice);
         }
+        return;
     }
     public static void subProuduct()
     {
+        string NewName;
+        double NewPrice;
+        int NewID;
+        Category NewCategory;
+        int NewInstock;
         Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
         char choice;
-        choice = (char)Console.Read();
+        char.TryParse(Console.ReadLine(), out choice); 
         switch (choice)
         {
-            case 'a': ///add product
-                Product product = new Product();
+            case 'a': ///add new product
                 Console.WriteLine("Enter product name:");
-                product.Name = Console.ReadLine();
+                NewName = Console.ReadLine();
+                Console.WriteLine("Enter product ID:");
+                int.TryParse(Console.ReadLine(), out NewID);
                 Console.WriteLine("Enter product Category:");
-                product.Category = Console.ReadLine();
+                Category.TryParse(Console.ReadLine(), out NewCategory);
                 Console.WriteLine("Enter product Price:");
-                product.Price = Console.Read();
-                Console.WriteLine("Enter product amount:");
-                product.InStock = Console.Read();
+                double.TryParse(Console.ReadLine(), out NewPrice);
+                Console.WriteLine("Enter product instock:");
+                int.TryParse(Console.ReadLine(),out NewInstock);
+
+                Product product = new Product
+                {
+                    
+                    Name = NewName,
+                    ID= NewID,  
+                    Price = NewPrice,
+                    Category = NewCategory,
+                    InStock = NewInstock
+                };
                 int id;
                 id= DalProduct.addProduct(product);
                 break;
 
             case 'b': ///show single product
                 Console.WriteLine("Enter product ID:");
-                int idForItem = Console.Read();
+                int idForItem;
+                int.TryParse(Console.ReadLine(),out idForItem);
                 Product singleProduct;
                 singleProduct = DalProduct.getSingleProduct(idForItem);
                 Console.WriteLine(singleProduct);
                 break;
 
-            case 'c':
-                foreach(Product product1 in DalProduct.getArrayOfProducts())
-                {
-                    Console.WriteLine(product1);
-                }
+            case 'c':// print  array
+                DalProduct.getArrayOfProducts();
                 break;
-            case 'd':
-                Product product2 = new Product();
-                Console.WriteLine("Enter ID: ");
-                product2.ID= Console.Read();
+            case 'd':// update product
                 Console.WriteLine("Enter product name:");
-                product2.Name = Console.ReadLine();
+                NewName = Console.ReadLine();
+                Console.WriteLine("Enter product ID:");
+                int.TryParse(Console.ReadLine(), out NewID);
                 Console.WriteLine("Enter product Category:");
-                product2.Category = Console.ReadLine();
-                //product2.Category = Enum.TryParse(Console.ReadLine());
+                Category.TryParse(Console.ReadLine(), out NewCategory);
                 Console.WriteLine("Enter product Price:");
-                product2.Price = Console.Read();
-                Console.WriteLine("Enter product amount:");
-                product2.InStock = Console.Read();
+                double.TryParse(Console.ReadLine(), out NewPrice);
+                Console.WriteLine("Enter product instock:");
+                int.TryParse(Console.ReadLine(), out NewInstock);
+
+                Product product2 = new Product
+                {
+
+                    Name = NewName,
+                    ID = NewID,
+                    Price = NewPrice,
+                    Category = NewCategory,
+                    InStock = NewInstock
+                };
 
                 DalProduct.updateProduct(product2);
                 break;
-            case 'e':
-                Console.WriteLine("Enter ID: ");
-                int delID= Console.Read();
+
+            case 'e'://delete product
+                int delID;
+                Console.WriteLine("Enter product ID:");
+                int.TryParse(Console.ReadLine(), out delID);
                 DalProduct.deleteProduct(delID);
                 break;
             default:
@@ -106,58 +134,57 @@ class Program
     }
     public static void subOrder()
     {
-        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID, c -  Show an array of products, d- Update a product , e - Delete a product");
+        int orderID;
+        Console.WriteLine(" Input : a - Add a order, b - Show a order by ID, c -  Show an array of orders, d- Update a order , e - Delete a order");
         char choice;
-        choice = (char)Console.Read();
+        char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
         {
             case 'a': ///add product
-                Product product = new Product();
-                Console.WriteLine("Enter product name:");
-                product.Name = Console.ReadLine();
-                Console.WriteLine("Enter product Category:");
-                product.Category = (Category)Console.Read();
-                Console.WriteLine("Enter product Price:");
-                product.Price = Console.Read();
-                Console.WriteLine("Enter product amount:");
-                product.InStock = Console.Read();
-                int id;
-                id = DalProduct.addProduct(product);
+                Order order = new Order();
+                Console.WriteLine("Enter Customer Name:");
+                order.CustomerName = Console.ReadLine();
+                Console.WriteLine("Enter Customer Email:");
+                order.CustomerEmail = Console.ReadLine();
+                Console.WriteLine("Enter Customer Address:");
+                order.CustomerAddress= Console.ReadLine();
+                order.OrderDate = DateTime.MinValue;
+                order.ShipDate= DateTime.MinValue;
+                order.DeliveryDate= DateTime.MinValue;
+                DalOrder.addOrder(order);
                 break;
 
-            case 'b': ///show single product
-                Console.WriteLine("Enter product ID:");
-                int idForItem = Console.Read();
-                Product singleProduct;
-                singleProduct = DalProduct.getSingleProduct(idForItem);
-                Console.WriteLine(singleProduct);
+            case 'b': ///show single order
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(),out orderID);
+                Order singleOrder;
+                singleOrder = DalOrder.getSingleOrder(orderID);
+                Console.WriteLine(singleOrder);
                 break;
 
             case 'c':
-                foreach (Product product1 in DalProduct.getArrayOfProducts())
-                {
-                    Console.WriteLine(product1);
-                }
+                DalOrder.getArrayOfOrders();
                 break;
             case 'd':
-                Product product2 = new Product();
-                Console.WriteLine("Enter ID: ");
-                product2.ID = Console.Read();
-                Console.WriteLine("Enter product name:");
-                product2.Name = Console.ReadLine();
-                Console.WriteLine("Enter product Category:");
-                product2.Category = (Category)Console.Read();
-                Console.WriteLine("Enter product Price:");
-                product2.Price = Console.Read();
-                Console.WriteLine("Enter product amount:");
-                product2.InStock = Console.Read();
-
-                DalProduct.updateProduct(product2);
+                Order order2 = new Order();
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(), out orderID);
+                order2.ID = orderID;
+                Console.WriteLine("Enter Customer Name:");
+                order2.CustomerName = Console.ReadLine();
+                Console.WriteLine("Enter Customer Email:");
+                order2.CustomerEmail = Console.ReadLine();
+                Console.WriteLine("Enter Customer Address:");
+                order2.CustomerAddress = Console.ReadLine();
+                order2.OrderDate = DateTime.MinValue;
+                order2.ShipDate = DateTime.MinValue;
+                order2.DeliveryDate = DateTime.MinValue;
+                DalOrder.updateOrder(order2);
                 break;
             case 'e':
-                Console.WriteLine("Enter ID: ");
-                int delID = Console.Read();
-                DalProduct.deleteProduct(delID);
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(), out orderID);
+                DalOrder.deleteOrder( orderID);
                 break;
             default:
                 Console.WriteLine("ERROR");
@@ -166,6 +193,83 @@ class Program
     }
     public static void subOrderItem()
     {
+        int newID;
+        int newProductID;
+        int newOrderID1;
+        double newPrice1;
+        int newAmount;
+        Console.WriteLine(" Input : a - Add a orderItem, b - Show a orderItem by ID, c -  Show an array of orderItems, d- Update a orderItem , e - Delete a orderItem");
+        char choice;
+        char.TryParse(Console.ReadLine(), out choice);
+        switch (choice)
+        {
+            case 'a': ///add product
 
+                Console.WriteLine("Enter  ID:");
+                int.TryParse(Console.ReadLine(), out newID);
+                Console.WriteLine("Enter Product ID:");
+                int.TryParse(Console.ReadLine(),out newProductID);
+                Console.WriteLine("Enter Order ID:");
+                int.TryParse(Console.ReadLine(),out newOrderID1);
+                Console.WriteLine("Enter  Price:");
+                double.TryParse(Console.ReadLine(), out newPrice1);
+                Console.WriteLine("Enter  amount:");
+                int.TryParse(Console.ReadLine(),out newAmount);
+
+                OrderItem orderItem = new OrderItem
+                {
+                    ID = newID,
+                    ProductID= newProductID,
+                    OrderID = newOrderID1,
+                    Price = newPrice1,
+                    Amount = newAmount,
+                };
+                int id;
+                id = DalOrderItem.addOrderItem(orderItem);
+                break;
+
+            case 'b': ///show single order item
+                Console.WriteLine("Enter  ID:");
+                int.TryParse(Console.ReadLine(), out newID);
+                OrderItem singleOrderItem;
+                singleOrderItem = DalOrderItem.getSingleOrderItem(newID);
+                Console.WriteLine(singleOrderItem);
+                break;
+
+            case 'c':
+                DalOrderItem.getArrayOfOrderItem();
+                break;
+            case 'd':
+                Console.WriteLine("Enter  ID:");
+                int.TryParse(Console.ReadLine(), out newID);
+                Console.WriteLine("Enter Product ID:");
+                int.TryParse(Console.ReadLine(), out newProductID);
+                Console.WriteLine("Enter Order ID:");
+                int.TryParse(Console.ReadLine(), out newOrderID1);
+                Console.WriteLine("Enter  Price:");
+                double.TryParse(Console.ReadLine(), out newPrice1);
+                Console.WriteLine("Enter  amount:");
+                int.TryParse(Console.ReadLine(), out newAmount);
+
+                OrderItem orderItem2 = new OrderItem
+                {
+                    ID = newID,
+                    ProductID = newProductID,
+                    OrderID = newOrderID1,
+                    Price = newPrice1,
+                    Amount = newAmount,
+                };
+                DalOrderItem.updateOrderItem(orderItem2);
+                break;
+
+            case 'e':
+                Console.WriteLine("Enter  ID:");
+                int.TryParse(Console.ReadLine(), out newID);
+                DalOrderItem.deleteOrderItem(newID);
+                break;
+            default:
+                Console.WriteLine("ERROR");
+                break;
+        }
     }
 }
