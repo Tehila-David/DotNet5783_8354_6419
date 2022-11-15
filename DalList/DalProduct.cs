@@ -5,7 +5,7 @@ namespace Dal;
 
 public class DalProduct
 {
-    public int addProduct(Product myProduct)
+    public static int addProduct(Product myProduct)
     {
         int nextIndex = DataSource.Config.IndexProducts;
         if (DataSource.arrayProducts.Length == nextIndex)
@@ -30,7 +30,7 @@ public class DalProduct
         return myProduct.ID;
     }
 
-    public Product getSingleProduct(int id)
+    public static Product getSingleProduct(int id)
     {
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
@@ -49,7 +49,7 @@ public class DalProduct
         }
         throw new Exception("Sorry ,this product does not exist in the array ");
     }
-    public Product[] getListOfProducts()
+    public static Product[] getArrayOfProducts()
     {
         int index = DataSource.Config.IndexProducts;
         Product[] newProductsList = new Product[index];
@@ -67,7 +67,7 @@ public class DalProduct
         }
         return newProductsList;
     }
-    public void deleteProduct(int ID)
+    public static void deleteProduct(int ID)
     {
         int nextIndex = DataSource.Config.IndexProducts;
         for (int i = 0; i < nextIndex; i++)
@@ -86,7 +86,7 @@ public class DalProduct
 
     }
 
-    public void updateProduct(Product myProduct)
+    public static void updateProduct(Product myProduct)
     {
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
