@@ -6,11 +6,11 @@ namespace Dal;
 
 class Program
 {
-    static void Main()
+  static DalProduct dalProduct = new DalProduct();
+  static void Main()
     {
 
-        //DalProduct product;;;;
-        int choice;
+         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
         int.TryParse(Console.ReadLine(),out choice);
         while (choice != 0)
@@ -81,7 +81,7 @@ class Program
                     InStock = NewInstock
                 };
                 int id;
-                id= DalProduct.addProduct(product);
+                id= dalProduct.addProduct(product);
                 break;
 
             case 'b': ///show single product
@@ -89,13 +89,19 @@ class Program
                 int idForItem;
                 int.TryParse(Console.ReadLine(),out idForItem);
                 Product singleProduct;
-                singleProduct = DalProduct.getSingleProduct(idForItem);
+                singleProduct = dalProduct.getSingleProduct(idForItem);
                 Console.WriteLine(singleProduct);
                 break;
 
             case 'c':// print  array
-                DalProduct.getArrayOfProducts();
+
+                foreach (var item in dalProduct.getListOfProducts())
+                {
+                    Console.WriteLine(item);
+                }
+                
                 break;
+
             case 'd':// update product
                 Console.WriteLine("Enter product name:");
                 NewName = Console.ReadLine();
@@ -118,14 +124,14 @@ class Program
                     InStock = NewInstock
                 };
 
-                DalProduct.updateProduct(product2);
+                dalProduct.updateProduct(product2);
                 break;
 
             case 'e'://delete product
                 int delID;
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out delID);
-                DalProduct.deleteProduct(delID);
+                dalProduct.deleteProduct(delID);
                 break;
             default:
                 Console.WriteLine("ERROR");
@@ -163,7 +169,7 @@ class Program
                 break;
 
             case 'c':
-                DalOrder.getArrayOfOrders();
+                //DalOrder.getArrayOfOrders();
                 break;
             case 'd':
                 Order order2 = new Order();
@@ -237,8 +243,8 @@ class Program
                 break;
 
             case 'c':
-                DalOrderItem.getArrayOfOrderItem();
-                break;
+
+               
             case 'd':
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);

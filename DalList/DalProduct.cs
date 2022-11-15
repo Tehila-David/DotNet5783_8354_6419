@@ -1,35 +1,36 @@
 ﻿
 using DO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
 
 public class DalProduct
 {
-    public static int addProduct(Product myProduct)
+    public int addProduct(Product myProduct)
     {
+        
         if (DataSource.arrayProducts.Length == DataSource.Config.IndexProducts)
         {
             throw new Exception("The product array is full");
         }
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
-            if (DataSource.arrayProducts[i].ID == myProduct.ID)
+              if (DataSource.arrayProducts[i].ID == myProduct.ID)
             {
                 throw new Exception("The product already exists");
             }
-
         }
-        DataSource.arrayProducts[nextIndex] = new Product()
+        DataSource.arrayProducts[DataSource.Config.IndexProducts] = new Product()
         { ID = myProduct.ID,
             Name = myProduct.Name,
             Price = myProduct.Price,
             Category = myProduct.Category,
             InStock = myProduct.InStock };
-
+        DataSource.Config.IndexProducts++;
         return myProduct.ID;
     }
 
-    public static Product getSingleProduct(int id)
+    public Product getSingleProduct(int id)
     {
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
@@ -48,18 +49,13 @@ public class DalProduct
         }
         throw new Exception("Sorry ,this product does not exist in the array ");
     }
-    public static Product[] getArrayOfProducts()//print all elements in array
-    {
-        int index = DataSource.Config.IndexProducts;
-        //Product[] newProductsList = new Product[index];
-
-        for (int i = 0; i < index; i++)
-        {
-            DataSource.arrayProducts[i].ToString();
-        }
-        return DataSource.arrayProducts;
+  //   public  IEnumerable<Product> getListOfProducts()
+     public  Product[] getListOfProducts()
+    {    
+         return  Array.FindAll(DataSource.arrayProducts, p => p.ID != 0);
+        //return  DataSource.arrayProducts.Where(p => p.ID != 0);
     }
-    public static void deleteProduct(int ID)
+    public void deleteProduct(int ID)
     {
         int nextIndex = DataSource.Config.IndexProducts;
         for (int i = 0; i < nextIndex; i++)
@@ -78,7 +74,7 @@ public class DalProduct
 
     }
 
-    public static void updateProduct(Product myProduct)
+    public void updateProduct(Product myProduct)
     {
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
