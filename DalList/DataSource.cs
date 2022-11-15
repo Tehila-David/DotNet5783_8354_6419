@@ -12,7 +12,7 @@ internal sealed class DataSource
     internal static readonly DataSource _instance;
     public static DataSource Instance
     {
-        get { return _instance; }   
+        get { return _instance; }
     }
     private DataSource()
     {
@@ -21,7 +21,7 @@ internal sealed class DataSource
     }
     static DataSource()
     {
-        _instance= new DataSource();
+        _instance = new DataSource();
     }
 
     internal static Product[] arrayProducts = new Product[50];
@@ -71,29 +71,29 @@ internal sealed class DataSource
         for (int i = 0; i < 12; i++)//80% ShipDatev+ 60% DeliveryDate =12
         {
             arrayOrder[i].ID = Config.NextOrderID;
-            arrayOrder[i].CustomerName = " Coustumer_" + (char)i;
-            arrayOrder[i].CustomerEmail = (char)i + "@gmail.com";
-            arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
+            arrayOrder[i].CustomerName = " Coustumer_" + i;
+            arrayOrder[i].CustomerEmail = i + "@gmail.com";
+            arrayOrder[i].CustomerAddress = "address_" + (i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
             arrayOrder[i].ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));// check!!!!
             arrayOrder[i].DeliveryDate = arrayOrder[i].ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
         }
-        for (int i = 0; i < 4; i++)// only DeliveryDate = 4
+        for (int i = 13; i < 17; i++)// only DeliveryDate = 4
         {
             arrayOrder[i].ID = Config.NextOrderID;
-            arrayOrder[i].CustomerName = " Coustumer_" + (char)i;
-            arrayOrder[i].CustomerEmail = (char)i + "@gmail.com";
-            arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
+            arrayOrder[i].CustomerName = " Coustumer_" + i;
+            arrayOrder[i].CustomerEmail = i + "@gmail.com";
+            arrayOrder[i].CustomerAddress = "address_" + (i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)); //check!!!!
             arrayOrder[i].ShipDate = DateTime.MinValue;
             arrayOrder[i].DeliveryDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
         }
-        for (int i = 0; i < 4; i++)// without DeliveryDate and ShipDate = 4
+        for (int i = 17; i < 21; i++)// without DeliveryDate and ShipDate = 4
         {
             arrayOrder[i].ID = Config.NextOrderID;
-            arrayOrder[i].CustomerName = " Coustumer_" + (char)i;
-            arrayOrder[i].CustomerEmail = (char)i + "@gmail.com";
-            arrayOrder[i].CustomerAddress = "address_" + (char)(i + 2);
+            arrayOrder[i].CustomerName = " Coustumer_" + i;
+            arrayOrder[i].CustomerEmail = i + "@gmail.com";
+            arrayOrder[i].CustomerAddress = "address_" + (i + 2);
             arrayOrder[i].OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//check!!!!
             arrayOrder[i].ShipDate = DateTime.MinValue;
             arrayOrder[i].DeliveryDate = DateTime.MinValue;
@@ -107,8 +107,8 @@ internal sealed class DataSource
            
             arrayOrderItem[i].ID = Config.NextOrderID;
             arrayOrderItem[i].ProductID = random.Next(222221, 222232);
-            arrayOrderItem[i].OrderID = random.Next(99999, Config.NextOrderItemID);
-            arrayOrderItem[i].Amount = random.Next(0, 4);
+            arrayOrderItem[i].OrderID = random.Next(100000, Config.NextOrderItemID);
+            arrayOrderItem[i].Amount = random.Next(1, 3);
             for (int j = 0; j < Config.IndexProducts; j++)
             {
                 if (arrayProducts[j].ID == arrayOrderItem[i].ProductID)
