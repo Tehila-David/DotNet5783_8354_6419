@@ -7,12 +7,11 @@ public class DalProduct
 {
     public static int addProduct(Product myProduct)
     {
-        int nextIndex = DataSource.Config.IndexProducts;
-        if (DataSource.arrayProducts.Length == nextIndex)
+        if (DataSource.arrayProducts.Length == DataSource.Config.IndexProducts)
         {
             throw new Exception("The product array is full");
         }
-        for (int i = 0; i < nextIndex; i++)
+        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
             if (DataSource.arrayProducts[i].ID == myProduct.ID)
             {
