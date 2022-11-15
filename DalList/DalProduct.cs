@@ -1,11 +1,11 @@
 ﻿
 using DO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
 
 public class DalProduct
 {
+    /// 
     public int addProduct(Product myProduct)
     {
         
@@ -49,11 +49,9 @@ public class DalProduct
         }
         throw new Exception("Sorry ,this product does not exist in the array ");
     }
-  //   public  IEnumerable<Product> getListOfProducts()
      public  Product[] getListOfProducts()
     {    
          return  Array.FindAll(DataSource.arrayProducts, p => p.ID != 0);
-        //return  DataSource.arrayProducts.Where(p => p.ID != 0);
     }
     public void deleteProduct(int ID)
     {

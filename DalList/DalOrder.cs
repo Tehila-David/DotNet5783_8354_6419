@@ -6,7 +6,8 @@ namespace Dal;
 
 public class DalOrder
 {
-    public static int addOrder(Order myOrder)
+    ///
+    public int addOrder(Order myOrder)
     {
         if (DataSource.arrayOrder.Length == DataSource.Config.IndexOrder)
         {
@@ -26,7 +27,7 @@ public class DalOrder
 
         return myOrder.ID;
     }
-    public static  Order getSingleOrder(int id)
+    public  Order getSingleOrder(int id)
     {
         for (int i = 0; i < DataSource.Config.IndexOrder; i++)
         {
@@ -48,7 +49,7 @@ public class DalOrder
         }
         throw new Exception("Sorry ,this Order does not exist in the array ");
     }
-    public static  Order[] getArrayOfOrders()
+    public Order[] getArrayOfOrders()
     {
         int index = DataSource.Config.IndexOrder;
         Order[] newOrderList = new Order[index];
@@ -59,7 +60,7 @@ public class DalOrder
         }
         return DataSource.arrayOrder;
     }
-    public static  void deleteOrder(int id)
+    public  void deleteOrder(int id)
     {
         int nextIndex = DataSource.Config.IndexOrder;
         for (int i = 0; i < nextIndex; i++)
@@ -78,7 +79,7 @@ public class DalOrder
 
     }
 
-    public static void updateOrder(Order myOrder)
+    public void updateOrder(Order myOrder)
     {
         for (int i = 0; i < DataSource.Config.IndexOrder; i++)
         {
