@@ -55,17 +55,9 @@ public class DalOrder
 
         for (int i = 0; i < index; i++)
         {
-            newOrderList[i] = new Order()
-            {
-                CustomerName = DataSource.arrayOrder[i].CustomerName,
-                CustomerEmail = DataSource.arrayOrder[i].CustomerEmail,
-                CustomerAddress = DataSource.arrayOrder[i].CustomerAddress,
-                OrderDate = DataSource.arrayOrder[i].OrderDate,
-                ShipDate = DataSource.arrayOrder[i].ShipDate,
-                DeliveryDate = DataSource.arrayOrder[i].DeliveryDate
-            };
+            DataSource.arrayOrder[i].ToString();
         }
-        return newOrderList;
+        return DataSource.arrayOrder;
     }
     public static  void deleteOrder(int id)
     {

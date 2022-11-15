@@ -49,23 +49,16 @@ public class DalProduct
         }
         throw new Exception("Sorry ,this product does not exist in the array ");
     }
-    public static Product[] getArrayOfProducts()
+    public static Product[] getArrayOfProducts()//print all elements in array
     {
         int index = DataSource.Config.IndexProducts;
-        Product[] newProductsList = new Product[index];
+        //Product[] newProductsList = new Product[index];
 
         for (int i = 0; i < index; i++)
         {
-            newProductsList[i] = new Product()
-            {
-                ID = DataSource.arrayProducts[i].ID,
-                Name = DataSource.arrayProducts[i].Name,
-                Price = DataSource.arrayProducts[i].Price,
-                Category = DataSource.arrayProducts[i].Category,
-                InStock = DataSource.arrayProducts[i].InStock
-            };
+            DataSource.arrayProducts[i].ToString();
         }
-        return newProductsList;
+        return DataSource.arrayProducts;
     }
     public static void deleteProduct(int ID)
     {

@@ -1,4 +1,6 @@
 ﻿using DO;
+using System;
+
 namespace Dal;
 
 
@@ -92,10 +94,7 @@ class Program
                 break;
 
             case 'c':// print  array
-                foreach(Product product1 in DalProduct.getArrayOfProducts())
-                {
-                    Console.WriteLine(product1);
-                }
+                DalProduct.getArrayOfProducts();
                 break;
             case 'd':// update product
                 Console.WriteLine("Enter product name:");
@@ -164,10 +163,7 @@ class Program
                 break;
 
             case 'c':
-                foreach (Order order1 in DalOrder.getArrayOfOrders())
-                {
-                    Console.WriteLine(order1);
-                }
+                DalOrder.getArrayOfOrders();
                 break;
             case 'd':
                 Order order2 = new Order();
@@ -241,10 +237,7 @@ class Program
                 break;
 
             case 'c':
-                foreach (OrderItem orderItem1 in DalOrderItem.getArrayOfOrderItem())
-                {
-                    Console.WriteLine(orderItem1);
-                }
+                DalOrderItem.getArrayOfOrderItem();
                 break;
             case 'd':
                 Console.WriteLine("Enter  ID:");

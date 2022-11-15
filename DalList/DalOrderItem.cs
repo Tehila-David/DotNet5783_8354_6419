@@ -51,16 +51,9 @@ public class DalOrderItem
 
         for (int i = 0; i < index; i++)
         {
-            newOrderItemList[i] = new OrderItem()   
-             {
-                    ID = DataSource.arrayOrderItem[i].ID,
-                    ProductID = DataSource.arrayOrderItem[i].ProductID,
-                    OrderID = DataSource.arrayOrderItem[i].OrderID,
-                    Amount = DataSource.arrayOrderItem[i].Amount,
-                    Price = DataSource.arrayOrderItem[i].Price
-              };
+            DataSource.arrayOrderItem[i].ToString();
         }
-        return newOrderItemList;
+        return DataSource.arrayOrderItem;
     }
     public static void deleteOrderItem(int id)
     {
