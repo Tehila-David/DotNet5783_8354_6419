@@ -96,9 +96,9 @@ class Program
                 Console.WriteLine("Enter product ID:");
                 int idForItem;
                 int.TryParse(Console.ReadLine(), out idForItem);
-                Product singleProduct;
-                singleProduct = dalProduct.getSingleProduct(idForItem); // sending the requested id to the function so that it can locate the product
-                Console.WriteLine(singleProduct);
+                Product singleProduct1 = dalProduct.getSingleProduct(idForItem);
+                // sending the requested id to the function so that it can locate the product
+                Console.WriteLine(singleProduct1);
                 break;
 
             case 'c':// print  array
@@ -113,9 +113,8 @@ class Program
                 ///asking the user to enter the details of the product to be updated
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out NewID);
-                int.TryParse(Console.ReadLine(), out NewID);
-                Product singleOrder1 = dalProduct.getSingleProduct(NewID);
-                Console.WriteLine(singleOrder1);
+                Product singleP= dalProduct.getSingleProduct(NewID);
+                Console.WriteLine(singleP);
 
                 Console.WriteLine("Enter product name:");
                 NewName = Console.ReadLine();

@@ -36,6 +36,7 @@ public struct OrderItem
     Order ID: {OrderID},
     Product Id: {ProductID},
     Price per product: {Price},
-    Amount: {Amount}";
+    Amount: {Amount}
+";
 
 }
