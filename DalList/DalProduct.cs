@@ -6,7 +6,7 @@ namespace Dal;
 public class DalProduct
 {
     /// This function adds an order item
-    public int addProduct(Product myProduct)
+    public  int addProduct(Product myProduct)
     {
         /// Checking if the length of the array is equal to the index of the last occupied space
         if (DataSource.arrayProducts.Length == DataSource.Config.IndexProducts)
@@ -34,11 +34,11 @@ public class DalProduct
     }
 
     /// This function returns a product based on the useer input id
-    public Product getSingleProduct(int id)
+    public  Product getSingleProduct(int id)
     {
         ///Going through the array of products
        
-        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
+        for (int i = 0; i < DataSource.arrayProducts.Length; i++)
         {
             ///Checking if the id the user entered is equal to an id in the array 
             if (id == DataSource.arrayProducts[i].ID)
@@ -65,11 +65,12 @@ public class DalProduct
         return Array.FindAll(DataSource.arrayProducts, p => p.ID != 0);
     }
     /// This function deletes a product from the array of products
-    public void deleteProduct(int ID)
+    public  void deleteProduct(int ID)
     {
+        bool flag=false;
         //int nextIndex = DataSource.Config.IndexProducts; //The amount of occupirs places in the array
         ///Going tthrough the array
-        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
+        for (int i = 0; i < DataSource.arrayProducts.Length; i++)
         {
             // Checking if th id in the array is equal to the id the user entered
             if (DataSource.arrayProducts[i].ID == ID)
@@ -81,17 +82,19 @@ public class DalProduct
                     DataSource.arrayProducts[j] = DataSource.arrayProducts[j + 1];
                 }
                 DataSource.Config.IndexProducts--; //Decreasing the amount of products by one
-                break;
+                flag = true;
             }
         }
         // If the id the user entered was not found inthe array
-        throw new Exception("Sorry ,this product does not exist in the array ");
+        if(flag==false)
+           throw new Exception("Sorry ,this product does not exist in the array ");
 
     }
 
     //This function receives a product and updates an existing product with it
-    public void updateProduct(Product myProduct)
+    public  void updateProduct(Product myProduct)
     {
+        bool flag = false;
         // Going through the product array
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
@@ -100,11 +103,12 @@ public class DalProduct
             {
                 //updating the product
                 DataSource.arrayProducts[i] = myProduct;
-                break;
+                flag = true;
             }
         }
         //If the id of the product the user entered to be updated is not found in the array
-        throw new Exception("Product to be updated does not exist");
+        if(flag==false)
+          throw new Exception("Product to be updated does not exist");
     }
 
 }
