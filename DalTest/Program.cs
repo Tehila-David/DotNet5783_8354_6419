@@ -7,7 +7,6 @@ namespace Dal;
 class Program
 
 {
-    $ git tag -d Targil_1;
     static DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
     static DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
     static DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
@@ -57,7 +56,7 @@ class Program
     /// </summary>
     public static void subProuduct()
     {
-        string ? NewName;
+        string? NewName;
         double NewPrice;
         int NewID;
         Category NewCategory;
@@ -156,9 +155,9 @@ class Program
     public static void subOrder()
     {
         int orderID1;
-        string ? CustomerName1;
-        string ? CustomerEmail1;
-        string ? CustomerAddress1;
+        string? CustomerName1;
+        string? CustomerEmail1;
+        string? CustomerAddress1;
 
 
         Console.WriteLine(" Input : a - Add a order, b - Show a order by ID, c -  Show an array of orders, d- Update a order , e - Delete a order");
@@ -190,7 +189,7 @@ class Program
                     ShipDate = DateTime.MinValue,
                     DeliveryDate = DateTime.MinValue
                 };
-               orderID1 = dalOrder.addOrder(order); //adding the new order to the array of orders
+                orderID1 = dalOrder.addOrder(order); //adding the new order to the array of orders
                 Console.WriteLine(orderID1);
                 break;
 
@@ -212,12 +211,12 @@ class Program
                 break;
 
             case 'd': ///Updating an order
-               
-                ///Asking the user to enter the details for the order to be updated
+
+                      ///Asking the user to enter the details for the order to be updated
                 Console.WriteLine("Enter order ID:");
                 /// sending the requested id to the function so that it can locate the order
                 int.TryParse(Console.ReadLine(), out orderID1);
-                Order singleOrder1= dalOrder.getSingleOrder(orderID1); 
+                Order singleOrder1 = dalOrder.getSingleOrder(orderID1);
 
                 Console.WriteLine(singleOrder1);
                 Console.WriteLine("Enter Customer Name:");
@@ -310,7 +309,7 @@ class Program
             case 'd': ///updating an order item
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
-                OrderItem orderItem1=dalOrderItem.getSingleOrderItem(newID);
+                OrderItem orderItem1 = dalOrderItem.getSingleOrderItem(newID);
                 Console.WriteLine(orderItem1);
 
                 Console.WriteLine("Enter Product ID:");
