@@ -345,7 +345,7 @@ class Program
                 OrderItem orderItemFound = dalOrderItem.getOrderItemBasedOnProducIDAndOrderID(newOrderID1, newProductID);
                 Console.WriteLine(orderItemFound);
                 break;
-            case 'g': ///returning array o order items based on order id
+            case 'g': ///returning array with order items based on order id
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out newOrderID1);
                 ///Printing the order items with the order id corresponding to the user input
