@@ -56,7 +56,7 @@ class Program
     /// </summary>
     public static void subProuduct()
     {
-        string? NewName;
+        string NewName;
         double NewPrice;
         int NewID;
         Category NewCategory;
@@ -113,7 +113,7 @@ class Program
                 ///asking the user to enter the details of the product to be updated
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out NewID);
-                Product singleP= dalProduct.getSingleProduct(NewID);
+                Product singleP = dalProduct.getSingleProduct(NewID);
                 Console.WriteLine(singleP);
 
                 Console.WriteLine("Enter product name:");
@@ -154,9 +154,9 @@ class Program
     public static void subOrder()
     {
         int orderID1;
-        string? CustomerName1;
-        string? CustomerEmail1;
-        string? CustomerAddress1;
+        string CustomerName1;
+        string CustomerEmail1;
+        string CustomerAddress1;
 
 
         Console.WriteLine(" Input : a - Add a order, b - Show a order by ID, c -  Show an array of orders, d- Update a order , e - Delete a order");
@@ -345,7 +345,7 @@ class Program
                 OrderItem orderItemFound = dalOrderItem.getOrderItemBasedOnProducIDAndOrderID(newOrderID1, newProductID);
                 Console.WriteLine(orderItemFound);
                 break;
-            case 'g': ///returning array o order items based on order id
+            case 'g': ///returning array with order items based on order id
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out newOrderID1);
                 ///Printing the order items with the order id corresponding to the user input
