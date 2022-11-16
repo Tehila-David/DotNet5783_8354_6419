@@ -37,6 +37,7 @@ public class DalProduct
     public Product getSingleProduct(int id)
     {
         ///Going through the array of products
+       
         for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
             ///Checking if the id the user entered is equal to an id in the array 
@@ -66,15 +67,15 @@ public class DalProduct
     /// This function deletes a product from the array of products
     public void deleteProduct(int ID)
     {
-        int nextIndex = DataSource.Config.IndexProducts; //The amount of occupirs places in the array
+        //int nextIndex = DataSource.Config.IndexProducts; //The amount of occupirs places in the array
         ///Going tthrough the array
-        for (int i = 0; i < nextIndex; i++)
+        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
         {
             // Checking if th id in the array is equal to the id the user entered
             if (DataSource.arrayProducts[i].ID == ID)
             {
                 /// Going through the array from  the point of the found id
-                for (int j = i; j < nextIndex - 1; j++)
+                for (int j = i; j < DataSource.Config.IndexProducts - 1; j++)
                 {
                     ///moving each product one space to the left
                     DataSource.arrayProducts[j] = DataSource.arrayProducts[j + 1];

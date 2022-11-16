@@ -14,7 +14,7 @@ internal sealed class DataSource
     {
         get { return _instance; }
     }
-    private DataSource()
+   private DataSource()
     {
         s_Initialize();
 
@@ -45,7 +45,7 @@ internal sealed class DataSource
     }
 
 
-    static void s_Initialize()// מאתחל את המערכים
+    static void s_Initialize()
     {
         createProducts();// 10
         createOrders();//20
