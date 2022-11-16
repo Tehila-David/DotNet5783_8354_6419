@@ -1,7 +1,6 @@
 ﻿
 using DO;
 
-
 namespace Dal;
 
 internal sealed class DataSource
@@ -14,7 +13,7 @@ internal sealed class DataSource
     {
         get { return _instance; }
     }
-   private DataSource()
+    private DataSource()
     {
         s_Initialize();
 
