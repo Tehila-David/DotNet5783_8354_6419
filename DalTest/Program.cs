@@ -5,7 +5,9 @@ namespace Dal;
 
 
 class Program
+
 {
+    $ git tag -d Targil_1;
     static DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
     static DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
     static DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
