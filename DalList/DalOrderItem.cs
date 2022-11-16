@@ -104,6 +104,32 @@ public class DalOrderItem
         throw new Exception("Order Item to be updated does not exist");
     }
 
-    public OrderItem
+    /// This function receives an order id and a product id and returns the matching order item
+    public OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct)
+    {
+        OrderItem orderItem = new OrderItem();
+        int nextIndex = DataSource.Config.IndexOrdersItem; ///The size of the occupied places in the array 
+        for (int i = 0; i < nextIndex; i++) //Going through the array of order items
+        {
+            ///checking if an orderitem has the same product and order id's as the on e the user entered 
+            if(DataSource.arrayOrderItem[i].ProductID == idProduct && DataSource.arrayOrderItem[i].OrderID == idOrder)
+            {
+                ///The correct order item based on the user input
+                orderItem = DataSource.arrayOrderItem[i];
+                return orderItem;
+            }
+        }
+        //If the order item being looked for is not found incthe array
+        throw new Exception("Sorry ,this item does not exist in the array ");
+    }
+
+    /// This function returns an array of all of the order items with the order id the user entered
+    public OrderItem[] getArrayOfOrderItemsBasedOnOrderID(int idOrder)
+    {
+        //creating an array with all of the order items that have the same order id as the one the user entered
+        return Array.FindAll(DataSource.arrayOrderItem, p => p.OrderID == idOrder);
+        //If no order items arec found with the order id the user entered
+        throw new Exception("No order items found with the entered order id");
+    }
 }
   

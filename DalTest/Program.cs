@@ -55,7 +55,7 @@ class Program
     /// </summary>
     public static void subProuduct()
     {
-        string NewName;
+        string ? NewName;
         double NewPrice;
         int NewID;
         Category NewCategory;
@@ -154,9 +154,9 @@ class Program
     public static void subOrder()
     {
         int orderID1;
-        string CustomerName1;
-        string CustomerEmail1;
-        string CustomerAddress1;
+        string ? CustomerName1;
+        string ? CustomerEmail1;
+        string ? CustomerAddress1;
 
 
         Console.WriteLine(" Input : a - Add a order, b - Show a order by ID, c -  Show an array of orders, d- Update a order , e - Delete a order");
@@ -258,7 +258,7 @@ class Program
         int newOrderID1;
         double newPrice1;
         int newAmount;
-        Console.WriteLine(" Input : a - Add a orderItem, b - Show a orderItem by ID, c -  Show an array of orderItems, d- Update a orderItem , e - Delete a orderItem");
+        Console.WriteLine(" Input : a - Add a orderItem, b - Show a orderItem by ID, c -  Show an array of orderItems, d- Update a orderItem , e - Delete a orderItem, f - get order item based on order and product, g - get array of order items based on order");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -336,8 +336,24 @@ class Program
                 int.TryParse(Console.ReadLine(), out newID);
                 dalOrderItem.deleteOrderItem(newID);
                 break;
-
-
+            case 'f': /// returning order item based on product and order id
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(), out newOrderID1);
+                Console.WriteLine("Enter product ID:");
+                int.TryParse(Console.ReadLine(), out newProductID);
+                /// Finding the order item with the same order and product id as the one the user entered
+                OrderItem orderItemFound = dalOrderItem.getOrderItemBasedOnProducIDAndOrderID(newOrderID1, newProductID);
+                Console.WriteLine(orderItemFound);
+                break;
+            case 'g': ///returning array o order items based on order id
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(), out newOrderID1);
+                ///Printing the order items with the order id corresponding to the user input
+                foreach (var item in dalOrderItem.getArrayOfOrderItemsBasedOnOrderID(newOrderID1))
+                {
+                    Console.WriteLine(item);
+                }
+                break;
             default:   ///Wrong input
                 Console.WriteLine("ERROR");
                 break;
