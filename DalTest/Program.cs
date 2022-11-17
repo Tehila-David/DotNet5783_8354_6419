@@ -56,7 +56,7 @@ class Program
     /// </summary>
     public static void subProuduct()
     {
-        string? NewName;
+        string NewName;
         double NewPrice;
         int NewID;
         Category NewCategory;
@@ -154,10 +154,9 @@ class Program
     public static void subOrder()
     {
         int orderID1;
-        string? CustomerName1;
-        string? CustomerEmail1;
-        string? CustomerAddress1;
-
+        string CustomerName1;
+        string CustomerEmail1;
+        string CustomerAddress1;
 
         Console.WriteLine(" Input : a - Add a order, b - Show a order by ID, c -  Show an array of orders, d- Update a order , e - Delete a order");
         char choice;
@@ -175,9 +174,7 @@ class Program
                 CustomerEmail1 = Console.ReadLine();
                 Console.WriteLine("Enter Customer Address:");
                 CustomerAddress1 = Console.ReadLine();
-                //order.OrderDate = DateTime.MinValue;
-                //order.ShipDate= DateTime.MinValue;
-                //order.DeliveryDate= DateTime.MinValue;
+                
                 Order order = new Order
                 {
                     ID = orderID1,

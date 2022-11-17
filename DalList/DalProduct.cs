@@ -38,7 +38,7 @@ public class DalProduct
     {
         ///Going through the array of products
        
-        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
+        for (int i = 0; i < DataSource.arrayProducts.Length; i++)
         {
             ///Checking if the id the user entered is equal to an id in the array 
             if (id == DataSource.arrayProducts[i].ID)
