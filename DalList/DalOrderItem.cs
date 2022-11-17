@@ -33,7 +33,7 @@ public class DalOrderItem
     public  OrderItem getSingleOrderItem(int id)
     {
         ///Going through the array of order items
-        for (int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
+        for (int i = 0; i < DataSource.arrayOrderItem.Length; i++)
         {
             ///Checking if the requested id is equal to an id of an order item in the array
             if (id == DataSource.arrayOrderItem[i].ID)
@@ -65,14 +65,14 @@ public class DalOrderItem
     /// This function receives an id of an ordre item and deletes the order item witn the same id
     public  void deleteOrderItem(int id)
     {
-        int nextIndex = DataSource.Config.IndexOrdersItem; ///The size of the occupied places in the array 
-        for (int i = 0; i < nextIndex; i++) ///Going through the array of order items
+         
+        for (int i = 0; i < DataSource.arrayOrderItem.Length; i++) ///Going through the array of order items
         {
             ///Checking if the requested id is equal to the id in the array
             if (DataSource.arrayOrderItem[i].ID == id)
             {
                 /// Going through the array from  the point of the found id
-                for (int j = i; j < nextIndex - 1; j++)
+                for (int j = i; j < DataSource.arrayOrderItem.Length - 1; j++)
                 {
                     ///moving each order item one space to the left
                     DataSource.arrayOrderItem[j] = DataSource.arrayOrderItem[j + 1];
@@ -90,7 +90,7 @@ public class DalOrderItem
     public  void updateOrderItem(OrderItem myOrderItem)
     {
         ///Going through the order items array
-        for(int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
+        for(int i = 0; i < DataSource.arrayOrderItem.Length; i++)
         {
             /// Checking if the id in the array is equal to the id of the requested order item to be updated
             if (DataSource.arrayOrderItem[i].ID == myOrderItem.ID)
@@ -108,8 +108,8 @@ public class DalOrderItem
     public OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct)
     {
         OrderItem orderItem = new OrderItem();
-        int nextIndex = DataSource.Config.IndexOrdersItem; ///The size of the occupied places in the array 
-        for (int i = 0; i < nextIndex; i++) //Going through the array of order items
+        //int nextIndex = DataSource.Config.IndexOrdersItem; ///The size of the occupied places in the array 
+        for (int i = 0; i < DataSource.arrayOrderItem.Length; i++) //Going through the array of order items
         {
             ///checking if an orderitem has the same product and order id's as the on e the user entered 
             if(DataSource.arrayOrderItem[i].ProductID == idProduct && DataSource.arrayOrderItem[i].OrderID == idOrder)

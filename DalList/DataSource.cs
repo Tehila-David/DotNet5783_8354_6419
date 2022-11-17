@@ -12,8 +12,8 @@ internal sealed class DataSource
     public static DataSource Instance
     {
         get { return _instance; }
-    }*/
-    static DataSource()
+    }
+    private DataSource()
     {
         s_Initialize();
 

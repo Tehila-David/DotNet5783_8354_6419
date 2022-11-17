@@ -113,7 +113,7 @@ class Program
                 ///asking the user to enter the details of the product to be updated
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out NewID);
-                Product singleP= dalProduct.getSingleProduct(NewID);
+                Product singleP = dalProduct.getSingleProduct(NewID);
                 Console.WriteLine(singleP);
 
                 Console.WriteLine("Enter product name:");
@@ -157,6 +157,7 @@ class Program
         string CustomerName1;
         string CustomerEmail1;
         string CustomerAddress1;
+
 
         Console.WriteLine(" Input : a - Add a order, b - Show a order by ID, c -  Show an array of orders, d- Update a order , e - Delete a order");
         char choice;
