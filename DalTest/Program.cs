@@ -175,9 +175,7 @@ class Program
                 CustomerEmail1 = Console.ReadLine();
                 Console.WriteLine("Enter Customer Address:");
                 CustomerAddress1 = Console.ReadLine();
-                //order.OrderDate = DateTime.MinValue;
-                //order.ShipDate= DateTime.MinValue;
-                //order.DeliveryDate= DateTime.MinValue;
+                
                 Order order = new Order
                 {
                     ID = orderID1,

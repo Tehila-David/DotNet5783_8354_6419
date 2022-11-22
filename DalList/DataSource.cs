@@ -8,7 +8,7 @@ internal sealed class DataSource
 
     public static readonly Random random = new Random();
 
-    internal static readonly DataSource _instance;
+    /*internal static readonly DataSource _instance;
     public static DataSource Instance
     {
         get { return _instance; }
@@ -18,10 +18,10 @@ internal sealed class DataSource
         s_Initialize();
 
     }
-    static DataSource()
+    /*static DataSource()
     {
         _instance = new DataSource();
-    }
+    }*/
 
     internal static Product[] arrayProducts = new Product[50];
     internal static OrderItem[] arrayOrderItem = new OrderItem[100];
@@ -103,7 +103,7 @@ internal sealed class DataSource
     {
         for (int i = 0; i < 40; i++)
         {
-           
+
             arrayOrderItem[i].ID = Config.NextOrderID;
             arrayOrderItem[i].ProductID = random.Next(222221, 222232);
             arrayOrderItem[i].OrderID = random.Next(100000, Config.NextOrderItemID);
@@ -115,7 +115,7 @@ internal sealed class DataSource
                     arrayOrderItem[i].Price = (double)(arrayProducts[j].Price * arrayOrderItem[i].Amount);
                     break;
                 }
-            }  
+            }
         }
         Config.IndexOrdersItem = 40;
     }
