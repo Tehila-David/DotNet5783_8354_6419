@@ -38,19 +38,6 @@ internal class DalOrder : IOrder
         {
             if (id == item.ID)
             {
-                ///Copying the details of the orders with the correct id to a new order
-                ///Order singleOrder = new Order()
-                //{
-                //    ID = DataSource.arrayOrder[i].ID,
-                //    CustomerName = DataSource.arrayOrder[i].CustomerName,
-                //    CustomerEmail = DataSource.arrayOrder[i].CustomerEmail,
-                //    CustomerAddress = DataSource.arrayOrder[i].CustomerAddress,
-                //    OrderDate = DataSource.arrayOrder[i].OrderDate,
-                //    ShipDate = DataSource.arrayOrder[i].ShipDate,
-                //    DeliveryDate = DataSource.arrayOrder[i].DeliveryDate
-
-                //};
-                ///singleOrder = item;
                 return item;
             }
         }

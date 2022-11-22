@@ -34,20 +34,7 @@ internal class DalOrderItem : IOrderItem
     {
         foreach (var item in _dataSource.OrderItemList)
         {
-            ///Checking if the requested id is equal to an id of an order item in the list
-            //if (id == DataSource.arrayOrderItem[i].ID)
-            //{
-            //    ///Copying the details of the order item wirh the correct id to a new order item
-            //    OrderItem singleOrderItem = new OrderItem()
-            //    {
-            //        ID = DataSource.arrayOrderItem[i].ID,
-            //        ProductID = DataSource.arrayOrderItem[i].ProductID,
-            //        OrderID = DataSource.arrayOrderItem[i].OrderID,
-            //        Amount = DataSource.arrayOrderItem[i].Amount,
-            //        Price = DataSource.arrayOrderItem[i].Price
-            //    };
-            //    return singleOrderItem; ///returning the new order item
-            //}
+            
             if(item.ID == id)
                 return item;
         }

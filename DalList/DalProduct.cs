@@ -35,16 +35,6 @@ internal class DalProduct : IProduct
         {   ///Checking if the id the user entered is equal to an id in the list
             if (id ==item.ID)
             {
-                ///Creating a new product with the details of the product with the id the user entered
-                //Product singleProduct = new Product()
-                //{
-                //    ID = DataSource.arrayProducts[i].ID,
-                //    Name = DataSource.arrayProducts[i].Name,
-                //    Price = DataSource.arrayProducts[i].Price,
-                //    Category = DataSource.arrayProducts[i].Category,
-                //    InStock = DataSource.arrayProducts[i].InStock
-                //};
-                //return singleProduct;
                 return item;
             }
         }
