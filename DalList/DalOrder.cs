@@ -1,104 +1,113 @@
 ﻿
 using DalApi;
+using DalFacade;
 using DO;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace Dal;
 
-internal class DalOrder: IOrder
+internal class DalOrder : IOrder
 {
-    /// This function adds an order to array
+    DataSource _dataSource = DataSource.s_instance;
+
+    /// <summary>
+    /// This function adds an order to list
+    /// </summary>
     public int Add(Order myOrder)
     {
-        if (DataSource.OrderList.Count == DataSource.Config.IndexOrder)//check if array is full
+
+        foreach (var item in _dataSource.OrderList)
         {
-            throw new Exception("The Order array is full");
-        }
-        for (int i = 0; i < DataSource.Config.IndexOrder; i++)// check if myOrder is exists
-        {
-            if (myOrder.ID == DataSource.arrayOrder[i].ID)
+            if (myOrder.ID == item.ID)
             {
                 throw new Exception(" The Order already exists");
             }
         }
-        //Placing the new order  in thelast available spot in the array
-        DataSource.arrayOrder[DataSource.Config.IndexOrder++] = new Order()
-        { ID = myOrder.ID, CustomerName = myOrder.CustomerName, CustomerEmail = myOrder.CustomerEmail, CustomerAddress = myOrder.CustomerAddress,
-         OrderDate = myOrder.OrderDate, ShipDate = myOrder.ShipDate, DeliveryDate = myOrder.DeliveryDate
-        };
+        _dataSource.OrderList.Add(myOrder);
 
         return myOrder.ID;
     }
 
+    /// <summary>
     /// This function returns the details of an order based on an id
+    /// </summary>
     public Order GetById(int id)
     {
-        ///Going through the array of order 
-        for (int i = 0; i < DataSource.arrayOrder.Length; i++)
+        foreach (var item in _dataSource.OrderList)
         {
-            ///Checking if the requested id is equal to an id of an orders in the array
-            if (id == DataSource.arrayOrder[i].ID)
+            if (id == item.ID)
             {
                 ///Copying the details of the orders with the correct id to a new order
-                Order singleOrder = new Order()
-                {
-                    ID = DataSource.arrayOrder[i].ID,
-                    CustomerName = DataSource.arrayOrder[i].CustomerName,
-                    CustomerEmail = DataSource.arrayOrder[i].CustomerEmail,
-                    CustomerAddress = DataSource.arrayOrder[i].CustomerAddress,
-                    OrderDate = DataSource.arrayOrder[i].OrderDate,
-                    ShipDate = DataSource.arrayOrder[i].ShipDate,
-                    DeliveryDate = DataSource.arrayOrder[i].DeliveryDate
+                ///Order singleOrder = new Order()
+                //{
+                //    ID = DataSource.arrayOrder[i].ID,
+                //    CustomerName = DataSource.arrayOrder[i].CustomerName,
+                //    CustomerEmail = DataSource.arrayOrder[i].CustomerEmail,
+                //    CustomerAddress = DataSource.arrayOrder[i].CustomerAddress,
+                //    OrderDate = DataSource.arrayOrder[i].OrderDate,
+                //    ShipDate = DataSource.arrayOrder[i].ShipDate,
+                //    DeliveryDate = DataSource.arrayOrder[i].DeliveryDate
 
-                };
-                return singleOrder;
+                //};
+                ///singleOrder = item;
+                return item;
             }
         }
         ///If the order  was not found in the array
-        throw new Exception("Sorry ,this Order does not exist in the array ");
+        throw new Exception("Sorry ,this Order does not exist in the List ");
     }
 
     /// <summary>
     /// This function returns the array with all of the order items
     /// </summary>
     /// <returns></returns> array of orders
-    
-    public Order[] GetAll()
+
+    public List<Order> GetAll()
 
     {  ///looking for all of the order items that have their details filed in and returning them
-        return Array.FindAll(DataSource.arrayOrder, p => p.ID != 0);
+        return _dataSource.OrderList.FindAll(delegate (Order myOrder)
+       {
+           return myOrder.ID != 0;
+       });
+
+
     }
+    /// <summary>
     /// This function receives an id of an order and deletes the order witn the same id
+    /// </summary>
     public void Delete(int id)
     {
-        //int nextIndex = DataSource.Config.IndexOrder;///The size of the occupied places in the array
-        for (int i = 0; i < DataSource.arrayOrder.Length; i++)
+        foreach (var item in _dataSource.OrderList)
         {
-            if (DataSource.arrayOrder[i].ID == id)
+            if (item.ID == id)
             {
-                for (int j = i; j < DataSource.arrayOrder.Length - 1; j++)
-                {   //moving each order one space to the left
-                    DataSource.arrayOrder[j] = DataSource.arrayOrder[j + 1];
-                }
-                DataSource.Config.IndexOrder--;///Decreasing the amount of order items by one
-                break;
+                _dataSource.OrderList.Remove(item);
+                return;
+
             }
         }
-        /// If the order was not found in the array
-        throw new Exception("Sorry ,this Order does not exist in the array ");
+        /// If the order was not found in the list
+        throw new Exception("Sorry ,this Order does not exist in the List ");
 
     }
 
+
+    /// <summary>
     /// This function receives an order and updates the order in the array that has the same id
+    /// </summary>
     public void Update(Order myOrder)
     {
-        for (int i = 0; i < DataSource.arrayOrder.Length; i++)
+        int index = 0;
+        foreach (Order item in _dataSource.OrderList)
         {
-            if (DataSource.arrayOrder[i].ID == myOrder.ID)
+            if (item.ID == myOrder.ID) ///updating the order
             {
-                ///updating the order 
-                DataSource.arrayOrder[i] = myOrder;
-                break;
+                _dataSource.OrderList.RemoveAt(index);
+                _dataSource.OrderList.Insert(index, myOrder);
+                return;
             }
+            index++;
         }
         ///if the id of the requested order  is not found in the array
         throw new Exception("Order to be updated does not exist");

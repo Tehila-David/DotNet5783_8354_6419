@@ -5,112 +5,104 @@ using DalApi;
 
 namespace Dal;
 
-internal class DalProduct:IProduct
+internal class DalProduct : IProduct
 {
-    /// This function adds an order item
-    public  int Add(Product myProduct)
+    DataSource _dataSource = DataSource.s_instance;
+
+    /// <summary>
+    /// This function adds an Product
+    /// </summary>
+    public int Add(Product myProduct)
     {
-        /// Checking if the length of the array is equal to the index of the last occupied space
-        if (DataSource.arrayProducts.Length == DataSource.Config.IndexProducts)
+        foreach (var item in _dataSource.ProductList)
         {
-            throw new Exception("The product array is full");
-        }
-        ///Going through the array
-        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
-        {
-            ///Checking if the id of the requested product is found in the array of products
-            if (DataSource.arrayProducts[i].ID == myProduct.ID)
+            ///Checking if the id of the requested product is found in the List of products
+            if (myProduct.ID == item.ID)
             {
                 throw new Exception("The product already exists");
             }
+            _dataSource.ProductList.Add(myProduct);
         }
-        ///Creating the new product to be added
-        DataSource.arrayProducts[DataSource.Config.IndexProducts] = new Product()
-        { ID = myProduct.ID,
-            Name = myProduct.Name,
-            Price = myProduct.Price,
-            Category = myProduct.Category,
-            InStock = myProduct.InStock };
-        DataSource.Config.IndexProducts++; ///Increasing the amount of occupied products in the array
         return myProduct.ID;
     }
 
-    /// This function returns a product based on the useer input id
-    public  Product GetById(int id)
+   /// <summary>
+   /// This function returns a product based on the useer input id
+   /// </summary>
+    public Product GetById(int id)
     {
-        ///Going through the array of products
-       
-        for (int i = 0; i < DataSource.arrayProducts.Length; i++)
-        {
-            ///Checking if the id the user entered is equal to an id in the array 
-            if (id == DataSource.arrayProducts[i].ID)
+        foreach (var item in _dataSource.ProductList)
+        {   ///Checking if the id the user entered is equal to an id in the list
+            if (id ==item.ID)
             {
                 ///Creating a new product with the details of the product with the id the user entered
-                Product singleProduct = new Product()
-                {
-                    ID = DataSource.arrayProducts[i].ID,
-                    Name = DataSource.arrayProducts[i].Name,
-                    Price = DataSource.arrayProducts[i].Price,
-                    Category = DataSource.arrayProducts[i].Category,
-                    InStock = DataSource.arrayProducts[i].InStock
-                };
-                return singleProduct;
+                //Product singleProduct = new Product()
+                //{
+                //    ID = DataSource.arrayProducts[i].ID,
+                //    Name = DataSource.arrayProducts[i].Name,
+                //    Price = DataSource.arrayProducts[i].Price,
+                //    Category = DataSource.arrayProducts[i].Category,
+                //    InStock = DataSource.arrayProducts[i].InStock
+                //};
+                //return singleProduct;
+                return item;
             }
         }
-        /// If the id the user entered is not found in the array
-        throw new Exception("Sorry ,this product does not exist in the array ");
+        /// If the id the user entered is not found in the list
+        throw new Exception("Sorry ,this product does not exist in the List ");
     }
+
+    /// <summary>
     /// This function returns all of the products
-     public  Product[] GetAll()
+    /// </summary>
+    public List<Product> GetAll()
     {
         ///looking for all of the products that have their details filed in and returning them
-        return Array.FindAll(DataSource.arrayProducts, p => p.ID != 0);
-    }
-    /// This function deletes a product from the array of products
-    public  void Delete(int ID)
-    {
-        bool flag=false;
-        //int nextIndex = DataSource.Config.IndexProducts; //The amount of occupirs places in the array
-        ///Going tthrough the array
-        for (int i = 0; i < DataSource.arrayProducts.Length; i++)
+        return _dataSource.ProductList.FindAll(delegate (Product myProduct)
         {
-            // Checking if th id in the array is equal to the id the user entered
-            if (DataSource.arrayProducts[i].ID == ID)
+            return myProduct.ID != 0;
+        });
+    }
+
+    /// <summary>
+    /// This function deletes a product from the list of products
+    /// </summary>
+    public void Delete(int ID)
+    {
+
+        foreach (var item in _dataSource.ProductList)
+        {  // Checking if th id in the list is equal to the id the user entered
+            if (item.ID == ID)
             {
-                /// Going through the array from  the point of the found id
-                for (int j = i; j < DataSource.Config.IndexProducts - 1; j++)
-                {
-                    ///moving each product one space to the left
-                    DataSource.arrayProducts[j] = DataSource.arrayProducts[j + 1];
-                }
-                DataSource.Config.IndexProducts--; //Decreasing the amount of products by one
-                flag = true;
+                
+                    _dataSource.ProductList.Remove(item);
+                    return;
+
             }
         }
-        // If the id the user entered was not found inthe array
-        if(flag==false)
-           throw new Exception("Sorry ,this product does not exist in the array ");
+        // If the id the user entered was not found in the list 
+        throw new Exception("Sorry ,this product does not exist in the array ");
 
     }
 
-    //This function receives a product and updates an existing product with it
-    public  void Update(Product myProduct)
+    /// <summary>
+    /// This function receives a product and updates an existing product with it
+    /// </summary>
+    public void Update(Product myProduct)
     {
-        bool flag = false;
-        // Going through the product array
-        for (int i = 0; i < DataSource.Config.IndexProducts; i++)
+        int index = 0;
+        foreach (var item in _dataSource.ProductList)
         {
-            // Checking if th id in the array is equal to the id  of the product the user entered
-            if (DataSource.arrayProducts[i].ID == myProduct.ID)
+            if (item.ID == myProduct.ID) ///updating the order
             {
-                //updating the product
-                DataSource.arrayProducts[i] = myProduct;
-                flag = true;
+                _dataSource.ProductList.RemoveAt(index);
+                _dataSource.ProductList.Insert(index, myProduct);
+                return;
             }
+            index++;
         }
-        //If the id of the product the user entered to be updated is not found in the array
-        if(flag==false)
-          throw new Exception("Product to be updated does not exist");
+        //If the id of the product the user entered to be updated is not found in the list
+        throw new Exception("Product to be updated does not exist");
     }
 
 }
