@@ -1,12 +1,14 @@
 ﻿
 using DO;
+using DalApi;
+
 
 namespace Dal;
 
-public class DalProduct
+internal class DalProduct:IProduct
 {
     /// This function adds an order item
-    public  int addProduct(Product myProduct)
+    public  int Add(Product myProduct)
     {
         /// Checking if the length of the array is equal to the index of the last occupied space
         if (DataSource.arrayProducts.Length == DataSource.Config.IndexProducts)
@@ -34,7 +36,7 @@ public class DalProduct
     }
 
     /// This function returns a product based on the useer input id
-    public  Product getSingleProduct(int id)
+    public  Product GetById(int id)
     {
         ///Going through the array of products
        
@@ -59,13 +61,13 @@ public class DalProduct
         throw new Exception("Sorry ,this product does not exist in the array ");
     }
     /// This function returns all of the products
-     public  Product[] getListOfProducts()
+     public  Product[] GetAll()
     {
         ///looking for all of the products that have their details filed in and returning them
         return Array.FindAll(DataSource.arrayProducts, p => p.ID != 0);
     }
     /// This function deletes a product from the array of products
-    public  void deleteProduct(int ID)
+    public  void Delete(int ID)
     {
         bool flag=false;
         //int nextIndex = DataSource.Config.IndexProducts; //The amount of occupirs places in the array
@@ -92,7 +94,7 @@ public class DalProduct
     }
 
     //This function receives a product and updates an existing product with it
-    public  void updateProduct(Product myProduct)
+    public  void Update(Product myProduct)
     {
         bool flag = false;
         // Going through the product array

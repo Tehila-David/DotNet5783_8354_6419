@@ -1,21 +1,22 @@
 ﻿
 using DO;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem : IOrderItem
 
 {
     /// This function adds an order item
-    public  int addOrderItem(OrderItem myOrderItem) 
+    public  int Add(OrderItem myOrderItem) 
     {
         ///Checking if the order item array is full
-        if(DataSource.arrayOrderItem.Length == DataSource.Config.IndexOrdersItem)
-        {
-            throw new Exception("The Order Item array is full");
-        }
+        //if(DataSource.OrderItemList.Count == DataSource.Config.IndexOrdersItem)
+        //{
+        //    throw new Exception("The Order Item array is full");
+        //}
         ///Going through the array of order items
-        for(int i = 0; i < DataSource.Config.IndexOrdersItem; i++)
+        for(int i = 0; i < DataSource.OrderItemList.Count; i++)
         {
             ///checking if  the id of an order item in the array is equal to the id of an order item wanted to be added
             if(myOrderItem.ID == DataSource.arrayOrderItem[i].ID)
@@ -30,7 +31,7 @@ public class DalOrderItem
         return myOrderItem.ID;
     }
     /// This function returns the details of an lorder item based on an id
-    public  OrderItem getSingleOrderItem(int id)
+    public  OrderItem GetById(int id)
     {
         ///Going through the array of order items
         for (int i = 0; i < DataSource.arrayOrderItem.Length; i++)
@@ -57,13 +58,13 @@ public class DalOrderItem
     /// This function returns the array with all of the order items
     /// </summary>
     /// <returns></returns> array of order items
-    public OrderItem[] getArrayOfOrderItem()
+    public OrderItem[] GetAll()
     {
         ///looking for all of the order items that have their details filed in and returning them
-        return Array.FindAll(DataSource.arrayOrderItem, p => p.ID != 0);
+        return Array.FindAll(DataSource.OrderItemList, p => p.ID != 0);
     }
     /// This function receives an id of an ordre item and deletes the order item witn the same id
-    public  void deleteOrderItem(int id)
+    public  void Delete(int id)
     {
          
         for (int i = 0; i < DataSource.arrayOrderItem.Length; i++) ///Going through the array of order items
@@ -87,7 +88,7 @@ public class DalOrderItem
     }
 
     /// This function receives an order item and updates the order item in the array that has the same id
-    public  void updateOrderItem(OrderItem myOrderItem)
+    public  void Update(OrderItem myOrderItem)
     {
         ///Going through the order items array
         for(int i = 0; i < DataSource.arrayOrderItem.Length; i++)
@@ -124,7 +125,7 @@ public class DalOrderItem
     }
 
     /// This function returns an array of all of the order items with the order id the user entered
-    public OrderItem[] getArrayOfOrderItemsBasedOnOrderID(int idOrder)
+    public OrderItem[] getListOfOrderItemsBasedOnOrderID(int idOrder)
     {
         //creating an array with all of the order items that have the same order id as the one the user entered
         return Array.FindAll(DataSource.arrayOrderItem, p => p.OrderID == idOrder);

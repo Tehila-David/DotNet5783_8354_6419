@@ -1,15 +1,15 @@
 ﻿
-
+using DalApi;
 using DO;
 
 namespace Dal;
 
-public class DalOrder
+internal class DalOrder: IOrder
 {
     /// This function adds an order to array
-    public int addOrder(Order myOrder)
+    public int Add(Order myOrder)
     {
-        if (DataSource.arrayOrder.Length == DataSource.Config.IndexOrder)//check if array is full
+        if (DataSource.OrderList.Count == DataSource.Config.IndexOrder)//check if array is full
         {
             throw new Exception("The Order array is full");
         }
@@ -30,7 +30,7 @@ public class DalOrder
     }
 
     /// This function returns the details of an order based on an id
-    public Order getSingleOrder(int id)
+    public Order GetById(int id)
     {
         ///Going through the array of order 
         for (int i = 0; i < DataSource.arrayOrder.Length; i++)
@@ -62,13 +62,13 @@ public class DalOrder
     /// </summary>
     /// <returns></returns> array of orders
     
-    public Order[] getArrayOfOrders()
+    public Order[] GetAll()
 
     {  ///looking for all of the order items that have their details filed in and returning them
         return Array.FindAll(DataSource.arrayOrder, p => p.ID != 0);
     }
     /// This function receives an id of an order and deletes the order witn the same id
-    public void deleteOrder(int id)
+    public void Delete(int id)
     {
         //int nextIndex = DataSource.Config.IndexOrder;///The size of the occupied places in the array
         for (int i = 0; i < DataSource.arrayOrder.Length; i++)
@@ -89,7 +89,7 @@ public class DalOrder
     }
 
     /// This function receives an order and updates the order in the array that has the same id
-    public void updateOrder(Order myOrder)
+    public void Update(Order myOrder)
     {
         for (int i = 0; i < DataSource.arrayOrder.Length; i++)
         {
