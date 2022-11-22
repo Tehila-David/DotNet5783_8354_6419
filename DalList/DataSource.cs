@@ -8,7 +8,7 @@ internal sealed class DataSource
 
     public static readonly Random random = new Random();
 
-    /*internal static readonly DataSource _instance;
+    internal static readonly DataSource _instance;
     public static DataSource Instance
     {
         get { return _instance; }
@@ -18,10 +18,10 @@ internal sealed class DataSource
         s_Initialize();
 
     }
-    /*static DataSource()
+    static DataSource()
     {
         _instance = new DataSource();
-    }*/
+    }
 
     internal static Product[] arrayProducts = new Product[50];
     internal static OrderItem[] arrayOrderItem = new OrderItem[100];
