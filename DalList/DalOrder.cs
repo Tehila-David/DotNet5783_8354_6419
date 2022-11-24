@@ -9,22 +9,31 @@ internal class DalOrder: IOrder
     /// This function adds an order to array
     public int Add(Order myOrder)
     {
-        if (DataSource.OrderList.Count == DataSource.Config.IndexOrder)//check if array is full
+        //if (DataSource.OrderList.Count == DataSource.Config.IndexOrder)//check if array is full
+        //{
+        //    throw new Exception("The Order array is full");
+        //}
+        for (int i = 0; i < OrderList.Count; i++)// check if myOrder is exists
         {
-            throw new Exception("The Order array is full");
-        }
-        for (int i = 0; i < DataSource.Config.IndexOrder; i++)// check if myOrder is exists
-        {
-            if (myOrder.ID == DataSource.arrayOrder[i].ID)
+            if (myOrder.ID == OrderList[i].ID)
             {
                 throw new Exception(" The Order already exists");
             }
         }
         //Placing the new order  in thelast available spot in the array
-        DataSource.arrayOrder[DataSource.Config.IndexOrder++] = new Order()
-        { ID = myOrder.ID, CustomerName = myOrder.CustomerName, CustomerEmail = myOrder.CustomerEmail, CustomerAddress = myOrder.CustomerAddress,
-         OrderDate = myOrder.OrderDate, ShipDate = myOrder.ShipDate, DeliveryDate = myOrder.DeliveryDate
-        };
+        OrderList.Add(new Order() {
+            ID = myOrder.ID,
+            CustomerName = myOrder.CustomerName,
+            CustomerEmail = myOrder.CustomerEmail,
+            CustomerAddress = myOrder.CustomerAddress,
+            OrderDate = myOrder.OrderDate,
+            ShipDate = myOrder.ShipDate,
+            DeliveryDate = myOrder.DeliveryDate
+        });
+        //DataSource.arrayOrder[DataSource.Config.IndexOrder++] = new Order()
+        //{ ID = myOrder.ID, CustomerName = myOrder.CustomerName, CustomerEmail = myOrder.CustomerEmail, CustomerAddress = myOrder.CustomerAddress,
+        // OrderDate = myOrder.OrderDate, ShipDate = myOrder.ShipDate, DeliveryDate = myOrder.DeliveryDate
+        //};
 
         return myOrder.ID;
     }
