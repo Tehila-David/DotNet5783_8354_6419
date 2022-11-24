@@ -1,4 +1,6 @@
-﻿using DO;
+﻿using DalApi;
+//using Dal;
+using DO;
 
 namespace Dal;
 
@@ -6,13 +8,13 @@ namespace Dal;
 public class Program
 
 {
-    DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
-    DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
-    DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
+   IDal dal = new DalList();
+   //DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
+   //DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
+   //DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
 
     static void Main(string[]arg)
     {
-
         int choice;
         Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
         int.TryParse(Console.ReadLine(), out choice);
@@ -87,7 +89,7 @@ public class Program
                     InStock = NewInstock
                 };
                 int id;
-                id = dalProduct.Add(product);//Adding the product to the array
+                id = dal.Product.Add(product);//Adding the product to the array
                 Console.WriteLine(id);
                 break;
 

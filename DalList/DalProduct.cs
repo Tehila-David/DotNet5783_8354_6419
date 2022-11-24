@@ -44,7 +44,7 @@ internal class DalProduct : IProduct
     /// <summary>
     /// This function returns all of the products
     /// </summary>
-    public List<Product> GetAll()
+    public IEnumerable <Product> GetAll()
     {
         ///looking for all of the products that have their details filed in and returning them
         return _dataSource.ProductList.FindAll(delegate (Product myProduct)

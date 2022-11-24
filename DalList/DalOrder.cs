@@ -49,7 +49,7 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <returns></returns> array of orders
 
-    public List<Order> GetAll()
+    public IEnumerable <Order> GetAll()
 
     {  ///looking for all of the order items that have their details filed in and returning them
         return _dataSource.OrderList.FindAll(delegate (Order myOrder)

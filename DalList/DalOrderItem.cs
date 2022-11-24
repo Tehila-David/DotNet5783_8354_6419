@@ -45,7 +45,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns the list with all of the order items
     /// </summary>
-    public List<OrderItem> GetAll()
+    public IEnumerable <OrderItem> GetAll()
     {
         ///looking for all of the order items that have their details filed in and returning them
         return _dataSource.OrderItemList.FindAll( delegate (OrderItem myOrderItem)
@@ -119,7 +119,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns an array of all of the order items with the order id the user entered
     /// </summary>
-    public List<OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder)
+    public IEnumerable <OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder)
     {
         //creating an list with all of the order items that have the same order id as the one the user entered
         return _dataSource.OrderItemList.FindAll(delegate (OrderItem myOrderItem)
