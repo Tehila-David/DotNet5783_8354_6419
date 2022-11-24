@@ -7,11 +7,11 @@ namespace Dal;
 class Program
 
 {
-    static DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
-    static DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
-    static DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
+    DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
+    DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
+    DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
 
-    static void Main()
+    static void Main(string[]arg)
     {
 
         int choice;
@@ -175,7 +175,7 @@ class Program
                 CustomerEmail1 = Console.ReadLine();
                 Console.WriteLine("Enter Customer Address:");
                 CustomerAddress1 = Console.ReadLine();
-                
+
                 Order order = new Order
                 {
                     ID = orderID1,

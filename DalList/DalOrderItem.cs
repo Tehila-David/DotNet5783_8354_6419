@@ -7,128 +7,125 @@ namespace Dal;
 internal class DalOrderItem : IOrderItem
 
 {
+    DataSource _dataSource = DataSource.s_instance;
+
+    /// <summary>
     /// This function adds an order item
+    /// </summary>
     public  int Add(OrderItem myOrderItem) 
     {
-        ///Checking if the order item array is full
-        //if(DataSource.OrderItemList.Count == DataSource.Config.IndexOrdersItem)
-        //{
-        //    throw new Exception("The Order Item array is full");
-        //}
-        ///Going through the array of order items
-        for(int i = 0; i < DataSource.OrderItemList.Count; i++)
+
+        foreach (var item in _dataSource.OrderItemList)
         {
-            ///checking if  the id of an order item in the array is equal to the id of an order item wanted to be added
-            if(myOrderItem.ID == DataSource.arrayOrderItem[i].ID)
+            ///checking if  the id of an order item in the list is equal to the id of an order item wanted to be added
+            if(myOrderItem.ID == item.ID)
             {
                 throw new Exception(" The order item already exists");
             }
         }
-        ///Placing the new order item in thelast available spot in the array
-        DataSource.arrayOrderItem[DataSource.Config.IndexOrdersItem++] = new OrderItem()
-        {ID = myOrderItem.ID, ProductID = myOrderItem.ProductID, OrderID = myOrderItem.OrderID, Amount = myOrderItem.Amount, Price = myOrderItem.Price};
-        
+        _dataSource.OrderItemList.Add(myOrderItem);
         return myOrderItem.ID;
     }
+
+    /// <summary>
     /// This function returns the details of an lorder item based on an id
+    /// </summary>
     public  OrderItem GetById(int id)
     {
-        ///Going through the array of order items
-        for (int i = 0; i < DataSource.arrayOrderItem.Length; i++)
+        foreach (var item in _dataSource.OrderItemList)
         {
-            ///Checking if the requested id is equal to an id of an order item in the array
-            if (id == DataSource.arrayOrderItem[i].ID)
-            {
-                ///Copying the details of the order item wirh the correct id to a new order item
-                OrderItem singleOrderItem = new OrderItem()
-                {
-                    ID = DataSource.arrayOrderItem[i].ID,
-                    ProductID = DataSource.arrayOrderItem[i].ProductID,
-                    OrderID = DataSource.arrayOrderItem[i].OrderID,
-                    Amount = DataSource.arrayOrderItem[i].Amount,
-                    Price = DataSource.arrayOrderItem[i].Price
-                };
-                return singleOrderItem; ///returning the new order item
-            }
+            
+            if(item.ID == id)
+                return item;
         }
-        ///If the order item was not found in the array
-        throw new Exception("Sorry ,this item does not exist in the array ");
+        ///If the order item was not found in the list
+        throw new Exception("Sorry ,this item does not exist in the list ");
     }
+
     /// <summary>
-    /// This function returns the array with all of the order items
+    /// This function returns the list with all of the order items
     /// </summary>
-    /// <returns></returns> array of order items
-    public OrderItem[] GetAll()
+    public List<OrderItem> GetAll()
     {
         ///looking for all of the order items that have their details filed in and returning them
-        return Array.FindAll(DataSource.OrderItemList, p => p.ID != 0);
+        return _dataSource.OrderItemList.FindAll( delegate (OrderItem myOrderItem)
+        {
+            return myOrderItem.ID != 0;
+        });
     }
+
+    /// <summary>
     /// This function receives an id of an ordre item and deletes the order item witn the same id
+    /// </summary>
     public  void Delete(int id)
     {
-         
-        for (int i = 0; i < DataSource.arrayOrderItem.Length; i++) ///Going through the array of order items
+
+        foreach (var item in _dataSource.OrderItemList)
         {
-            ///Checking if the requested id is equal to the id in the array
-            if (DataSource.arrayOrderItem[i].ID == id)
+            ///Checking if the requested id is equal to the id 
+            if (item.ID == id)
             {
-                /// Going through the array from  the point of the found id
-                for (int j = i; j < DataSource.arrayOrderItem.Length - 1; j++)
-                {
-                    ///moving each order item one space to the left
-                    DataSource.arrayOrderItem[j] = DataSource.arrayOrderItem[j + 1];
-                }
-                DataSource.Config.IndexOrdersItem--; ///Decreasing the amount of order items by one
-                break;
+                _dataSource.OrderItemList.Remove(item);
+                return;
             }
         }
-        /// If the order item was not found in the array
-        throw new Exception("Sorry ,this item does not exist in the array ");
+        /// If the order item was not found in the list
+        throw new Exception("Sorry ,this item does not exist in the list ");
 
     }
 
-    /// This function receives an order item and updates the order item in the array that has the same id
+    /// <summary>
+    /// This function receives an order item and updates the order item in the list that has the same id
+    /// </summary>
     public  void Update(OrderItem myOrderItem)
     {
-        ///Going through the order items array
-        for(int i = 0; i < DataSource.arrayOrderItem.Length; i++)
+
+        int index = 0;
+        foreach (var item in _dataSource.OrderItemList)
         {
-            /// Checking if the id in the array is equal to the id of the requested order item to be updated
-            if (DataSource.arrayOrderItem[i].ID == myOrderItem.ID)
+            if (item.ID == myOrderItem.ID) ///updating the order
             {
-                ///updating the order item
-                DataSource.arrayOrderItem[i] = myOrderItem;
-                break;
+                _dataSource.OrderItemList.RemoveAt(index);
+                _dataSource.OrderItemList.Insert(index, myOrderItem);
+                return;
             }
+            index++;
         }
-        ///if the id of the requested order item is not found in the array
+        ///if the id of the requested order item is not found in the list
         throw new Exception("Order Item to be updated does not exist");
     }
 
+    /// <summary>
     /// This function receives an order id and a product id and returns the matching order item
+    /// </summary>
     public OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct)
     {
         OrderItem orderItem = new OrderItem();
-        //int nextIndex = DataSource.Config.IndexOrdersItem; ///The size of the occupied places in the array 
-        for (int i = 0; i < DataSource.arrayOrderItem.Length; i++) //Going through the array of order items
+        foreach (OrderItem item in _dataSource.OrderItemList)
         {
             ///checking if an orderitem has the same product and order id's as the on e the user entered 
-            if(DataSource.arrayOrderItem[i].ProductID == idProduct && DataSource.arrayOrderItem[i].OrderID == idOrder)
+            if (item.ID == idProduct && item.OrderID == idOrder)
             {
                 ///The correct order item based on the user input
-                orderItem = DataSource.arrayOrderItem[i];
+                orderItem = item;
                 return orderItem;
             }
         }
-        //If the order item being looked for is not found incthe array
-        throw new Exception("Sorry ,this item does not exist in the array ");
+        //If the order item being looked for is not found in the list
+        throw new Exception("Sorry ,this item does not exist in the list ");
     }
 
+
+    /// <summary>
     /// This function returns an array of all of the order items with the order id the user entered
-    public OrderItem[] getListOfOrderItemsBasedOnOrderID(int idOrder)
+    /// </summary>
+    public List<OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder)
     {
-        //creating an array with all of the order items that have the same order id as the one the user entered
-        return Array.FindAll(DataSource.arrayOrderItem, p => p.OrderID == idOrder);
+        //creating an list with all of the order items that have the same order id as the one the user entered
+        return _dataSource.OrderItemList.FindAll(delegate (OrderItem myOrderItem)
+        {
+            return myOrderItem.ID != idOrder;
+        });
         //If no order items arec found with the order id the user entered
         throw new Exception("No order items found with the entered order id");
     }
