@@ -6,6 +6,7 @@ namespace Dal;
 
 internal sealed class DataSource
 {
+
     internal static DataSource s_instance { get; } //This variable can contain an object of the class - dataSource
     public static readonly Random random = new Random(); //Variable to generate random numbers
     static DataSource() => s_instance = new DataSource(); //This function returns the created object
