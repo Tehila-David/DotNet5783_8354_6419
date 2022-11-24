@@ -1,10 +1,9 @@
 ﻿using DO;
-using System;
 
 namespace Dal;
 
 
-class Program
+public class Program
 
 {
     DalProduct dalProduct = new DalProduct(); // variable to access dalProduct

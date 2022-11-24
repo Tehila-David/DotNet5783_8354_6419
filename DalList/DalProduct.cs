@@ -2,7 +2,6 @@
 using DO;
 using DalApi;
 
-
 namespace Dal;
 
 internal class DalProduct : IProduct
@@ -19,7 +18,7 @@ internal class DalProduct : IProduct
             ///Checking if the id of the requested product is found in the List of products
             if (myProduct.ID == item.ID)
             {
-                throw new Exception("The product already exists");
+                throw new AlreadyExists("The product already exists");
             }
             _dataSource.ProductList.Add(myProduct);
         }
@@ -39,7 +38,7 @@ internal class DalProduct : IProduct
             }
         }
         /// If the id the user entered is not found in the list
-        throw new Exception("Sorry ,this product does not exist in the List ");
+        throw new NotExists("Sorry ,this product does not exist in the List ");
     }
 
     /// <summary>
@@ -71,7 +70,7 @@ internal class DalProduct : IProduct
             }
         }
         // If the id the user entered was not found in the list 
-        throw new Exception("Sorry ,this product does not exist in the array ");
+        throw new NotExists("Sorry ,this product does not exist in the array ");
 
     }
 
@@ -92,7 +91,11 @@ internal class DalProduct : IProduct
             index++;
         }
         //If the id of the product the user entered to be updated is not found in the list
-        throw new Exception("Product to be updated does not exist");
+        throw new NotExists("Product to be updated does not exist");
     }
 
+    IEnumerable<Product?> ICrud<Product>.GetAll(Func<Product?, bool>? filter)
+    {
+        throw new NotImplementedException();
+    }
 }

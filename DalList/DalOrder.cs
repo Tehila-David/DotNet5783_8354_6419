@@ -2,8 +2,7 @@
 using DalApi;
 using DalFacade;
 using DO;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
+
 
 namespace Dal;
 
@@ -21,7 +20,7 @@ internal class DalOrder : IOrder
         {
             if (myOrder.ID == item.ID)
             {
-                throw new Exception(" The Order already exists");
+                throw new AlreadyExists(" The Order already exists");
             }
         }
         _dataSource.OrderList.Add(myOrder);
@@ -42,7 +41,7 @@ internal class DalOrder : IOrder
             }
         }
         ///If the order  was not found in the array
-        throw new Exception("Sorry ,this Order does not exist in the List ");
+        throw new NotExists("Sorry ,this Order does not exist in the List ");
     }
 
     /// <summary>
@@ -75,7 +74,7 @@ internal class DalOrder : IOrder
             }
         }
         /// If the order was not found in the list
-        throw new Exception("Sorry ,this Order does not exist in the List ");
+        throw new NotExists("Sorry ,this Order does not exist in the List ");
 
     }
 
@@ -97,6 +96,11 @@ internal class DalOrder : IOrder
             index++;
         }
         ///if the id of the requested order  is not found in the array
-        throw new Exception("Order to be updated does not exist");
+        throw new NotExists("Order to be updated does not exist");
+    }
+
+    IEnumerable<Order?> ICrud<Order>.GetAll(Func<Order?, bool>? filter)
+    {
+        throw new NotImplementedException();
     }
 }

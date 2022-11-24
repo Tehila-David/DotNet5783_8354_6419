@@ -20,7 +20,7 @@ internal class DalOrderItem : IOrderItem
             ///checking if  the id of an order item in the list is equal to the id of an order item wanted to be added
             if(myOrderItem.ID == item.ID)
             {
-                throw new Exception(" The order item already exists");
+                throw new AlreadyExists(" The order item already exists");
             }
         }
         _dataSource.OrderItemList.Add(myOrderItem);
@@ -39,7 +39,7 @@ internal class DalOrderItem : IOrderItem
                 return item;
         }
         ///If the order item was not found in the list
-        throw new Exception("Sorry ,this item does not exist in the list ");
+        throw new NotExists("Sorry ,this item does not exist in the list ");
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ internal class DalOrderItem : IOrderItem
             }
         }
         /// If the order item was not found in the list
-        throw new Exception("Sorry ,this item does not exist in the list ");
+        throw new NotExists("Sorry ,this item does not exist in the list ");
 
     }
 
@@ -92,7 +92,7 @@ internal class DalOrderItem : IOrderItem
             index++;
         }
         ///if the id of the requested order item is not found in the list
-        throw new Exception("Order Item to be updated does not exist");
+        throw new NotExists("Order Item to be updated does not exist");
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ internal class DalOrderItem : IOrderItem
             }
         }
         //If the order item being looked for is not found in the list
-        throw new Exception("Sorry ,this item does not exist in the list ");
+        throw new NotExists("Sorry ,this item does not exist in the list ");
     }
 
 
@@ -127,7 +127,12 @@ internal class DalOrderItem : IOrderItem
             return myOrderItem.ID != idOrder;
         });
         //If no order items arec found with the order id the user entered
-        throw new Exception("No order items found with the entered order id");
+        throw new NotExists("No order items found with the entered order id");
+    }
+
+    IEnumerable<OrderItem?> ICrud<OrderItem>.GetAll(Func<OrderItem?, bool>? filter)
+    {
+        throw new NotImplementedException();
     }
 }
   
