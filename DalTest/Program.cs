@@ -1,5 +1,5 @@
 ﻿using DalApi;
-//using Dal;
+using Dal;
 using DO;
 
 namespace Dal;
@@ -8,10 +8,10 @@ namespace Dal;
 public class Program
 
 {
-   IDal dal = new DalList();
-   //DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
-   //DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
-   //DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
+    static IDal dal; /*= new DalList();*/
+    //DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
+    //DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
+    //DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
 
     static void Main(string[]arg)
     {
@@ -97,14 +97,14 @@ public class Program
                 Console.WriteLine("Enter product ID:");
                 int idForItem;
                 int.TryParse(Console.ReadLine(), out idForItem);
-                Product singleProduct1 = dalProduct.GetById(idForItem);
+                Product singleProduct1 = dal.Product.GetById(idForItem);
                 // sending the requested id to the function so that it can locate the product
                 Console.WriteLine(singleProduct1);
                 break;
 
             case 'c':// print  array
                 ///going through the array and printing the products
-                foreach (var item in dalProduct.GetAll())
+                foreach (var item in dal.Product.GetAll())
                 {
                     Console.WriteLine(item);
                 }
@@ -114,7 +114,7 @@ public class Program
                 ///asking the user to enter the details of the product to be updated
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out NewID);
-                Product singleP = dalProduct.GetById(NewID);
+                Product singleP = dal.Product.GetById(NewID);
                 Console.WriteLine(singleP);
 
                 Console.WriteLine("Enter product name:");
@@ -135,14 +135,14 @@ public class Program
                     Category = NewCategory,
                     InStock = NewInstock
                 };
-                dalProduct.Update(product2); ///updating the product
+                dal.Product.Update(product2); ///updating the product
                 break;
 
             case 'e'://delete product
                 int delID;
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out delID);
-                dalProduct.Delete(delID); ///deleting the product with the ID the user entered
+                dal.Product.Delete(delID); ///deleting the product with the ID the user entered
                 break;
             default: ///wrong input
                 Console.WriteLine("ERROR");
@@ -187,7 +187,7 @@ public class Program
                     ShipDate = DateTime.MinValue,
                     DeliveryDate = DateTime.MinValue
                 };
-                orderID1 = dalOrder.Add(order); //adding the new order to the array of orders
+                orderID1 = dal.Order.Add(order); //adding the new order to the array of orders
                 Console.WriteLine(orderID1);
                 break;
 
@@ -195,14 +195,14 @@ public class Program
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
                 Order singleOrder;
-                singleOrder = dalOrder.GetById(orderID1);
+                singleOrder = dal.Order.GetById(orderID1);
                 /// sending the requested id to the function so that it can locate the order
                 Console.WriteLine(singleOrder);
                 break;
 
             case 'c': /// Printing the array of orders
                       ///going through the array and printing the orders
-                foreach (var item in dalOrder.GetAll())
+                foreach (var item in dal.Order.GetAll())
                 {
                     Console.WriteLine(item);
                 }
@@ -214,7 +214,7 @@ public class Program
                 Console.WriteLine("Enter order ID:");
                 /// sending the requested id to the function so that it can locate the order
                 int.TryParse(Console.ReadLine(), out orderID1);
-                Order singleOrder1 = dalOrder.GetById(orderID1);
+                Order singleOrder1 = dal.Order.GetById(orderID1);
 
                 Console.WriteLine(singleOrder1);
                 Console.WriteLine("Enter Customer Name:");
@@ -233,13 +233,13 @@ public class Program
                     ShipDate = DateTime.MinValue,
                     DeliveryDate = DateTime.MinValue
                 };
-                dalOrder.Update(order3); ///Updating the order
+                dal.Order.Update(order3); ///Updating the order
                 break;
 
             case 'e': ///deleting an order
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
-                dalOrder.Delete(orderID1);
+                dal.Order.Delete(orderID1);
                 break;
 
             default: //Wrong input
@@ -283,7 +283,7 @@ public class Program
                     Price = newPrice1,
                     Amount = newAmount,
                 };
-                int id = dalOrderItem.Add(orderItem);
+                int id = dal.OrderItem.Add(orderItem);
                 ///Adding the order item to the Rray of order items
                 Console.WriteLine(id);
                 break;
@@ -292,13 +292,13 @@ public class Program
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
                 ///finding the order item based on the id that the user entered
-                OrderItem singleOrderItem = dalOrderItem.GetById(newID);
+                OrderItem singleOrderItem = dal.OrderItem.GetById(newID);
                 Console.WriteLine(singleOrderItem);
                 break;
 
             case 'c':
                 ///going through the array and printing the order items
-                foreach (var item in dalOrderItem.GetAll())
+                foreach (var item in dal.OrderItem.GetAll())
                 {
                     Console.WriteLine(item);
                 }
@@ -307,7 +307,7 @@ public class Program
             case 'd': ///updating an order item
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
-                OrderItem orderItem1 = dalOrderItem.GetById(newID);
+                OrderItem orderItem1 = dal.OrderItem.GetById(newID);
                 Console.WriteLine(orderItem1);
 
                 Console.WriteLine("Enter Product ID:");
@@ -327,13 +327,13 @@ public class Program
                     Price = newPrice1,
                     Amount = newAmount,
                 };
-                dalOrderItem.Update(orderItem2); ///updating the requested order  item
+                dal.OrderItem.Update(orderItem2); ///updating the requested order  item
                 break;
 
             case 'e': ///deleting an order item
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
-                dalOrderItem.Delete(newID);
+                dal.OrderItem.Delete(newID);
                 break;
             case 'f': /// returning order item based on product and order id
                 Console.WriteLine("Enter order ID:");
@@ -341,14 +341,14 @@ public class Program
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out newProductID);
                 /// Finding the order item with the same order and product id as the one the user entered
-                OrderItem orderItemFound = dalOrderItem.getOrderItemBasedOnProducIDAndOrderID(newOrderID1, newProductID);
+                OrderItem orderItemFound = dal.OrderItem.getOrderItemBasedOnProducIDAndOrderID(newOrderID1, newProductID);
                 Console.WriteLine(orderItemFound);
                 break;
             case 'g': ///returning array with order items based on order id
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out newOrderID1);
                 ///Printing the order items with the order id corresponding to the user input
-                foreach (var item in dalOrderItem.getListOfOrderItemsBasedOnOrderID(newOrderID1))
+                foreach (var item in dal.OrderItem.getListOfOrderItemsBasedOnOrderID(newOrderID1))
                 {
                     Console.WriteLine(item);
                 }
