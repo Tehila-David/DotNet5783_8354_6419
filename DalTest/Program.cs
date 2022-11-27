@@ -8,15 +8,15 @@ namespace Dal;
 public class Program
 
 {
-    static IDal dal; /*= new DalList();*/
+    static IDal dal = new Dal.DalList();
     //DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
     //DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
     //DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
 
-    static void Main(string[]arg)
+    static void Main(string[] arg)
     {
         int choice;
-        Console.WriteLine(" Input: O - Exit , 1 - Product , 2 - Order, 3 - Order Item");
+        Console.WriteLine(" Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Order Item");
         int.TryParse(Console.ReadLine(), out choice);
         while (choice != 0) ///checking if the user does not want to exit
         {

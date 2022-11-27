@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    internal class OrderTracking
+    public class BOOrderTracking
     {
     }
 }

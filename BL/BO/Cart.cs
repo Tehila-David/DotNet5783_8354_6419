@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    internal class Cart
+    public class BOCart
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BO
 {
-  public class Order
+  public class BOOrder
     {
       public int ID { get; set; }
       public string? CustomerName { get; set; }
@@ -13,6 +13,14 @@ namespace BO
         public DateTime? ShipDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public IEnumerable <OrderItem>? Items { get; set; }
-        public double TotalPrice { get; set; }  
+        public double TotalPrice { get; set; }
+        public override string ToString() => $@"
+        ID:{ID},
+        Costumer Name: {CustomerName},
+        Customer Email: {CustomerEmail},
+        Customer Address: {CustomerAddress},
+        OrderDate: {OrderDate},
+        Ship Date: {ShipDate},
+        Delivery Date: {DeliveryDate}";
     }
 }
