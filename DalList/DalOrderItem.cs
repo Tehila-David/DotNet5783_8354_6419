@@ -48,10 +48,7 @@ internal class DalOrderItem : IOrderItem
     public IEnumerable <OrderItem> GetAll()
     {
         ///looking for all of the order items that have their details filed in and returning them
-        return _dataSource.OrderItemList.FindAll( delegate (OrderItem myOrderItem)
-        {
-            return myOrderItem.ID != 0;
-        });
+        return _dataSource.OrderItemList.ToList();
     }
 
     /// <summary>

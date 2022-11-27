@@ -52,10 +52,7 @@ internal class DalOrder : IOrder
     public IEnumerable <Order> GetAll()
 
     {  ///looking for all of the order items that have their details filed in and returning them
-        return _dataSource.OrderList.FindAll(delegate (Order myOrder)
-       {
-           return myOrder.ID != 0;
-       });
+        return _dataSource.OrderList.ToList();
 
 
     }

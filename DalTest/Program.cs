@@ -9,7 +9,7 @@ public class Program
 
 {
     static IDal dal = new Dal.DalList();
-    static IDal dal = new DalList();
+    //static IDal dal = new DalList();
     //DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
     //DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
     //DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
