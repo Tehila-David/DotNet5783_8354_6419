@@ -10,10 +10,10 @@ namespace BlApi;
 
 public interface IProduct
 {
-    public int Add(Product myProduct);
-    public Product GetById(int id);
-    public IEnumerable<Product> GetAll();
+    public int Add(BO.Product myProduct);
+    public BO.Product GetById(int id);
+    public IEnumerable<BO.Product> GetAll();
     public void Delete(int ID);
-    public void Update(Product myProduct);
+    public void Update(BO.Product myProduct);
 
 }
