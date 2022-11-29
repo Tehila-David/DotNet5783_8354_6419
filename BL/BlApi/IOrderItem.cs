@@ -9,13 +9,13 @@ namespace BlApi
 {
     public interface IOrderItem
     {
-        public int Add(OrderItem myOrderItem);
-        public OrderItem GetById(int id);
-        public IEnumerable<OrderItem> GetAll();
+        public int Add(BO.OrderItem myOrderItem);
+        public BO.OrderItem GetById(int id);
+        public IEnumerable<BO.OrderItem> GetAll();
         public void Delete(int ID);
-        public void Update(OrderItem myOrderItem);
-        public OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct);
-        public IEnumerable<OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder);
+        public void Update(BO.OrderItem myOrderItem);
+        public BO.OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct);
+        public IEnumerable<BO.OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder);
 
     }
 }
