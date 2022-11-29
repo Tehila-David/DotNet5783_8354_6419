@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 using DalApi;
-using BO;
+using Dal;
+
 namespace BlImplementation;
 
 internal class Cart: ICart
 {
-
+    IDal Dal = new DalList();
 }

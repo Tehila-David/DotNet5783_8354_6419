@@ -1,21 +1,18 @@
-﻿using DO;
+﻿using BlImplementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
 
 namespace BlApi
 {
     public interface ICart
     {
-        public int Add(BO.OrderItem myOrderItem);
-        public BO.OrderItem GetById(int id);
-        public IEnumerable<BO.OrderItem> GetAll();
-        public void Delete(int ID);
-        public void Update(BO.OrderItem myOrderItem);
-        public BO.OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct);
-        public IEnumerable<BO.OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder);
+     
+        public void UpdateTotalSum(BO.Cart myCart);
+        BO.Cart AddProduct(BO.Cart myCart, int productId);
 
     }
 }

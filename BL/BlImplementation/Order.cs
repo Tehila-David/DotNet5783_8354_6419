@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using BlApi;
 using DalApi;
 
-using BO;
+using Dal;
+
 namespace BlImplementation;
 
 internal class Order: BlApi.IOrder
 {
+    IDal Dal = new DalList();
+
 }
