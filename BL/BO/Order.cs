@@ -13,6 +13,7 @@ namespace BO
         public DateTime? DeliveryDate { get; set; }
         public IEnumerable <OrderItem>? Items { get; set; }
         public double TotalPrice { get; set; }
+
         public override string ToString() => $@"
         ID:{ID},
         Costumer Name: {CustomerName},

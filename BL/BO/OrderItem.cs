@@ -8,29 +8,28 @@ namespace BO
 {
     public class OrderItem
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int ID { get; set; }
         /// <summary>
-        ///  ID of item
+        /// 
         /// </summary>
+        public int Name { get; set; }
         public int ProductID { get; set; }
-        /// <summary>
-        /// ID of Order
-        /// </summary>
-        public int OrderID { get; set; }
-        /// <summary>
-        /// Price of item
-        /// </summary>
-        public double Price { get; set; }
-        /// <summary>
-        /// Amount of items in order
-        /// </summary>
+        public int Price { get; set; }
         public int Amount { get; set; }
+        public int TotalPrice { get; set; }
+
+
+
         public override string ToString() => $@"
         ID:{ID},
-        Order ID: {OrderID},
+        Name: {Name},
         Product Id: {ProductID},
         Price per product: {Price},
         Amount: {Amount}
+        TotalPrice: {TotalPrice}
         ";
 
     }

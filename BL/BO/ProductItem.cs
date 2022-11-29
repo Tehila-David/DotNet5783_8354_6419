@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class Product
+    public class ProductItem
     {
         /// <summary>
         /// Unique ID of Prudct
@@ -28,6 +28,7 @@ namespace BO
         /// <summary>
         /// Instock of product
         /// </summary>
+        public int Amount { get; set; }
         public int InStock { get; set; }
 
 
@@ -36,6 +37,7 @@ namespace BO
         Name: {Name} 
         category: {Category}
         Price: {Price}
+        Amount: {Amount}
         Amount in stock: {InStock}";
     }
 }
