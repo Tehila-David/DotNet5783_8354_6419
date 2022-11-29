@@ -15,14 +15,8 @@ internal class DalOrderItem : IOrderItem
     public  int Add(OrderItem myOrderItem) 
     {
 
-        foreach (var item in _dataSource.OrderItemList)
-        {
-            ///checking if  the id of an order item in the list is equal to the id of an order item wanted to be added
-            if(myOrderItem.ID == item.ID)
-            {
-                throw new AlreadyExists(" The order item already exists");
-            }
-        }
+        if (_dataSource.OrderItemList.Exists(p => p.ID == myOrderItem.ID))
+            throw new AlreadyExists("The order item already exists");
         _dataSource.OrderItemList.Add(myOrderItem);
         return myOrderItem.ID;
     }

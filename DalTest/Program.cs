@@ -74,7 +74,7 @@ public class Program
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out NewID);
                 Console.WriteLine("Enter product Category:");
-                Category.TryParse(Console.ReadLine(), out NewCategory);
+                Category.TryParse(Console.ReadLine().ToUpper(), out NewCategory);
                 Console.WriteLine("Enter product Price:");
                 double.TryParse(Console.ReadLine(), out NewPrice);
                 Console.WriteLine("Enter product instock:");
