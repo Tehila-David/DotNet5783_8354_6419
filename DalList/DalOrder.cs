@@ -1,6 +1,5 @@
 ﻿
 using DalApi;
-using DalFacade;
 using DO;
 
 
@@ -16,15 +15,9 @@ internal class DalOrder : IOrder
     public int Add(Order myOrder)
     {
 
-        foreach (var item in _dataSource.OrderList)
-        {
-            if (myOrder.ID == item.ID)
-            {
-                throw new AlreadyExists(" The Order already exists");
-            }
-        }
+        if (_dataSource.OrderList.Exists(p => p.ID == myOrder.ID))
+             throw new AlreadyExists("The order already exists");
         _dataSource.OrderList.Add(myOrder);
-
         return myOrder.ID;
     }
 

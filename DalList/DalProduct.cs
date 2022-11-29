@@ -13,26 +13,20 @@ internal class DalProduct : IProduct
     /// </summary>
     public int Add(Product myProduct)
     {
-        foreach (var item in _dataSource.ProductList)
-        {
-            ///Checking if the id of the requested product is found in the List of products
-            if (myProduct.ID == item.ID)
-            {
-                throw new AlreadyExists("The product already exists");
-            }
-            _dataSource.ProductList.Add(myProduct);
-        }
+        if(_dataSource.ProductList.Exists(p => p.ID== myProduct.ID))
+             throw new AlreadyExists("The product already exists");
+        _dataSource.ProductList.Add(myProduct);
         return myProduct.ID;
     }
 
-   /// <summary>
-   /// This function returns a product based on the useer input id
-   /// </summary>
+    /// <summary>
+    /// This function returns a product based on the useer input id
+    /// </summary>
     public Product GetById(int id)
     {
         foreach (var item in _dataSource.ProductList)
         {   ///Checking if the id the user entered is equal to an id in the list
-            if (id ==item.ID)
+            if (id == item.ID)
             {
                 return item;
             }
@@ -44,7 +38,7 @@ internal class DalProduct : IProduct
     /// <summary>
     /// This function returns all of the products
     /// </summary>
-    public IEnumerable <Product> GetAll()
+    public IEnumerable<Product> GetAll()
     {
         ///looking for all of the products that have their details filed in and returning them
         return _dataSource.ProductList.ToList();
@@ -60,9 +54,9 @@ internal class DalProduct : IProduct
         {  // Checking if th id in the list is equal to the id the user entered
             if (item.ID == ID)
             {
-                
-                    _dataSource.ProductList.Remove(item);
-                    return;
+
+                _dataSource.ProductList.Remove(item);
+                return;
 
             }
         }

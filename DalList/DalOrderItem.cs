@@ -15,14 +15,8 @@ internal class DalOrderItem : IOrderItem
     public  int Add(OrderItem myOrderItem) 
     {
 
-        foreach (var item in _dataSource.OrderItemList)
-        {
-            ///checking if  the id of an order item in the list is equal to the id of an order item wanted to be added
-            if(myOrderItem.ID == item.ID)
-            {
-                throw new AlreadyExists(" The order item already exists");
-            }
-        }
+        if (_dataSource.OrderItemList.Exists(p => p.ID == myOrderItem.ID))
+            throw new AlreadyExists("The order item already exists");
         _dataSource.OrderItemList.Add(myOrderItem);
         return myOrderItem.ID;
     }
@@ -96,7 +90,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function receives an order id and a product id and returns the matching order item
     /// </summary>
-    public OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct)
+    public OrderItem getOrderItem(int idOrder, int idProduct)
     {
         OrderItem orderItem = new OrderItem();
         foreach (OrderItem item in _dataSource.OrderItemList)
@@ -117,7 +111,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns an array of all of the order items with the order id the user entered
     /// </summary>
-    public IEnumerable <OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder)
+    public IEnumerable <OrderItem> getListOrderItems(int idOrder)
     {
         //creating an list with all of the order items that have the same order id as the one the user entered
         return _dataSource.OrderItemList.FindAll(delegate (OrderItem myOrderItem)
