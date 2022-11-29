@@ -7,7 +7,7 @@ namespace DO
     /// </summary>
     public class NotExists: Exception
     {
-        public NotExists(string message)
+        public NotExists(string message):base(message)
         {
 
         }
@@ -18,7 +18,7 @@ namespace DO
     /// </summary>
     public class AlreadyExists: Exception
     {
-        public AlreadyExists(string message)
+        public AlreadyExists(string message):base(message)
         {
 
         }
