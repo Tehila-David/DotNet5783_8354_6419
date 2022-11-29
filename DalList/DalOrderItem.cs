@@ -96,7 +96,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function receives an order id and a product id and returns the matching order item
     /// </summary>
-    public OrderItem getOrderItemBasedOnProducIDAndOrderID(int idOrder, int idProduct)
+    public OrderItem getOrderItem(int idOrder, int idProduct)
     {
         OrderItem orderItem = new OrderItem();
         foreach (OrderItem item in _dataSource.OrderItemList)
@@ -117,7 +117,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns an array of all of the order items with the order id the user entered
     /// </summary>
-    public IEnumerable <OrderItem> getListOfOrderItemsBasedOnOrderID(int idOrder)
+    public IEnumerable <OrderItem> getListOrderItems(int idOrder)
     {
         //creating an list with all of the order items that have the same order id as the one the user entered
         return _dataSource.OrderItemList.FindAll(delegate (OrderItem myOrderItem)
