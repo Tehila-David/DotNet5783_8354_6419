@@ -48,15 +48,10 @@ internal class DalOrder : IOrder
     /// This function returns the array with all of the order items
     /// </summary>
     /// <returns></returns> array of orders
-
-    public IEnumerable <Order> GetAll()
+    public IEnumerable<Order> GetAll()
 
     {  ///looking for all of the order items that have their details filed in and returning them
-        return _dataSource.OrderList.FindAll(delegate (Order myOrder)
-       {
-           return myOrder.ID != 0;
-       });
-
+        return _dataSource.OrderList.ToList();
 
     }
     /// <summary>
@@ -98,9 +93,6 @@ internal class DalOrder : IOrder
         ///if the id of the requested order  is not found in the array
         throw new NotExists("Order to be updated does not exist");
     }
+    
 
-    IEnumerable<Order?> ICrud<Order>.GetAll(Func<Order?, bool>? filter)
-    {
-        throw new NotImplementedException();
-    }
 }

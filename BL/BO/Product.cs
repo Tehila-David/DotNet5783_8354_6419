@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class BOProduct
+    public class Product
     {
         /// <summary>
         /// Unique ID of Prudct

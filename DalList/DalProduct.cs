@@ -47,10 +47,7 @@ internal class DalProduct : IProduct
     public IEnumerable <Product> GetAll()
     {
         ///looking for all of the products that have their details filed in and returning them
-        return _dataSource.ProductList.FindAll(delegate (Product myProduct)
-        {
-            return myProduct.ID != 0;
-        });
+        return _dataSource.ProductList.ToList();
     }
 
     /// <summary>
@@ -92,10 +89,5 @@ internal class DalProduct : IProduct
         }
         //If the id of the product the user entered to be updated is not found in the list
         throw new NotExists("Product to be updated does not exist");
-    }
-
-    IEnumerable<Product?> ICrud<Product>.GetAll(Func<Product?, bool>? filter)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class BOOrderItem
+    public class OrderItem
     {
         public int ID { get; set; }
         /// <summary>

@@ -48,10 +48,8 @@ internal class DalOrderItem : IOrderItem
     public IEnumerable <OrderItem> GetAll()
     {
         ///looking for all of the order items that have their details filed in and returning them
-        return _dataSource.OrderItemList.FindAll( delegate (OrderItem myOrderItem)
-        {
-            return myOrderItem.ID != 0;
-        });
+        return _dataSource.OrderItemList.ToList();
+
     }
 
     /// <summary>
@@ -128,11 +126,6 @@ internal class DalOrderItem : IOrderItem
         });
         //If no order items arec found with the order id the user entered
         throw new NotExists("No order items found with the entered order id");
-    }
-
-    IEnumerable<OrderItem?> ICrud<OrderItem>.GetAll(Func<OrderItem?, bool>? filter)
-    {
-        throw new NotImplementedException();
     }
 }
   

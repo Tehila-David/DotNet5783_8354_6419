@@ -8,7 +8,7 @@ using DO;
 
 namespace BlApi;
 
-public interface IBoProduct
+public interface IProduct
 {
     public int Add(Product myProduct);
     public Product GetById(int id);

@@ -2,7 +2,7 @@
 
 namespace BO
 {
-  public class BOOrder
+  public class Order
     {
       public int ID { get; set; }
       public string? CustomerName { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-    public interface IBoOrderItem
+    public interface IOrderItem
     {
         public int Add(OrderItem myOrderItem);
         public OrderItem GetById(int id);
