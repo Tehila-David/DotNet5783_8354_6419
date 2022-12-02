@@ -9,7 +9,7 @@ using Dal;
 
 namespace BlImplementation;
 
-internal class Cart: ICart
+internal class Cart:ICart
 {
     IDal Dal = new DalList();
 }

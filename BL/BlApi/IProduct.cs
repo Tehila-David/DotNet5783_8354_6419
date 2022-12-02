@@ -9,9 +9,9 @@ namespace BlApi;
 
 public interface IProduct
 {
-    public IEnumerable<BO.Product> GetListedProducts();
+    public IEnumerable <BO.Product> GetListedProducts();
     public BO.Product GetById(int id);
-    IEnumerable<ProductItem> GetProducts();
+    public IEnumerable<ProductItem> GetProducts();
 
 
 }
