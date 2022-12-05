@@ -46,6 +46,6 @@ public interface IProduct
     /// for the manager ,delete product from list
     /// </summary>
     /// <param name="product"></param>
-    public void Delete (BO.Product product);
+    public void Delete (int id);
 
 }

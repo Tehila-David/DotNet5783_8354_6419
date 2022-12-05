@@ -94,15 +94,27 @@ internal class Product : BlApi.IProduct
             Category = (DO.Category)(product.Category),
             InStock = product.InStock
         });
-
     }
     
     public void Update(BO.Product product)
     {
+        if (product.ID < 0) { throw new BO.InternalProblem("ID not positive"); }
+        if (product.Name == "") { throw new BO.InternalProblem("The String is empty"); }
+        if (product.Price < 0) { throw new BO.InternalProblem("The Price is negative"); }
+        if (product.InStock < 0) { throw new BO.InternalProblem("The Amount is negative"); }
+        Dal.Product.Update(new DO.Product
+        {
+
+            ID = product.ID,
+            Name = product.Name,
+            Price = product.Price,
+            Category = (DO.Category)(product.Category),
+            InStock = product.InStock
+        });
 
     }
    
-    public void Delete(BO.Product product)
+    public void Delete(int id)
     {
 
     }
