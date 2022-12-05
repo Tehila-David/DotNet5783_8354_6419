@@ -7,7 +7,7 @@ using DO;
 
 namespace BO
 {
-    internal class ProductForList
+    public  class ProductForList
     {
         public int ID { get; set; } 
         public string? Name { get; set; }
