@@ -13,7 +13,7 @@ namespace BlApi
     {
      
         public void UpdateTotalSum(BO.Cart myCart);
-        BO.Cart AddProduct(BO.Cart myCart, int productId);
+        public BO.Cart AddProduct(BO.Cart myCart, int productId);
 
     }
 }
