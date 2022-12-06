@@ -27,6 +27,12 @@ namespace BlApi
         /// for the manager , update ShipDate and return Order
         /// </summary>
         public BO.Order UpdateShipDate(int id);   
+        /// <summary>
+        /// for the manager, return order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BO.Order followOrder(int id);
 
     }
 }
