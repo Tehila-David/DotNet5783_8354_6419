@@ -15,11 +15,11 @@ namespace BO
         /// <summary>
         /// 
         /// </summary>
-        public int Name { get; set; }
+        public string? Name { get; set; }
         public int ProductID { get; set; }
-        public int Price { get; set; }
+        public double? Price { get; set; }
         public int Amount { get; set; }
-        public int TotalPrice { get; set; }
+        public double? TotalPrice { get; set; }
 
 
 
@@ -31,6 +31,5 @@ namespace BO
         Amount: {Amount}
         TotalPrice: {TotalPrice}
         ";
-
     }
 }
