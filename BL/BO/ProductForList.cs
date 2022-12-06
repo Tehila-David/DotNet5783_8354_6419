@@ -7,11 +7,11 @@ using DO;
 
 namespace BO
 {
-    internal class ProductForList
+    public  class ProductForList
     {
         public int ID { get; set; } 
         public string? Name { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public Category Category { get; set; }
         public override string ToString() => $@"
         ID: {ID}

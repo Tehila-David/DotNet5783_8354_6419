@@ -6,7 +6,7 @@ using System.Reflection.Metadata;
 
 namespace BlImplementation;
 
-internal class Cart: ICart
+internal class Cart:ICart
 {
     IDal Dal = new DalList();
     public void UpdateTotalSum(BO.Cart myCart)

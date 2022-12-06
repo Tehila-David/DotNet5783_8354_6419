@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class Exceptions
+    public class InternalProblem : Exception
     {
+        public InternalProblem(string message) : base(message)
+        {
+
+        }
+        public InternalProblem(string message, Exception inner) : base(message, inner)
+        {
+
+        }
+
     }
-}
+    

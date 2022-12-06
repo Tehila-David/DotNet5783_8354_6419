@@ -61,7 +61,7 @@ internal class DalProduct : IProduct
             }
         }
         // If the id the user entered was not found in the list 
-        throw new NotExists("Sorry ,this product does not exist in the array ");
+        throw new NotExists("Sorry ,this product does not exist in the list ");
 
     }
 
