@@ -10,6 +10,12 @@ namespace BlApi
 {
     public interface IOrder
     {
-        
+        /// <summary>
+        /// for the manager, return 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<OrderForList> GetListedOrders();
+       
+        public IEnumerable<ProductItem> GetProducts();
     }
 }

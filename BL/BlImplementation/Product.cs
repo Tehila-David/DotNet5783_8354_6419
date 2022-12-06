@@ -113,10 +113,9 @@ internal class Product : BlApi.IProduct
         });
 
     }
-   
+
     public void Delete(int id)
     {
-
     }
 
 }

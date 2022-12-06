@@ -11,7 +11,8 @@ namespace BlApi;
 public interface IProduct
 {
     /// <summary>
-    /// for the manager , return list of ProductForList
+    ///  for the manager , return list of ProductForList
+    /// </summary>
     /// <returns></returns>
     public IEnumerable<ProductForList> GetListedProducts();
     /// <summary>
