@@ -11,16 +11,10 @@ namespace BlApi;
 public interface IProduct
 {
     /// <summary>
-    ///  for the manager , return list of ProductForList
+    ///  for the manager and customer , return list of ProductForList
     /// </summary>
     /// <returns></returns>
     public IEnumerable<ProductForList> GetListedProducts();
-    /// <summary>
-    ///for the customer, return list of productItem
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public IEnumerable<ProductItem> GetProducts();
     /// <summary>
     /// for the manager , return details of product
     /// </summary>
@@ -28,11 +22,11 @@ public interface IProduct
     /// <returns></returns>
     public BO.Product GetById(int id);
     /// <summary>
-    /// for the customer , return details of product
+    /// for the customer , return details of productItem
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public BO.Product GetById1(int id);
+    public BO.ProductItem GetById1(int id,BO.Cart myCart);
     /// <summary>
     /// for the manager, add product to list
     /// </summary>

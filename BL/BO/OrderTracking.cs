@@ -13,8 +13,10 @@ namespace BO
     {
         int ID { get; set; }    
         OrderStatus Status { get; set; }
+        public List<Tuple<DateTime, string>>? Tracking { get; set; }
         public override string ToString() => $@"
         Product ID: {ID}
-        Status: {Status}";
+        Status: {Status}
+        Tracking: {Tracking}";
     }
 }

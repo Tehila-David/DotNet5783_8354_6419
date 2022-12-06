@@ -29,7 +29,7 @@ namespace BO
         /// Instock of product
         /// </summary>
         public int Amount { get; set; }
-        public int InStock { get; set; }
+        public bool  IsAvailable { get; set; }
 
 
         public override string ToString() => $@"
@@ -38,6 +38,6 @@ namespace BO
         category: {Category}
         Price: {Price}
         Amount: {Amount}
-        Amount in stock: {InStock}";
+        IsAvailable : {IsAvailable}";
     }
 }
