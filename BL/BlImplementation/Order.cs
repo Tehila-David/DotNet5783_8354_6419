@@ -73,7 +73,8 @@ internal class Order: BlApi.IOrder
                 OrderDate = order.OrderDate,
                 DeliveryDate = order.DeliveryDate,
                 ShipDate= order.ShipDate,
-                TotalPrice=
+                TotalPrice= Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem.Price * orderItem.Amount),
+
 
             };
         }
