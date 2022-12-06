@@ -13,14 +13,12 @@ internal class Cart:ICart
     {
         
     }
-    public bool FirstOrDefault(Func<object, bool> value)
-    {
-        throw new NotImplementedException();
-    }
+    
     public BO.Cart AddProduct(BO.Cart myCart, int productId)
     {
         DO.Product doProduct;
-        try
+
+        try //Checking if the productId exists in stock
         {
             doProduct = Dal.Product.GetById(productId);
         }
@@ -29,7 +27,7 @@ internal class Cart:ICart
             throw new BO.EntityNotExist("Product ID is not valid", ex);
         }
         //Checking if product exists in cart
-        BO.OrderItem newItem = myCart.Items.FirstOrDefault(item => item.ProductID == productId);
+        BO.OrderItem? newItem = myCart.Items?.FirstOrDefault(item => item?.ProductID == productId);
         
         bool itemExists = false;
 
@@ -51,7 +49,10 @@ internal class Cart:ICart
         }
         if(itemExists == true)
         {
-
+            if(++newItem.Amount > doProduct.InStock)
+            {
+                throw new BO.notEnoughInStock("There are not enough product items in stock");
+            }
         }
 
         
@@ -60,7 +61,7 @@ internal class Cart:ICart
         {
             myCart.Items?.Add(newItem);
         }
-        return cart;
+        return myCart;
 
     }
 }

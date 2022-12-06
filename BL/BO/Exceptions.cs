@@ -8,14 +8,18 @@ namespace BO
 {
     public class InternalProblem : Exception
     {
-        public InternalProblem(string message) : base(message)
-        {
-
-        }
-        public InternalProblem(string message, Exception inner) : base(message, inner)
-        {
-
-        }
-
+        public InternalProblem(string message) : base(message) { }
+        public InternalProblem(string message, Exception inner) : base(message, inner) { }
     }
+    public class EntityNotExist : Exception
+    {
+        public EntityNotExist(string message) : base(message) { }
+    }
+    public class notEnoughInStock : Exception
+    {
+        public notEnoughInStock(string message) : base(message) { }
+        
+    }
+
+}
     
