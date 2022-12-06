@@ -12,8 +12,8 @@ namespace BlApi
     public interface ICart
     {
      
-        public void UpdateTotalSum(BO.Cart myCart);
+        public BO.Cart UpdateProductAmount(BO.Cart myCart, int productId, int newAmount);
         public BO.Cart AddProduct(BO.Cart myCart, int productId);
-
+        public void UpdateTotalSum(BO.Cart myCart);
     }
 }

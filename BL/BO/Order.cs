@@ -21,6 +21,7 @@ namespace BO
         Customer Address: {CustomerAddress},
         OrderDate: {OrderDate},
         Ship Date: {ShipDate},
-        Delivery Date: {DeliveryDate}";
+        Delivery Date: {DeliveryDate}
+        Total Price: {TotalPrice}";
     }
 }
