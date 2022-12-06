@@ -32,7 +32,7 @@ namespace BlApi
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BO.Order followOrder(int id);
+        public BO.OrderTracking followOrder(int id);
 
     }
 }
