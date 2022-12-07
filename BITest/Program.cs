@@ -1,10 +1,13 @@
-﻿namespace BITest
+﻿
+using BlApi;
+using System.ComponentModel
+
+
+public class Program
+
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
-    }
+
+    IBl bl = new BL();
+
+
 }

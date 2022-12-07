@@ -1,5 +1,5 @@
 ﻿using BlApi;
-using BO;
+
 using Dal;
 using DalApi;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ namespace BlImplementation;
 internal class Product : BlApi.IProduct
 {
     //private static readonly IDal? dal = Factory.Get();
-    IDal Dal = new DalList();
+   IDal Dal = new DalList();
     public IEnumerable<BO.ProductForList> GetListedProducts()
     {
         return Dal.Product.GetAll().Select(product => new BO.ProductForList
