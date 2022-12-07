@@ -1,7 +1,7 @@
 ﻿
 using DalApi;
 using DO;
-
+using System.Runtime.CompilerServices;
 
 namespace Dal;
 
@@ -17,6 +17,8 @@ internal class DalOrder : IOrder
 
         if (_dataSource.OrderList.Exists(p => p.ID == myOrder.ID))
              throw new AlreadyExists("The order already exists");
+        if(myOrder.ID == 0)
+            myOrder.ID = DataSource.Config.NextOrderID;
         _dataSource.OrderList.Add(myOrder);
         return myOrder.ID;
     }

@@ -15,7 +15,7 @@ internal class Cart:ICart
     public BO.Cart UpdateProductAmount(BO.Cart myCart, int productId, int newAmount)
     {
         DO.Product doProduct;
-        try //Checking if the productId exists 
+        try //Checking if the productId exists in the product list 
         {
             doProduct = Dal.Product.GetById(productId);
         }
@@ -25,9 +25,10 @@ internal class Cart:ICart
         }
         //Checking if product exists in cart
         BO.OrderItem? newItem = myCart.Items?.FirstOrDefault(item => item?.ProductID == productId);
-        if(newAmount > newItem?.Amount)
+        if(newAmount > newItem?.Amount)// Checking if the amount grew
         {
-            if (++newItem.Amount > doProduct.InStock)
+            //adding a product which exists in the cart to the cart
+            if (++newItem.Amount > doProduct.InStock) 
             {
                 throw new BO.notEnoughInStock("There are not enough product items in stock");
             }
@@ -129,7 +130,7 @@ internal class Cart:ICart
         }
         DO.Order doOrder = new DO.Order()
         {
-            //ID = Config.NextOrderID,
+            ID = 0,
             CustomerName = myCart.CustomerName,
             CustomerEmail = myCart.CustomerEmail,
             CustomerAddress = myCart.CustomerAddress,
