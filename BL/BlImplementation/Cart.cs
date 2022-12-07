@@ -102,7 +102,7 @@ internal class Cart:ICart
 
     }
 
-    public void UpdateTotalSum(BO.Cart myCart)
+    public void CartConfirmation(BO.Cart myCart)
     {
         DO.Product doProduct;
 
