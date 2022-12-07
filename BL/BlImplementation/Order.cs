@@ -84,7 +84,7 @@ internal class Order : BlApi.IOrder
                 ShipDate = order.ShipDate,
                 DeliveryDate = order.DeliveryDate,
                 TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem.Price * orderItem.Amount),
-                Items = (List<OrderItem>)Dal.OrderItem.getListOrderItems(order.ID)
+                Items = (List<BO.OrderItem>)Dal.OrderItem.getListOrderItems(order.ID)
 
             };
         }
@@ -115,7 +115,7 @@ internal class Order : BlApi.IOrder
                 DeliveryDate = order.DeliveryDate,
                 ShipDate = order.ShipDate,
                 TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem.Price * orderItem.Amount),
-                Items = (List<OrderItem>)Dal.OrderItem.getListOrderItems(order.ID),
+                Items = (List<BO.OrderItem>)Dal.OrderItem.getListOrderItems(order.ID),
 
             };
         }
