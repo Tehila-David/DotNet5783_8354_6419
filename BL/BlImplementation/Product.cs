@@ -29,7 +29,7 @@ internal class Product : BlApi.IProduct
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Got null product from data");
+            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("");
             return new BO.Product()
             {
                 ID = product.ID,
