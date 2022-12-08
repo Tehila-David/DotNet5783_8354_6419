@@ -1,17 +1,17 @@
 ﻿
 using BlApi;
 using BO;
-//using DalApi;
 
+using BlImplementation;
 
 public class Program
 
 {
-    IBl bl = new Bl();
+   static IBl bl = new Bl();
     static void Main(string[] arg)
     {
         int choice;
-        Console.WriteLine(" Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
+        Console.WriteLine("Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
         int.TryParse(Console.ReadLine(), out choice);
         while (choice != 0) ///checking if the user does not want to exit
         {
@@ -42,7 +42,7 @@ public class Program
                 Console.WriteLine(ex.Message);
             }
 
-            Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Cart");
+            Console.WriteLine("Input : O - Exit , 1 - Product , 2 - Order, 3 - Cart");
             int.TryParse(Console.ReadLine(), out choice);
         }
         return;
@@ -57,7 +57,13 @@ public class Program
         int NewID;
         Category NewCategory;
         int NewInstock;
-        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID for manager, c - Show a product by ID for client, d -  Show an array of products, e- Update a product , f - Delete a product");
+        Console.WriteLine($@"Input : 
+a - Add a product 
+b - Show a product by ID for manager
+c - Show a product by ID for client 
+d - Show a list of products
+e - Update a product 
+f - Delete a product");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -82,9 +88,7 @@ public class Program
                     Category = NewCategory,
                     InStock = NewInstock
                 };
-                int id;
-                id = bl.Product.Add(product);//Adding the product to the array
-                Console.WriteLine(id);
+                bl.Product.Add(product);;//Adding the product 
                 break;
 
             case 'b': ///show single product for manager
@@ -100,13 +104,13 @@ public class Program
                 Console.WriteLine("Enter product ID:");
                 int idForItem2;
                 int.TryParse(Console.ReadLine(), out idForItem2);
-                Product singleProduct2 = bl.Product.GetById1(idForItem2, myCart);
+                ProductItem singleProduct2 = bl.Product.GetById1(idForItem2, myCart);
                 // sending the requested id to the function so that it can locate the product
                 Console.WriteLine(singleProduct2);
                 break;
             case 'd':// print  list of products
                 ///going through the array and printing the products
-                foreach (var item in bl.Product.GetAll())
+                foreach (var item in bl.Product.GetListedProducts())
                 {
                     Console.WriteLine(item);
                 }
@@ -158,7 +162,12 @@ public class Program
     {
         int orderID1;
        
-        Console.WriteLine(" Input : a - Show a order by ID, b -  Show an List of orders, c - Update order delivery, d - Update order arrival, e - Order tracking");
+        Console.WriteLine($@"Input : 
+a - Show a order by ID 
+b - Show a List of orders
+c - Update order delivery
+d - Update order arrival 
+e - Order tracking");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -166,12 +175,12 @@ public class Program
             case 'a': ///Show a order by ID
                 Console.WriteLine("Enter Order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
-                Order singleOrder2 = bl.Order.GetById(orderID1);
+                Order singleOrder2 = bl.Order.GetByID(orderID1);
                 Console.WriteLine(orderID1);
                 break;
 
             case 'b': ///Show an List of orders
-                foreach (var item in bl.Order.GetAll())
+                foreach (var item in bl.Order.GetListedOrders())
                 {
                     Console.WriteLine(item);
                 }
@@ -193,7 +202,7 @@ public class Program
             case 'e': ///Order tracking
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
-                Order orderTracking = bl.Order.followOrder(orderID1);
+                OrderTracking orderTracking = bl.Order.followOrder(orderID1);
                 Console.WriteLine(orderTracking);
                 break;
 
@@ -212,7 +221,10 @@ public class Program
         int newOrderID1;
         double newPrice1;
         int newAmount;
-        Console.WriteLine(" Input : a - Add a product to cart, b - Update product amount in cart, c - Cart confirmation");
+        Console.WriteLine($@"Input : 
+a - Add a product to cart 
+b - Update product amount in cart 
+c - Cart confirmation");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
