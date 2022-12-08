@@ -10,7 +10,7 @@ namespace BO
     public class ProductItem
     {
         /// <summary>
-        /// Unique ID of Prudct
+        /// Unique ID of Prudct 
         /// </summary>
         public int ID { get; set; }
         /// <summary>

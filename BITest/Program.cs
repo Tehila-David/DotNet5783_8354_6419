@@ -226,6 +226,19 @@ public class Program
         int newOrderID1;
         double newPrice1;
         int newAmount;
+        string customerName, customerEmail, customerAddress;
+        Console.WriteLine("Enter  the customer name:");
+        customerName = Console.ReadLine();
+        Console.WriteLine("Enter the customer email address:");
+        customerEmail = Console.ReadLine();
+        Console.WriteLine("Enter the customer address:");
+        customerAddress = Console.ReadLine();
+        Cart myCart = new Cart()
+        {
+            CustomerName = customerName,
+            CustomerEmail = customerEmail,
+            CustomerAddress = customerAddress
+        };
         Console.WriteLine($@"Input : 
         a - Add a product to cart 
         b - Update product amount in cart 
@@ -237,7 +250,7 @@ public class Program
             case 'a': ///Add a product to cart
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
-                Cart myCart = new Cart();
+
                 myCart = bl.Cart.AddProduct(myCart, newID);
                 Console.WriteLine(myCart);
                 break;
@@ -247,27 +260,12 @@ public class Program
                 int.TryParse(Console.ReadLine(), out newID);
                 Console.WriteLine("Enter new product amount:");
                 int.TryParse(Console.ReadLine(), out newAmount);
-                Cart myCart1 = new Cart();
-                myCart1 = bl.Cart.UpdateProductAmount(myCart1, newID, newAmount);
-                Console.WriteLine(myCart1);
+                myCart = bl.Cart.UpdateProductAmount(myCart, newID, newAmount);
+                Console.WriteLine(myCart);
                 break;
 
             case 'c': ///Cart confirmation
-                string customerName, customerEmail, customerAddress;
-                Console.WriteLine("Enter  the customer name:");
-                customerName = Console.ReadLine();
-                Console.WriteLine("Enter the customer email address:");
-                customerEmail = Console.ReadLine();
-                Console.WriteLine("Enter the customer address:");
-                customerAddress = Console.ReadLine();
-                Cart myCart2 = new Cart()
-                {
-                    CustomerName = customerName,
-                    CustomerEmail = customerEmail,
-                    CustomerAddress = customerAddress
-                };
-                bl.Cart.CartConfirmation(myCart2);
-
+                bl.Cart.CartConfirmation(myCart);
                 break;
             default:   ///Wrong input
                 Console.WriteLine("ERROR");
