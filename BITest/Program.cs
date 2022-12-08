@@ -2,7 +2,7 @@
 using BlApi;
 using BO;
 
-namespace BlImplementation;
+using BlImplementation;
 
 public class Program
 
@@ -82,9 +82,7 @@ public class Program
                     Category = NewCategory,
                     InStock = NewInstock
                 };
-                int id;
-                id = bl.Product.Add(product);//Adding the product to the array
-                Console.WriteLine(id);
+                bl.Product.Add(product);;//Adding the product 
                 break;
 
             case 'b': ///show single product for manager
@@ -100,13 +98,13 @@ public class Program
                 Console.WriteLine("Enter product ID:");
                 int idForItem2;
                 int.TryParse(Console.ReadLine(), out idForItem2);
-                Product singleProduct2 = bl.Product.GetById1(idForItem2, myCart);
+                ProductItem singleProduct2 = bl.Product.GetById1(idForItem2, myCart);
                 // sending the requested id to the function so that it can locate the product
                 Console.WriteLine(singleProduct2);
                 break;
             case 'd':// print  list of products
                 ///going through the array and printing the products
-                foreach (var item in bl.Product.GetAll())
+                foreach (var item in bl.Product.GetListedProducts())
                 {
                     Console.WriteLine(item);
                 }
@@ -166,12 +164,12 @@ public class Program
             case 'a': ///Show a order by ID
                 Console.WriteLine("Enter Order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
-                Order singleOrder2 = bl.Order.GetById(orderID1);
+                Order singleOrder2 = bl.Order.GetByID(orderID1);
                 Console.WriteLine(orderID1);
                 break;
 
             case 'b': ///Show an List of orders
-                foreach (var item in bl.Order.GetAll())
+                foreach (var item in bl.Order.GetListedOrders())
                 {
                     Console.WriteLine(item);
                 }
@@ -193,7 +191,7 @@ public class Program
             case 'e': ///Order tracking
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
-                Order orderTracking = bl.Order.followOrder(orderID1);
+                OrderTracking orderTracking = bl.Order.followOrder(orderID1);
                 Console.WriteLine(orderTracking);
                 break;
 
