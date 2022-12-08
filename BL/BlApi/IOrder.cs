@@ -36,8 +36,6 @@ namespace BlApi
         /// <summary>
         /// for the manager, return order
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public BO.OrderTracking followOrder(int id);
 
     }

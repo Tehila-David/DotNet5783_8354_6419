@@ -29,6 +29,9 @@ namespace BO
         /// Instock of product
         /// </summary>
         public int Amount { get; set; }
+        /// <summary>
+        /// if product is availavle in store
+        /// </summary>
         public bool  IsAvailable { get; set; }
 
 

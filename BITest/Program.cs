@@ -3,6 +3,7 @@ using BlApi;
 using BO;
 
 using BlImplementation;
+using System.Collections.Generic;
 
 public class Program
 
@@ -48,7 +49,7 @@ public class Program
         return;
     }
     /// <summary>
-    /// Fuction that implements CRUD for product
+    /// Function that implements CRUD for product
     /// </summary>
     public static void subProuduct()
     {
@@ -204,6 +205,10 @@ public class Program
                 int.TryParse(Console.ReadLine(), out orderID1);
                 OrderTracking orderTracking = bl.Order.followOrder(orderID1);
                 Console.WriteLine(orderTracking);
+                foreach (var tuple in orderTracking.Tracking)
+                {
+                     Console.WriteLine("        Tracking:{0} - {1} ", tuple.Item1, tuple.Item2);
+                }
                 break;
 
             default: //Wrong input
