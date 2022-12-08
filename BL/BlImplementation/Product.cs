@@ -54,11 +54,11 @@ internal class Product : BlApi.IProduct
             BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,
-                Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
                 Name = product.Name,
-                IsAvailable = (product.InStock > 0) ? true : false,
-                Amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
                 Price = product.Price,
+                Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
+                Amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
+                IsAvailable = (product.InStock > 0) ? true : false,
             };
             return productItem;
         }
@@ -128,6 +128,6 @@ internal class Product : BlApi.IProduct
                     throw new BO.InternalProblem("The product already exists");
                 }
         }
-            Dal.Product.Delete(id);
+        Dal.Product.Delete(id);
     }
 }
