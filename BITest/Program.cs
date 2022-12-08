@@ -1,13 +1,13 @@
 ﻿
 using BlApi;
 using BO;
-//using DalApi;
 
+namespace BlImplementation;
 
 public class Program
 
 {
-    IBl bl = new Bl();
+   static IBl bl = new Bl();
     static void Main(string[] arg)
     {
         int choice;
