@@ -50,8 +50,8 @@ internal class Product : BlApi.IProduct
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Got null product from data");
-            return new BO.ProductItem()
+            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
+            BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,
                 Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
@@ -59,7 +59,8 @@ internal class Product : BlApi.IProduct
                 IsAvailable = (product.InStock > 0) ? true : false,
                 Amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
                 Price = product.Price,
-            };  
+            };
+            return productItem;
         }
         catch (DO.NotExists ex)
         {
@@ -118,24 +119,15 @@ internal class Product : BlApi.IProduct
 
     public void Delete(int id)
     {
-        try
+        DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
+
+        foreach (DO.Order order in Dal.Order.GetAll())
         {
-            foreach (DO.Order order in Dal.Order.GetAll())
-            {
-                if (Dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem.ProductID != id))
+                if (Dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem.ProductID == id))
                 {
-                    Dal.Product.Delete(id);
-                }
-                else
                     throw new BO.InternalProblem("The product already exists");
-            }
-
+                }
         }
-        catch (DO.NotExists ex)
-        {
-            throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
-        }
-
+            Dal.Product.Delete(id);
     }
-
 }

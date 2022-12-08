@@ -58,12 +58,12 @@ public class Program
         Category NewCategory;
         int NewInstock;
         Console.WriteLine($@"Input : 
-a - Add a product 
-b - Show a product by ID for manager
-c - Show a product by ID for client 
-d - Show a list of products
-e - Update a product 
-f - Delete a product");
+        a - Add a product 
+        b - Show a product by ID for manager
+        c - Show a product by ID for client 
+        d - Show a list of products
+        e - Update a product 
+        f - Delete a product");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -163,11 +163,11 @@ f - Delete a product");
         int orderID1;
        
         Console.WriteLine($@"Input : 
-a - Show a order by ID 
-b - Show a List of orders
-c - Update order delivery
-d - Update order arrival 
-e - Order tracking");
+        a - Show a order by ID 
+        b - Show a List of orders
+        c - Update order delivery
+        d - Update order arrival 
+        e - Order tracking");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -222,9 +222,9 @@ e - Order tracking");
         double newPrice1;
         int newAmount;
         Console.WriteLine($@"Input : 
-a - Add a product to cart 
-b - Update product amount in cart 
-c - Cart confirmation");
+        a - Add a product to cart 
+        b - Update product amount in cart 
+        c - Cart confirmation");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -248,7 +248,19 @@ c - Cart confirmation");
                 break;
 
             case 'c': ///Cart confirmation
-                Cart myCart2 = new Cart();
+                string customerName, customerEmail, customerAddress;
+                Console.WriteLine("Enter  the customer name:");
+                customerName = Console.ReadLine();
+                Console.WriteLine("Enter the customer email address:");
+                customerEmail = Console.ReadLine();
+                Console.WriteLine("Enter the customer address:");
+                customerAddress = Console.ReadLine();
+                Cart myCart2 = new Cart()
+                {
+                    CustomerName = customerName,
+                    CustomerEmail = customerEmail,
+                    CustomerAddress = customerAddress
+                };
                 bl.Cart.CartConfirmation(myCart2);
 
                 break;
