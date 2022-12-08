@@ -96,7 +96,7 @@ internal class DalOrderItem : IOrderItem
         foreach (OrderItem item in _dataSource.OrderItemList)
         {
             ///checking if an orderitem has the same product and order id's as the on e the user entered 
-            if (item.ID == idProduct && item.OrderID == idOrder)
+            if (item.ProductID == idProduct && item.OrderID == idOrder)
             {
                 ///The correct order item based on the user input
                 orderItem = item;
@@ -116,7 +116,7 @@ internal class DalOrderItem : IOrderItem
         //creating an list with all of the order items that have the same order id as the one the user entered
         return _dataSource.OrderItemList.FindAll(delegate (OrderItem myOrderItem)
         {
-            return myOrderItem.ID != idOrder;
+            return myOrderItem.OrderID == idOrder;
         });
         //If no order items arec found with the order id the user entered
         throw new NotExists("No order items found with the entered order id");

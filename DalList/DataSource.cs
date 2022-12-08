@@ -49,8 +49,8 @@ internal sealed class DataSource
     }
     private void createOrders()
     {
-
-        for (int i = 0; i < 12; i++)//80% ShipDatev+ 60% DeliveryDate =12
+        int j = 1;
+        for (int i = 0; i < 16; i++)//80% ShipDatev => 60% DeliveryDate 
         {
             var order = new Order()
             {
@@ -59,28 +59,16 @@ internal sealed class DataSource
                 CustomerEmail = i + "@gmail.com",
                 CustomerAddress = "address_" + (i + 2),
                 OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-                ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L))
+                ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
+                DeliveryDate = DateTime.MinValue
             };
-            order.DeliveryDate = order.ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+            order.DeliveryDate = (j<10) ? (order.ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L))) : DateTime.MinValue;
+            j++;
             OrderList.Add(order);
         }
-        for (int i = 13; i < 17; i++)// only DeliveryDate = 4
-        {
-            var order = new Order()
-            {
-                ID = Config.NextOrderID,
-                CustomerName = " Coustumer_" + i,
-                CustomerEmail = i + "@gmail.com",
-                CustomerAddress = "address_" + (i + 2),
-                OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-                ShipDate = DateTime.MinValue,
-                DeliveryDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-            };
-
-            OrderList.Add(order);
-        }
+       
     
-        for (int i = 17; i< 21; i++)// without DeliveryDate and ShipDate = 4
+        for (int i = 0; i< 4; i++)// without DeliveryDate and ShipDate = 4
         {
             var order = new Order()
             { 

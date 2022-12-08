@@ -165,8 +165,8 @@ public class Program
         Console.WriteLine($@"Input : 
         a - Show a order by ID 
         b - Show a List of orders
-        c - Update order delivery
-        d - Update order arrival 
+        c - Order shipping update
+        d - Order delivery update
         e - Order tracking");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
@@ -176,7 +176,7 @@ public class Program
                 Console.WriteLine("Enter Order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
                 Order singleOrder2 = bl.Order.GetByID(orderID1);
-                Console.WriteLine(orderID1);
+                Console.WriteLine(singleOrder2);
                 break;
 
             case 'b': ///Show an List of orders
@@ -185,18 +185,18 @@ public class Program
                     Console.WriteLine(item);
                 }
                 break;
-            case 'c': /// Update order delivery
+            case 'c': /// Update Order shipping
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(), out orderID1);
+                Order orderArrival = bl.Order.UpdateShipDate(orderID1);
+                Console.WriteLine(orderArrival);
+                break;
+
+            case 'd': ///Update Order delivery 
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
                 Order orderDelivery = bl.Order.UpdateDelivery(orderID1);
                 Console.WriteLine(orderDelivery);
-                break;
-
-            case 'd': ///Update order arrival
-                Console.WriteLine("Enter order ID:");
-                int.TryParse(Console.ReadLine(), out orderID1);
-                Order orderArrival =  bl.Order.UpdateShipDate(orderID1);
-                Console.WriteLine(orderArrival);
                 break;
 
             case 'e': ///Order tracking

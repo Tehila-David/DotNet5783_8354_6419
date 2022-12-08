@@ -62,6 +62,24 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
+    public List<BO.OrderItem> getDoOrderItem(int id)
+    {
+        List<BO.OrderItem> listForBo=new List<BO.OrderItem>();
+       
+        foreach(var item in Dal.OrderItem.getListOrderItems(id))
+        {
+            listForBo.Add(new BO.OrderItem
+            {
+                ID = item.ID,
+                Name = Dal.Product.GetById(item.ProductID).Name,
+                ProductID = item.ProductID,
+                Amount = item.Amount,
+                Price = item.Price,
+                TotalPrice = item.Amount * item.Price
+            });
+        }
+        return listForBo;
+    }
 
     public BO.Order UpdateShipDate(int id)
     {
@@ -84,7 +102,7 @@ internal class Order : BlApi.IOrder
                 ShipDate = order.ShipDate,
                 DeliveryDate = order.DeliveryDate,
                 TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem.Price * orderItem.Amount),
-                Items = (List<BO.OrderItem>)Dal.OrderItem.getListOrderItems(order.ID)
+                Items = getDoOrderItem(order.ID),
 
             };
         }
@@ -101,9 +119,10 @@ internal class Order : BlApi.IOrder
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order from data");
             if (order.OrderDate == DateTime.MinValue) { throw new BO.InternalProblem("The order not confiremed");}
-            if (order.ShipDate != DateTime.MinValue) { throw new BO.InternalProblem("The order shipped"); }
-            order.ShipDate = DateTime.Now;
+            if (order.ShipDate == DateTime.MinValue) { throw new BO.InternalProblem("The order not  shipped"); }
+            order.DeliveryDate = DateTime.Now;
             Dal.Order.Update(order);
+
             return new BO.Order()
             {
                 ID = order.ID,
@@ -115,7 +134,7 @@ internal class Order : BlApi.IOrder
                 DeliveryDate = order.DeliveryDate,
                 ShipDate = order.ShipDate,
                 TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem.Price * orderItem.Amount),
-                Items = (List<BO.OrderItem>)Dal.OrderItem.getListOrderItems(order.ID),
+                Items = getDoOrderItem(order.ID),
 
             };
         }
