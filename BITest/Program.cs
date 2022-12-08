@@ -11,7 +11,7 @@ public class Program
     static void Main(string[] arg)
     {
         int choice;
-        Console.WriteLine(" Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
+        Console.WriteLine("Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
         int.TryParse(Console.ReadLine(), out choice);
         while (choice != 0) ///checking if the user does not want to exit
         {
@@ -42,7 +42,7 @@ public class Program
                 Console.WriteLine(ex.Message);
             }
 
-            Console.WriteLine(" Input : O - Exit , 1 - Product , 2 - Order, 3 - Cart");
+            Console.WriteLine("Input : O - Exit , 1 - Product , 2 - Order, 3 - Cart");
             int.TryParse(Console.ReadLine(), out choice);
         }
         return;
@@ -57,7 +57,13 @@ public class Program
         int NewID;
         Category NewCategory;
         int NewInstock;
-        Console.WriteLine(" Input : a - Add a product, b - Show a product by ID for manager, c - Show a product by ID for client, d -  Show an array of products, e- Update a product , f - Delete a product");
+        Console.WriteLine($@"Input : 
+a - Add a product 
+b - Show a product by ID for manager
+c - Show a product by ID for client 
+d - Show a list of products
+e - Update a product 
+f - Delete a product");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -156,7 +162,12 @@ public class Program
     {
         int orderID1;
        
-        Console.WriteLine(" Input : a - Show a order by ID, b -  Show an List of orders, c - Update order delivery, d - Update order arrival, e - Order tracking");
+        Console.WriteLine($@"Input : 
+a - Show a order by ID 
+b - Show a List of orders
+c - Update order delivery
+d - Update order arrival 
+e - Order tracking");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
@@ -210,7 +221,10 @@ public class Program
         int newOrderID1;
         double newPrice1;
         int newAmount;
-        Console.WriteLine(" Input : a - Add a product to cart, b - Update product amount in cart, c - Cart confirmation");
+        Console.WriteLine($@"Input : 
+a - Add a product to cart 
+b - Update product amount in cart 
+c - Cart confirmation");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
         switch (choice)
