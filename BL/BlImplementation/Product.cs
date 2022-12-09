@@ -51,16 +51,13 @@ internal class Product : BlApi.IProduct
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
-            int amount;
-            if (myCart.Items == null) { amount = 0; }
-            else { amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(); }
             BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,
                 Name = product.Name,
                 Price = product.Price,
                 Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
-                Amount = amount/*myCart.Items.Count() == 0 ? 0: myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count()*/,
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
                 IsAvailable = (product.InStock > 0) ? true : false,
             };
             return productItem;
