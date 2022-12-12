@@ -51,6 +51,15 @@ internal class Product : BlApi.IProduct
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
+            int amount;
+            if(myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count() == 0)
+            {
+                amount = 0;
+            }
+            else
+            {
+                amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count();
+            }
             BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,

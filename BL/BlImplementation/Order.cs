@@ -85,7 +85,6 @@ internal class Order : BlApi.IOrder
                 DeliveryDate = order.DeliveryDate,
                 TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem.Price * orderItem.Amount),
                 Items = (List<BO.OrderItem>)Dal.OrderItem.getListOrderItems(order.ID)
-
             };
         }
         catch (DO.NotExists ex)
@@ -93,7 +92,7 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-
+    
     public BO.Order UpdateDelivery (int id)
     {
         try
