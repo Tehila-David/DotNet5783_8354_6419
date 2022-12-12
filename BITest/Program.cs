@@ -18,7 +18,7 @@ public class Program
         customerEmail = Console.ReadLine();
         Console.WriteLine("Enter the customer address:");
         customerAddress = Console.ReadLine();
-        Cart myCart = new Cart()
+        BO.Cart myCart = new Cart()
         {
             CustomerName = customerName,
             CustomerEmail = customerEmail,
@@ -174,7 +174,7 @@ public class Program
     /// <summary>
     /// Function that implements CRUD for order
     /// </summary>
-    public static void subOrder(Cart myCart)
+    public static void subOrder(BO.Cart myCart)
     {
         int orderID1;
        
@@ -234,7 +234,7 @@ public class Program
     /// <summary>
     /// Function that implements CRUD for order item
     /// </summary>
-    public static void subCart(Cart myCart)
+    public static void subCart(BO.Cart myCart)
     {
         int newID;
         int newProductID;
