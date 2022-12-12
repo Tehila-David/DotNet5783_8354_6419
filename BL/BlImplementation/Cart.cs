@@ -17,7 +17,9 @@ internal class Cart:ICart
         DO.Product doProduct;
         try //Checking if the productId exists in the product list 
         {
-            doProduct = Dal.Product.GetById(productId);
+            doProduct = Dal?.Product.GetById(productId)
+             ?? throw new BO.InternalProblem("Dal layer is inaccessible");
+
         }
         catch (DO.NotExists ex)
         {
@@ -25,40 +27,50 @@ internal class Cart:ICart
         }
         //Checking if product exists in cart
         BO.OrderItem? newItem = myCart.Items?.FirstOrDefault(item => item?.ProductID == productId);
-        if(newAmount > newItem?.Amount)// Checking if the amount grew
+        if (newItem != null)
         {
-            //adding a product which exists in the cart to the cart
-            if (++newItem.Amount > doProduct.InStock) 
+            if (newAmount > newItem?.Amount)// Checking if the amount grew
             {
-                throw new BO.notEnoughInStock("There are not enough product items in stock");
+                //adding a product which exists in the cart to the cart
+                if(newItem.Amount < doProduct.InStock)
+                {
+                    newItem.Amount++;
+                    newItem.TotalPrice += doProduct.Price;
+                    myCart.TotalPrice += doProduct.Price;
+                }
+                else
+                {
+                    throw new BO.notEnoughInStock("There are not enough product items in stock");
+                }
             }
-            if (newItem != null)
+            else if (newAmount < newItem?.Amount)
             {
-               myCart.Items?.Add(newItem);
+                int amountDiff = newItem.Amount - newAmount;
+                newItem.Amount = newAmount;
+                newItem.TotalPrice = newAmount * newItem.Price;
+                myCart.TotalPrice -= amountDiff * newItem.Price;
             }
-    }
-        else if (newAmount < newItem?.Amount)
-        {
-            int amountDiff = newAmount - newItem.Amount;    
-            newItem.Amount = newAmount;
-            newItem.TotalPrice = newAmount * newItem.Price;
-            myCart.TotalPrice -= amountDiff * newItem.Price;
-        }
-        else if(newAmount ==  0)
-        {
-            myCart.TotalPrice -= newItem?.Amount * newItem?.Price;
-            myCart.Items?.Remove(newItem);
+            else if (newAmount == 0)
+            {
+                myCart.Items?.Remove(newItem);
+                myCart.TotalPrice -= newItem?.Amount * newItem?.Price;
+            }
         }
         return myCart;
     }
 
     public BO.Cart AddProduct(BO.Cart myCart, int productId)
     {
+        if(myCart.Items == null)
+        {
+            myCart.Items = new();
+        }
         DO.Product doProduct;
 
-        try //Checking if the productId exists 
+        try //Checking if the productId exists within the list of products
         {
-            doProduct = Dal.Product.GetById(productId);
+            doProduct = Dal?.Product.GetById(productId)
+            ?? throw new BO.InternalProblem("Dal layer is inaccessible");
         }
         catch(DO.NotExists ex)
         {
@@ -66,58 +78,62 @@ internal class Cart:ICart
         }
         //Checking if product exists in cart
         BO.OrderItem? newItem = myCart.Items?.FirstOrDefault(item => item?.ProductID == productId);
-        
-        bool itemExists = false;
 
-        if (newItem != null)
-        {
-            itemExists = true;
-        }
-        if(newItem == null) //If the product does not exist in the cart
-        {
-            newItem = new()
+           if (newItem == null) //If the product does not exist in the cart
+           {
+            if (doProduct.InStock > 0) // Checking if there is enough of the product in stock
             {
-               ID = 0,
-               Name = doProduct.Name,
-               Price = doProduct.Price,
-               Amount = 0,
-               ProductID = productId,
-               TotalPrice = doProduct.Price
-            };
-        }
-        if(itemExists == true) // Checking if after adding to the amount of a product which already exists in the
-                               // cart if it would exceed the amount of the product in stock
+                newItem = new()
+                {
+                    ID = 0,
+                    Name = doProduct.Name,
+                    Price = doProduct.Price,
+                    Amount = 1,
+                    ProductID = productId,
+                    TotalPrice = doProduct.Price
+                };
+                myCart.TotalPrice += doProduct.Price;
+                myCart.Items?.Add(newItem);
+            }
+           }
+        //If the product already exists in the cart
+        // Checking if the amount of a product which already exists in the
+        // cart is less than the amount of the product in stock (so that it is possible to add)
+        else
         {
-            if(++newItem.Amount > doProduct.InStock)
+            if (newItem.Amount < doProduct.InStock)
+            {
+                newItem.Amount++;
+                newItem.TotalPrice += doProduct.Price;
+                myCart.TotalPrice += doProduct.Price;
+            }
+            else
             {
                 throw new BO.notEnoughInStock("There are not enough product items in stock");
             }
         }
-
-        if(newItem != null)
-        {
-            myCart.Items?.Add(newItem);
-        }
         return myCart;
-
     }
 
     public void CartConfirmation(BO.Cart myCart)
     {
         DO.Product doProduct;
 
+        //Checking if the cart detaile are valid
         if (String.IsNullOrEmpty(myCart.CustomerName))
             throw new BO.IncorrectName("Customer name is empty");
-        if (myCart.CustomerAddress == null)
+        if (String.IsNullOrEmpty(myCart.CustomerAddress))
             throw new BO.IncorrectAddress("Customer address is empty");
         Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
         if (myCart.CustomerEmail == null || (emailRegex.IsMatch(myCart.CustomerEmail)) == false)
             throw new BO.IncorrectEmailAddress("Customer email address is empty or not in correct format");
-        foreach(var item in myCart.Items)
+        foreach(BO.OrderItem ? item in myCart.Items) //!!!beaya!!!
         {
             try //Checking if the productId exists 
             {
-                doProduct = Dal.Product.GetById(item.ProductID);
+                doProduct = Dal?.Product.GetById(item.ProductID)
+                ?? throw new BO.InternalProblem("Dal layer is inaccessible");
+
             }
             catch (DO.NotExists ex)
             {
@@ -128,18 +144,28 @@ internal class Cart:ICart
             if (item.Amount > doProduct.InStock)
                 throw new BO.notEnoughInStock("There are not enough product items in stock");
         }
-        DO.Order doOrder = new DO.Order()
+        //finished checking the validity of the cart details
+
+        DO.Order doOrder = new DO.Order() //Creating an order
         {
             ID = 0,
             CustomerName = myCart.CustomerName,
             CustomerEmail = myCart.CustomerEmail,
             CustomerAddress = myCart.CustomerAddress,
-            OrderDate = DateTime.Now,
+            OrderDate = DateTime.Now, //Date for starting the order
             ShipDate = DateTime.MinValue,
             DeliveryDate = DateTime.MinValue
         };
-        int orderID = Dal.Order.Add(doOrder);
-        foreach (var item in myCart.Items)
+        int orderID;
+        try
+        {
+            orderID = Dal.Order.Add(doOrder); //Trying to add the order to the Dal layer
+        }
+        catch
+        {
+            throw new BO.InternalProblem("Dal layer is inaccessible");
+        }
+        foreach (BO.OrderItem? item in myCart.Items) //Creating order items based om the items in the cart
         {
             DO.OrderItem doOrderItem = new DO.OrderItem()
             {
@@ -149,9 +175,17 @@ internal class Cart:ICart
                 Price = (double)item.Price,
                 Amount = item.Amount
             };
+            try
+            {
+                Dal?.OrderItem.Add(doOrderItem); //trying to add the order item
+            }
+            catch
+            {
+                throw new BO.InternalProblem("Dal layer is inaccessible");
+            }
         }
         DO.Product myProduct;
-        foreach (var item in myCart.Items)
+        foreach (BO.OrderItem? item in myCart.Items) //Going through the items in the cart
         {
             try //Checking if the productId exists 
             {
@@ -161,10 +195,7 @@ internal class Cart:ICart
             {
                 throw new BO.EntityNotExist("Product ID is not valid", ex);
             }
-            myProduct.InStock -= item.Amount;
-
+            myProduct.InStock -= item.Amount; //Updating the amount of the product in stock while the order is being confirmed 
         }
-
     }
-
 }

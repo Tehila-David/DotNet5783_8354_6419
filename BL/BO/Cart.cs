@@ -23,7 +23,7 @@ namespace BO
         CustomerName: {CustomerName}
         CustomerEmail: {CustomerEmail} 
         CustomerAddress: {CustomerAddress}
-        Items: {Items}
+        Items: {Items} 
         TotalPrice: {TotalPrice}";
     }
 }

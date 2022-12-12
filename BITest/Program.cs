@@ -11,6 +11,21 @@ public class Program
    static IBl bl = new Bl();
     static void Main(string[] arg)
     {
+        string customerName, customerEmail, customerAddress;
+        Console.WriteLine("Enter  the customer name:");
+        customerName = Console.ReadLine();
+        Console.WriteLine("Enter the customer email address:");
+        customerEmail = Console.ReadLine();
+        Console.WriteLine("Enter the customer address:");
+        customerAddress = Console.ReadLine();
+        Cart myCart = new Cart()
+        {
+            CustomerName = customerName,
+            CustomerEmail = customerEmail,
+            CustomerAddress = customerAddress,
+            Items = null,
+            TotalPrice = 0
+        };
         int choice;
         Console.WriteLine("Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
         int.TryParse(Console.ReadLine(), out choice);
@@ -26,10 +41,10 @@ public class Program
                         subProuduct();
                         break;
                     case 2: /// If the user chooses order
-                        subOrder();
+                        subOrder(myCart);
                         break;
                     case 3: /// If the user chooses order item
-                        subCart();
+                        subCart(myCart);
                         break;
 
                     default: /// If bthe user chooses any other option
@@ -159,7 +174,7 @@ public class Program
     /// <summary>
     /// Function that implements CRUD for order
     /// </summary>
-    public static void subOrder()
+    public static void subOrder(Cart myCart)
     {
         int orderID1;
        
@@ -219,26 +234,13 @@ public class Program
     /// <summary>
     /// Function that implements CRUD for order item
     /// </summary>
-    public static void subCart()
+    public static void subCart(Cart myCart)
     {
         int newID;
         int newProductID;
         int newOrderID1;
         double newPrice1;
         int newAmount;
-        string customerName, customerEmail, customerAddress;
-        Console.WriteLine("Enter  the customer name:");
-        customerName = Console.ReadLine();
-        Console.WriteLine("Enter the customer email address:");
-        customerEmail = Console.ReadLine();
-        Console.WriteLine("Enter the customer address:");
-        customerAddress = Console.ReadLine();
-        Cart myCart = new Cart()
-        {
-            CustomerName = customerName,
-            CustomerEmail = customerEmail,
-            CustomerAddress = customerAddress
-        };
         Console.WriteLine($@"Input : 
         a - Add a product to cart 
         b - Update product amount in cart 
@@ -250,7 +252,6 @@ public class Program
             case 'a': ///Add a product to cart
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
-
                 myCart = bl.Cart.AddProduct(myCart, newID);
                 Console.WriteLine(myCart);
                 break;
@@ -266,6 +267,7 @@ public class Program
 
             case 'c': ///Cart confirmation
                 bl.Cart.CartConfirmation(myCart);
+                Console.WriteLine("Dear customer, your order has been completed.");
                 break;
             default:   ///Wrong input
                 Console.WriteLine("ERROR");
