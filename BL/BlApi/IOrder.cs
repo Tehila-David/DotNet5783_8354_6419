@@ -20,18 +20,22 @@ namespace BlApi
        /// </summary>
         public BO.Order GetByID(int id);
         /// <summary>
+        /// for help id of order and return list of BO.OrderItem
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<BO.OrderItem> getDoOrderItem(int id);
+        /// <summary>
         /// for the manager , update DeliveryDate and return Order
         /// </summary>
         public BO.Order UpdateDelivery(int id);
         /// <summary>
         /// for the manager , update ShipDate and return Order
         /// </summary>
-        public BO.Order UpdateShipDate(int id);   
+        public BO.Order UpdateShipDate(int id);
         /// <summary>
-        /// for the manager, return order
+        /// for the manager, return Order tracking
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public BO.OrderTracking followOrder(int id);
 
     }

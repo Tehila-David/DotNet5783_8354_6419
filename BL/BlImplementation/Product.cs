@@ -29,7 +29,7 @@ internal class Product : BlApi.IProduct
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Got null product from data");
+            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("");
             return new BO.Product()
             {
                 ID = product.ID,
@@ -66,7 +66,7 @@ internal class Product : BlApi.IProduct
                 Name = product.Name,
                 Price = product.Price,
                 Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
-                Amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
                 IsAvailable = (product.InStock > 0) ? true : false,
             };
             return productItem;

@@ -3,6 +3,7 @@ using BlApi;
 using BO;
 
 using BlImplementation;
+using System.Collections.Generic;
 
 public class Program
 
@@ -48,7 +49,7 @@ public class Program
         return;
     }
     /// <summary>
-    /// Fuction that implements CRUD for product
+    /// Function that implements CRUD for product
     /// </summary>
     public static void subProuduct()
     {
@@ -165,8 +166,8 @@ public class Program
         Console.WriteLine($@"Input : 
         a - Show a order by ID 
         b - Show a List of orders
-        c - Update order delivery
-        d - Update order arrival 
+        c - Order shipping update
+        d - Order delivery update
         e - Order tracking");
         char choice;
         char.TryParse(Console.ReadLine(), out choice);
@@ -176,7 +177,7 @@ public class Program
                 Console.WriteLine("Enter Order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
                 Order singleOrder2 = bl.Order.GetByID(orderID1);
-                Console.WriteLine(orderID1);
+                Console.WriteLine(singleOrder2);
                 break;
 
             case 'b': ///Show an List of orders
@@ -185,18 +186,18 @@ public class Program
                     Console.WriteLine(item);
                 }
                 break;
-            case 'c': /// Update order delivery
+            case 'c': /// Update Order shipping
+                Console.WriteLine("Enter order ID:");
+                int.TryParse(Console.ReadLine(), out orderID1);
+                Order orderArrival = bl.Order.UpdateShipDate(orderID1);
+                Console.WriteLine(orderArrival);
+                break;
+
+            case 'd': ///Update Order delivery 
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
                 Order orderDelivery = bl.Order.UpdateDelivery(orderID1);
                 Console.WriteLine(orderDelivery);
-                break;
-
-            case 'd': ///Update order arrival
-                Console.WriteLine("Enter order ID:");
-                int.TryParse(Console.ReadLine(), out orderID1);
-                Order orderArrival =  bl.Order.UpdateShipDate(orderID1);
-                Console.WriteLine(orderArrival);
                 break;
 
             case 'e': ///Order tracking
@@ -204,6 +205,10 @@ public class Program
                 int.TryParse(Console.ReadLine(), out orderID1);
                 OrderTracking orderTracking = bl.Order.followOrder(orderID1);
                 Console.WriteLine(orderTracking);
+                foreach (var tuple in orderTracking.Tracking)
+                {
+                     Console.WriteLine("        Tracking:{0} - {1} ", tuple.Item1, tuple.Item2);
+                }
                 break;
 
             default: //Wrong input
@@ -221,6 +226,19 @@ public class Program
         int newOrderID1;
         double newPrice1;
         int newAmount;
+        string customerName, customerEmail, customerAddress;
+        Console.WriteLine("Enter  the customer name:");
+        customerName = Console.ReadLine();
+        Console.WriteLine("Enter the customer email address:");
+        customerEmail = Console.ReadLine();
+        Console.WriteLine("Enter the customer address:");
+        customerAddress = Console.ReadLine();
+        Cart myCart = new Cart()
+        {
+            CustomerName = customerName,
+            CustomerEmail = customerEmail,
+            CustomerAddress = customerAddress
+        };
         Console.WriteLine($@"Input : 
         a - Add a product to cart 
         b - Update product amount in cart 
@@ -232,7 +250,7 @@ public class Program
             case 'a': ///Add a product to cart
                 Console.WriteLine("Enter  ID:");
                 int.TryParse(Console.ReadLine(), out newID);
-                Cart myCart = new Cart();
+
                 myCart = bl.Cart.AddProduct(myCart, newID);
                 Console.WriteLine(myCart);
                 break;
@@ -242,27 +260,12 @@ public class Program
                 int.TryParse(Console.ReadLine(), out newID);
                 Console.WriteLine("Enter new product amount:");
                 int.TryParse(Console.ReadLine(), out newAmount);
-                Cart myCart1 = new Cart();
-                myCart1 = bl.Cart.UpdateProductAmount(myCart1, newID, newAmount);
-                Console.WriteLine(myCart1);
+                myCart = bl.Cart.UpdateProductAmount(myCart, newID, newAmount);
+                Console.WriteLine(myCart);
                 break;
 
             case 'c': ///Cart confirmation
-                string customerName, customerEmail, customerAddress;
-                Console.WriteLine("Enter  the customer name:");
-                customerName = Console.ReadLine();
-                Console.WriteLine("Enter the customer email address:");
-                customerEmail = Console.ReadLine();
-                Console.WriteLine("Enter the customer address:");
-                customerAddress = Console.ReadLine();
-                Cart myCart2 = new Cart()
-                {
-                    CustomerName = customerName,
-                    CustomerEmail = customerEmail,
-                    CustomerAddress = customerAddress
-                };
-                bl.Cart.CartConfirmation(myCart2);
-
+                bl.Cart.CartConfirmation(myCart);
                 break;
             default:   ///Wrong input
                 Console.WriteLine("ERROR");

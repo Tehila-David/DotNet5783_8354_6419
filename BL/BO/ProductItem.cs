@@ -10,7 +10,7 @@ namespace BO
     public class ProductItem
     {
         /// <summary>
-        /// Unique ID of Prudct
+        /// Unique ID of Prudct 
         /// </summary>
         public int ID { get; set; }
         /// <summary>
@@ -29,6 +29,9 @@ namespace BO
         /// Instock of product
         /// </summary>
         public int Amount { get; set; }
+        /// <summary>
+        /// if product is availavle in store
+        /// </summary>
         public bool  IsAvailable { get; set; }
 
 
