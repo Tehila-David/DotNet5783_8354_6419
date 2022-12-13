@@ -11,11 +11,8 @@ public class Program
    static IBl bl = new Bl();
     static void Main(string[] arg)
     {
-        int choice;
-        Console.WriteLine("Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
-        int.TryParse(Console.ReadLine(), out choice);
         string customerName, customerEmail, customerAddress;
-        Console.WriteLine("Enter  the customer name:");
+        Console.WriteLine("Enter the customer name:");
         customerName = Console.ReadLine();
         Console.WriteLine("Enter the customer email address:");
         customerEmail = Console.ReadLine();
@@ -29,6 +26,9 @@ public class Program
             Items = null,
             TotalPrice = 0
         };
+        int choice;
+        Console.WriteLine("Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
+        int.TryParse(Console.ReadLine(), out choice);
         while (choice != 0) ///checking if the user does not want to exit
         {
             try
@@ -220,10 +220,10 @@ public class Program
                 int.TryParse(Console.ReadLine(), out orderID1);
                 OrderTracking orderTracking = bl.Order.followOrder(orderID1);
                 Console.WriteLine(orderTracking);
-                foreach (var tuple in orderTracking.Tracking)
-                {
-                     Console.WriteLine("        Tracking:{0} - {1} ", tuple.Item1, tuple.Item2);
-                }
+                //foreach (var tuple in orderTracking.Tracking)
+                //{
+                //     Console.WriteLine("        Tracking:{0} - {1} ", tuple.Item1, tuple.Item2);
+                //}
                 break;
 
             default: //Wrong input

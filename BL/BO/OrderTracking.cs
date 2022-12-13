@@ -22,8 +22,19 @@ namespace BO
         /// Tuple list of date and Status
         /// </summary>
         public List<Tuple<DateTime, string>>? Tracking { get; set; }
-        public override string ToString() => $@"
-        Product ID: {ID}
-        Status: {Status}";
+       
+        public override string ToString()
+        {
+            string str = "";
+            str += $"Product ID: {ID} \n";
+            str += $"Status: {Status} \n";
+            str += $"Tracking:  \n";
+            foreach (var tuple in Tracking)
+            {
+                str += $" {tuple.Item1} - {tuple.Item2}\n ";
+            }
+            return str;
+        }
+       
     }
 }

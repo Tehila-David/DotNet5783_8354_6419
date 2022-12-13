@@ -14,14 +14,25 @@ namespace BO
         public List <OrderItem>? Items { get; set; }
         public double TotalPrice { get; set; }
 
-        public override string ToString() => $@"
-        ID:{ID},
-        Costumer Name: {CustomerName},
-        Customer Email: {CustomerEmail},
-        Customer Address: {CustomerAddress},
-        OrderDate: {OrderDate},
-        Ship Date: {ShipDate},
-        Delivery Date: {DeliveryDate}
-        Total Price: {TotalPrice}";
+        
+        public override string ToString()
+        {
+            string str = "";
+            str += $"ID: {ID} \n";
+            str += $"Costumer Name: {CustomerName} \n";
+            str += $"CustomerEmail: {CustomerEmail} \n";
+            str += $"CustomerAddress: {CustomerAddress} \n";
+            str += $"OrderDate: {OrderDate}";
+            str += $"Ship Date: {ShipDate}";
+            str += $"Delivery Date: {DeliveryDate}";
+            str += $"Total Price: {TotalPrice} \n";
+            str += $"Items:  \n";
+
+            foreach (var item in Items)
+            {
+                str += $"OrderItem: {item} \n";
+            }
+            return str;
+        }
     }
 }
