@@ -21,7 +21,7 @@ namespace BO
         /// <summary>
         /// Tuple list of date and Status
         /// </summary>
-        public List<Tuple<DateTime, string>>? Tracking { get; set; }
+        public List<Tuple<DateTime?, string?>>? Tracking { get; set; }
        
         public override string ToString()
         {

@@ -24,7 +24,7 @@ namespace BO
         /// <summary>
         /// Category of product
         /// </summary>
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
         /// <summary>
         /// Instock of product
         /// </summary>

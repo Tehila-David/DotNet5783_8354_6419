@@ -1,6 +1,7 @@
 ﻿
 using DalApi;
 using DO;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace Dal;
@@ -42,7 +43,7 @@ internal class DalOrder : IOrder
     /// This function returns the array with all of the order items
     /// </summary>
     /// <returns></returns> array of orders
-    public IEnumerable<Order> GetAll()
+    public IEnumerable<Order?, Func<Order?, bool>? predicate = null > GetAll()
 
     {  ///looking for all of the order items that have their details filed in and returning them
         return _dataSource.OrderList.ToList();

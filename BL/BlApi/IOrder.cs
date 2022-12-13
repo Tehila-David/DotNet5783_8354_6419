@@ -14,7 +14,7 @@ namespace BlApi
         /// for the manager, return list of orders
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<OrderForList> GetListedOrders();
+        public IEnumerable<OrderForList?> GetListedOrders();
        /// <summary>
        /// for the manager and customer , retrun details of Order
        /// </summary>

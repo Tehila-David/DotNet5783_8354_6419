@@ -14,7 +14,7 @@ public interface IProduct
     ///  for the manager and customer , return list of ProductForList
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<ProductForList> GetListedProducts();
+    public IEnumerable<ProductForList?> GetListedProducts();
     /// <summary>
     /// for the manager , return details of product
     /// </summary>
