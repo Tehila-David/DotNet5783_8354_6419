@@ -81,7 +81,7 @@ public class Program
         e - Update a product 
         f - Delete a product");
         char choice;
-        char.TryParse(Console.ReadLine(), out choice);
+        char.TryParse(Console.ReadLine().ToLower(), out choice);
         switch (choice)
         {
             case 'a': ///add new product
@@ -185,7 +185,7 @@ public class Program
         d - Order delivery update
         e - Order tracking");
         char choice;
-        char.TryParse(Console.ReadLine(), out choice);
+        char.TryParse(Console.ReadLine().ToLower(), out choice);
         switch (choice)
         {
             case 'a': ///Show a order by ID
@@ -246,7 +246,7 @@ public class Program
         b - Update product amount in cart 
         c - Cart confirmation");
         char choice;
-        char.TryParse(Console.ReadLine(), out choice);
+        char.TryParse(Console.ReadLine().ToLower(), out choice);
         switch (choice)
         {
             case 'a': ///Add a product to cart
