@@ -13,6 +13,7 @@ public class Program
     {
         int choice;
         Console.WriteLine("Input: 0 - Exit , 1 - Product , 2 - Order, 3 - Cart");
+        int.TryParse(Console.ReadLine(), out choice);
         string customerName, customerEmail, customerAddress;
         Console.WriteLine("Enter  the customer name:");
         customerName = Console.ReadLine();
@@ -28,7 +29,6 @@ public class Program
             Items = null,
             TotalPrice = 0
         };
-        int.TryParse(Console.ReadLine(), out choice);
         while (choice != 0) ///checking if the user does not want to exit
         {
             try

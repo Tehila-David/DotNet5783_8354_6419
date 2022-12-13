@@ -19,11 +19,21 @@ namespace BO
         public List <OrderItem>? Items { get; set; }
         public double? TotalPrice { get; set; }
 
-        public override string ToString() => $@"
-        CustomerName: {CustomerName}
-        CustomerEmail: {CustomerEmail} 
-        CustomerAddress: {CustomerAddress}
-        Items: {Items} 
-        TotalPrice: {TotalPrice}";
+        public override string ToString()
+        {
+            string str = "";
+            str += $"CustomerName: {CustomerName} \n";
+            str += $"CustomerEmail: {CustomerEmail} \n";
+            str += $"CustomerAddress: {CustomerAddress} \n";
+            str += $"Items:  \n";
+            foreach (var item in Items)
+            {
+                str += $"OrderItem: {item} \n";
+            }
+            str += $"CustomerName: {CustomerName} \n";
+            str += $"TotalPrice: {TotalPrice} \n";
+
+            return str;
+        }
     }
 }
