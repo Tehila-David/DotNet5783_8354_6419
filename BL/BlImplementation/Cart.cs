@@ -31,12 +31,12 @@ internal class Cart:ICart
         {
             if (newAmount > newItem?.Amount)// Checking if the amount grew
             {
-                //adding a product which exists in the cart to the cart
-                if(newItem.Amount < doProduct.InStock)
+                //adding amount of products which exists in the cart to the cart
+                if(newAmount <= doProduct.InStock)
                 {
-                    newItem.Amount++;
-                    newItem.TotalPrice += doProduct.Price;
-                    myCart.TotalPrice += doProduct.Price;
+                    newItem.Amount = newItem.Amount+newAmount;
+                    newItem.TotalPrice = doProduct.Price* newItem.Amount;
+                    myCart.TotalPrice += newAmount * doProduct.Price;
                 }
                 else
                 {

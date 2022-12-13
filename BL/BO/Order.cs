@@ -11,10 +11,10 @@ namespace BO
         public DateTime? OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
-        public List <OrderItem>? Items { get; set; }
+        public List <OrderItem?>? Items { get; set; }
         public double TotalPrice { get; set; }
 
-        
+
         public override string ToString()
         {
             string str = "";
@@ -28,10 +28,10 @@ namespace BO
             str += $"Total Price: {TotalPrice} \n";
             str += $"Items:  \n";
 
-            foreach (var item in Items)
+            /*Items != null ?*/ foreach (OrderItem? item in Items)
             {
                 str += $"OrderItem: {item} \n";
-            }
+            } /*: str += $"There is no Items \n"*/
             return str;
         }
     }

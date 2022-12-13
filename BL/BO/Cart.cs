@@ -30,7 +30,6 @@ namespace BO
             {
                 str += $"OrderItem: {item} \n";
             }
-            str += $"CustomerName: {CustomerName} \n";
             str += $"TotalPrice: {TotalPrice} \n";
 
             return str;

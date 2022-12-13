@@ -26,12 +26,12 @@ namespace BO
         public override string ToString()
         {
             string str = "";
-            str += $"Product ID: {ID} \n";
+            str += $"Order ID: {ID} \n";
             str += $"Status: {Status} \n";
             str += $"Tracking:  \n";
             foreach (var tuple in Tracking)
             {
-                str += $" {tuple.Item1} - {tuple.Item2}\n ";
+                str += $"{tuple.Item1} - {tuple.Item2}\n";
             }
             return str;
         }

@@ -20,7 +20,7 @@ namespace BlApi
        /// </summary>
         public BO.Order GetByID(int id);
         /// <summary>
-        /// for help id of order and return list of BO.OrderItem
+        /// func for help,get id of order and return list of BO.OrderItem
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

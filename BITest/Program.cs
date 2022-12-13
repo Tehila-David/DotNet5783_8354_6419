@@ -192,7 +192,10 @@ public class Program
                 Console.WriteLine("Enter Order ID:");
                 int.TryParse(Console.ReadLine(), out orderID1);
                 Order singleOrder2 = bl.Order.GetByID(orderID1);
-                Console.WriteLine(singleOrder2);
+                if (singleOrder2.Items != null)
+                { Console.WriteLine(singleOrder2); }
+                else
+                { Console.WriteLine("There is no items in this order!"); } 
                 break;
 
             case 'b': ///Show an List of orders

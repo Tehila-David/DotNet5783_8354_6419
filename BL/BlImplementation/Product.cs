@@ -9,10 +9,10 @@ namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
-    //private static readonly IDal? dal = Factory.Get();
    IDal Dal = new DalList();
     public IEnumerable<BO.ProductForList> GetListedProducts()
     {
+        // return  IEnumerable
         return Dal.Product.GetAll().Select(product => new BO.ProductForList
         {
 
@@ -29,11 +29,11 @@ internal class Product : BlApi.IProduct
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("");
+            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
             return new BO.Product()
             {
                 ID = product.ID,
-                Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
+                Category = (BO.Category)(product.Category), 
                 Price = product.Price,
                 Name = product.Name,
                 InStock = product.InStock
@@ -52,6 +52,7 @@ internal class Product : BlApi.IProduct
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
             int amount;
+            //if in the cart product amount=0 
             if(myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count() == 0)
             {
                 amount = 0;
@@ -85,6 +86,7 @@ internal class Product : BlApi.IProduct
             if (String.IsNullOrEmpty(product.Name)) { throw new BO.InternalProblem("The String is empty"); }
             if (product.Price < 0) { throw new BO.InternalProblem("The Price is negative"); }
             if (product.InStock < 0) { throw new BO.InternalProblem("The Amount is negative"); }
+            //add product in data
             Dal.Product.Add(new DO.Product
             {
 
@@ -109,6 +111,7 @@ internal class Product : BlApi.IProduct
             if (product.Name == "") { throw new BO.InternalProblem("The String is empty"); }
             if (product.Price < 0) { throw new BO.InternalProblem("The Price is negative"); }
             if (product.InStock < 0) { throw new BO.InternalProblem("The Amount is negative"); }
+            //update from data
             Dal.Product.Update(new DO.Product
             {
 
@@ -137,6 +140,7 @@ internal class Product : BlApi.IProduct
                     throw new BO.InternalProblem("The product already exists");
                 }
         }
+        //delete from data
         Dal.Product.Delete(id);
     }
 }
