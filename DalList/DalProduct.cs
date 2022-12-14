@@ -18,7 +18,7 @@ internal class DalProduct : IProduct
     /// </summary>
     public int Add(Product myProduct)
     {
-        if(_dataSource.ProductList.Exists(p => p.ID== myProduct.ID))
+        if(_dataSource.ProductList.Exists(p => p?.ID== myProduct.ID))
              throw new AlreadyExists("The product already exists");
         _dataSource.ProductList.Add(myProduct);
         return myProduct.ID;
@@ -30,7 +30,7 @@ internal class DalProduct : IProduct
     public Product GetById(int id)
     {
         
-       return _dataSource.ProductList?.FirstOrDefault(s=>s.ID==id)
+       return _dataSource.ProductList?.FirstOrDefault(s=>s?.ID==id)
             ?? throw new NotExists("Sorry ,this product does not exist in the List ");
         
     }
@@ -53,7 +53,7 @@ internal class DalProduct : IProduct
 
         foreach (var item in _dataSource.ProductList)
         {  // Checking if th id in the list is equal to the id the user entered
-            if (item.ID == ID)
+            if (item?.ID == ID)
             {
 
                 _dataSource.ProductList.Remove(item);
@@ -74,7 +74,7 @@ internal class DalProduct : IProduct
         int index = 0;
         foreach (var item in _dataSource.ProductList)
         {
-            if (item.ID == myProduct.ID) ///updating the order
+            if (item?.ID == myProduct.ID) ///updating the order
             {
                 _dataSource.ProductList.RemoveAt(index);
                 _dataSource.ProductList.Insert(index, myProduct);

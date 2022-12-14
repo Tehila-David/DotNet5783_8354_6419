@@ -16,10 +16,10 @@ internal class Product : BlApi.IProduct
         return Dal.Product.GetAll().Select(product => new BO.ProductForList
         {
 
-            ID = product.ID,
-            Name = product.Name,
-            Price = product.Price,
-            Category = (BO.Category)product.Category,
+            ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
+            Name = product?.Name,
+            Price = product?.Price ?? 0d,
+            Category = (BO.Category)product?.Category,
         });
     }
 
@@ -135,7 +135,7 @@ internal class Product : BlApi.IProduct
 
         foreach (DO.Order order in Dal.Order.GetAll())
         {
-                if (Dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem.ProductID == id))
+                if (Dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem?.ProductID == id))
                 {
                     throw new BO.InternalProblem("The product already exists");
                 }

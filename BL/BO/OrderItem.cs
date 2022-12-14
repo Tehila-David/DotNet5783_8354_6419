@@ -23,7 +23,7 @@ namespace BO
         /// <summary>
         /// price of product
         /// </summary>
-        public double? Price { get; set; }
+        public double Price { get; set; }
         /// <summary>
         /// amount of products in order
         /// </summary>
@@ -31,7 +31,7 @@ namespace BO
         /// <summary>
         /// total price of all products in order
         /// </summary>
-        public double? TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
 
 
 

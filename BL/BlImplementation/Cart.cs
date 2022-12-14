@@ -53,7 +53,7 @@ internal class Cart:ICart
             else if (newAmount == 0)
             {
                 myCart.Items?.Remove(newItem);
-                myCart.TotalPrice -= newItem?.Amount * newItem?.Price;
+                myCart.TotalPrice -= newItem.Amount * newItem.Price;
             }
         }
         return myCart;

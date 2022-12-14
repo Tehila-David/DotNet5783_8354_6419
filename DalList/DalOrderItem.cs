@@ -20,7 +20,7 @@ internal class DalOrderItem : IOrderItem
     public  int Add(OrderItem myOrderItem) 
     {
 
-        if (_dataSource.OrderItemList.Exists(p => p.ID == myOrderItem.ID))
+        if (_dataSource.OrderItemList.Exists(p => p?.ID == myOrderItem.ID))
             throw new AlreadyExists("The order item already exists");
         _dataSource.OrderItemList.Add(myOrderItem);
         return myOrderItem.ID;
@@ -32,7 +32,7 @@ internal class DalOrderItem : IOrderItem
     public  OrderItem GetById(int id)
     {
         
-        return _dataSource.OrderItemList?.FirstOrDefault(s => s.ID == id) 
+        return _dataSource.OrderItemList?.FirstOrDefault(s => s?.ID == id) 
         ?? throw new NotExists("Sorry ,this item does not exist in the List "); 
     
     }
@@ -56,7 +56,7 @@ internal class DalOrderItem : IOrderItem
         foreach (var item in _dataSource.OrderItemList)
         {
             ///Checking if the requested id is equal to the id 
-            if (item.ID == id)
+            if (item?.ID == id)
             {
                 _dataSource.OrderItemList.Remove(item);
                 return;
@@ -76,7 +76,7 @@ internal class DalOrderItem : IOrderItem
         int index = 0;
         foreach (var item in _dataSource.OrderItemList)
         {
-            if (item.ID == myOrderItem.ID) ///updating the order
+            if (item?.ID == myOrderItem.ID) ///updating the order
             {
                 _dataSource.OrderItemList.RemoveAt(index);
                 _dataSource.OrderItemList.Insert(index, myOrderItem);
@@ -108,7 +108,7 @@ internal class DalOrderItem : IOrderItem
         ////If the order item being looked for is not found in the list
         //throw new NotExists("Sorry ,this item does not exist in the list ");
 
-        return GetById(item => item.ProductID == idProduct && item.OrderID == idOrder);
+        return GetById(item => item?.ProductID == idProduct && item?.OrderID == idOrder);
     }
 
 
@@ -127,7 +127,7 @@ internal class DalOrderItem : IOrderItem
 
         ////If no order items arec found with the order id the user entered
         //throw new NotExists("No order items found with the entered order id");
-        return GetAll(item => item.OrderID == idOrder) ??
+        return GetAll(item => item?.OrderID == idOrder) ??
         throw new NotExists("No order items found with the entered order id");
 
     }

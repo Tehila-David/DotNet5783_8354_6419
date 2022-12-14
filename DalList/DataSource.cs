@@ -97,9 +97,9 @@ internal sealed class DataSource
             
             foreach(var item in ProductList)
             {
-                if(item.ID == orderItem.ProductID)
+                if(item?.ID == orderItem.ProductID)
                 {
-                    orderItem.Price = (double)(item.Price * orderItem.Amount);
+                    orderItem.Price = (double)(item?.Price * orderItem.Amount);
                      break;
                 }
             }

@@ -21,7 +21,7 @@ internal class DalOrder : IOrder
     {
         if (myOrder.ID == 0)
             myOrder.ID = DataSource.Config.NextOrderID;
-        if (_dataSource.OrderList.Exists(p => p.ID == myOrder.ID))
+        if (_dataSource.OrderList.Exists(p => p?.ID == myOrder.ID))
              throw new AlreadyExists("The order already exists");
         _dataSource.OrderList.Add(myOrder);
         return myOrder.ID;
@@ -32,7 +32,7 @@ internal class DalOrder : IOrder
     /// </summary>
     public Order GetById(int id)
     {
-        return _dataSource.OrderList?.FirstOrDefault(s => s.ID == id)
+        return _dataSource.OrderList?.FirstOrDefault(s => s?.ID == id)
             ?? throw new NotExists("Sorry ,this order does not exist in the List ");
         
         ///If the order  was not found in the array
@@ -56,7 +56,7 @@ internal class DalOrder : IOrder
     {
         foreach (var item in _dataSource.OrderList)
         {
-            if (item.ID == id)
+            if (item?.ID == id)
             {
                 _dataSource.OrderList.Remove(item);
                 return;
