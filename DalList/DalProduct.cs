@@ -1,13 +1,18 @@
 ﻿
 using DO;
 using DalApi;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Dal;
 
 internal class DalProduct : IProduct
 {
     DataSource _dataSource = DataSource.s_instance;
-
+   public Product GetById(Func<Product?, bool>? predicate)
+    {
+        return _dataSource.ProductList?.FirstOrDefault(predicate)
+            ?? throw new NotExists("Sorry ,this product does not exist in the List ");
+    }
     /// <summary>
     /// This function adds an Product
     /// </summary>
@@ -24,24 +29,20 @@ internal class DalProduct : IProduct
     /// </summary>
     public Product GetById(int id)
     {
-        foreach (var item in _dataSource.ProductList)
-        {   ///Checking if the id the user entered is equal to an id in the list
-            if (id == item.ID)
-            {
-                return item;
-            }
-        }
-        /// If the id the user entered is not found in the list
-        throw new NotExists("Sorry ,this product does not exist in the List ");
+        
+       return _dataSource.ProductList?.FirstOrDefault(s=>s.ID==id)
+            ?? throw new NotExists("Sorry ,this product does not exist in the List ");
+        
     }
 
     /// <summary>
     /// This function returns all of the products
     /// </summary>
-    public IEnumerable<Product> GetAll()
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? predicate=null )
     {
         ///looking for all of the products that have their details filed in and returning them
-        return _dataSource.ProductList.ToList();
+        //if(predicate == null) { return _dataSource.ProductList.AsEnumerable(); }
+        return _dataSource.ProductList.Where(predicate) ?? _dataSource.ProductList.AsEnumerable(); 
     }
 
     /// <summary>

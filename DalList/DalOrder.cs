@@ -9,7 +9,11 @@ namespace Dal;
 internal class DalOrder : IOrder
 {
     DataSource _dataSource = DataSource.s_instance;
-
+    public Order GetById(Func<Order?, bool>? predicate)
+    {
+        return _dataSource.OrderList?.FirstOrDefault(predicate)
+            ?? throw new NotExists("Sorry ,this order does not exist in the List ");
+    }
     /// <summary>
     /// This function adds an order to list
     /// </summary>
@@ -28,26 +32,22 @@ internal class DalOrder : IOrder
     /// </summary>
     public Order GetById(int id)
     {
-        foreach (var item in _dataSource.OrderList)
-        {
-            if (id == item.ID)
-            {
-                return item;
-            }
-        }
+        return _dataSource.OrderList?.FirstOrDefault(s => s.ID == id)
+            ?? throw new NotExists("Sorry ,this order does not exist in the List ");
+        
         ///If the order  was not found in the array
-        throw new NotExists("Sorry ,this Order does not exist in the List ");
+       
     }
 
     /// <summary>
     /// This function returns the array with all of the order items
     /// </summary>
     /// <returns></returns> array of orders
-    public IEnumerable<Order?, Func<Order?, bool>? predicate = null > GetAll()
-
-    {  ///looking for all of the order items that have their details filed in and returning them
-        return _dataSource.OrderList.ToList();
-
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? predicate = null)
+    {
+        ///looking for all of the products that have their details filed in and returning them
+        //if (predicate == null) { return _dataSource.OrderList.AsEnumerable(); }
+        return _dataSource.OrderList.Where(predicate)?? _dataSource.OrderList.AsEnumerable();
     }
     /// <summary>
     /// This function receives an id of an order and deletes the order witn the same id

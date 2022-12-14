@@ -12,7 +12,7 @@ public struct Order
     /// <summary>
     /// name of costumer
     /// </summary>
-    public string CustomerName{ get; set; }
+    public string? CustomerName{ get; set; }
     /// <summary>
     /// Email of costumer
     /// </summary>
@@ -20,11 +20,11 @@ public struct Order
     /// <summary>
     /// address of costumer
     /// </summary>
-    public string CustomerAddress { get; set; }
+    public string? CustomerAddress { get; set; }
     /// <summary>
     /// Date of Order
     /// </summary>
-    public DateTime OrderDate { get; set; }
+    public DateTime? OrderDate { get; set; }
     /// <summary>
     /// Date of shipping
     /// </summary>

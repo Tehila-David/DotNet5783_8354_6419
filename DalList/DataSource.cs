@@ -12,9 +12,9 @@ internal sealed class DataSource
     static DataSource() => s_instance = new DataSource(); //This function returns the created object
     private DataSource() => s_Initialize(); //constructor of an object of dataSource
 
-    internal List<Product> ProductList { get; } = new List<Product>();
-    internal List<Order> OrderList { get; } = new List<Order>();
-    internal List<OrderItem> OrderItemList { get; } = new List<OrderItem>();
+    internal List<Product?> ProductList { get; } = new List<Product?>();
+    internal List<Order?> OrderList { get; } = new List<Order?>();
+    internal List<OrderItem?> OrderItemList { get; } = new List<OrderItem?>();
 
     internal static class Config
     {
@@ -60,7 +60,7 @@ internal sealed class DataSource
                 CustomerAddress = "address_" + (i + 2),
                 OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
                 ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-                DeliveryDate = DateTime.MinValue
+                DeliveryDate = null
             };
             order.DeliveryDate = (j<10) ? (order.ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L))) : DateTime.MinValue;
             j++;
@@ -77,8 +77,8 @@ internal sealed class DataSource
             CustomerEmail = i + "@gmail.com",
             CustomerAddress = "address_" + (i + 2),
             OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-            ShipDate = DateTime.MinValue,
-            DeliveryDate = DateTime.MinValue
+            ShipDate = null,
+            DeliveryDate = null
             };
             OrderList.Add(order);
         }

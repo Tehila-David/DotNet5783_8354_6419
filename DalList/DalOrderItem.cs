@@ -1,6 +1,7 @@
 ﻿
 using DO;
 using DalApi;
+using System;
 
 namespace Dal;
 
@@ -8,7 +9,11 @@ internal class DalOrderItem : IOrderItem
 
 {
     DataSource _dataSource = DataSource.s_instance;
-
+    public OrderItem GetById(Func<OrderItem?, bool>? predicate)
+    {
+        return _dataSource.OrderItemList?.FirstOrDefault(predicate)
+            ?? throw new NotExists("Sorry ,this item does not exist in the List ");
+    }
     /// <summary>
     /// This function adds an order item
     /// </summary>
@@ -26,24 +31,20 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     public  OrderItem GetById(int id)
     {
-        foreach (var item in _dataSource.OrderItemList)
-        {
-            
-            if(item.ID == id)
-                return item;
-        }
-        ///If the order item was not found in the list
-        throw new NotExists("Sorry ,this item does not exist in the list ");
+        
+        return _dataSource.OrderItemList?.FirstOrDefault(s => s.ID == id) 
+        ?? throw new NotExists("Sorry ,this item does not exist in the List "); 
+    
     }
 
     /// <summary>
     /// This function returns the list with all of the order items
     /// </summary>
-    public IEnumerable <OrderItem> GetAll()
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? predicate = null)
     {
-        ///looking for all of the order items that have their details filed in and returning them
-        return _dataSource.OrderItemList.ToList();
-
+        ///looking for all of the products that have their details filed in and returning them
+        //if (predicate == null) { return _dataSource.OrderItemList.AsEnumerable(); }
+        return _dataSource.OrderItemList.Where(predicate)?? _dataSource.OrderItemList.AsEnumerable();
     }
 
     /// <summary>
@@ -92,34 +93,44 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     public OrderItem getOrderItem(int idOrder, int idProduct)
     {
-        OrderItem orderItem = new OrderItem();
-        foreach (OrderItem item in _dataSource.OrderItemList)
-        {
-            ///checking if an orderitem has the same product and order id's as the on e the user entered 
-            if (item.ProductID == idProduct && item.OrderID == idOrder)
-            {
-                ///The correct order item based on the user input
-                orderItem = item;
-                return orderItem;
-            }
-        }
-        //If the order item being looked for is not found in the list
-        throw new NotExists("Sorry ,this item does not exist in the list ");
+
+        //OrderItem orderItem = new OrderItem();
+        //foreach (OrderItem item in _dataSource.OrderItemList)
+        //{
+        //    ///checking if an orderitem has the same product and order id's as the on e the user entered 
+        //    if (item.ProductID == idProduct && item.OrderID == idOrder)
+        //    {
+        //        ///The correct order item based on the user input
+        //        orderItem = item;
+        //        return orderItem;
+        //    }
+        //}
+        ////If the order item being looked for is not found in the list
+        //throw new NotExists("Sorry ,this item does not exist in the list ");
+
+        return GetById(item => item.ProductID == idProduct && item.OrderID == idOrder);
     }
 
 
     /// <summary>
     /// This function returns an array of all of the order items with the order id the user entered
     /// </summary>
-    public IEnumerable <OrderItem> getListOrderItems(int idOrder)
+    public IEnumerable <OrderItem?> getListOrderItems(int idOrder)
     {
         //creating an list with all of the order items that have the same order id as the one the user entered
-        return _dataSource.OrderItemList.FindAll(delegate (OrderItem myOrderItem)
-        {
-            return myOrderItem.OrderID == idOrder;
-        });
-        //If no order items arec found with the order id the user entered
+        //Func<OrderItem, bool>? predicate = item =>
+        //{
+        //    bool b1 = item.OrderID == idOrder;
+        //    return b1;
+        //};
+        //OrderItem orderItem=
+
+        ////If no order items arec found with the order id the user entered
+        //throw new NotExists("No order items found with the entered order id");
+        return GetAll(item => item.OrderID == idOrder) ??
         throw new NotExists("No order items found with the entered order id");
+
     }
+
 }
   

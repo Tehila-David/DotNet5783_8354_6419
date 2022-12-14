@@ -154,7 +154,7 @@ internal class Order : BlApi.IOrder
             //add status and dateTime to list-TrackingForHelp
             if (order.OrderDate != DateTime.MinValue)
             {
-                TrackingForHelp.Add(new Tuple<DateTime, string>(order.OrderDate, "Confirmed"));
+                TrackingForHelp.Add(new Tuple<DateTime, string>((DateTime)order.OrderDate, "Confirmed"));
                 if (order.ShipDate != DateTime.MinValue)
                 {
                     TrackingForHelp.Add(new Tuple<DateTime, string>((DateTime)order.ShipDate, "Shipped"));
@@ -171,7 +171,7 @@ internal class Order : BlApi.IOrder
                 ID = order.ID,
                 Status = order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
             :   order.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
-                Tracking = TrackingForHelp,
+                Tracking = TrackingForHelp
 
             };
         }
