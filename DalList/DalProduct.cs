@@ -41,8 +41,8 @@ internal class DalProduct : IProduct
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? predicate=null )
     {
         ///looking for all of the products that have their details filed in and returning them
-        //if(predicate == null) { return _dataSource.ProductList.AsEnumerable(); }
-        return _dataSource.ProductList.Where(predicate) ?? _dataSource.ProductList.AsEnumerable(); 
+        if (predicate == null) { return _dataSource.ProductList.AsEnumerable(); }
+        return _dataSource.ProductList.Where(predicate);/*?? _dataSource.ProductList.AsEnumerable();*/ 
     }
 
     /// <summary>

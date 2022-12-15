@@ -1,5 +1,5 @@
 ﻿using BlApi;
-
+using BO;
 using Dal;
 using DalApi;
 using System.Diagnostics;
@@ -22,8 +22,9 @@ internal class Product : BlApi.IProduct
             Category = (BO.Category)product?.Category,
         });
     }
-
-
+   
+   
+    
     public BO.Product GetById(int id)
     {
         try

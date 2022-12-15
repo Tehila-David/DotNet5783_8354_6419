@@ -21,7 +21,7 @@
             <ComboBox Name="CategorySelector" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1"/>
             <Label Content="Products" Grid.Column="0"/>
         </Grid>
-        <ListView Grid.Row="1" x:Name="ProductsList" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView Grid.Row="1" x:Name="ProductsList" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ProductsList_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
