@@ -22,9 +22,9 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBl bl = new Bl();
-        //public MainWindow()
-        //{
-        //    InitializeComponent();
-        //}
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }
