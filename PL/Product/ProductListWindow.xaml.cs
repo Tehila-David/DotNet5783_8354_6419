@@ -19,12 +19,14 @@ namespace PL
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class ProductListWindow : Window
     {
         private IBl bl = new Bl();
-        public Window1()
+        public ProductListWindow()
         {
             InitializeComponent();
+           ProductsList.ItemsSource=bl.Product.GetListedProducts();
         }
+       
     }
 }
