@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{3F36
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BITest", "BITest\BITest.csproj", "{59F40000-DBF5-443E-8865-3CA5D47C5113}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL1", "PL1\PL1.csproj", "{49A68F5B-2396-47FD-8643-28906D1A2373}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL1\PL.csproj", "{49A68F5B-2396-47FD-8643-28906D1A2373}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
