@@ -82,9 +82,9 @@ internal class Order : BlApi.IOrder
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
             //There is no order date
-            if (order.OrderDate == DateTime.MinValue) { throw new BO.InternalProblem("The order not  confirmed"); }
+            if (order.OrderDate == null) { throw new BO.InternalProblem("The order not  confirmed"); }
             //The order shipped 
-            if (order.ShipDate != DateTime.MinValue) { throw new BO.InternalProblem("The order shipped"); }
+            if (order.ShipDate != null) { throw new BO.InternalProblem("The order shipped"); }
             order.ShipDate = DateTime.Now;
             Dal.Order.Update(order);
             return new BO.Order()
@@ -115,9 +115,9 @@ internal class Order : BlApi.IOrder
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order ");
             //There is no order date
-            if (order.OrderDate == DateTime.MinValue) { throw new BO.InternalProblem("The order not confiremed");}
+            if (order.OrderDate == null) { throw new BO.InternalProblem("The order not confiremed");}
             //The order wasn't shipped
-            if (order.ShipDate == DateTime.MinValue) { throw new BO.InternalProblem("The order not  shipped"); }
+            if (order.ShipDate == null) { throw new BO.InternalProblem("The order not  shipped"); }
             order.DeliveryDate = DateTime.Now;
             Dal.Order.Update(order);
 
@@ -154,11 +154,11 @@ internal class Order : BlApi.IOrder
             if (order.OrderDate != DateTime.MinValue)
             {
                 TrackingForHelp.Add(new Tuple<DateTime?, string?>((DateTime)order.OrderDate, "Confirmed"));
-                if (order.ShipDate != DateTime.MinValue)
+                if (order.ShipDate != null)
                 {
                     TrackingForHelp.Add(new Tuple<DateTime?, string?>((DateTime)order.ShipDate, "Shipped"));
                     
-                    if (order.DeliveryDate != DateTime.MinValue)
+                    if (order.DeliveryDate != null)
                     {
                         TrackingForHelp.Add(new Tuple<DateTime?, string?> ((DateTime)order.DeliveryDate, "Delivered"));
                     }
@@ -168,8 +168,8 @@ internal class Order : BlApi.IOrder
             return new BO.OrderTracking()
             {
                 ID = order.ID,
-                Status = order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-            :   order.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
+                Status = order.DeliveryDate != null ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
+            :   order.OrderDate != null ? BO.OrderStatus.Confirmed : null,
                 Tracking = TrackingForHelp
             };
         }

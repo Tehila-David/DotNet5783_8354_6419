@@ -5,6 +5,7 @@ using Dal;
 using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using System.Runtime.ConstrainedExecution;
+using System;
 
 namespace BlImplementation;
 
@@ -153,8 +154,8 @@ internal class Cart:ICart
             CustomerEmail = myCart.CustomerEmail,
             CustomerAddress = myCart.CustomerAddress,
             OrderDate = DateTime.Now, //Date for starting the order
-            ShipDate = DateTime.MinValue,
-            DeliveryDate = DateTime.MinValue
+            ShipDate = null,
+            DeliveryDate = null
         };
         int orderID;
         try
