@@ -12,6 +12,7 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Button Content="Admin" HorizontalAlignment="Left" Margin="369,163,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
 
     </Grid>
