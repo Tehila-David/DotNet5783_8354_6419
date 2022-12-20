@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BlImplementation;
+using DO;
 using System;
 using System.Windows;
 
@@ -23,7 +24,8 @@ namespace PL
 
         private void ProductsList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
+            CategorySelector.SelectedItem = Enum.GetValues(typeof(BO.Category));
+            ProductsList.ItemsSource = bl.Product.GetListedProducts(product=> product?.Category ?? throw new NullReferenceException("Missing product category") == (BO.Category)CategorySelector.SelectedItem);
         }
     }
 }

@@ -14,7 +14,7 @@ public interface IProduct
     ///  for the manager and customer , return list of ProductForList
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<ProductForList?> GetListedProducts();
+    public IEnumerable<ProductForList?> GetListedProducts(Func<DO.Product?, bool>? predicate = null);
     /// <summary>
     /// for the manager , return details of product
     /// </summary>
