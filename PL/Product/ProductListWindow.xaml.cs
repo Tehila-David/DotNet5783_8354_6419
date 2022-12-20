@@ -17,21 +17,24 @@ namespace PL
         {
            InitializeComponent();
            ProductsList.ItemsSource=bl.Product.GetListedProducts();
-           CategorySelector.ItemsSource= Enum.GetValues(typeof(BO.Category));
-           CategorySelector.SelectedItem= Enum.GetValues(typeof(BO.Category));
-
-            Func<DO.Product?, bool>? predicate = item =>
-            {
-                bool b1 = item?.Category == (DO.Category)CategorySelector.SelectedItem;
-                return b1;
-            };
-            CategorySelector.ItemsSource = bl.Product.GetListedProducts(predicate);
+           CategorySelector.ItemsSource= Enum.GetValues(typeof(BO.Category));   
         }
-
+        
         private void ProductsList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            CategorySelector.SelectedItem = Enum.GetValues(typeof(BO.Category));
-            //ProductsList.ItemsSource = bl.Product.GetListedProducts(product=> product?.Category ?? throw new NullReferenceException("Missing product category") == (BO.Category)CategorySelector.SelectedItem);
+            
+        }
+
+        private void CategorySelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            BO.Category category = (BO.Category)CategorySelector.SelectedItem;
+            Func<DO.Product?, bool>? predicate = item =>
+            {
+                bool b1 = item?.Category == (DO.Category)category;
+                return b1;
+            };
+
+            ProductsList.ItemsSource = bl.Product.GetListedProducts(predicate);
         }
     }
 }
