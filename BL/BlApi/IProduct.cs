@@ -14,7 +14,7 @@ public interface IProduct
     ///  for the manager and customer , return list of ProductForList
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<ProductForList?> GetListedProducts();
+    public IEnumerable<ProductForList?> GetListedProducts(Func<DO.Product?, bool>? predicate = null);
     /// <summary>
     /// for the manager , return details of product
     /// </summary>
@@ -26,21 +26,22 @@ public interface IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public BO.ProductItem GetById1(int id,BO.Cart myCart);
+    public BO.ProductItem GetById1(int id, BO.Cart myCart);
     /// <summary>
     /// for the manager, add product to list
     /// </summary>
     /// <param name="product"></param>
-    public void Add (BO.Product product);
+    public void Add(BO.Product product);
     /// <summary>
     /// for the manager, update product from list
     /// </summary>
     /// <param name="product"></param>
-    public void Update (BO.Product product);
+    public void Update(BO.Product product);
     /// <summary>
     /// for the manager ,delete product from list
     /// </summary>
     /// <param name="product"></param>
-    public void Delete (int id);
+    public void Delete(int id);
+}
 
    

@@ -2,6 +2,7 @@
 using BO;
 using Dal;
 using DalApi;
+using DO;
 using System.Diagnostics;
 using System.Xml.Linq;
 
@@ -10,20 +11,41 @@ namespace BlImplementation;
 internal class Product : BlApi.IProduct
 {
    IDal Dal = new DalList();
-    public IEnumerable<BO.ProductForList> GetListedProducts()
+    public IEnumerable<BO.ProductForList> GetListedProducts(Func<DO.Product?, bool>? predicate = null)
     {
-        // return  IEnumerable
-        return Dal.Product.GetAll().Select(product => new BO.ProductForList
+        if (predicate == null)
         {
+            // return  IEnumerable
+            return Dal.Product.GetAll().Select(product => new BO.ProductForList
+            {
 
-            ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
-            Name = product?.Name,
-            Price = product?.Price ?? 0d,
-            Category = (BO.Category)product?.Category,
-        });
+                ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
+                Name = product?.Name,
+                Price = product?.Price ?? 0d,
+                Category = (BO.Category)product?.Category,
+            });
+        }
+        else
+        {
+            //return Dal.Product.GetAll(predicate).Select(product => new BO.ProductForList
+            //{
+
+            //    ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
+            //    Name = product?.Name,
+            //    Price = product?.Price ?? 0d,
+            //    Category = (BO.Category)product?.Category,
+            //});
+            return from item in Dal.Product.GetAll(predicate)
+                   select new BO.ProductForList
+                   {
+                       ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
+                       Name = item?.Name,
+                       Price = item?.Price ?? 0d,
+                       Category = (BO.Category)item?.Category
+                   };
+        }
+
     }
-   
-   
     
     public BO.Product GetById(int id)
     {
