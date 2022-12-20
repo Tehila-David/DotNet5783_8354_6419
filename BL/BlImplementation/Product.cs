@@ -45,8 +45,9 @@ internal class Product : BlApi.IProduct
                    };
         }
 
+        
     }
-    
+
     public BO.Product GetById(int id)
     {
         try

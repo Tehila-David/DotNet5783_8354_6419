@@ -42,6 +42,7 @@ public interface IProduct
     /// </summary>
     /// <param name="product"></param>
     public void Delete(int id);
+
 }
 
    

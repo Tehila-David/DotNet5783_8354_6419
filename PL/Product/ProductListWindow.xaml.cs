@@ -19,13 +19,19 @@ namespace PL
            ProductsList.ItemsSource=bl.Product.GetListedProducts();
            CategorySelector.ItemsSource= Enum.GetValues(typeof(BO.Category));
            CategorySelector.SelectedItem= Enum.GetValues(typeof(BO.Category));
-           CategorySelector.ItemsSource = /*bl.Product(CategorySelector.SelectedItem);*/
+
+            Func<DO.Product?, bool>? predicate = item =>
+            {
+                bool b1 = item?.Category == (DO.Category)CategorySelector.SelectedItem;
+                return b1;
+            };
+            CategorySelector.ItemsSource = bl.Product.GetListedProducts(predicate);
         }
 
         private void ProductsList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             CategorySelector.SelectedItem = Enum.GetValues(typeof(BO.Category));
-            ProductsList.ItemsSource = bl.Product.GetListedProducts(product=> product?.Category ?? throw new NullReferenceException("Missing product category") == (BO.Category)CategorySelector.SelectedItem);
+            //ProductsList.ItemsSource = bl.Product.GetListedProducts(product=> product?.Category ?? throw new NullReferenceException("Missing product category") == (BO.Category)CategorySelector.SelectedItem);
         }
     }
 }
