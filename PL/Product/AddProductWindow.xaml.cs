@@ -22,6 +22,12 @@ namespace PL
         public AddProductWindow()
         {
             InitializeComponent();
+            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        }
+
+        private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

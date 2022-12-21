@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="AddProductWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Id :" HorizontalAlignment="Left" Margin="94,53,0,0" VerticalAlignment="Top" Width="55" />
+        <Label Content="Category :" HorizontalAlignment="Left" Margin="94,84,0,0" VerticalAlignment="Top" Width="55" />
+        <Label Content="Name :" HorizontalAlignment="Left" Margin="94,115,0,0" VerticalAlignment="Top" Width="55"/>
+        <Label Content="Price :" HorizontalAlignment="Left" Margin="94,146,0,0" VerticalAlignment="Top" Width="55"/>
+        <Label Content="In Stock :" HorizontalAlignment="Left" Margin="94,177,0,0" VerticalAlignment="Top" Width="55"/>
+        <TextBox x:Name="txtID" MaxLength="9" HorizontalAlignment="Left" Margin="204,57,0,0" TextWrapping="Wrap" Text="12345" VerticalAlignment="Top" Width="100"/>
+        <ComboBox Name="CategorySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="204,97,0,0" Width="100" SelectionChanged="CategorySelector_SelectionChanged" />
+        <TextBox x:Name="txtName" MaxLength="9" HorizontalAlignment="Left" Margin="204,137,0,0" TextWrapping="Wrap" Text="12345" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

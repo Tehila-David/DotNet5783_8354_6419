@@ -36,5 +36,12 @@ namespace PL
 
             ProductsList.ItemsSource = bl.Product.GetListedProducts(predicate);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new AddProductWindow().Show();
+        }
+
+        
     }
 }
