@@ -17,7 +17,7 @@ namespace PL
         {
            InitializeComponent();
            ProductsList.ItemsSource=bl.Product.GetListedProducts();
-           CategorySelector.ItemsSource= Enum.GetValues(typeof(BO.Category));   
+            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));   
         }
         
         private void ProductsList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
