@@ -54,8 +54,8 @@ namespace PL
         /// <param name="e"></param>
         private void ProductsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            BO.ProductForList? product = new BO.ProductForList();
-            product = (BO.ProductForList?)sender;//צריך להמיר את המוצר שנבחר מתוך הרשימה לטיפוס מוצר כי זה בטיפוס של עצם
+            BO.ProductForList product = new BO.ProductForList();
+            product = (BO.ProductForList)sender;//צריך להמיר את המוצר שנבחר מתוך הרשימה לטיפוס מוצר כי זה בטיפוס של עצם
             new AddProductWindow(product.ID).Show();
         }
     }
