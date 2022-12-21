@@ -52,12 +52,11 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ProductsList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ProductsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            BO.Product product = new BO.Product();
-            product = (BO.Product)sender;//צריך להמיר את המוצר שנבחר מתוך הרשימה לטיפוס מוצר כי זה בטיפוס של עצם
+            BO.ProductForList? product = new BO.ProductForList();
+            product = (BO.ProductForList?)sender;//צריך להמיר את המוצר שנבחר מתוך הרשימה לטיפוס מוצר כי זה בטיפוס של עצם
             new AddProductWindow(product.ID).Show();
         }
-
     }
 }

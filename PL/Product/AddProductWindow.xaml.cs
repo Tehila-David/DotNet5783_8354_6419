@@ -64,16 +64,6 @@ namespace PL
             product.Category = (BO.Category)CategorySelector.SelectedItem;
             bl.Product.Add(product);
         }
-
-
-        private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        private void txtID_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
 /*private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)//הכנסת רק מספרים לתיבת הטקסט

@@ -12,8 +12,8 @@
         <Label Content="Name :" HorizontalAlignment="Left" Margin="94,110,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <Label Content="Price :" HorizontalAlignment="Left" Margin="94,140,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <Label Content="In Stock :" HorizontalAlignment="Left" Margin="94,170,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
-        <TextBox x:Name="txtID" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap" Text="123456" VerticalAlignment="Top" Width="100" Height="25" TextChanged="txtID_TextChanged"/>
-        <ComboBox Name="CategorySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25" SelectionChanged="CategorySelector_SelectionChanged" />
+        <TextBox x:Name="txtID" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap" Text="123456" VerticalAlignment="Top" Width="100" Height="25" />
+        <ComboBox Name="CategorySelector" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25"  />
         <TextBox x:Name="txtName" MaxLength="9" HorizontalAlignment="Left" Margin="200,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
         <TextBox x:Name="txtPrice" MaxLength="9" HorizontalAlignment="Left" Margin="200,140,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="100" Height="25"/>
         <TextBox x:Name="txtInStock" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="100" Height="25"/>
