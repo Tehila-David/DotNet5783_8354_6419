@@ -55,7 +55,7 @@ namespace PL
         private void ProductsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             BO.ProductForList product = new BO.ProductForList();
-            product = (BO.ProductForList)sender;//צריך להמיר את המוצר שנבחר מתוך הרשימה לטיפוס מוצר כי זה בטיפוס של עצם
+            product = (BO.ProductForList)sender;//Casting not work!!!!!!!
             new AddProductWindow(product.ID).Show();
         }
     }
