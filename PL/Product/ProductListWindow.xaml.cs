@@ -3,7 +3,7 @@ using BlImplementation;
 using DO;
 using System;
 using System.Windows;
-
+using System.Windows.Controls;
 
 namespace PL
 {
@@ -44,6 +44,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Hide();
             new AddProductWindow().Show();
         }
 
@@ -54,8 +55,10 @@ namespace PL
         /// <param name="e"></param>
         private void ProductsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            ListBox listBox= sender as ListBox;
             BO.ProductForList product = new BO.ProductForList();
-            product = (BO.ProductForList)sender;//Casting not work!!!!!!!
+            product = listBox.SelectedItem as BO.ProductForList;
+            Hide();
             new AddProductWindow(product.ID).Show();
         }
     }

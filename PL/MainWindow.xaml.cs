@@ -19,6 +19,7 @@ namespace PL
         private IBl bl = new Bl();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Hide();
              new ProductListWindow().Show();
         }
     }
