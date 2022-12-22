@@ -37,7 +37,7 @@ namespace PL
             Update.Visibility = Visibility.Hidden;
         }
 
-        /// <summary>
+        /// <summary> 
         /// constructor of Update product
         /// </summary>
         /// <param name="product"></param>
