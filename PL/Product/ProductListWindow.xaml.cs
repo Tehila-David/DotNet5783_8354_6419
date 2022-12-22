@@ -17,7 +17,7 @@ namespace PL
         {
            InitializeComponent();
            ProductsList.ItemsSource=bl.Product.GetListedProducts();
-           CategorySelector.ItemsSource= Enum.GetValues(typeof(BO.Category));   
+            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));   
         }
 
         /// <summary>
