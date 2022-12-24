@@ -43,7 +43,7 @@ internal class DalOrderItem : IOrderItem
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? predicate = null)
     {
         ///looking for all of the products that have their details filed in and returning them
-        //if (predicate == null) { return _dataSource.OrderItemList.AsEnumerable(); }
+        if (predicate == null) { return _dataSource.OrderItemList.AsEnumerable(); }
         return _dataSource.OrderItemList.Where(predicate)?? _dataSource.OrderItemList.AsEnumerable();
     }
 
