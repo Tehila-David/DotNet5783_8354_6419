@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BlApi;
 using DalApi;
 
-using Dal;
 
 
 
@@ -14,35 +13,34 @@ namespace BlImplementation;
 
 internal class Order : BlApi.IOrder
 {
-    IDal Dal = new DalList();
-
+    DalApi.IDal dal = DalApi.Factory.Get()!;
 
     public IEnumerable<BO.OrderForList> GetListedOrders(Func<DO.Order?, bool>? predicate = null)
     {
         if (predicate == null)
         {
             // return list of orders
-            return Dal.Order.GetAll().Select(order => new BO.OrderForList
+            return dal.Order.GetAll().Select(order => new BO.OrderForList
             {
                 ID = order?.ID ?? throw new NullReferenceException("Missing ID"),
                 CustomerName = order?.CustomerName,
                 Status = order?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
             : order?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
-                AmountOfItems = Dal.OrderItem.getListOrderItems(order?.ID ?? 0).Sum(orderItem => orderItem?.Amount ?? 0),
-                TotalPrice = (Dal.OrderItem.getListOrderItems(order?.ID ?? 0).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
+                AmountOfItems = dal.OrderItem.getListOrderItems(order?.ID ?? 0).Sum(orderItem => orderItem?.Amount ?? 0),
+                TotalPrice = (dal.OrderItem.getListOrderItems(order?.ID ?? 0).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
             });
         }
         else
         {
-            return from item in Dal.Order.GetAll(predicate)
+            return from item in dal.Order.GetAll(predicate)
                    select new BO.OrderForList
                    {
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
                        CustomerName = item?.CustomerName,
                        Status = item?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : item?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
                        : item?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
-                       AmountOfItems = Dal.OrderItem.getListOrderItems(item?.ID ?? 0).Sum(orderItem => orderItem?.Amount ?? 0),
-                       TotalPrice = (Dal.OrderItem.getListOrderItems(item?.ID ?? 0).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
+                       AmountOfItems = dal.OrderItem.getListOrderItems(item?.ID ?? 0).Sum(orderItem => orderItem?.Amount ?? 0),
+                       TotalPrice = (dal.OrderItem.getListOrderItems(item?.ID ?? 0).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
                    };
         }
     }
@@ -51,7 +49,7 @@ internal class Order : BlApi.IOrder
         try
         {
             //if order exsits
-            DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
+            DO.Order order = dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
 
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
             // return the order by ID
@@ -76,12 +74,12 @@ internal class Order : BlApi.IOrder
     {
         List<BO.OrderItem> listForBo = new List<BO.OrderItem>();
         // it is creating new list of orderItem and adding orderItem
-        foreach (var item in Dal.OrderItem.getListOrderItems(id))
+        foreach (var item in dal.OrderItem.getListOrderItems(id))
         {
             listForBo.Add(new BO.OrderItem
             {
                 ID = item?.ID ?? 0,
-                Name = Dal.Product.GetById(item?.ProductID ?? 0).Name,
+                Name = dal.Product.GetById(item?.ProductID ?? 0).Name,
                 ProductID = item?.ProductID ?? 0,
                 Amount = item?.Amount ?? 0,
                 Price = item?.Price ?? 0,
@@ -96,13 +94,13 @@ internal class Order : BlApi.IOrder
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
+            DO.Order order = dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
             //There is no order date
             if (order.OrderDate == null) { throw new BO.InternalProblem("The order not  confirmed"); }
             //The order shipped 
             if (order.ShipDate != null) { throw new BO.InternalProblem("The order shipped"); }
             order.ShipDate = DateTime.Now;
-            Dal.Order.Update(order);
+            dal.Order.Update(order);
             return new BO.Order()
             {
                 ID = order.ID,
@@ -113,7 +111,7 @@ internal class Order : BlApi.IOrder
                 OrderDate = order.OrderDate,
                 ShipDate = order.ShipDate,
                 DeliveryDate = order.DeliveryDate,
-                TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0),
+                TotalPrice = dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0),
                 Items = getDoOrderItem(order.ID),
 
             };
@@ -129,13 +127,13 @@ internal class Order : BlApi.IOrder
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order ");
+            DO.Order order = dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order ");
             //There is no order date
             if (order.OrderDate == null) { throw new BO.InternalProblem("The order not confiremed"); }
             //The order wasn't shipped
             if (order.ShipDate == null) { throw new BO.InternalProblem("The order not  shipped"); }
             order.DeliveryDate = DateTime.Now;
-            Dal.Order.Update(order);
+            dal.Order.Update(order);
 
             return new BO.Order()
             {
@@ -147,7 +145,7 @@ internal class Order : BlApi.IOrder
                 OrderDate = order.OrderDate,
                 DeliveryDate = order.DeliveryDate,
                 ShipDate = order.ShipDate,
-                TotalPrice = Dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0),
+                TotalPrice = dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0),
                 Items = getDoOrderItem(order.ID),
 
             };
@@ -164,7 +162,7 @@ internal class Order : BlApi.IOrder
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Order order = Dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
+            DO.Order order = dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
             List<Tuple<DateTime?, string?>>? TrackingForHelp = new List<Tuple<DateTime?, string?>>();
             //add status and dateTime to list-TrackingForHelp
             if (order.OrderDate != DateTime.MinValue)

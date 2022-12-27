@@ -1,5 +1,4 @@
-﻿using BlApi;
-using BlImplementation;
+﻿
 using System.Windows;
 
 
@@ -16,7 +15,8 @@ namespace PL
         {
             InitializeComponent();
         }
-        private IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Hide();

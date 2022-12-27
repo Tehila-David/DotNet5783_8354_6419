@@ -8,11 +8,8 @@ using DO;
 public class Program
 
 {
-    static IDal dal = new Dal.DalList();
-    //static IDal dal = new DalList();
-    //DalProduct dalProduct = new DalProduct(); // variable to access dalProduct
-    //DalOrder dalOrder = new DalOrder(); // variable to access dalOrder
-    //DalOrderItem dalOrderItem = new DalOrderItem(); // variable to access dalOrderItem
+    static DalApi.IDal dal = DalApi.Factory.Get()!;    //static IDal dal = new DalList();
+
 
     static void Main(string[] arg)
     {
@@ -90,7 +87,7 @@ public class Program
                     InStock = NewInstock
                 };
                 int id;
-                id = dal.Product.Add(product);//Adding the product to the array
+                id = dal.Product.Add(product); //Adding the product to the array
                 Console.WriteLine(id);
                 break;
 

@@ -1,7 +1,6 @@
 ﻿
 using BlApi;
 using DalApi;
-using Dal;
 using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using System.Runtime.ConstrainedExecution;
@@ -11,14 +10,14 @@ namespace BlImplementation;
 
 internal class Cart:ICart
 {
-    IDal Dal = new DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     //This function updates the amount of a product in the cart
     public BO.Cart UpdateProductAmount(BO.Cart myCart, int productId, int newAmount)
     {
         DO.Product doProduct;
         try //Checking if the productId exists in the product list 
         {
-            doProduct = Dal?.Product.GetById(productId)
+            doProduct = dal?.Product.GetById(productId)
              ?? throw new BO.InternalProblem("Dal layer is inaccessible");
 
         }
@@ -70,7 +69,7 @@ internal class Cart:ICart
 
         try //Checking if the productId exists within the list of products
         {
-            doProduct = Dal?.Product.GetById(productId)
+            doProduct = dal?.Product.GetById(productId)
             ?? throw new BO.InternalProblem("Dal layer is inaccessible");
         }
         catch(DO.NotExists ex)
@@ -132,7 +131,7 @@ internal class Cart:ICart
         {
             try //Checking if the productId exists 
             {
-                doProduct = Dal?.Product.GetById(item.ProductID)
+                doProduct = dal?.Product.GetById(item.ProductID)
                 ?? throw new BO.InternalProblem("Dal layer is inaccessible");
 
             }
@@ -160,7 +159,7 @@ internal class Cart:ICart
         int orderID;
         try
         {
-            orderID = Dal.Order.Add(doOrder); //Trying to add the order to the Dal layer
+            orderID = dal.Order.Add(doOrder); //Trying to add the order to the Dal layer
         }
         catch
         {
@@ -178,7 +177,7 @@ internal class Cart:ICart
             };
             try
             {
-                Dal?.OrderItem.Add(doOrderItem); //trying to add the order item
+                dal?.OrderItem.Add(doOrderItem); //trying to add the order item
             }
             catch
             {
@@ -190,7 +189,7 @@ internal class Cart:ICart
         {
             try //Checking if the productId exists 
             {
-                myProduct = Dal.Product.GetById(item.ProductID);
+                myProduct = dal.Product.GetById(item.ProductID);
             }
             catch (DO.NotExists ex)
             {

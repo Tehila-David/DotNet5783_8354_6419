@@ -1,14 +1,13 @@
 ﻿
 using BlApi;
 using BO;
-
 using BlImplementation;
 using System.Collections.Generic;
-
+namespace BL;
 public class Program
 
 {
-   static IBl bl = new Bl();
+   static IBl bl = Factory.Get();
     static void Main(string[] arg)
     {
         string customerName, customerEmail, customerAddress;
@@ -240,9 +239,6 @@ public class Program
     public static void subCart(BO.Cart myCart)
     {
         int newID;
-        int newProductID;
-        int newOrderID1;
-        double newPrice1;
         int newAmount;
         Console.WriteLine($@"Input : 
         a - Add a product to cart 

@@ -1,6 +1,5 @@
 ﻿using BlApi;
 using BO;
-using Dal;
 using DalApi;
 using DO;
 using System.Diagnostics;
@@ -10,13 +9,13 @@ namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
-   IDal Dal = new DalList();
+DalApi.IDal? dal = DalApi.Factory.Get();
     public IEnumerable<BO.ProductForList> GetListedProducts(Func<DO.Product?, bool>? predicate = null)
     {
         if (predicate == null)
         {
             // return  IEnumerable
-            return Dal.Product.GetAll().Select(product => new BO.ProductForList
+            return dal.Product.GetAll().Select(product => new BO.ProductForList
             {
 
                 ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
@@ -27,15 +26,7 @@ internal class Product : BlApi.IProduct
         }
         else
         {
-            //return Dal.Product.GetAll(predicate).Select(product => new BO.ProductForList
-            //{
-
-            //    ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
-            //    Name = product?.Name,
-            //    Price = product?.Price ?? 0d,
-            //    Category = (BO.Category)product?.Category,
-            //});
-            return from item in Dal.Product.GetAll(predicate)
+            return from item in dal.Product.GetAll(predicate)
                    select new BO.ProductForList
                    {
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
@@ -52,7 +43,7 @@ internal class Product : BlApi.IProduct
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
+            DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
             return new BO.Product()
             {
                 ID = product.ID,
@@ -73,7 +64,7 @@ internal class Product : BlApi.IProduct
         try
         {
             if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
-            DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
+            DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
             int amount;
             //if in the cart product amount=0 
             if(myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count() == 0)
@@ -110,7 +101,7 @@ internal class Product : BlApi.IProduct
             if (product.Price < 0) { throw new BO.InternalProblem("The Price is negative"); }
             if (product.InStock < 0) { throw new BO.InternalProblem("The Amount is negative"); }
             //add product in data
-            Dal.Product.Add(new DO.Product
+            dal.Product.Add(new DO.Product
             {
 
                 ID = product.ID,
@@ -135,7 +126,7 @@ internal class Product : BlApi.IProduct
             if (product.Price < 0) { throw new BO.InternalProblem("The Price is negative"); }
             if (product.InStock < 0) { throw new BO.InternalProblem("The Amount is negative"); }
             //update from data
-            Dal.Product.Update(new DO.Product
+            dal.Product.Update(new DO.Product
             {
 
                 ID = product.ID,
@@ -154,16 +145,16 @@ internal class Product : BlApi.IProduct
 
     public void Delete(int id)
     {
-        DO.Product product = Dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
+        DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
 
-        foreach (DO.Order order in Dal.Order.GetAll())
+        foreach (DO.Order order in dal.Order.GetAll())
         {
-                if (Dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem?.ProductID == id))
+                if (dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem?.ProductID == id))
                 {
                     throw new BO.InternalProblem("The product already exists");
                 }
         }
         //delete from data
-        Dal.Product.Delete(id);
+        dal.Product.Delete(id);
     }
 }
