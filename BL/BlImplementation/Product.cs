@@ -28,6 +28,7 @@ DalApi.IDal? dal = DalApi.Factory.Get();
         else
         {
             return from item in dal.Product.GetAll(predicate)
+                   orderby item?.Name
                    select new BO.ProductForList
                    {
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
@@ -36,6 +37,7 @@ DalApi.IDal? dal = DalApi.Factory.Get();
                        Category = (BO.Category)item?.Category
                    };
         }
+        //מיון לפי אב
 
         
     }
@@ -68,14 +70,14 @@ DalApi.IDal? dal = DalApi.Factory.Get();
             DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List");
             int amount;
             //if in the cart product amount=0 
-            if(myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count() == 0)
-            {
-                amount = 0;
-            }
-            else
-            {
-                amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count();
-            }
+            //if(myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count() == 0)
+            //{
+            //    amount = 0;
+            //}
+            //else
+            
+            amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count();
+            
             BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,

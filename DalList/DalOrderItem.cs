@@ -94,7 +94,7 @@ internal class DalOrderItem : IOrderItem
         //    index++;
         //}
         var orderItem = (from item in _dataSource.OrderItemList
-                       where item?.ID == myOrderItem.ID
+                         where item?.ID == myOrderItem.ID
                          select item).FirstOrDefault();
         if (orderItem != null)
         {
