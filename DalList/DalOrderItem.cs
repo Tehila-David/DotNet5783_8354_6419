@@ -2,6 +2,7 @@
 using DO;
 using DalApi;
 using System;
+using System.Reflection;
 
 namespace Dal;
 
@@ -53,14 +54,22 @@ internal class DalOrderItem : IOrderItem
     public  void Delete(int id)
     {
 
-        foreach (var item in _dataSource.OrderItemList)
+        //foreach (var item in _dataSource.OrderItemList)
+        //{
+        //    ///Checking if the requested id is equal to the id 
+        //    if (item?.ID == id)
+        //    {
+        //        _dataSource.OrderItemList.Remove(item);
+        //        return;
+        //    }
+        //}
+        var orderItem = (from item in _dataSource.OrderItemList
+                         where item?.ID == id
+                         select item).FirstOrDefault();
+        if (orderItem != null)
         {
-            ///Checking if the requested id is equal to the id 
-            if (item?.ID == id)
-            {
-                _dataSource.OrderItemList.Remove(item);
-                return;
-            }
+            _dataSource.OrderItemList.Remove(orderItem);
+            return;
         }
         /// If the order item was not found in the list
         throw new NotExists("Sorry ,this item does not exist in the list ");
@@ -73,16 +82,25 @@ internal class DalOrderItem : IOrderItem
     public  void Update(OrderItem myOrderItem)
     {
 
-        int index = 0;
-        foreach (var item in _dataSource.OrderItemList)
+        //int index = 0;
+        //foreach (var item in _dataSource.OrderItemList)
+        //{
+        //    if (item?.ID == myOrderItem.ID) ///updating the order
+        //    {
+        //        _dataSource.OrderItemList.RemoveAt(index);
+        //        _dataSource.OrderItemList.Insert(index, myOrderItem);
+        //        return;
+        //    }
+        //    index++;
+        //}
+        var orderItem = (from item in _dataSource.OrderItemList
+                       where item?.ID == myOrderItem.ID
+                         select item).FirstOrDefault();
+        if (orderItem != null)
         {
-            if (item?.ID == myOrderItem.ID) ///updating the order
-            {
-                _dataSource.OrderItemList.RemoveAt(index);
-                _dataSource.OrderItemList.Insert(index, myOrderItem);
-                return;
-            }
-            index++;
+            _dataSource.OrderItemList.Remove(orderItem);
+            _dataSource.OrderItemList.Add(myOrderItem);
+            return;
         }
         ///if the id of the requested order item is not found in the list
         throw new NotExists("Order Item to be updated does not exist");
@@ -91,7 +109,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function receives an order id and a product id and returns the matching order item
     /// </summary>
-    public OrderItem getOrderItem(int idOrder, int idProduct)
+    public OrderItem getOrderItem(int idOrder, int idProduct)//צריכות למחוק את הפונקציה הזאת!!!
     {
 
         //OrderItem orderItem = new OrderItem();
@@ -115,7 +133,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns an array of all of the order items with the order id the user entered
     /// </summary>
-    public IEnumerable <OrderItem?> getListOrderItems(int idOrder)
+    public IEnumerable <OrderItem?> getListOrderItems(int idOrder)// צריכות למחוק את הפונקציה הזאת!!!
     {
         //creating an list with all of the order items that have the same order id as the one the user entered
         //Func<OrderItem, bool>? predicate = item =>

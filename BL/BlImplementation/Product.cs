@@ -3,6 +3,7 @@ using BO;
 using DalApi;
 using DO;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 namespace BlImplementation;
@@ -147,13 +148,18 @@ DalApi.IDal? dal = DalApi.Factory.Get();
     {
         DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
 
-        foreach (DO.Order order in dal.Order.GetAll())
-        {
-                if (dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem?.ProductID == id))
-                {
-                    throw new BO.InternalProblem("The product already exists");
-                }
-        }
+        //foreach (DO.Order order in dal.Order.GetAll())
+        //{
+        //    if (dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem?.ProductID == id))
+        //    {
+        //        throw new BO.InternalProblem("The product already exists");
+        //    }
+        //}
+        var product1 =from order in dal.Order.GetAll()
+                      from orderItem in dal.OrderItem.GetAll(item => item?.OrderID == order.Value.ID)
+                      where  orderItem?.ProductID == id
+                      select orderItem;
+       if(product1 != null) { throw new BO.InternalProblem("The product already exists"); }
         //delete from data
         dal.Product.Delete(id);
     }

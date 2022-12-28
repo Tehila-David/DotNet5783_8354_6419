@@ -22,9 +22,9 @@ namespace BO
             str += $"Costumer Name: {CustomerName} \n";
             str += $"CustomerEmail: {CustomerEmail} \n";
             str += $"CustomerAddress: {CustomerAddress} \n";
-            str += $"OrderDate: {OrderDate}";
-            str += $"Ship Date: {ShipDate}";
-            str += $"Delivery Date: {DeliveryDate}";
+            str += $"OrderDate: {OrderDate}\n";
+            str += $"Ship Date: {ShipDate}\n";
+            str += $"Delivery Date: {DeliveryDate} \n";
             str += $"Total Price: {TotalPrice} \n";
             str += $"Items:  \n";
 

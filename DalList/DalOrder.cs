@@ -54,14 +54,22 @@ internal class DalOrder : IOrder
     /// </summary>
     public void Delete(int id)
     {
-        foreach (var item in _dataSource.OrderList)
-        {
-            if (item?.ID == id)
-            {
-                _dataSource.OrderList.Remove(item);
-                return;
+        //foreach (var item in _dataSource.OrderList)
+        //{
+        //    if (item?.ID == id)
+        //    {
+        //        _dataSource.OrderList.Remove(item);
+        //        return;
 
-            }
+        //    }
+        //}
+        var order = (from item in _dataSource.OrderList
+                     where item?.ID == id
+                     select item).FirstOrDefault();
+        if (order != null)
+        {
+            _dataSource.OrderList.Remove(order);
+            return;
         }
         /// If the order was not found in the list
         throw new NotExists("Sorry ,this Order does not exist in the List ");
@@ -74,16 +82,25 @@ internal class DalOrder : IOrder
     /// </summary>
     public void Update(Order myOrder)
     {
-        int index = 0;
-        foreach (Order item in _dataSource.OrderList)
+        //int index = 0;
+        //foreach (Order item in _dataSource.OrderList)
+        //{
+        //    if (item.ID == myOrder.ID) ///updating the order
+        //    {
+        //        _dataSource.OrderList.RemoveAt(index);
+        //        _dataSource.OrderList.Insert(index, myOrder);
+        //        return;
+        //    }
+        //    index++;
+        //}
+        var order= (from item in _dataSource.OrderList
+                        where item?.ID == myOrder.ID
+                        select item).FirstOrDefault();
+        if (order != null)
         {
-            if (item.ID == myOrder.ID) ///updating the order
-            {
-                _dataSource.OrderList.RemoveAt(index);
-                _dataSource.OrderList.Insert(index, myOrder);
-                return;
-            }
-            index++;
+            _dataSource.OrderList.Remove(order);
+            _dataSource.OrderList.Add(myOrder);
+            return;
         }
         ///if the id of the requested order  is not found in the array
         throw new NotExists("Order to be updated does not exist");

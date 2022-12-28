@@ -2,6 +2,7 @@
 using DO;
 using DalApi;
 using System.Reflection.Metadata.Ecma335;
+using System;
 
 namespace Dal;
 
@@ -79,17 +80,27 @@ internal class DalProduct : IProduct
     /// </summary>
     public void Update(Product myProduct)
     {
-        int index = 0;
-        foreach (var item in _dataSource.ProductList)
+        //int index = 0;
+        //foreach (var item in _dataSource.ProductList)
+        //{
+        //    if (item?.ID == myProduct.ID) ///updating the order
+        //    {
+        //        _dataSource.ProductList.RemoveAt(index);
+        //        _dataSource.ProductList.Insert(index, myProduct);
+        //        return;
+        //    }
+        //    index++;
+        //}
+        var product = (from item in _dataSource.ProductList
+                       where item?.ID == myProduct.ID
+                       select item).FirstOrDefault();
+        if (product != null)
         {
-            if (item?.ID == myProduct.ID) ///updating the order
-            {
-                _dataSource.ProductList.RemoveAt(index);
-                _dataSource.ProductList.Insert(index, myProduct);
-                return;
-            }
-            index++;
+            _dataSource.ProductList.Remove(product);
+            _dataSource.ProductList.Add(myProduct);
+            return;
         }
+
         //If the id of the product the user entered to be updated is not found in the list
         throw new NotExists("Product to be updated does not exist");
     }
