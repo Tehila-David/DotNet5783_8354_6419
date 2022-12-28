@@ -51,15 +51,23 @@ internal class DalProduct : IProduct
     public void Delete(int ID)
     {
 
-        foreach (var item in _dataSource.ProductList)
-        {  // Checking if th id in the list is equal to the id the user entered
-            if (item?.ID == ID)
-            {
+        //foreach (var item in _dataSource.ProductList)
+        //{  // Checking if th id in the list is equal to the id the user entered
+        //    if (item?.ID == ID)
+        //    {
 
-                _dataSource.ProductList.Remove(item);
-                return;
+        //        _dataSource.ProductList.Remove(item);
+        //        return;
 
-            }
+        //    }
+        //}
+        var product = (from item in _dataSource.ProductList
+                       where item?.ID == ID
+                       select item).FirstOrDefault();
+        if (product != null)
+        {
+            _dataSource.ProductList.Remove(product);
+            return;
         }
         // If the id the user entered was not found in the list 
         throw new NotExists("Sorry ,this product does not exist in the list ");
