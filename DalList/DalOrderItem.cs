@@ -94,7 +94,7 @@ internal class DalOrderItem : IOrderItem
         //    index++;
         //}
         var orderItem = (from item in _dataSource.OrderItemList
-                       where item?.ID == myOrderItem.ID
+                         where item?.ID == myOrderItem.ID
                          select item).FirstOrDefault();
         if (orderItem != null)
         {
@@ -105,6 +105,11 @@ internal class DalOrderItem : IOrderItem
         ///if the id of the requested order item is not found in the list
         throw new NotExists("Order Item to be updated does not exist");
     }
+
+
+    //!!!predicate בשלב 3 היינו צריכות למחוק את הפונקציות הללו כי הן מיותרות אחרי שלמדנו 
+
+
 
     /// <summary>
     /// This function receives an order id and a product id and returns the matching order item
@@ -130,9 +135,9 @@ internal class DalOrderItem : IOrderItem
     //}
 
 
-    ///// <summary>
-    ///// This function returns an array of all of the order items with the order id the user entered
-    ///// </summary>
+    /// <summary>
+    /// This function returns an array of all of the order items with the order id the user entered
+    /// </summary>
     //public IEnumerable <OrderItem?> getListOrderItems(int idOrder)// צריכות למחוק את הפונקציה הזאת!!!
     //{
     //    //creating an list with all of the order items that have the same order id as the one the user entered
@@ -151,4 +156,4 @@ internal class DalOrderItem : IOrderItem
     //}
 
 }
-  
+

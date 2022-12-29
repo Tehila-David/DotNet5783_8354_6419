@@ -53,16 +53,28 @@ namespace PL
         /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            
-            BO.Product product = new BO.Product();
-            product.ID = int.Parse(txtID.Text);
-            product.Name = txtName.Text;
-            product.InStock = int.Parse(txtInStock.Text);
-            product.Price = int.Parse(txtPrice.Text);
-            product.Category = (BO.Category)CategorySelector.SelectedItem;
-            bl.Product.Add(product);
-            Hide();
-            new ProductListWindow().Show();
+            try
+            {
+                BO.Product product = new BO.Product();
+                product.ID = int.Parse(txtID.Text);
+                product.Name = txtName.Text;
+                product.InStock = int.Parse(txtInStock.Text);
+                product.Price = int.Parse(txtPrice.Text);
+                product.Category = (BO.Category)CategorySelector.SelectedItem;
+                bl.Product.Add(product);
+               
+                new ProductListWindow().Show();
+                Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
         /// <summary>
         /// click on button UPDATE
@@ -71,47 +83,31 @@ namespace PL
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            BO.Product product = new BO.Product();
-            product.ID = IdForUpdate;
-            product.Name = txtName.Text;
-            product.InStock = int.Parse(txtInStock.Text);
-            product.Price = int.Parse(txtPrice.Text);
-            product.Category = (BO.Category)CategorySelector.SelectedItem;
-            bl.Product.Update(product);
-            Hide();
-            new ProductListWindow().Show();
+            try 
+            {
+                BO.Product product = new BO.Product();
+                product.ID = IdForUpdate;
+                product.Name = txtName.Text;
+                product.InStock = int.Parse(txtInStock.Text);
+                product.Price = int.Parse(txtPrice.Text);
+                product.Category = (BO.Category)CategorySelector.SelectedItem;
+                bl.Product.Update(product);
+     
+                new ProductListWindow().Show();
+                Close ();   
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
-        /// <summary>
-        /// check inputs from type int/double
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)//הכנסת רק מספרים לתיבת הטקסט
-        {
-            TextBox text = sender as TextBox;
-            if (text == null) return;
-            if (e == null) return;
-            //allow get out of the text box
-            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
-                return;
-            //allow list of system keys (add other key here if you want to allow)
-            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
-            e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-            || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
-                return;
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-            //allow control system keys
-            if (Char.IsControl(c)) return;
-            //allow digits (without Shift or Alt)
-            if (Char.IsDigit(c))
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-                    return; //let this key be written inside the textbox
-                            //forbid letters and signs (#,$, %, ...)
-            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other
-            return;
-        }
+        
 
     }
 }

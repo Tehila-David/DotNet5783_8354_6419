@@ -24,7 +24,7 @@ namespace BlApi
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<BO.OrderItem> getDoOrderItem(int id);
+        public List<BO.OrderItem?> getDoOrderItem(int id);
         /// <summary>
         /// for the manager , update DeliveryDate and return Order
         /// </summary>

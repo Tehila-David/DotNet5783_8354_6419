@@ -19,29 +19,37 @@ internal class Order : BlApi.IOrder
     {
         if (predicate == null)
         {
-            // return list of orders
-            return dal.Order.GetAll().Select(order => new BO.OrderForList
-            {
-                ID = order?.ID ?? throw new NullReferenceException("Missing ID"),
-                CustomerName = order?.CustomerName,
-                Status = order?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-            : order?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
-                /*AmountOfItems = dal.OrderItem.GetAll(item => item?.OrderID == order.Value.ID).Sum(orderItem => orderItem?.Amount ?? 0)*/,
-                AmountOfItems = dal.OrderItem.getListOrderItems(order?.ID ?? 0).Sum(orderItem => orderItem?.Amount ?? 0),
-                TotalPrice = (dal.OrderItem.getListOrderItems(order?.ID ?? 0).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
-            });
+   
+            return from item in dal?.Order.GetAll()
+                   where item != null
+                   orderby item?.ID
+                   let order = item
+                   select new BO.OrderForList
+                   {
+                       ID = order?.ID ?? throw new NullReferenceException("Missing ID"),
+                       CustomerName = order?.CustomerName,
+                       Status = order?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
+                       : order?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
+                       AmountOfItems = dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
+                       TotalPrice = (dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
+                   };
+                   
+
         }
         else
         {
             return from item in dal.Order.GetAll(predicate)
+                   where item != null
+                   orderby item?.ID
+                   let order = item
                    select new BO.OrderForList
                    {
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
                        CustomerName = item?.CustomerName,
                        Status = item?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : item?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
                        : item?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
-                       AmountOfItems = dal.OrderItem.getListOrderItems(item?.ID ?? 0).Sum(orderItem => orderItem?.Amount ?? 0),
-                       TotalPrice = (dal.OrderItem.getListOrderItems(item?.ID ?? 0).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
+                       AmountOfItems = dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
+                       TotalPrice = (dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
                    };
         }
     }
@@ -61,10 +69,10 @@ internal class Order : BlApi.IOrder
                 CustomerEmail = order.CustomerEmail,
                 CustomerAddress = order.CustomerAddress,
                 Status = order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-            : order.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
+            :   order.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
                 OrderDate = order.OrderDate,
-                Items = getDoOrderItem(order.ID)
-                TotalPrice = getDoOrderItem(order.ID).Sum(item => item.TotalPrice)
+                Items = getDoOrderItem(order.ID),
+                TotalPrice = getDoOrderItem(order.ID).Sum(item => item?.TotalPrice ?? 0)
             };
         }
         catch (DO.NotExists ex)
@@ -72,24 +80,23 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-    public List<BO.OrderItem> getDoOrderItem(int id)
+    public List<BO.OrderItem?> getDoOrderItem(int id)
     {
-        List<BO.OrderItem> listForBo = new List<BO.OrderItem>();
-        // it is creating new list of orderItem and adding orderItem
+        List<BO.OrderItem?> listForBo = new List<BO.OrderItem>();
+        //it is creating new list of orderItem and adding orderItem
 
-        //foreach (var item in dal.OrderItem.getListOrderItems(id))
-        //{
-        //    listForBo.Add(new BO.OrderItem
-        //    {
-        //        ID = item?.ID ?? 0,
-        //        Name = dal.Product.GetById(item?.ProductID ?? 0).Name,
-        //        ProductID = item?.ProductID ?? 0,
-        //        Amount = item?.Amount ?? 0,
-        //        Price = item?.Price ?? 0,
-        //        TotalPrice = item?.Amount * item?.Price ?? 0
-        //    });
-        //}
-
+        foreach (var item in dal.OrderItem.GetAll(item => item?.OrderID==id))
+        {
+            listForBo.Add(new BO.OrderItem
+            {
+                ID = item?.ID ?? 0,
+                Name = dal.Product.GetById(item?.ProductID ?? 0).Name,
+                ProductID = item?.ProductID ?? 0,
+                Amount = item?.Amount ?? 0,
+                Price = item?.Price ?? 0,
+                TotalPrice = item?.Amount * item?.Price ?? 0
+            });
+        }
         return listForBo;
     }
 
@@ -115,8 +122,8 @@ internal class Order : BlApi.IOrder
                 OrderDate = order.OrderDate,
                 ShipDate = order.ShipDate,
                 DeliveryDate = order.DeliveryDate,
-                TotalPrice = dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0),
-                Items = getDoOrderItem(order.ID),
+                TotalPrice = getDoOrderItem(order.ID).Sum(item => item?.TotalPrice ?? 0),
+                Items = getDoOrderItem(id)
 
             };
         }
@@ -149,8 +156,8 @@ internal class Order : BlApi.IOrder
                 OrderDate = order.OrderDate,
                 DeliveryDate = order.DeliveryDate,
                 ShipDate = order.ShipDate,
-                TotalPrice = dal.OrderItem.getListOrderItems(order.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0),
-                Items = getDoOrderItem(order.ID),
+                TotalPrice = getDoOrderItem(id).Sum(orderItem => orderItem?.TotalPrice ?? 0),
+                Items = getDoOrderItem(id),
 
             };
         }
@@ -187,7 +194,7 @@ internal class Order : BlApi.IOrder
             {
                 ID = order.ID,
                 Status = order.DeliveryDate != null ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-            : order.OrderDate != null ? BO.OrderStatus.Confirmed : null,
+            :   order.OrderDate != null ? BO.OrderStatus.Confirmed : null,
                 Tracking = TrackingForHelp
             };
         }

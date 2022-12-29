@@ -339,14 +339,14 @@ public class Program
                 Console.WriteLine("Enter product ID:");
                 int.TryParse(Console.ReadLine(), out newProductID);
                 /// Finding the order item with the same order and product id as the one the user entered
-                OrderItem orderItemFound = dal.OrderItem.getOrderItem(newOrderID1, newProductID);
+                OrderItem? orderItemFound = dal.OrderItem.GetAll(item => item?.OrderID == newOrderID1 && item?.ProductID == newProductID).FirstOrDefault();
                 Console.WriteLine(orderItemFound);
                 break;
             case 'g': ///returning array with order items based on order id
                 Console.WriteLine("Enter order ID:");
                 int.TryParse(Console.ReadLine(), out newOrderID1);
                 ///Printing the order items with the order id corresponding to the user input
-                foreach (var item in dal.OrderItem.getListOrderItems(newOrderID1))
+                foreach (var item in dal.OrderItem.GetAll(item=> item?.OrderID==newOrderID1))
                 {
                     Console.WriteLine(item);
                 }
