@@ -53,16 +53,29 @@ namespace PL
         /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            
-            BO.Product product = new BO.Product();
-            product.ID = int.Parse(txtID.Text);
-            product.Name = txtName.Text;
-            product.InStock = int.Parse(txtInStock.Text);
-            product.Price = int.Parse(txtPrice.Text);
-            product.Category = (BO.Category)CategorySelector.SelectedItem;
-            bl.Product.Add(product);
-            Hide();
-            new ProductListWindow().Show();
+            try
+            {
+                BO.Product product = new BO.Product();
+                product.ID = int.Parse(txtID.Text);
+                product.Name = txtName.Text;
+                product.InStock = int.Parse(txtInStock.Text);
+                product.Price = int.Parse(txtPrice.Text);
+                product.Category = (BO.Category)CategorySelector.SelectedItem;
+                bl.Product.Add(product);
+                Hide();
+                new ProductListWindow().Show();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
+
+
         }
         /// <summary>
         /// click on button UPDATE

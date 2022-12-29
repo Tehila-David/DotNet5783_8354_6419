@@ -10,9 +10,10 @@ namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
-DalApi.IDal? dal = DalApi.Factory.Get();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     public IEnumerable<BO.ProductForList> GetListedProducts(Func<DO.Product?, bool>? predicate = null)
     {
+
         if (predicate == null)
         {
             // return  IEnumerable
@@ -23,12 +24,12 @@ DalApi.IDal? dal = DalApi.Factory.Get();
                 Name = product?.Name,
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
-            });
+            }).OrderBy(item => item.Name);
         }
         else
         {
             return from item in dal.Product.GetAll(predicate)
-                   orderby item?.Name
+                   orderby item?.Name //מיון לפי אב
                    select new BO.ProductForList
                    {
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
@@ -37,9 +38,9 @@ DalApi.IDal? dal = DalApi.Factory.Get();
                        Category = (BO.Category)item?.Category
                    };
         }
-        //מיון לפי אב
 
-        
+
+
     }
     public BO.Product GetById(int id)
     {
@@ -50,7 +51,7 @@ DalApi.IDal? dal = DalApi.Factory.Get();
             return new BO.Product()
             {
                 ID = product.ID,
-                Category = (BO.Category)(product.Category), 
+                Category = (BO.Category)(product.Category),
                 Price = product.Price,
                 Name = product.Name,
                 InStock = product.InStock
@@ -62,7 +63,7 @@ DalApi.IDal? dal = DalApi.Factory.Get();
         }
 
     }
-    public BO.ProductItem GetById1(int id , BO.Cart myCart)
+    public BO.ProductItem GetById1(int id, BO.Cart myCart)
     {
         try
         {
@@ -75,9 +76,9 @@ DalApi.IDal? dal = DalApi.Factory.Get();
             //    amount = 0;
             //}
             //else
-            
+
             amount = myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count();
-            
+
             BO.ProductItem productItem = new BO.ProductItem()
             {
                 ID = product.ID,
@@ -148,21 +149,21 @@ DalApi.IDal? dal = DalApi.Factory.Get();
 
     public void Delete(int id)
     {
-        DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
-
-        //foreach (DO.Order order in dal.Order.GetAll())
-        //{
-        //    if (dal.OrderItem.getListOrderItems(order.ID).Any(orderItem => orderItem?.ProductID == id))
-        //    {
-        //        throw new BO.InternalProblem("The product already exists");
-        //    }
-        //}
-        var product1 =from order in dal.Order.GetAll()
-                      from orderItem in dal.OrderItem.GetAll(item => item?.OrderID == order.Value.ID)
-                      where  orderItem?.ProductID == id
-                      select orderItem;
-       if(product1 != null) { throw new BO.InternalProblem("The product already exists"); }
-        //delete from data
-        dal.Product.Delete(id);
+        try
+        {
+            DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
+            var item = from order in dal.Order.GetAll()
+                       from orderItem in dal.OrderItem.GetAll(item => item?.OrderID == order.Value.ID)
+                       where orderItem?.ProductID == id
+                       select orderItem;
+            if (item != null) { throw new BO.InternalProblem("The product already ordered"); }
+            //delete from data
+            dal.Product.Delete(id);
+        }
+        catch (DO.NotExists ex)
+        {
+            throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
+        }
     }
 }
+
