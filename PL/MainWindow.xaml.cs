@@ -1,4 +1,5 @@
 ﻿
+using PL.Order;
 using System.Windows;
 
 
@@ -17,10 +18,25 @@ namespace PL
         }
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Manager_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-             new ProductListWindow().Show();
+            new ProductListWindow().Show();
+            
+        }
+
+        private void NewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderListWindow().Show();
+        }
+
+        private void OrderTracking_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

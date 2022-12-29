@@ -24,7 +24,7 @@ internal class Product : BlApi.IProduct
                 Name = product?.Name,
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
-            }).OrderBy(item => item.Name);
+            }).OrderBy(item => item.ID);
         }
         else
         {

@@ -1,6 +1,7 @@
 ﻿
 using DO;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +17,7 @@ namespace PL
         {
            InitializeComponent();
            ProductsList.ItemsSource=bl.Product.GetListedProducts();
-            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));   
+           CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));   
         }
 
         /// <summary>
@@ -43,8 +44,9 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
+           
             new AddProductWindow().Show();
+            Close();
         }
 
         /// <summary>
@@ -57,8 +59,11 @@ namespace PL
             ListBox listBox= sender as ListBox;
             BO.ProductForList product = new BO.ProductForList();
             product = listBox.SelectedItem as BO.ProductForList;
-            Hide();
+            
             new AddProductWindow(product.ID).Show();
+            Close();
         }
+
+        
     }
 }
