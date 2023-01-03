@@ -23,14 +23,11 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="ID:" Grid.Column="1" Margin="237,136,524,26" Grid.Row="0" />
-            <TextBox x:Name="idTextBox"
-            Text="{Binding ID}" 
-            Grid.Column="1" Margin="299,133,339,53" Grid.Row="0" />
+            <Label Content="ID:" Grid.Column="1" Margin="257,139,504,23" Grid.Row="0" />
+            <TextBox x:Name="idTextBox" Text="{Binding ID}" MaxLength="9" HorizontalAlignment="Center" Margin="0,139,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Column="1" />
 
         </Grid>
-        <Button x:Name="orderTrackingButton" Content="Order Tracking" 
-         FontSize="30" Grid.Row="1" Margin="248,186,328,192" Click="OrderTracking_Click"/>
+        <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30" Grid.Row="1" Margin="256,186,328,204" Click="OrderTracking_Click"/>
 
     </Grid>
 </Window>
