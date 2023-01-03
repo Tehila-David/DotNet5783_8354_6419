@@ -16,9 +16,11 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Content="Manager" HorizontalAlignment="Left" Margin="45,84,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="Manager_Click"/>
-        <Button Content="New Order" HorizontalAlignment="Left" Margin="46,141,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="NewOrder_Click"/>
-        <Button Content="Order Tracking" HorizontalAlignment="Left" Margin="46,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="114" Click="OrderTracking_Click"/>
+        <Button Name="Manager" Content="Manager" HorizontalAlignment="Left" Margin="45,84,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="Manager_Click"/>
+        <Button Name="New_Order" Content="New Order" HorizontalAlignment="Left" Margin="46,141,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="NewOrder_Click"/>
+        <Button Name="Order_Tracking" Content="Order Tracking" HorizontalAlignment="Left" Margin="46,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="114" Click="OrderTracking_Click"/>
+        <Button Name="Products_List"  Content="Products List" HorizontalAlignment="Left" Margin="262,145,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="ProductsList_Click"  />
+        <Button Name="Orders_List" Content="Orders List" HorizontalAlignment="Left" Margin="395,144,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="OrdersList_Click" />
 
     </Grid>
 </Window>

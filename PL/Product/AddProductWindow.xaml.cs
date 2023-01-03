@@ -44,6 +44,8 @@ namespace PL
             InitializeComponent();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Add.Visibility = Visibility.Hidden;
+            LabelID.Visibility= Visibility.Hidden;
+            txtID.Visibility= Visibility.Hidden;    
             IdForUpdate = ID;
         }
         /// <summary>
@@ -63,7 +65,7 @@ namespace PL
                 product.Category = (BO.Category)CategorySelector.SelectedItem;
                 bl.Product.Add(product);
                
-                new ProductListWindow().Show();
+                //new ProductListWindow().Show();
                 Close();
             }
             catch (FormatException)
@@ -92,7 +94,6 @@ namespace PL
                 product.Price = int.Parse(txtPrice.Text);
                 product.Category = (BO.Category)CategorySelector.SelectedItem;
                 bl.Product.Update(product);
-     
                 new ProductListWindow().Show();
                 Close ();   
             }

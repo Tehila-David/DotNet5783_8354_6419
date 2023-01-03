@@ -1,6 +1,7 @@
 ﻿
 using DO;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,7 +64,23 @@ namespace PL
             new AddProductWindow(product.ID).Show();
             Close();
         }
+       
 
-        
     }
+
+    //class listProducts : DependencyObject
+    //{
+    //    public IEnumerable<Product?> ProductsList
+    //    {
+    //        get { return (IEnumerable<Product?>)GetValue(MyPropertyProperty); }
+    //        set { SetValue(MyPropertyProperty, value); }
+    //    }
+
+    //    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    //    public static readonly DependencyProperty MyPropertyProperty =
+    //        DependencyProperty.Register("ProductsList", typeof(int), typeof(ProductListWindow), new PropertyMetadata(0));
+
+    //}
+
+
 }
