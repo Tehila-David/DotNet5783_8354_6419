@@ -60,7 +60,7 @@ internal class Product : BlApi.IProduct
         }
         else
         {
-            return dal.Product.GetAll().Select(product => new BO.ProductItem
+            return dal.Product.GetAll(predicate).Select(product => new BO.ProductItem
             {
 
                 ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
