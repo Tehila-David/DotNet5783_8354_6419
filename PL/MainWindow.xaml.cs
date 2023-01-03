@@ -15,7 +15,7 @@ namespace PL
 
         public MainWindow()
         {
-            InitializeComponent();
+           InitializeComponent();
            Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
            Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
         }
@@ -48,7 +48,6 @@ namespace PL
         private void ProductsList_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().Show();
-
             Close();
         }
 

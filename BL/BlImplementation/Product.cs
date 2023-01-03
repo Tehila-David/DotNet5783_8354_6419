@@ -41,7 +41,7 @@ internal class Product : BlApi.IProduct
 
     }
 
-    public IEnumerable<BO.ProductForList> GetListProductItem(Func<DO.Product?, bool>? predicate = null)
+    public IEnumerable<BO.ProductItem> GetListProductItem(Func<DO.Product?, bool>? predicate = null)
     {
 
         if (predicate == null)
@@ -60,15 +60,16 @@ internal class Product : BlApi.IProduct
         }
         else
         {
-            return from item in dal.Product.GetAll(predicate)
-                   orderby item?.Name //מיון לפי אב
-                   select new BO.ProductForList
-                   {
-                       ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
-                       Name = item?.Name,
-                       Price = item?.Price ?? 0d,
-                       Category = (BO.Category)item?.Category
-                   };
+            return dal.Product.GetAll().Select(product => new BO.ProductItem
+            {
+
+                ID = product?.ID ?? throw new NullReferenceException("Missing ID"),
+                Name = product?.Name,
+                Price = product?.Price ?? 0d,
+                Category = (BO.Category)product?.Category,
+                Amount = product?.InStock ?? 0,
+                IsAvailable = product?.InStock == 0 ? true : false,
+            }).OrderBy(item => item.ID);
         }
 
     }
