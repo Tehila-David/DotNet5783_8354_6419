@@ -44,8 +44,10 @@ namespace PL
             InitializeComponent();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Add.Visibility = Visibility.Hidden;
-            LabelID.Visibility= Visibility.Hidden;
-            txtID.Visibility= Visibility.Hidden;    
+            txtID.Text = ID.ToString();
+            txtName.Text = bl.Product.GetById(ID).Name.ToString();
+            txtPrice.Text= bl.Product.GetById(ID).Price.ToString();
+            txtInStock.Text=bl.Product.GetById(ID).InStock.ToString();
             IdForUpdate = ID;
         }
         /// <summary>
