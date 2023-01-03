@@ -15,6 +15,12 @@ public interface IProduct
     /// </summary>
     /// <returns></returns>
     public IEnumerable<ProductForList?> GetListedProducts(Func<DO.Product?, bool>? predicate = null);
+
+    /// <summary>
+    ///  for the manager and customer , return list of ProductItem
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<BO.ProductItem> GetListProductItem(Func<DO.Product?, bool>? predicate = null);
     /// <summary>
     /// for the manager , return details of product
     /// </summary>

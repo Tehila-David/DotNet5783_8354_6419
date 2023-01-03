@@ -36,7 +36,7 @@ namespace PL
                 return b1;
             };
 
-            ProductsItemList.ItemsSource = bl.Product.GetListedProducts(predicate);
+            ProductsItemList.ItemsSource = bl.Product.GetListProductItem(predicate);
         }
         
         /// <summary>
