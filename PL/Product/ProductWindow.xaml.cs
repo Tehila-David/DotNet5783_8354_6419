@@ -48,7 +48,8 @@ namespace PL
             txtName.Text = bl.Product.GetById(ID).Name.ToString();
             txtPrice.Text= bl.Product.GetById(ID).Price.ToString();
             txtInStock.Text=bl.Product.GetById(ID).InStock.ToString();
-            CategorySelector.Text= bl.Product.GetById(ID).Category.ToString();
+            CategorySelector.Text = bl.Product.GetById(ID).Category.ToString();
+
             IdForUpdate = ID;
         }
         /// <summary>
@@ -68,7 +69,7 @@ namespace PL
                 product.Category = (BO.Category)CategorySelector.SelectedItem;
                 bl.Product.Add(product);
                
-                //new ProductListWindow().Show();
+                new ProductListWindow().Show();
                 Close();
             }
             catch (FormatException)
