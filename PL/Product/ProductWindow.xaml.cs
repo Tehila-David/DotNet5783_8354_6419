@@ -18,7 +18,7 @@ namespace PL
     /// <summary>
     /// Interaction logic for AddProductWindow.xaml
     /// </summary>
-    public partial class AddProductWindow : Window
+    public partial class ProductWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
@@ -27,7 +27,7 @@ namespace PL
         /// <summary>
         ///constructor of Add product
         /// </summary>
-        public AddProductWindow()
+        public ProductWindow()
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace PL
         /// constructor of Update product
         /// </summary>
         /// <param name="product"></param>
-        public AddProductWindow(int ID)
+        public ProductWindow(int ID)
         {
             InitializeComponent();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
@@ -48,6 +48,7 @@ namespace PL
             txtName.Text = bl.Product.GetById(ID).Name.ToString();
             txtPrice.Text= bl.Product.GetById(ID).Price.ToString();
             txtInStock.Text=bl.Product.GetById(ID).InStock.ToString();
+            CategorySelector.Text= bl.Product.GetById(ID).Category.ToString();
             IdForUpdate = ID;
         }
         /// <summary>

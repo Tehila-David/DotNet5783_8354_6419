@@ -46,7 +46,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
            
-            new AddProductWindow().Show();
+            new ProductWindow().Show();
             Close();
         }
 
@@ -61,7 +61,7 @@ namespace PL
             BO.ProductForList product = new BO.ProductForList();
             product = listBox.SelectedItem as BO.ProductForList;
             
-            new AddProductWindow(product.ID).Show();
+            new ProductWindow(product.ID).Show();
             Close();
         }
        
