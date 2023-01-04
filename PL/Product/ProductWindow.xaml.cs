@@ -93,7 +93,7 @@ namespace PL
         {
             try 
             {
-                bl.Product.Update(product);
+                bl.Product.Update(Product);
                 new ProductListWindow().Show();
                 Close ();   
             }

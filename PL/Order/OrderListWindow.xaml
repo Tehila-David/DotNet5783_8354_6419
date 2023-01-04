@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
-        Title="OrderListWindow" Height="450" Width="800">
+        Title="OrderListWindow" Height="450" Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40*"/>
@@ -16,12 +17,13 @@
            VerticalAlignment="Stretch" Width="auto">
             <Label Content="Orders" Grid.Column="0"/>
             </Grid>
-            <ListView Grid.Row="1" x:Name="OrdersList"  d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick"   >
+        <ListView Grid.Row="1" x:Name="OrdersList"  ItemsSource="{Binding Orders}" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+       
     </Grid>
 </Window>

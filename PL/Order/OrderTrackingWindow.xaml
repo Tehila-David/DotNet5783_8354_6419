@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
-        Title="OrderTrackingWindow" Height="450" Width="800">
+        Title="OrderTrackingWindow" Height="450" Width="800"
+         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="373*"/>
@@ -17,7 +18,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:"  Grid.Row="1" RenderTransformOrigin="2.463,0.513"  HorizontalAlignment="Left" Margin="231,143,0,0"   VerticalAlignment="Top" Width="45" Height="25" />
-        <TextBox x:Name="idTextBox" Text="{Binding ID}" MaxLength="9" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+        <TextBox x:Name="idTextBox" Text="{Binding id}" MaxLength="9" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
         <Label Content="Enter an order ID :" FontSize="30" RenderTransformOrigin="2.463,0.513"  Grid.Row="1"  HorizontalAlignment="Left" Margin="216,72,0,0"   VerticalAlignment="Top" Width="257" Height="52"/>
 
         <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="232,196,0,0"  VerticalAlignment="Top" Width="223" Height="52" Grid.Row="1" Click="OrderTracking_Click"/>

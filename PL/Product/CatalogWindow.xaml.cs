@@ -17,10 +17,11 @@ namespace PL
     /// <summary>
     /// List of products in the catalog
     /// </summary>
-    public partial class ProductItemWindow : Window
+    public partial class CatalogWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
-        public ProductItemWindow()
+
+        public CatalogWindow()
         {
             InitializeComponent();
             ProductsItemList.ItemsSource = bl.Product.GetListProductItem();
