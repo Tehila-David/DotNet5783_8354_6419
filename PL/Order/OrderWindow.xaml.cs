@@ -40,8 +40,26 @@ namespace PL.Order
             OrderId = id;
 
         }
+        public OrderWindow(int id,bool flag)
+        {
+            InitializeComponent();
+            OrderID.Text = bl.Order.GetByID(id).ID.ToString();
+            ClientName.Text = bl.Order.GetByID(id).CustomerName.ToString();
+            ClientEmail.Text = bl.Order.GetByID(id).CustomerEmail.ToString();
+            ClientAddress.Text = bl.Order.GetByID(id).CustomerAddress.ToString();
+            OrderDate.Text = bl.Order.GetByID(id).OrderDate.ToString();
+            DeliveryDate.Text = bl.Order.GetByID(id).DeliveryDate.ToString();
+            ShipDate.Text = bl.Order.GetByID(id).ShipDate.ToString();
+            TotalPrice.Text = bl.Order.GetByID(id).TotalPrice.ToString();
+            OrderStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
+            OrderStatusSelector.Text = bl.Order.GetByID(id).Status.ToString();
+            ItemsList.ItemsSource = bl.Order.GetByID(id).Items;
+            OrderId = id;
+            Add_newItem.Visibility = Visibility.Hidden;
 
-     
+        }
+
+
         private void Add_newItem_Click(object sender, RoutedEventArgs e)
         {
             try

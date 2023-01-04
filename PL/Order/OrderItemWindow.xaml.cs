@@ -31,9 +31,9 @@ namespace PL.Order
         /// <param name="OrderID"></param>
         public OrderItemWindow(int OrderID)
         {
-          InitializeComponent();
-          UpdateItem.Visibility = Visibility.Hidden;
-          IdOfOrder = OrderID;
+            InitializeComponent();
+            UpdateItem.Visibility = Visibility.Hidden;
+            IdOfOrder = OrderID;
         }
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
@@ -70,17 +70,18 @@ namespace PL.Order
             InitializeComponent();
             AddItem.Visibility = Visibility.Hidden;
             IdOfOrder = OrderID;
-            IdOfOrderItem=orderItem.ID;
+            IdOfOrderItem = orderItem.ID;
             txtOrderItemID.Text = orderItem.ID.ToString();
-            txtProductID.Text= orderItem.ProductID.ToString();
-            txtAmount.Text=orderItem.Amount.ToString();
+            txtProductID.Text = orderItem.ProductID.ToString();
+            txtAmount.Text = orderItem.Amount.ToString();
 
         }
 
         private void UpdateItem_Click(object sender, RoutedEventArgs e)
         {
 
-            try {
+            try
+            {
 
                 BO.OrderItem orderItem = new BO.OrderItem();
 

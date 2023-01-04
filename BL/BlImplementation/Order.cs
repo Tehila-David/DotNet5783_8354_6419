@@ -28,8 +28,8 @@ internal class Order : BlApi.IOrder
                    {
                        ID = order?.ID ?? throw new NullReferenceException("Missing ID"),
                        CustomerName = order?.CustomerName,
-                       Status = order?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-                       : order?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
+                       Status = order?.DeliveryDate != null ? BO.OrderStatus.Deliverded : order?.ShipDate != null ? BO.OrderStatus.shipped
+                       :  BO.OrderStatus.Confirmed ,
                        AmountOfItems = dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
                        TotalPrice = (dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
                    };
@@ -46,8 +46,8 @@ internal class Order : BlApi.IOrder
                    {
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
                        CustomerName = item?.CustomerName,
-                       Status = item?.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : item?.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-                       : item?.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
+                       Status = item?.DeliveryDate != null ? BO.OrderStatus.Deliverded : item?.ShipDate != null ? BO.OrderStatus.shipped
+                       :  BO.OrderStatus.Confirmed ,
                        AmountOfItems = dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
                        TotalPrice = (dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
                    };
@@ -68,8 +68,8 @@ internal class Order : BlApi.IOrder
                 CustomerName = order.CustomerName,
                 CustomerEmail = order.CustomerEmail,
                 CustomerAddress = order.CustomerAddress,
-                Status = order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-            :   order.OrderDate != DateTime.MinValue ? BO.OrderStatus.Confirmed : null,
+                Status = order.DeliveryDate != null ? BO.OrderStatus.Deliverded : order.ShipDate != null ? BO.OrderStatus.shipped
+            :    BO.OrderStatus.Confirmed,
                 OrderDate = order.OrderDate,
                 Items = getDoOrderItem(order.ID),
                 TotalPrice = getDoOrderItem(order.ID).Sum(item => item?.TotalPrice ?? 0)

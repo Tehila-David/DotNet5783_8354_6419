@@ -1,7 +1,9 @@
 ﻿
+using BO;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,12 +16,29 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
+
+        public static readonly DependencyProperty ProductsDependency =
+        DependencyProperty.Register(nameof(Products),
+                                typeof(ObservableCollection<ProductForList?>),
+                                typeof(ProductListWindow));
+        public ObservableCollection<ProductForList?> Products
+        {
+            get => (ObservableCollection<ProductForList?>)GetValue(ProductsDependency);
+            private set => SetValue(ProductsDependency, value);
+        }
+
+        public BO.Category Category { get; set; } = BO.Category.NO_ONE;
+
+        public Array CategoryArray = Enum.GetValues(typeof(BO.Category));
+
         public ProductListWindow()
         {
            InitializeComponent();
-           ProductsList.ItemsSource=bl.Product.GetListedProducts();
-           CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));   
+           var item  = bl.Product.GetListedProducts();
+           Products = item == null ? new() : new(item);
+
         }
+
 
         /// <summary>
         /// Filter - list products by category
@@ -28,14 +47,10 @@ namespace PL
         /// <param name="e"></param>
         private void CategorySelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            BO.Category category = (BO.Category)CategorySelector.SelectedItem;
-            Func<DO.Product?, bool>? predicate = item =>
-            {
-                bool b1 = item?.Category == (DO.Category)category;
-                return b1;
-            };
+            var temp = Category == BO.Category.NO_ONE ?
+            bl.Product.GetListedProducts() : bl.Product.GetListedProducts().Where(item => item.Category == Category);
+            Products = temp == null ? new() : new(temp);
 
-            ProductsList.ItemsSource = bl.Product.GetListedProducts(predicate);
         }
 
         /// <summary>
@@ -57,10 +72,10 @@ namespace PL
         /// <param name="e"></param>
         private void ProductsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ListBox listBox= sender as ListBox;
+            ListBox listBox = sender as ListBox;
             BO.ProductForList product = new BO.ProductForList();
             product = listBox.SelectedItem as BO.ProductForList;
-            
+
             new ProductWindow(product.ID).Show();
             Close();
         }
@@ -68,19 +83,9 @@ namespace PL
 
     }
 
-    //class listProducts : DependencyObject
-    //{
-    //    public IEnumerable<Product?> ProductsList
-    //    {
-    //        get { return (IEnumerable<Product?>)GetValue(MyPropertyProperty); }
-    //        set { SetValue(MyPropertyProperty, value); }
-    //    }
 
-    //    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-    //    public static readonly DependencyProperty MyPropertyProperty =
-    //        DependencyProperty.Register("ProductsList", typeof(int), typeof(ProductListWindow), new PropertyMetadata(0));
 
-    //}
+    
 
 
 }

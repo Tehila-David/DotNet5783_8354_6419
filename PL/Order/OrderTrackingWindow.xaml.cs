@@ -34,7 +34,8 @@ namespace PL.Order
             {
                 int id = int.Parse(idTextBox.Text);
                 OrderTracking orderTracking = bl.Order.followOrder(id);
-                new OrderShowWindow(id).Show();
+                new OrderWindow(id,true).Show();
+                //new OrderShowWindow(id).Show();
                 Close();
             }
 

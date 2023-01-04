@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -24,14 +26,26 @@ namespace PL
 
         int IdForUpdate = 0;
 
+        public static readonly DependencyProperty ProductDependency =
+        DependencyProperty.Register(nameof(Product),
+                               typeof(BO.Product),
+                               typeof(ProductWindow));
+        public BO.Product? Product
+        {
+            get => (BO.Product)GetValue(ProductDependency);
+            private set => SetValue(ProductDependency, value);
+        }
+
+
+        public BO.Category Category { get; set; } = BO.Category.NO_ONE;
+
+        Array CategoryArray = Enum.GetValues(typeof(BO.Category));
         /// <summary>
         ///constructor of Add product
         /// </summary>
         public ProductWindow()
         {
             InitializeComponent();
-
-            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Update.Visibility = Visibility.Hidden;
         }
 
@@ -42,14 +56,9 @@ namespace PL
         public ProductWindow(int ID)
         {
             InitializeComponent();
-            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
+             
             Add.Visibility = Visibility.Hidden;
-            txtID.Text = ID.ToString();
-            txtName.Text = bl.Product.GetById(ID).Name.ToString();
-            txtPrice.Text= bl.Product.GetById(ID).Price.ToString();
-            txtInStock.Text=bl.Product.GetById(ID).InStock.ToString();
-            CategorySelector.Text = bl.Product.GetById(ID).Category.ToString();
-
+            Product = bl.Product.GetById(ID);
             IdForUpdate = ID;
         }
         /// <summary>
@@ -61,14 +70,7 @@ namespace PL
         {
             try
             {
-                BO.Product product = new BO.Product();
-                product.ID = int.Parse(txtID.Text);
-                product.Name = txtName.Text;
-                product.InStock = int.Parse(txtInStock.Text);
-                product.Price = int.Parse(txtPrice.Text);
-                product.Category = (BO.Category)CategorySelector.SelectedItem;
-                bl.Product.Add(product);
-               
+                bl.Product.Add(Product);
                 new ProductListWindow().Show();
                 Close();
             }
@@ -91,12 +93,6 @@ namespace PL
         {
             try 
             {
-                BO.Product product = new BO.Product();
-                product.ID = IdForUpdate;
-                product.Name = txtName.Text;
-                product.InStock = int.Parse(txtInStock.Text);
-                product.Price = int.Parse(txtPrice.Text);
-                product.Category = (BO.Category)CategorySelector.SelectedItem;
                 bl.Product.Update(product);
                 new ProductListWindow().Show();
                 Close ();   
@@ -111,8 +107,9 @@ namespace PL
             }
 
         }
-
         
+   
+
 
     }
 }
