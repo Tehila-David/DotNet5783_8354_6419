@@ -29,7 +29,7 @@ namespace PL
 
         public BO.Category Category { get; set; } = BO.Category.NO_ONE;
 
-        public Array CategoryArray = Enum.GetValues(typeof(BO.Category));
+        public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
 
         public ProductListWindow()
         {

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,91 +22,62 @@ namespace PL.Order
     /// </summary>
     public partial class OrderWindow : Window
     {
-        int OrderId = 0;
-        int OrderItemId = 0;
+   
         BlApi.IBl bl = BlApi.Factory.Get()!;
+
+        public static readonly DependencyProperty OrderDependency =
+       DependencyProperty.Register(nameof(Order),
+                              typeof(BO.Order),
+                              typeof(OrderWindow));
+        public BO.Order? Order
+        {
+            get => (BO.Order)GetValue(OrderDependency);
+            private set => SetValue(OrderDependency, value);
+        }
+
+
+        public BO.OrderStatus Status { get; set; } 
+
+        public Array StatusArray { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
+
+        /// <summary>
+        /// constructor for Manager
+        /// </summary>
+        /// <param name="id"></param>
         public OrderWindow(int id)
         {
             InitializeComponent();
-            OrderID.Text = bl.Order.GetByID(id).ID.ToString();
-            ClientName.Text = bl.Order.GetByID(id).CustomerName.ToString();
-            ClientEmail.Text = bl.Order.GetByID(id).CustomerEmail.ToString();
-            ClientAddress.Text = bl.Order.GetByID(id).CustomerAddress.ToString();
-            OrderDate.Text = bl.Order.GetByID(id).OrderDate.ToString();
-            DeliveryDate.Text = bl.Order.GetByID(id).DeliveryDate.ToString();
-            ShipDate.Text = bl.Order.GetByID(id).ShipDate.ToString();
-            TotalPrice.Text = bl.Order.GetByID(id).TotalPrice.ToString();
-            OrderStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
-            OrderStatusSelector.Text=bl.Order.GetByID(id).Status.ToString();
-            ItemsList.ItemsSource = bl.Order.GetByID(id).Items;
-            OrderId = id;
+            Order=bl.Order.GetByID(id);
+            
 
         }
+
+        /// <summary>
+        /// constructor for Client
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="flag"></param>
         public OrderWindow(int id,bool flag)
         {
             InitializeComponent();
-            OrderID.Text = bl.Order.GetByID(id).ID.ToString();
-            ClientName.Text = bl.Order.GetByID(id).CustomerName.ToString();
-            ClientEmail.Text = bl.Order.GetByID(id).CustomerEmail.ToString();
-            ClientAddress.Text = bl.Order.GetByID(id).CustomerAddress.ToString();
-            OrderDate.Text = bl.Order.GetByID(id).OrderDate.ToString();
-            DeliveryDate.Text = bl.Order.GetByID(id).DeliveryDate.ToString();
-            ShipDate.Text = bl.Order.GetByID(id).ShipDate.ToString();
-            TotalPrice.Text = bl.Order.GetByID(id).TotalPrice.ToString();
-            OrderStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
-            OrderStatusSelector.Text = bl.Order.GetByID(id).Status.ToString();
-            ItemsList.ItemsSource = bl.Order.GetByID(id).Items;
-            OrderId = id;
-            Add_newItem.Visibility = Visibility.Hidden;
+            Order = bl.Order.GetByID(id);
+            Update_Items.Visibility = Visibility.Hidden;
 
         }
 
-
-        private void Add_newItem_Click(object sender, RoutedEventArgs e)
+        private void Update_Items_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //BO.Order order = bl.Order.GetByID(OrderId);
-                bl.Order.GetByID(OrderId).ID = int.Parse(OrderID.Text);
-                bl.Order.GetByID(OrderId).CustomerName = ClientName.Text;
-                bl.Order.GetByID(OrderId).CustomerEmail = ClientEmail.Text;
-                bl.Order.GetByID(OrderId).CustomerAddress = ClientAddress.Text;
-                bl.Order.GetByID(OrderId).ShipDate = DateTime.Parse(ShipDate.Text);
-                bl.Order.GetByID(OrderId).DeliveryDate = DateTime.Parse(DeliveryDate.Text);
-                bl.Order.GetByID(OrderId).Status = (BO.OrderStatus)OrderStatusSelector.SelectedItem;
-                new OrderItemWindow(OrderId).Show();
-                Close();
-            }
-            //catch (FormatException)
-            //{
-            //    MessageBox.Show("Check your input and try again");
-            //}
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            Close();
+            bl.Order.UpdateShipDate(Order.ID);
+            bl.Order.UpdateDelivery(Order.ID);
+            new OrderItemWindow(Order.ID).Show();
+        }
+
+        private void Update_Order_Details_Click(object sender, RoutedEventArgs e)
+        {
+            bl.Order.UpdateShipDate(Order.ID);
+            bl.Order.UpdateDelivery(Order.ID);
             
         }
 
-        private void ItemsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            bl.Order.GetByID(OrderId).ID = int.Parse(OrderID.Text);
-            bl.Order.GetByID(OrderId).CustomerName = ClientName.Text;
-            bl.Order.GetByID(OrderId).CustomerEmail = ClientEmail.Text;
-            bl.Order.GetByID(OrderId).CustomerAddress = ClientAddress.Text;
-            bl.Order.GetByID(OrderId).OrderDate = DateTime.Parse(OrderDate.Text);
-            bl.Order.GetByID(OrderId).ShipDate = DateTime.Parse(ShipDate.Text);
-            bl.Order.GetByID(OrderId).DeliveryDate = DateTime.Parse(DeliveryDate.Text);
-            bl.Order.GetByID(OrderId).Status = (BO.OrderStatus)OrderStatusSelector.SelectedItem;
-
-            ListBox listBox = sender as ListBox;
-            BO.OrderItem orderItem = new BO.OrderItem();
-            orderItem = listBox.SelectedItem as BO.OrderItem;
-            new OrderItemWindow(OrderId,orderItem).Show();
-            Close();
-        }
-
-        
     }
 }

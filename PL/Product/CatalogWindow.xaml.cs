@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BO;
+using PL.Cart;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,34 +24,39 @@ namespace PL
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
+        public static readonly DependencyProperty ProductsDependency =
+                DependencyProperty.Register(nameof(Products),
+                                        typeof(ObservableCollection<ProductForList?>),
+                                        typeof(ProductListWindow));
+        public ObservableCollection<ProductItem?> Products
+        {
+            get => (ObservableCollection<ProductItem?>)GetValue(ProductsDependency);
+            private set => SetValue(ProductsDependency, value);
+        }
+
+
+        public BO.Category Category { get; set; } = BO.Category.NO_ONE;
+
+        public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
+
         public CatalogWindow()
         {
             InitializeComponent();
-            ProductsItemList.ItemsSource = bl.Product.GetListProductItem();
-            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            var item = bl.Product.GetListProductItem();
+            Products = item == null ? new() : new(item);
         }
 
-        private void ProductsItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            BO.Category category = (BO.Category)CategorySelector.SelectedItem;
-            Func<DO.Product?, bool>? predicate = item =>
-            {
-                bool b1 = item?.Category == (DO.Category)category;
-                return b1;
-            };
-
-            ProductsItemList.ItemsSource = bl.Product.GetListProductItem(predicate);
-        }
+      
         
         /// <summary>
-        /// Click Button of adding products 
+        /// Click Button of Cart
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            new CartWindow();
 
-            
         }
 
         /// <summary>
@@ -59,16 +67,21 @@ namespace PL
         private void ProductsItemList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListBox listBox = sender as ListBox;
-            BO.ProductForList product = new BO.ProductForList();
-            product = listBox.SelectedItem as BO.ProductForList;
-
-            
-           
+            BO.ProductItem product = new BO.ProductItem();
+            product = listBox.SelectedItem as BO.ProductItem;
+            new ProductWindow(product.ID);
         }
 
+        /// <summary>
+        /// Filter - list products by category
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var temp = Category == BO.Category.NO_ONE ?
+           bl.Product.GetListProductItem() : bl.Product.GetListProductItem().Where(item => item.Category == Category);
+            Products = temp == null ? new() : new(temp);
         }
     }
 }

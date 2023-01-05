@@ -35,7 +35,6 @@ namespace PL.Order
                 
                 OrderTracking orderTracking = bl.Order.followOrder(id);
                 new OrderWindow(id,true).Show();
-                //new OrderShowWindow(id).Show();
                 Close();
             }
 

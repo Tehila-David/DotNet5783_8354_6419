@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
-        Title="OrderItemWindow" Height="450" Width="800">
+        Title="OrderItemWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <TextBlock Text="Order Item:" Grid.Row="0"/>
         <Label  Content="Order Item ID :" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="96" Height="23"/>
         <Label  Content="Product ID :" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" Width="66" Height="25"/>
         <Label  Content="Amount :" HorizontalAlignment="Left" Margin="20,130,0,0" VerticalAlignment="Top" Width="66" Height="25"/>
-        <TextBox x:Name="txtOrderItemID" Text="0" MaxLength="9" HorizontalAlignment="Left" Margin="130,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"  />
-        <TextBox x:Name="txtProductID" Text="0" MaxLength="9" HorizontalAlignment="Left" Margin="130,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
-        <TextBox x:Name="txtAmount" Text="0" MaxLength="9" HorizontalAlignment="Left" Margin="130,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
-        <Button x:Name="AddItem" Content="Add new Item to Order"   RenderTransformOrigin="2.463,0.513"   HorizontalAlignment="Left"   Margin="64,244,0,156" Width="148" Height="34" Click="AddItem_Click" />
-        <Button x:Name="UpdateItem" Content="Update Item from Order"   RenderTransformOrigin="2.463,0.513"   HorizontalAlignment="Left"   Margin="63,205,0,195" Width="148" Height="34" Click="UpdateItem_Click"  />
+        <TextBox x:Name="txtOrderItemID" Text="{Binding OrderItem.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="130,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"  />
+        <TextBox x:Name="txtProductID" Text="{Binding OrderItem.ProductID}" MaxLength="9" HorizontalAlignment="Left" Margin="130,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
+        <TextBox x:Name="txtAmount" Text="{Binding OrderItem.Amount}" MaxLength="9" HorizontalAlignment="Left" Margin="130,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
+        <Button x:Name="UpdateItem" Content="Update Item"   RenderTransformOrigin="2.463,0.513"   HorizontalAlignment="Left"   Margin="64,244,0,156" Width="148" Height="34" Click="UpdateItem_Click"  />
+        
     </Grid>
 </Window>

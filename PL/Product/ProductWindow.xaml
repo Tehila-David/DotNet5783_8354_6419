@@ -14,7 +14,7 @@
         <Label Content="Price :" HorizontalAlignment="Left" Margin="94,140,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <Label Content="In Stock :" HorizontalAlignment="Left" Margin="94,170,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <TextBox x:Name="txtID"  Text="{Binding Path =Product.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"  />
-        <ComboBox Name="CategorySelector"  SelectedItem="{Binding Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25"  />
+        <ComboBox Name="CategorySelector"  SelectedItem="{Binding Product.Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25"  />
         <TextBox x:Name="txtName" Text="{Binding Path=Product.Name}" MaxLength="9" HorizontalAlignment="Left" Margin="200,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" />
         <TextBox x:Name="txtPrice" Text="{Binding Path = Product.Price}" MaxLength="9" HorizontalAlignment="Left" Margin="200,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
         <TextBox x:Name="txtInStock" Text="{Binding Path=Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>

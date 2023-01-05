@@ -37,7 +37,7 @@ namespace PL
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
         {
-            new ProductItemWindow().Show();
+            new CatalogWindow().Show();
         }
 
         private void OrderTracking_Click(object sender, RoutedEventArgs e)
