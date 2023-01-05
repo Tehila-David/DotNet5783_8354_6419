@@ -32,6 +32,9 @@ namespace PL.Order
             get => (ObservableCollection<OrderForList?>)GetValue(OrdersDependency);
             private set => SetValue(OrdersDependency, value);
         }
+
+        //public BO.OrderStatus Status{ get; set; }
+        //public Array StatusArray { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
         public OrderListWindow()
         {
             InitializeComponent();
@@ -48,6 +51,9 @@ namespace PL.Order
             Close();
         }
 
-        
+        private void OrdersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

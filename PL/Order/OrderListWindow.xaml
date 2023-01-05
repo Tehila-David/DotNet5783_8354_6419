@@ -17,7 +17,8 @@
            VerticalAlignment="Stretch" Width="auto">
             <Label Content="Orders" Grid.Column="0"/>
             </Grid>
-        <ListView Grid.Row="1" x:Name="OrdersList"  ItemsSource="{Binding Orders}" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick"   >
+        <ComboBox Name="StatusSelector"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1"  />
+        <ListView Grid.Row="1" x:Name="OrdersList"  ItemsSource="{Binding Orders}" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick" SelectionChanged="OrdersList_SelectionChanged"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
