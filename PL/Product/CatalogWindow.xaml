@@ -22,7 +22,7 @@
             <ComboBox Name="CategorySelector" SelectedItem="{Binding  Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />
                 <Label Content="Products" Grid.Column="0"/>
             </Grid>
-            <ListView Grid.Row="1" x:Name="ProductsItemList" ItemsSource="{Binding Products}" d:ItemsSource="{d:SampleData ItemCount=5}"     >
+        <ListView Grid.Row="1" x:Name="ProductsItemList" ItemsSource="{Binding Products}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsItemList_MouseDoubleClick"    >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>

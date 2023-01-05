@@ -26,8 +26,8 @@ namespace PL
 
         public static readonly DependencyProperty ProductsDependency =
                 DependencyProperty.Register(nameof(Products),
-                                        typeof(ObservableCollection<ProductForList?>),
-                                        typeof(ProductListWindow));
+                                        typeof(ObservableCollection<ProductItem?>),
+                                        typeof(CatalogWindow));
         public ObservableCollection<ProductItem?> Products
         {
             get => (ObservableCollection<ProductItem?>)GetValue(ProductsDependency);
@@ -69,7 +69,7 @@ namespace PL
             ListBox listBox = sender as ListBox;
             BO.ProductItem product = new BO.ProductItem();
             product = listBox.SelectedItem as BO.ProductItem;
-            new ProductWindow(product.ID);
+            new ProductWindow(product.ID,true).Show();
         }
 
         /// <summary>
@@ -83,5 +83,7 @@ namespace PL
            bl.Product.GetListProductItem() : bl.Product.GetListProductItem().Where(item => item.Category == Category);
             Products = temp == null ? new() : new(temp);
         }
+
+       
     }
 }

@@ -55,7 +55,7 @@ internal class Product : BlApi.IProduct
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
                 Amount = product?.InStock ?? 0,
-                IsAvailable = product?.InStock == 0 ? true : false,
+                IsAvailable = product?.InStock == 0 ? false :true,
             }).OrderBy(item => item.ID);
         }
         else

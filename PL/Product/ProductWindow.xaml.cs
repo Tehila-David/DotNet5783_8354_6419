@@ -36,10 +36,9 @@ namespace PL
             private set => SetValue(ProductDependency, value);
         }
 
+        public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
 
-        public BO.Category Category { get; set; } = BO.Category.NO_ONE;
 
-        Array CategoryArray = Enum.GetValues(typeof(BO.Category));
         /// <summary>
         ///constructor of Add product
         /// </summary>
@@ -58,6 +57,19 @@ namespace PL
             InitializeComponent();
              
             Add.Visibility = Visibility.Hidden;
+            Product = bl.Product.GetById(ID);
+            IdForUpdate = ID;
+        }
+        /// <summary>
+        /// constructor for Client
+        /// </summary>
+        /// <param name="ID"></param>
+        public ProductWindow(int ID,bool flag)
+        {
+            InitializeComponent();
+
+            Add.Visibility = Visibility.Hidden;
+            Update.Visibility = Visibility.Hidden;
             Product = bl.Product.GetById(ID);
             IdForUpdate = ID;
         }
