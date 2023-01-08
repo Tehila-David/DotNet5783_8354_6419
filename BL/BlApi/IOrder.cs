@@ -37,6 +37,13 @@ namespace BlApi
         /// for the manager, return Order tracking
         /// </summary>
         public BO.OrderTracking followOrder(int id);
+        /// <summary>
+        /// for help in PL 
+        /// </summary>
+        /// <param name="Order"></param>
+        /// <param name="productId"></param>
+        /// <param name="amount"></param>
+        public void UpdateItems(BO.Order Order, int productId, int amount);
 
     }
 }

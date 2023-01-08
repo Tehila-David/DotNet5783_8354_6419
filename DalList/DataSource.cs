@@ -62,7 +62,10 @@ internal sealed class DataSource
                 ShipDate = DateTime.Now + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
                 DeliveryDate = null
             };
-            order.DeliveryDate = (j<10) ? (order.ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L))) : DateTime.MinValue;
+            if (j < 10)
+            {
+                order.DeliveryDate = order.ShipDate + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+            }
             j++;
             OrderList.Add(order);
         }

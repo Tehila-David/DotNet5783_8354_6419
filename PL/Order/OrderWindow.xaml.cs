@@ -1,19 +1,6 @@
-﻿using DO;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 
 namespace PL.Order
 {
@@ -22,7 +9,7 @@ namespace PL.Order
     /// </summary>
     public partial class OrderWindow : Window
     {
-   
+
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
         public static readonly DependencyProperty OrderDependency =
@@ -36,7 +23,7 @@ namespace PL.Order
         }
 
 
-        public BO.OrderStatus Status { get; set; } 
+        public BO.OrderStatus Status { get; set; }
 
         public Array StatusArray { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
 
@@ -47,8 +34,8 @@ namespace PL.Order
         public OrderWindow(int id)
         {
             InitializeComponent();
-            Order=bl.Order.GetByID(id);
-            
+            Order = bl.Order.GetByID(id);
+
 
         }
 
@@ -57,27 +44,63 @@ namespace PL.Order
         /// </summary>
         /// <param name="id"></param>
         /// <param name="flag"></param>
-        public OrderWindow(int id,bool flag)
+        public OrderWindow(int id, bool flag)
         {
             InitializeComponent();
             Order = bl.Order.GetByID(id);
-            Update_Items.Visibility = Visibility.Hidden;
+
 
         }
 
-        private void Update_Items_Click(object sender, RoutedEventArgs e)
+        //private void Update_Items_Click(object sender, RoutedEventArgs e)
+        //{
+        //    bl.Order.UpdateShipDate(Order.ID);
+        //    bl.Order.UpdateDelivery(Order.ID);
+        //    new OrderItemWindow(Order.ID).Show();
+        //}
+
+        private void Update_DeliveryDate_Click(object sender, RoutedEventArgs e)
         {
-            bl.Order.UpdateShipDate(Order.ID);
-            bl.Order.UpdateDelivery(Order.ID);
-            new OrderItemWindow(Order.ID).Show();
+            try
+            {
+                Order = bl.Order.UpdateDelivery(Order.ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
 
-        private void Update_Order_Details_Click(object sender, RoutedEventArgs e)
+
+
+        private void Update_ShipDate_Click(object sender, RoutedEventArgs e)
         {
-            bl.Order.UpdateShipDate(Order.ID);
-            bl.Order.UpdateDelivery(Order.ID);
+            try
+            {
+                Order = bl.Order.UpdateShipDate(Order.ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void Click_Items_List(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ListBox listBox = sender as ListBox;
+            BO.OrderItem orderItem = new BO.OrderItem();
+           orderItem = listBox.SelectedItem as BO.OrderItem;
+
+            new OrderItemWindow(Order.ID,orderItem.ID).Show();
             
         }
 
+        private void Add_New_Item_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderItemWindow(Order.ID).Show();
+        }
     }
 }

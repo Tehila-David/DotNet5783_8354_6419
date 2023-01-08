@@ -71,6 +71,8 @@ internal class Order : BlApi.IOrder
                 Status = order.DeliveryDate != null ? BO.OrderStatus.Deliverded : order.ShipDate != null ? BO.OrderStatus.shipped
             :    BO.OrderStatus.Confirmed,
                 OrderDate = order.OrderDate,
+                ShipDate= order.ShipDate,
+                DeliveryDate= order.DeliveryDate,
                 Items = getDoOrderItem(order.ID),
                 TotalPrice = getDoOrderItem(order.ID).Sum(item => item?.TotalPrice ?? 0)
             };
@@ -143,6 +145,8 @@ internal class Order : BlApi.IOrder
             if (order.OrderDate == null) { throw new BO.InternalProblem("The order not confiremed"); }
             //The order wasn't shipped
             if (order.ShipDate == null) { throw new BO.InternalProblem("The order not  shipped"); }
+            if (order.DeliveryDate != null) { throw new BO.InternalProblem("The order Delivered"); }
+
             order.DeliveryDate = DateTime.Now;
             dal.Order.Update(order);
 
@@ -202,5 +206,32 @@ internal class Order : BlApi.IOrder
         {
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
+    }
+    public void UpdateItems(BO.Order Order,int productId,int amount)
+    {
+        DO.Product product = new DO.Product();
+        product=dal.Product.GetById(productId);
+        BO.OrderItem orderItem = new BO.OrderItem();
+        if (product.InStock >= amount )
+        {
+            orderItem = Order.Items.Find(item => item.ProductID == productId);
+            Order.Items.RemoveAll(item => item.ProductID == productId);
+            if ( Order.Items.Any(item => item.ProductID == productId) )
+            {
+                orderItem.Amount += amount;
+                Order.Items.Add(orderItem);
+            }
+            if (amount < 0)
+            {
+                amount = (-1) * amount;
+                product.InStock += amount;
+            }
+            else
+            {
+                product.InStock -= amount;
+            }
+        }
+        else { throw new BO.InternalProblem("The amount of  products is not available"); }
+       
     }
 }

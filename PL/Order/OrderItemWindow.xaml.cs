@@ -49,7 +49,12 @@ namespace PL.Order
             InitializeComponent();
             OrderID = OrderId;
         }
-
+        public OrderItemWindow(int OrderId,int OrderItemId)
+        {
+            InitializeComponent();
+            OrderID = OrderId;
+            OrderItem = bl.Order.GetByID(OrderID).Items.FirstOrDefault(item => item.ID == OrderItemId);
+        }
 
         private void UpdateItem_Click(object sender, RoutedEventArgs e)
         {
@@ -57,11 +62,12 @@ namespace PL.Order
             try
             {
 
-                bl.Order.GetByID(OrderID).Items.RemoveAll(item => item.ID == OrderItem.ID);
-                OrderItem.Name = bl.Product.GetById(OrderItem.ProductID).Name;
-                OrderItem.Price = bl.Product.GetById(OrderItem.ProductID).Price;
-                OrderItem.TotalPrice = OrderItem.Amount * OrderItem.Price;
-                bl.Order.GetByID(OrderID).Items.Add(OrderItem);
+                //bl.Order.GetByID(OrderID).Items.RemoveAll(item => item.ID == OrderItem.ID);
+                //OrderItem.Name = bl.Product.GetById(OrderItem.ProductID).Name;
+                //OrderItem.Price = bl.Product.GetById(OrderItem.ProductID).Price;
+                //OrderItem.TotalPrice = OrderItem.Amount * OrderItem.Price;
+                //bl.Order.GetByID(OrderID).Items.Add(OrderItem);
+                bl.Order.UpdateItems(bl.Order.GetByID(OrderID), OrderItem.ProductID, OrderItem.Amount);
 
             }
             catch (FormatException)
