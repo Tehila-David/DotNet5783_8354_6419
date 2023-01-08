@@ -23,5 +23,15 @@ namespace PL.Cart
         {
             InitializeComponent();
         }
+
+        private void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
