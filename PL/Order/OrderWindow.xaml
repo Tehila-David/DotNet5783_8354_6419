@@ -37,11 +37,11 @@
         <TextBox x:Name="ShipDate" Text="{Binding Order.ShipDate}" MaxLength="9" HorizontalAlignment="Left" Margin="140,211,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1"/>
         <TextBox x:Name="DeliveryDate" Text="{Binding Order.DeliveryDate}" MaxLength="9" HorizontalAlignment="Left" Margin="140,244 ,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1"/>
         <TextBox x:Name="TotalPrice" Text="{Binding Order.TotalPrice}" MaxLength="9" HorizontalAlignment="Left" Margin="140,276 ,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"/>
-        <ListView  x:Name="ItemsList"  ItemsSource="{Binding Order.Items}" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="420,69,30,-21" Grid.Row="1"  Grid.RowSpan="2" MouseDoubleClick="Click_Items_List" >
+        <ListView  x:Name="ItemsList"  ItemsSource="{Binding Order.Items}" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="420,69,30,-21" Grid.Row="1"  Grid.RowSpan="2" MouseDoubleClick="Click_Items_List"  >
         </ListView>
         <Button x:Name="Update_ShipDate" Content="Update Ship Date " RenderTransformOrigin="2.463,0.513" Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="69,318,0,0"  Height="29" Width="120" Click="Update_ShipDate_Click" />
         <Button x:Name="Update_DeliveryDate" Content="Update Delivery Date " RenderTransformOrigin="2.463,0.513" Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="204,318,0,0" Height="29" Width="120" Click="Update_DeliveryDate_Click" />
-        <Button x:Name="Add_New_Item" Content="Add New Item" RenderTransformOrigin="2.463,0.513" Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="493,20,0,0" Height="29" Width="120" Click="Add_New_Item_Click"  />
+        <Button x:Name="Add_New_Item" Content="Add New Item" RenderTransformOrigin="2.463,0.513" Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="493,20,0,0" Height="29" Width="120"  />
 
     </Grid>
 </Window>

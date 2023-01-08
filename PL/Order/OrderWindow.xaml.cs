@@ -13,7 +13,7 @@ namespace PL.Order
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
         public static readonly DependencyProperty OrderDependency =
-       DependencyProperty.Register(nameof(Order),
+        DependencyProperty.Register(nameof(Order),
                               typeof(BO.Order),
                               typeof(OrderWindow));
         public BO.Order? Order
@@ -88,19 +88,23 @@ namespace PL.Order
 
         }
 
+        /// <summary>
+        /// Update item in Order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Click_Items_List(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListBox listBox = sender as ListBox;
             BO.OrderItem orderItem = new BO.OrderItem();
-           orderItem = listBox.SelectedItem as BO.OrderItem;
+            orderItem = listBox.SelectedItem as BO.OrderItem;
 
             new OrderItemWindow(Order.ID,orderItem.ID).Show();
             
         }
+       
+        
 
-        private void Add_New_Item_Click(object sender, RoutedEventArgs e)
-        {
-            new OrderItemWindow(Order.ID).Show();
-        }
+       
     }
 }

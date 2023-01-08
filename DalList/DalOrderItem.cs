@@ -18,7 +18,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function adds an order item
     /// </summary>
-    public  int Add(OrderItem myOrderItem) 
+    public int Add(OrderItem myOrderItem)
     {
 
         if (_dataSource.OrderItemList.Exists(p => p?.ID == myOrderItem.ID))
@@ -30,12 +30,12 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns the details of an lorder item based on an id
     /// </summary>
-    public  OrderItem GetById(int id)
+    public OrderItem GetById(int id)
     {
-        
-        return _dataSource.OrderItemList?.FirstOrDefault(s => s?.ID == id) 
-        ?? throw new NotExists("Sorry ,this item does not exist in the List "); 
-    
+
+        return _dataSource.OrderItemList?.FirstOrDefault(s => s?.ID == id)
+        ?? throw new NotExists("Sorry ,this item does not exist in the List ");
+
     }
 
     /// <summary>
@@ -45,13 +45,13 @@ internal class DalOrderItem : IOrderItem
     {
         ///looking for all of the products that have their details filed in and returning them
         if (predicate == null) { return _dataSource.OrderItemList.AsEnumerable(); }
-        return _dataSource.OrderItemList.Where(predicate)?? _dataSource.OrderItemList.AsEnumerable();
+        return _dataSource.OrderItemList.Where(predicate) ?? _dataSource.OrderItemList.AsEnumerable();
     }
 
     /// <summary>
     /// This function receives an id of an ordre item and deletes the order item witn the same id
     /// </summary>
-    public  void Delete(int id)
+    public void Delete(int id)
     {
 
         //foreach (var item in _dataSource.OrderItemList)
@@ -79,7 +79,7 @@ internal class DalOrderItem : IOrderItem
     /// <summary>
     /// This function receives an order item and updates the order item in the list that has the same id
     /// </summary>
-    public  void Update(OrderItem myOrderItem)
+    public void Update(OrderItem myOrderItem)
     {
 
         //int index = 0;
@@ -106,6 +106,8 @@ internal class DalOrderItem : IOrderItem
         throw new NotExists("Order Item to be updated does not exist");
     }
 
+
+}
 
     //!!!predicate בשלב 3 היינו צריכות למחוק את הפונקציות הללו כי הן מיותרות אחרי שלמדנו 
 
@@ -155,5 +157,5 @@ internal class DalOrderItem : IOrderItem
 
     //}
 
-}
+
 
