@@ -208,31 +208,36 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-    public void UpdateItems(BO.Order Order,int productId,int amount)
+    public BO.OrderItem UpdateItems(BO.Order Order,int productId,int amount)
     {
+        int firstAmount;
         DO.Product product = new DO.Product();
         product=dal.Product.GetById(productId);
         BO.OrderItem orderItem = new BO.OrderItem();
         if (product.InStock >= amount )
         {
             orderItem = Order.Items.Find(item => item.ProductID == productId);
+            firstAmount = orderItem.Amount;
             Order.Items.RemoveAll(item => item.ProductID == productId);
-            if ( Order.Items.Any(item => item.ProductID == productId) )
+            if(orderItem != null) //Order Item Exsits- עדכון פריט קיים
             {
-                orderItem.Amount += amount;
-                Order.Items.Add(orderItem);
+                if (Order.Items.Any(item => item.ProductID == productId))
+                {
+                    orderItem.Amount = amount;
+                    Order.Items.Add(orderItem);
+                }
             }
-            if (amount < 0)
+            else//new Order Item- הוספת פריט חדש
             {
-                amount = (-1) * amount;
-                product.InStock += amount;
+               /* orderItem.ID=dal.*//*NextOrderItemID*/ ///??  שלו  idביצירת פריט חדש איך יודעים מה ה
             }
-            else
-            {
-                product.InStock -= amount;
-            }
+           product.InStock -= amount- firstAmount;
+           dal.Product.Update(product);
+           
+            return orderItem;
         }
-        else { throw new BO.InternalProblem("The amount of  products is not available"); }
+        else 
+        { throw new BO.InternalProblem("The amount of  products is not available"); }
        
     }
 }

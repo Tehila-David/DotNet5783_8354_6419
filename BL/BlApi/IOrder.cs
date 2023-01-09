@@ -43,7 +43,7 @@ namespace BlApi
         /// <param name="Order"></param>
         /// <param name="productId"></param>
         /// <param name="amount"></param>
-        public void UpdateItems(BO.Order Order, int productId, int amount);
+        public BO.OrderItem UpdateItems(BO.Order Order, int productId, int amount);
 
 
     }

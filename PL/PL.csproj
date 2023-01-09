@@ -18,7 +18,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="logo.jpg" />
+    <None Remove="צילום מסך 2023-01-08 234608.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="צילום מסך 2023-01-08 234608.png" />
   </ItemGroup>
 
 </Project>
