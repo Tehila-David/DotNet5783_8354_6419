@@ -8,6 +8,10 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ProductWindow" Height="450" Width="800" >
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="99*"/>
+        </Grid.ColumnDefinitions>
         <Label Name ="LabelID" Content="Id :" HorizontalAlignment="Left" Margin="94,50,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <Label Content="Category :" HorizontalAlignment="Left" Margin="94,80,0,0" VerticalAlignment="Top" Width="65" Height="28"/>
         <Label Content="Name :" HorizontalAlignment="Left" Margin="94,110,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
@@ -20,5 +24,10 @@
         <TextBox x:Name="txtInStock" Text="{Binding Path=Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
         <Button x:Name="Add" Content="Add"  HorizontalAlignment="Left" Margin="209,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Add_Click" RenderTransformOrigin="2.463,0.513"/>
         <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="118,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Update_Click" />
+        <Button x:Name="AddToCart" Content="Add To Cart"  HorizontalAlignment="Left" Margin="100,269,0,0"  VerticalAlignment="Top" Width="80" Height="35" Click="AddCart_Click" RenderTransformOrigin="2.463,0.513"/>
+        <Button x:Name="RemoveFromCart" Content="Remove From Cart"  HorizontalAlignment="Left" Margin="205,269,0,0"  VerticalAlignment="Top" Width="110" Height="35" Click="RemoveCart_Click" RenderTransformOrigin="2.463,0.513" Grid.ColumnSpan="2"/>
+
+
+
     </Grid>
 </Window>

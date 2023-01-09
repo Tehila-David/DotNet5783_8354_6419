@@ -38,10 +38,11 @@ namespace PL
         public BO.Category Category { get; set; } = BO.Category.NO_ONE;
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
-
-        public CatalogWindow()
+        BO.Cart myLovelyCart;
+    public CatalogWindow(BO.Cart myCart)
         {
             InitializeComponent();
+            myLovelyCart = myCart;
             var item = bl.Product.GetListProductItem();
             Products = item == null ? new() : new(item);
         }
@@ -55,7 +56,7 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow().Show();
+            new CartWindow(myLovelyCart).Show();
 
         }
 
@@ -69,7 +70,7 @@ namespace PL
             ListBox listBox = sender as ListBox;
             BO.ProductItem product = new BO.ProductItem();
             product = listBox.SelectedItem as BO.ProductItem;
-            new ProductWindow(product.ID,true).Show();
+            new ProductWindow(product.ID,true, myLovelyCart).Show();
         }
 
         /// <summary>

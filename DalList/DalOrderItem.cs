@@ -28,7 +28,7 @@ internal class DalOrderItem : IOrderItem
     }
 
     /// <summary>
-    /// This function returns the details of an lorder item based on an id
+    /// This function returns the details of an order item based on an id
     /// </summary>
     public  OrderItem GetById(int id)
     {

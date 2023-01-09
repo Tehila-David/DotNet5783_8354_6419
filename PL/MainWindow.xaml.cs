@@ -37,7 +37,8 @@ namespace PL
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
         {
-            new CatalogWindow().Show();
+            BO.Cart myCart = new BO.Cart();
+            new CatalogWindow(myCart).Show();
         }
 
         private void OrderTracking_Click(object sender, RoutedEventArgs e)
