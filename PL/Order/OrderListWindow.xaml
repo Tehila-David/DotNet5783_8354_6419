@@ -5,23 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
-        Title="OrderListWindow" Height="450" Width="800">
+        Title="OrderListWindow" Height="450" Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid Name="MainGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="500*"/>
-                <RowDefinition Height="Auto"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
            VerticalAlignment="Stretch" Width="auto">
             <Label Content="Orders" Grid.Column="0"/>
-            </Grid>
-            <ListView Grid.Row="1" x:Name="OrdersList"  d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick"   >
+        </Grid>
+        <ComboBox Name="StatusSelector"  SelectedItem="{Binding  Status}" ItemsSource="{Binding StatusArray}" SelectionChanged="StatusSelector_SelectionChanged" Margin="562,0,0,0"  />
+        <ListView Grid.Row="1" x:Name="OrdersList"  ItemsSource="{Binding Orders}" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick" SelectionChanged="OrdersList_SelectionChanged"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+
     </Grid>
 </Window>

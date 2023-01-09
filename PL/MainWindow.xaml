@@ -6,6 +6,14 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="myButtonStyle" TargetType="Button"
+>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="373*"/>
@@ -16,11 +24,11 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Name="Manager" Content="Manager" HorizontalAlignment="Left" Margin="45,84,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="Manager_Click"/>
-        <Button Name="New_Order" Content="New Order" HorizontalAlignment="Left" Margin="46,141,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="NewOrder_Click"/>
-        <Button Name="Order_Tracking" Content="Order Tracking" HorizontalAlignment="Left" Margin="46,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="114" Click="OrderTracking_Click"/>
-        <Button Name="Products_List"  Content="Products List" HorizontalAlignment="Left" Margin="262,145,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="ProductsList_Click"  />
-        <Button Name="Orders_List" Content="Orders List" HorizontalAlignment="Left" Margin="395,144,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="114" Click="OrdersList_Click" />
+        <Button Name="Manager" Content="Manager" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="45,84,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="42" Width="134" ClickMode="Press" Click="Manager_Click" />
+        <Button Name="New_Order" Content="New Order" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,141,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="39" Width="132" Click="NewOrder_Click"/>
+        <Button Name="Order_Tracking" Content="Order Tracking" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="196" Click="OrderTracking_Click"/>
+        <Button Name="Products_List"  Content="Products List" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="253,145,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="41" Width="159" Click="ProductsList_Click" />
+        <Button Name="Orders_List" Content="Orders List" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="430,146,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="40" Width="175" Click="OrdersList_Click" />
 
     </Grid>
 </Window>

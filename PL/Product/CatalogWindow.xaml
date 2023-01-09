@@ -1,11 +1,12 @@
-﻿<Window x:Class="PL.ProductItemWindow"
+﻿<Window x:Class="PL.CatalogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductItemWindow" Height="450" Width="800">
+        Title="CatalogWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40*"/>
@@ -18,17 +19,17 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions >
-                <ComboBox Name="CategorySelector" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />
+            <ComboBox Name="CategorySelector" SelectedItem="{Binding  Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />
                 <Label Content="Products" Grid.Column="0"/>
             </Grid>
-            <ListView Grid.Row="1" x:Name="ProductsItemList" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="ProductsItemList_MouseDoubleClick" SelectionChanged="ProductsItemList_SelectionChanged"   >
+        <ListView Grid.Row="1" x:Name="ProductsItemList" ItemsSource="{Binding Products}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsItemList_MouseDoubleClick"    >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Show Product" Grid.Row="2" HorizontalAlignment="Left" Margin="691,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click"/>
+            <Button Content="Show Cart" Grid.Row="2" HorizontalAlignment="Left" Margin="691,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click"/>
 
         </Grid>
 </Window>

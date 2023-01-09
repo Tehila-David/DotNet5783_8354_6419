@@ -27,14 +27,14 @@ namespace PL.Order
             InitializeComponent();
             
         }
-
+        public int id { get; set; }
         private void OrderTracking_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int id = int.Parse(idTextBox.Text);
+                
                 OrderTracking orderTracking = bl.Order.followOrder(id);
-                new OrderShowWindow(id).Show();
+                new OrderWindow(id,true).Show();
                 Close();
             }
 

@@ -5,29 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
-        Title="OrderTrackingWindow" Height="450" Width="800">
+        Title="OrderTrackingWindow" Height="450" Width="800"
+         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="373*"/>
+            <ColumnDefinition Width="27*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Enter an order ID :" 
-         FontSize="30" Margin="232,58,310,323" Grid.RowSpan="2"/>
-        <Grid x:Name="OrderDetailsGrid" Grid.Row="1" Margin="4,2,-4,-2" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Content="ID:" Grid.Column="1" Margin="257,139,504,23" Grid.Row="0" />
-            <TextBox x:Name="idTextBox" Text="{Binding ID}" MaxLength="9" HorizontalAlignment="Center" Margin="0,139,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Column="1" />
+        <Label Content="ID:"  Grid.Row="1" RenderTransformOrigin="2.463,0.513"  HorizontalAlignment="Left" Margin="231,143,0,0"   VerticalAlignment="Top" Width="45" Height="25" />
+        <TextBox x:Name="idTextBox" Text="{Binding id}" MaxLength="9" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+        <Label Content="Enter an order ID :" FontSize="30" RenderTransformOrigin="2.463,0.513"  Grid.Row="1"  HorizontalAlignment="Left" Margin="216,72,0,0"   VerticalAlignment="Top" Width="257" Height="52"/>
 
-        </Grid>
-        <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30" Grid.Row="1" Margin="256,186,328,204" Click="OrderTracking_Click"/>
+        <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="232,196,0,0"  VerticalAlignment="Top" Width="223" Height="52" Grid.Row="1" Click="OrderTracking_Click"/>
 
     </Grid>
 </Window>
