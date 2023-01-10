@@ -71,6 +71,7 @@ namespace PL
             BO.ProductItem product = new BO.ProductItem();
             product = listBox.SelectedItem as BO.ProductItem;
             new ProductWindow(product.ID,true, myLovelyCart).Show();
+
         }
 
         /// <summary>
