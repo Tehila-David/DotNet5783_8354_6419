@@ -12,6 +12,12 @@ internal class Cart:ICart
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
     //This function updates the amount of a product in the cart
+
+    public IEnumerable<BO.OrderItem> cartItems(BO.Cart myCart)
+    {
+        return myCart.Items;
+    }
+
     public BO.Cart UpdateProductAmount(BO.Cart myCart, int productId, int newAmount)
     {
         DO.Product doProduct;

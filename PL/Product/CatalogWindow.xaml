@@ -27,7 +27,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
-                    </GridView>
+                </GridView>
                 </ListView.View>
             </ListView>
             <Button Content="Show Cart" Grid.Row="2" HorizontalAlignment="Left" Margin="691,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click"/>
