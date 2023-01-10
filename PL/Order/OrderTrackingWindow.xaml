@@ -22,6 +22,8 @@
         <Label Content="Enter an order ID :" FontSize="30" RenderTransformOrigin="2.463,0.513"  Grid.Row="1"  HorizontalAlignment="Left" Margin="216,72,0,0"   VerticalAlignment="Top" Width="257" Height="52"/>
 
         <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="232,196,0,0"  VerticalAlignment="Top" Width="223" Height="52" Grid.Row="1" Click="OrderTracking_Click"/>
+        <Button Content="Back To Main Window" RenderTransformOrigin="2.463,0.513" FontSize="20"   HorizontalAlignment="Left" Margin="30,22,0,0"  VerticalAlignment="Top" Width="210" Height="35" Grid.Row="1" Click="BackToMainWindow_Click"/>
+
 
     </Grid>
 </Window>
