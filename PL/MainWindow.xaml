@@ -37,7 +37,7 @@
         <Button x:Name="Order_Tracking" Content="Order Tracking" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,237,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="196" Click="OrderTracking_Click"/>
         <Button x:Name="Products_List"  Content="Products List" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="293,141,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="42" Width="171" Click="ProductsList_Click" />
         <Button x:Name="Orders_List" Content="Orders List" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="292,196,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="40" Width="175" Click="OrdersList_Click" RenderTransformOrigin="0.625,0.411" />
-        <Image Name="image1" Margin="210,14,162,270" Grid.Row="1" Source="/צילום מסך 2023-01-08 234608.png" RenderTransformOrigin="0.238,0.478"/>
+        <Image Name="image1" Margin="198,1,174,283" Source="/צילום מסך 2023-01-08 234608.png" RenderTransformOrigin="0.238,0.478" Grid.Row="1"/>
         <Image HorizontalAlignment="Left" Height="4" Margin="539,372,0,0" Grid.Row="1" VerticalAlignment="Top" Width="30"/>
 
     </Grid>
