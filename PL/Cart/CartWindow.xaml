@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespaceDataTemplate"
+        xmlns:local="clr-namespace:PL.Cart"
         mc:Ignorable="d"
         Title="CartWindow" Height="450" Width="800">
     <Window.Resources>
-        <DataTemplate DataType="local:OrderItem">
+        <DataTemplate DataType="OrderItem">
             <Border Name="border" BorderBrush="Aqua" BorderThickness="1"
           Padding="5" Margin="5">
                 <Grid>
@@ -28,7 +28,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Price:"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Price}"/>
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Total Price:"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=ToatalPrice}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=TotalPrice}"/>
 
                 </Grid>
             </Border>
@@ -37,6 +37,6 @@
     <StackPanel>
         <ListBox ItemsSource="{Binding}"
         HorizontalContentAlignment="Stretch" />
-       </StackPanel>
+    </StackPanel>
 
 </Window>

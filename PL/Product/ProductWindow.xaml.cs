@@ -113,7 +113,7 @@ namespace PL
             try
             {
                 bl.Cart.AddProduct(myCart, Product.ID);
-                new ProductListWindow().Show();
+                //new ProductListWindow().Show();
                 Close();
 
             }
@@ -137,7 +137,7 @@ namespace PL
             try 
             {
                 bl.Product.Update(Product);
-                new ProductListWindow().Show();
+                //new ProductListWindow().Show();
                 Close ();   
             }
             catch (FormatException)

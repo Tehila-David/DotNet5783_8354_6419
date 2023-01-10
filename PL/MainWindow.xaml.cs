@@ -44,7 +44,6 @@ namespace PL
         private void OrderTracking_Click(object sender, RoutedEventArgs e)
         {
             new OrderTrackingWindow().Show();
-            Close();
         }
 
         private void ProductsList_Click(object sender, RoutedEventArgs e)

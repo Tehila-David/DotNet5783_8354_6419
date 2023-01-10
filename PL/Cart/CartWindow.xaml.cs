@@ -50,11 +50,11 @@ namespace PL.Cart
 
         public CartWindow(BO.Cart myCart)
         {
-            InitializeComponent();
             Cart = myCart;
             var item = bl.Cart.cartItems(Cart);
             CartItems = item == null ? new() : new(item);
-            this.DataContext = CartItems;
+            InitializeComponent();
+            DataContext = CartItems;
         }
 
         public int id { get; set; }
@@ -98,7 +98,10 @@ namespace PL.Cart
 
         private void EmptyCart_Click(object sender, RoutedEventArgs e)
         {
-
+            foreach(var item in CartItems) //removing all items from cart by settong their amount to zero
+            {
+                bl.Cart.UpdateProductAmount(Cart, item.ProductID, 0);
+            }
         }
         private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
         {
@@ -106,7 +109,7 @@ namespace PL.Cart
         }
         private void BackToCatalog_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
 
     }
