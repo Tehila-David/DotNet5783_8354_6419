@@ -26,42 +26,49 @@ namespace PL
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
-        int IdForUpdate = 0;
-
-        public static readonly DependencyProperty ProductDependency =
-        DependencyProperty.Register(nameof(Product),
-                               typeof(BO.Product),
-                               typeof(ProductWindow));
-        public BO.Product? Product
-        {
-            get => (BO.Product)GetValue(ProductDependency);
-            private set => SetValue(ProductDependency, value);
-        }
-
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
+
+        public static readonly DependencyProperty ProductDependency = DependencyProperty.Register(nameof(Product), typeof(BO.Product), typeof(Window));
+        public BO.Product? Product { get => (BO.Product)GetValue(ProductDependency); private set => SetValue(ProductDependency, value); }
+
+        public ProductWindow(int id = 0)
+        {
+            try
+            {
+                Product = id == 0 ? new() { Category = BO.Category.NO_ONE } : bl.Product.GetById(id);
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                Close();
+                MessageBox.Show(ex.Message, "Failure getting entity", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+       
+        
 
 
         /// <summary>
         ///constructor of Add product
         /// </summary>
-        public ProductWindow()
-        {
-            InitializeComponent();
-            Update.Visibility = Visibility.Hidden;
+        //public ProductWindow()
+        //{
+        //    InitializeComponent();
+        //    Update.Visibility = Visibility.Hidden;
             
-        }
+        //}
 
         /// <summary> 
         /// constructor of Update product
         /// </summary>
         /// <param name="product"></param>
-        public ProductWindow(int ID)
-        {
-            InitializeComponent();
-            Add.Visibility = Visibility.Hidden;
-            Product = bl.Product.GetById(ID);
-            IdForUpdate = ID;
-        }
+        //public ProductWindow(int ID)
+        //{
+        //    InitializeComponent();
+        //    Add.Visibility = Visibility.Hidden;
+        //    Product = bl.Product.GetById(ID);
+        //    IdForUpdate = ID;
+        //}
         
       
         /// <summary>
@@ -86,7 +93,6 @@ namespace PL
             }
 
         }
-
 
         
         /// <summary>
