@@ -11,16 +11,39 @@
 
 
     <Grid >
-        <DataGrid x:Name="OrderItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="124,49,114,177" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="OrderItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="207,62,172,172" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="OrderItem_SelectionChanged" RenderTransformOrigin="0.777,0.52">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="cityColumn" Binding="{Binding Name}" Header="Name:" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Amount}" Header="Amount:" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numberColumn" Binding="{Binding Price}" Header="Price:" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="personalStatusColumn" Binding="{Binding TotalPrice}" Header="TotalPrice:" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="ProductID" Binding="{Binding ProductID}" Header="Product ID:" Width="Auto"/>
+                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name:" Width="Auto"/>
+
+                <DataGridTemplateColumn Header="Amount:" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="cmdDown" Margin="1" Content="˅" Click="cmdDown_Click" />
+                                <TextBox x:Name="txtNum" Margin="1" Width="Auto" Text="{Binding Amount}" TextChanged="txtNum_TextChanged" />
+                                <Button x:Name="cmdUp" Margin="1" Content="˄" Click="cmdUp_Click" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn x:Name="Price" Binding="{Binding Price}" Header="Price:" Width="Auto"/>
+                <DataGridTextColumn x:Name="TotalPrice" Binding="{Binding TotalPrice}" Header="Total Price:" Width="Auto"/>
+                <DataGridTemplateColumn Header="Remove">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="Remove" Content="X" Foreground="Red" Click="RemoveProduct_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnUpdate" Content="Update Product" HorizontalAlignment="Left" Margin="180,292,0,0" VerticalAlignment="Top" Width="100" Click="UpdateProduct_Click" Height="19"/>
-        <Button x:Name="btnNew" Content="Remove Product" HorizontalAlignment="Left" Margin="447,291,0,0" VerticalAlignment="Top" Width="75" Click="RemoveProduct_Click"/>
+        <Button x:Name="btnRem" Content="Remove Product" HorizontalAlignment="Left" Margin="447,291,0,0" VerticalAlignment="Top" Width="75" Click="RemoveProduct_Click"/>
     </Grid>
 
 </Window>
