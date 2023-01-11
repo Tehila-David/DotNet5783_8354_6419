@@ -39,7 +39,7 @@ namespace PL
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
         BO.Cart myLovelyCart;
-        public CatalogWindow()
+        public CatalogWindow(BO.Cart myCart)
         {
             InitializeComponent();
             myLovelyCart = myCart;
@@ -57,7 +57,6 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new CartWindow(myLovelyCart).Show();
-
         }
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace PL
             BO.ProductItem product = new BO.ProductItem();
             product = listBox.SelectedItem as BO.ProductItem;
             //new ProductWindow(product.ID,true, myLovelyCart).Show();
-
+            
         }
 
         /// <summary>

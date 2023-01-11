@@ -33,8 +33,8 @@ namespace PL.Product
         }
         public ProductItemWindow(int productID)
         {
-            InitializeComponent();
-
+            //InitializeComponent();
+           
         }
 
         private void AddCart_Click(object sender, RoutedEventArgs e)
