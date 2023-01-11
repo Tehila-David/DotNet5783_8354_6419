@@ -63,9 +63,18 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow().Show();
-            var item = bl.Product.GetListedProducts();
-            Products = item == null ? new() : new(item);
+            try 
+            {
+                new ProductWindow().Show();
+                var item = bl.Product.GetListedProducts();
+                Products = item == null ? new() : new(item);
+            }
+            catch (FormatException )
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+           
+
         }
 
         /// <summary>
@@ -75,18 +84,26 @@ namespace PL
         /// <param name="e"></param>
         private void ProductsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ListBox listBox = sender as ListBox;
-            BO.ProductForList product = new BO.ProductForList();
-            product = listBox.SelectedItem as BO.ProductForList;
-
-            new ProductWindow(product.ID).Show();
-            Close();
+            try 
+            {
+                ListBox listBox = sender as ListBox;
+                BO.ProductForList product = new BO.ProductForList();
+                product = listBox.SelectedItem as BO.ProductForList;
+                new ProductWindow(product.ID).Show();
+                var item = bl.Product.GetListedProducts();
+                Products = item == null ? new() : new(item);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void showCartButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         
     }
