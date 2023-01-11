@@ -33,7 +33,7 @@ namespace PL.Product
         }
         public ProductItemWindow(int productID)
         {
-            InitializeComponent();
+            //InitializeComponent();
            
         }
 

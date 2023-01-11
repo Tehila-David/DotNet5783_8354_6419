@@ -72,6 +72,7 @@ namespace PL.Cart
                 BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
                 bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, 0);
                 
+                
             }
             catch (FormatException)
             {

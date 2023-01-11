@@ -74,7 +74,6 @@ namespace PL
             try
             {
                 bl.Product.Add(Product);
-                new ProductListWindow().Show();
                 Close();
             }
             catch (FormatException)
@@ -100,7 +99,6 @@ namespace PL
             try 
             {
                 bl.Product.Update(Product);
-                //new ProductListWindow().Show();
                 Close ();   
             }
             catch (FormatException)
