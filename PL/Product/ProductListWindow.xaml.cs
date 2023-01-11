@@ -4,9 +4,11 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PL
 {
@@ -21,11 +23,12 @@ namespace PL
         DependencyProperty.Register(nameof(Products),
                                 typeof(ObservableCollection<ProductForList?>),
                                 typeof(ProductListWindow));
-        public ObservableCollection<ProductForList?> Products
+        public  ObservableCollection<ProductForList?> Products
         {
             get => (ObservableCollection<ProductForList?>)GetValue(ProductsDependency);
             private set => SetValue(ProductsDependency, value);
         }
+       
 
         public BO.Category Category { get; set; } = BO.Category.NO_ONE;
 
@@ -60,9 +63,9 @@ namespace PL
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
             new ProductWindow().Show();
-            Close();
+            var item = bl.Product.GetListedProducts();
+            Products = item == null ? new() : new(item);
         }
 
         /// <summary>
@@ -79,8 +82,13 @@ namespace PL
             new ProductWindow(product.ID).Show();
             Close();
         }
-       
 
+        private void showCartButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
 
 
