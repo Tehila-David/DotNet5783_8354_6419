@@ -21,7 +21,7 @@ namespace PL.Product
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
-      
+
         public static readonly DependencyProperty ProductItemDependency =
         DependencyProperty.Register(nameof(ProductItem),
                                typeof(BO.ProductItem),
@@ -34,7 +34,7 @@ namespace PL.Product
         public ProductItemWindow(int productID)
         {
             InitializeComponent();
-           
+
         }
 
         private void AddCart_Click(object sender, RoutedEventArgs e)
