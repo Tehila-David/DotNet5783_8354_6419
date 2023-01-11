@@ -34,9 +34,8 @@
                       ItemsSource="{Binding CategoryArray}"
                       SelectedItem="{Binding  Category}" Grid.Column="1" />
 
-        <ListView ItemsSource="{Binding Products,Mode=OneWay}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="2" Margin="0,43,0,0" Grid.RowSpan="2" >
+        <ListView ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="2" Margin="0,43,0,0" Grid.RowSpan="2" >
             <ListView.View>
-
                 <GridView>
                     <GridViewColumn Width="Auto" Header="ID">
                         <GridViewColumn.CellTemplate>

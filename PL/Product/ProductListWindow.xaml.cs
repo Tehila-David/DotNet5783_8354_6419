@@ -51,7 +51,7 @@ namespace PL
         private void CategorySelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var temp = Category == BO.Category.NO_ONE ?
-            bl.Product.GetListedProducts() : bl.Product.GetListedProducts().Where(item => item.Category == Category);
+            bl.Product.GetListedProducts() : bl.Product.GetListedProducts().Where(item => item?.Category == Category);
             Products = temp == null ? new() : new(temp);
 
         }
@@ -87,7 +87,7 @@ namespace PL
             try 
             {
                 ListBox listBox = sender as ListBox;
-                BO.ProductForList product = new BO.ProductForList();
+                BO.ProductForList? product = new BO.ProductForList();
                 product = listBox.SelectedItem as BO.ProductForList;
                 new ProductWindow(product.ID).Show();
                 var item = bl.Product.GetListedProducts();
