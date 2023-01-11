@@ -5,33 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CatalogWindow" Height="450" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid Name="MainGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="500*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-           VerticalAlignment="Stretch" Width="auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions >
-            <ComboBox Name="CategorySelector" SelectedItem="{Binding  Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />
-                <Label Content="Products" Grid.Column="0"/>
-            </Grid>
-        <ListView Grid.Row="1" x:Name="ProductsItemList" ItemsSource="{Binding Products}" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsItemList_MouseDoubleClick" 
-                  >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                </GridView>
-                </ListView.View>
-            </ListView>
-            <Button Content="Show Cart" Grid.Row="2" HorizontalAlignment="Left" Margin="691,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click"/>
+        Title="CatalogWindow" Height="450" Width="800">
 
-        </Grid>
+    <Grid >
+        <DataGrid x:Name="ProductItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="177,62,141,148" RowDetailsVisibilityMode="VisibleWhenSelected"  RenderTransformOrigin="0.777,0.52">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="ProductID" Binding="{Binding ID}" Header="Product ID:" Width="Auto"/>
+                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name:" Width="Auto"/>
+                <DataGridTextColumn x:Name="Category" Binding="{Binding Category}" Header="Category:" Width="Auto"/>
+                <DataGridTextColumn x:Name="Price" Binding="{Binding Price}" Header="Price:" Width="Auto"/>
+                <DataGridTextColumn x:Name="Amount" Binding="{Binding Amount}" Header="Amount In Cart:" Width="Auto"/>
+
+                <DataGridTemplateColumn Header="Is Available:" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="Is Available:"
+                            IsEnabled="False"
+                            IsChecked="{Binding Path=IsAvailable}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+                <DataGridTemplateColumn Header="Add:">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="Add" Content="Add" Foreground="Green" Click="AddToCart_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+                <DataGridTemplateColumn Header="Remove:">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="Remove" Content="X" Foreground="Red" Click="RemoveProduct_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="showCart" Content="Cart" HorizontalAlignment="Left" Margin="180,347,0,0" VerticalAlignment="Top" Width="98" Click="ShowCart_Click" Height="38"/>
+    </Grid>
+
 </Window>
 
