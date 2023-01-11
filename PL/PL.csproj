@@ -20,6 +20,7 @@
   <ItemGroup>
     <None Remove="logo.jpg" />
     <None Remove="צילום מסך 2023-01-08 234608.png" />
+    <None Remove="צילום מסך 2023-01-11 094323.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
 
   <ItemGroup>
     <Resource Include="צילום מסך 2023-01-08 234608.png" />
+    <Resource Include="צילום מסך 2023-01-11 094323.png" />
   </ItemGroup>
 
 </Project>

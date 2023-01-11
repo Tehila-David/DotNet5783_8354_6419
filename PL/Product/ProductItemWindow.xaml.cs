@@ -36,5 +36,15 @@ namespace PL.Product
             InitializeComponent();
            
         }
+
+        private void AddCart_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveCart_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
