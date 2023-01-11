@@ -40,9 +40,10 @@ internal class Cart:ICart
                 //adding amount of products which exists in the cart to the cart
                 if(newAmount <= doProduct.InStock)
                 {
-                    newItem.Amount = newItem.Amount+newAmount;
-                    newItem.TotalPrice = doProduct.Price* newItem.Amount;
-                    myCart.TotalPrice += newAmount * doProduct.Price;
+                    newItem.Amount = newAmount;
+                    double oldTotalPrice = newItem.TotalPrice;
+                    newItem.TotalPrice = newItem.Price* newAmount;
+                    myCart.TotalPrice += newItem.TotalPrice - oldTotalPrice;
                 }
                 else
                 {

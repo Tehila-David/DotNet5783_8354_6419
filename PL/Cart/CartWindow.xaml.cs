@@ -134,7 +134,7 @@ namespace PL.Cart
         private void cmdUp_Click(object sender, RoutedEventArgs e)
         {
             BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
-            bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, orderItem.Amount + 1);
+            bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) + 1);
             var items = bl.Cart.cartItems(Cart); //returning list of cart items 
             CartItems = items == null ? new() : new(items);
             //InitializeComponent();
@@ -145,7 +145,7 @@ namespace PL.Cart
         private void cmdDown_Click(object sender, RoutedEventArgs e)
         {
             BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
-            bl.Cart.UpdateProductAmount(Cart, orderItem. ProductID, orderItem. Amount - 1);
+            bl.Cart.UpdateProductAmount(Cart, orderItem. ProductID, (orderItem. Amount) - 1);
             var items = bl.Cart.cartItems(Cart); //returning list of cart items 
             CartItems = items == null ? new() : new(items);
             //InitializeComponent();

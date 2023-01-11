@@ -67,7 +67,7 @@ namespace PL
             {
                 new ProductWindow().Show();
                 var item = bl.Product.GetListedProducts();
-                Produc  ts = item == null ? new() : new(item);
+                Products = item == null ? new() : new(item);
             }
             catch (FormatException )
             {

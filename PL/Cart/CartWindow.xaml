@@ -21,7 +21,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="cmdDown" Margin="1" Content="˅" Click="cmdDown_Click" />
-                                <TextBox x:Name="txtNum" Margin="1" Width="Auto" Text="{Binding Amount}" TextChanged="txtNum_TextChanged" />
+                                <TextBox x:Name="txtNum" Margin="1" Width="Auto" Text="{Binding Amount}" />
                                 <Button x:Name="cmdUp" Margin="1" Content="˄" Click="cmdUp_Click" />
                             </StackPanel>
                         </DataTemplate>
@@ -30,7 +30,7 @@
 
                 <DataGridTextColumn x:Name="Price" Binding="{Binding Price}" Header="Price:" Width="Auto"/>
                 <DataGridTextColumn x:Name="TotalPrice" Binding="{Binding TotalPrice}" Header="Total Price:" Width="Auto"/>
-                <DataGridTemplateColumn Header="Remove">
+                <DataGridTemplateColumn Header="Remove:">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Name="Remove" Content="X" Foreground="Red" Click="RemoveProduct_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >

@@ -35,26 +35,27 @@ namespace PL
         }
 
 
-        public BO.Category Category { get; set; } = BO.Category.NO_ONE;
+       public BO.Category myCategory { get; set; } = BO.Category.NO_ONE;
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
         BO.Cart myLovelyCart;
         public CatalogWindow(BO.Cart myCart)
         {
-            InitializeComponent();
             myLovelyCart = myCart;
-            var item = bl.Product.GetListProductItem();
-            Products = item == null ? new() : new(item);
+            var items = bl.Product.GetListProductItem();
+            Products = items == null ? new() : new(items);
+            InitializeComponent();
+            DataContext = Products;
         }
 
-      
-        
+
+
         /// <summary>
         /// Click Button of Cart
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ShowCart_Click(object sender, RoutedEventArgs e)
         {
             new CartWindow(myLovelyCart).Show();
         }
@@ -80,11 +81,53 @@ namespace PL
         /// <param name="e"></param>
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var temp = Category == BO.Category.NO_ONE ?
-           bl.Product.GetListProductItem() : bl.Product.GetListProductItem().Where(item => item.Category == Category);
+            var temp = myCategory == BO.Category.NO_ONE ?
+           bl.Product.GetListProductItem() : bl.Product.GetListProductItem().Where(item => item.Category == myCategory);
             Products = temp == null ? new() : new(temp);
         }
 
-       
+        private void ProductItemListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddToCart_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
+                bl.Cart.AddProduct(myLovelyCart, productItem.ID);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
+                bl.Cart.UpdateProductAmount(myLovelyCart, productItem.ID, 0);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+    
+
     }
 }
