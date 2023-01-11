@@ -48,8 +48,7 @@ namespace PL
         {
             InitializeComponent();
             Update.Visibility = Visibility.Hidden;
-            RemoveFromCart.Visibility = Visibility.Hidden;
-            AddToCart.Visibility = Visibility.Hidden;
+            
         }
 
         /// <summary> 
@@ -59,30 +58,12 @@ namespace PL
         public ProductWindow(int ID)
         {
             InitializeComponent();
-             
             Add.Visibility = Visibility.Hidden;
-            RemoveFromCart.Visibility = Visibility.Hidden;
-            AddToCart.Visibility = Visibility.Hidden;
             Product = bl.Product.GetById(ID);
             IdForUpdate = ID;
         }
-        /// <summary>
-        /// constructor for Client
-        /// </summary>
-        /// <param name="ID"></param>
-        /// 
-
-        BO.Cart myCart;
-
-        public ProductWindow(int ID,bool flag, BO.Cart myLovelyCart)
-        {
-            InitializeComponent();
-            Add.Visibility = Visibility.Hidden;
-            Update.Visibility = Visibility.Hidden;
-            Product = bl.Product.GetById(ID);
-            IdForUpdate = ID;
-            myCart = myLovelyCart;
-        }
+        
+      
         /// <summary>
         /// click on button ADD
         /// </summary>
@@ -108,25 +89,7 @@ namespace PL
         }
 
 
-        private void AddCart_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bl.Cart.AddProduct(myCart, Product.ID);
-                //new ProductListWindow().Show();
-                Close();
-
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Check your input and try again");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
+        
         /// <summary>
         /// click on button UPDATE
         /// </summary>
@@ -151,25 +114,7 @@ namespace PL
 
         }
 
-        private void RemoveCart_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bl.Cart.UpdateProductAmount(myCart, Product.ID, 0);
-                new ProductListWindow().Show();
-                Close();
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Check your input and try again");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
+        
 
     }
 }

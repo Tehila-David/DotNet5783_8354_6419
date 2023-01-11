@@ -22,7 +22,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Name}" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CartItems.}" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount:"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Amount}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Price:"/>

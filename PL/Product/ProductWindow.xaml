@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ProductWindow" Height="450" Width="800" >
@@ -17,15 +17,14 @@
         <Label Content="Name :" HorizontalAlignment="Left" Margin="94,110,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <Label Content="Price :" HorizontalAlignment="Left" Margin="94,140,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
         <Label Content="In Stock :" HorizontalAlignment="Left" Margin="94,170,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
-        <TextBox x:Name="txtID"  Text="{Binding Path =Product.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"  />
+        <TextBox   Text="{Binding Product.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"  />
         <ComboBox Name="CategorySelector"  SelectedItem="{Binding Product.Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25"  />
-        <TextBox x:Name="txtName" Text="{Binding Path=Product.Name}" MaxLength="9" HorizontalAlignment="Left" Margin="200,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" />
-        <TextBox x:Name="txtPrice" Text="{Binding Path = Product.Price}" MaxLength="9" HorizontalAlignment="Left" Margin="200,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
-        <TextBox x:Name="txtInStock" Text="{Binding Path=Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
+        <TextBox  Text="{Binding Product.Name}" MaxLength="9" HorizontalAlignment="Left" Margin="200,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" />
+        <TextBox Text="{Binding Product.Price}" MaxLength="9" HorizontalAlignment="Left" Margin="200,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
+        <TextBox  Text="{Binding Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
         <Button x:Name="Add" Content="Add"  HorizontalAlignment="Left" Margin="209,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Add_Click" RenderTransformOrigin="2.463,0.513"/>
         <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="118,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Update_Click" />
-        <Button x:Name="AddToCart" Content="Add To Cart"  HorizontalAlignment="Left" Margin="100,269,0,0"  VerticalAlignment="Top" Width="80" Height="35" Click="AddCart_Click" RenderTransformOrigin="2.463,0.513"/>
-        <Button x:Name="RemoveFromCart" Content="Remove From Cart"  HorizontalAlignment="Left" Margin="205,269,0,0"  VerticalAlignment="Top" Width="110" Height="35" Click="RemoveCart_Click" RenderTransformOrigin="2.463,0.513" Grid.ColumnSpan="2"/>
+      
 
 
 
