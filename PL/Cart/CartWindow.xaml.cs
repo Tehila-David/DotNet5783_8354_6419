@@ -36,6 +36,10 @@ namespace PL.Cart
         }
 
 
+       // public ObservableCollection<OrderItem> CartItems = new ObservableCollection<OrderItem>();
+
+
+
 
         public static readonly DependencyProperty CartDependency =
                 DependencyProperty.Register(nameof(Cart),
@@ -51,11 +55,12 @@ namespace PL.Cart
         public CartWindow(BO.Cart myCart)
         {
             Cart = myCart;
-            var item = bl.Cart.cartItems(Cart);
-            CartItems = item == null ? new() : new(item);
-            InitializeComponent();
+            var items = bl.Cart.cartItems(myCart); //returning list of cart items 
+            CartItems = Cart.Items == null ? new() : new(items);
+            //CartItems = myCart.Items ? new (items);
             DataContext = CartItems;
-        }
+            InitializeComponent();
+         }
 
         public int id { get; set; }
 
