@@ -10,39 +10,56 @@
     <Window.Resources>
         <local:CategoryColorConverter
          x:Key="CategoryColor" />
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="Blue">
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="152*"/>
+            <ColumnDefinition Width="141*"/>
+            <ColumnDefinition Width="107*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="2">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="3" Margin="0,0,0,547" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <!--<ComboBox Name="CategorySelector"  SelectedItem="{Binding  Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />-->
-            <Label Content="Products" Grid.Column="0"/>
-            <Label Content="Please select a category => " Grid.Row="0"  Margin="10,4,229,6" Grid.Column="1" />
+            <Label Content="Products" Grid.Column="0"  FontFamily="Impact" FontSize="24" />
+            <Label Content="Please select a category => " Grid.Row="0"  Margin="319,4,262,6" FontSize="16" Grid.ColumnSpan="2" FontFamily="Impact"  />
         </Grid>
-        <Label Content="" FontSize="16" Margin="6,11,4,537" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <Label Content="" FontSize="16" Margin="6,11,4,537" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="Transparent"/>
         <ComboBox FontSize="16" SelectedIndex="0" Margin="279,5,29,5" Grid.Row="0"
                       SelectionChanged="CategorySelector_SelectionChanged"
                       ItemsSource="{Binding CategoryArray}"
-                      SelectedItem="{Binding  Category}" Grid.Column="1" />
+                      SelectedItem="{Binding  Category}" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Bahnschrift SemiLight SemiCondensed" >
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFF1A5A5" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
 
-        <ListView ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="2" Margin="0,43,0,0" Grid.RowSpan="2" >
+        <ListView Background="#FF85D0D2" ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Black"  >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="Auto" Header="ID">
+                    <GridViewColumn Width="Auto"  Header="ID">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Margin="-5,-1"  Text="{Binding ID}" TextAlignment="Center" Padding="5" RenderTransformOrigin="0.411,0.621"/>
+                                <TextBlock Margin="-5,-1"   Text="{Binding ID}" TextAlignment="Center" Padding="5" RenderTransformOrigin="0.411,0.621"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -96,7 +113,7 @@
                 </GroupStyle>
             </ListView.GroupStyle>-->
         </ListView>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="336,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click" Width="120" Grid.Column="1"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="54,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click" Width="120" Grid.Column="2"/>
     </Grid>
 
 </Window>

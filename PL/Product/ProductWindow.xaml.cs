@@ -30,46 +30,31 @@ namespace PL
         public static readonly DependencyProperty ProductDependency = DependencyProperty.Register(nameof(Product), typeof(BO.Product), typeof(Window));
         public BO.Product? Product { get => (BO.Product)GetValue(ProductDependency); private set => SetValue(ProductDependency, value); }
 
-        public ProductWindow(int id = 0)
+        Action<BO.ProductForList> ActionProduct;
+        public ProductWindow( Action<BO.ProductForList> addProduct1, int id = 0)
         {
             try
             {
                 Product = id == 0 ? new() { Category = BO.Category.NO_ONE } : bl.Product.GetById(id);
+                
                 InitializeComponent();
+                if (id == 0)
+                {
+                    Update.Visibility=Visibility.Hidden;
+                }
+                else
+                {
+                    Add.Visibility=Visibility.Hidden;
+                }
             }
             catch (Exception ex)
             {
                 Close();
                 MessageBox.Show(ex.Message, "Failure getting entity", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            ActionProduct = addProduct1;
         }
        
-        
-
-
-        /// <summary>
-        ///constructor of Add product
-        /// </summary>
-        //public ProductWindow()
-        //{
-        //    InitializeComponent();
-        //    Update.Visibility = Visibility.Hidden;
-            
-        //}
-
-        /// <summary> 
-        /// constructor of Update product
-        /// </summary>
-        /// <param name="product"></param>
-        //public ProductWindow(int ID)
-        //{
-        //    InitializeComponent();
-        //    Add.Visibility = Visibility.Hidden;
-        //    Product = bl.Product.GetById(ID);
-        //    IdForUpdate = ID;
-        //}
-        
-      
         /// <summary>
         /// click on button ADD
         /// </summary>
@@ -90,7 +75,15 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-
+            BO.ProductForList productForList = new ProductForList
+            {
+                Price = Product.Price,
+                ID = Product.ID,
+                Category = Product.Category,
+                Name = Product.Name,
+            };
+            ActionProduct(productForList);
+           
         }
 
         
