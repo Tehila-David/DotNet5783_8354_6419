@@ -8,8 +8,7 @@
         Title="CatalogWindow" Height="450" Width="800">
 
     <Grid >
-        
-        <DataGrid x:Name="ProductItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="111,91,118,119" RowDetailsVisibilityMode="VisibleWhenSelected"   RenderTransformOrigin="0.777,0.52" >
+        <DataGrid x:Name="ProductItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="36,27,30,113" RowDetailsVisibilityMode="VisibleWhenSelected"  RenderTransformOrigin="0.777,0.52">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ProductID" Binding="{Binding ID}" Header="Product ID:" Width="Auto"/>
                 <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name:" Width="Auto"/>

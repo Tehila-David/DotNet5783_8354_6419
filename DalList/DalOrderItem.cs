@@ -20,7 +20,8 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     public int Add(OrderItem myOrderItem)
     {
-
+        if (myOrderItem.ID == 0)
+            myOrderItem.ID = DataSource.Config.NextOrderItemID;
         if (_dataSource.OrderItemList.Exists(p => p?.ID == myOrderItem.ID))
             throw new AlreadyExists("The order item already exists");
         _dataSource.OrderItemList.Add(myOrderItem);
