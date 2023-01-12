@@ -5,27 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Cart"
         mc:Ignorable="d"
-        Title="OrderConfirmationWindow" Height="450" Width="800">
-    <Grid>
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="61*"/>
-                <ColumnDefinition Width="99*"/>
-            </Grid.ColumnDefinitions>
+        Title="OrderConfirmationWindow" Height="450" Width="800"
+         DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Dear customer, please enter the following details:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin=" 50,50,0,0">
-            </TextBlock>
-            <TextBlock Text="Name:"  FontSize="18" FontWeight="Bold" FontStyle="Italic">
-            </TextBlock>
-            <TextBox x:Name="nameTextBox" Text="{Binding customerName}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+        <TextBlock Text="Dear customer, please enter the following details:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="21,27,342,360">
+        </TextBlock>
+        <TextBlock Text="Name:"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="23,82,704,309" RenderTransformOrigin="0.5,0.5">
+        </TextBlock>
+        <TextBox x:Name="nameTextBox" Text="{Binding CustomerName}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="192" Height="23" Margin="95,89,0,0" />
 
-            <TextBlock Text="Email Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic">
-            </TextBlock>
-            <TextBox x:Name="emailTextBox" Text="{Binding customerEmail}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+        <TextBlock Text="Email Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="20,125,632,266" RenderTransformOrigin="0.507,-1.537">
+        </TextBlock>
+        <TextBox x:Name="emailTextBox" Text="{Binding CustomerEmail}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="194" Height="27" Margin="161,129,0,0" RenderTransformOrigin="0.529,0.562" />
 
-            <TextBlock Text="Home Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic">
-            </TextBlock>
-            <TextBox x:Name="homeAddressTextBox" Text="{Binding customerAddress}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
-
-        </Grid>
+        <TextBlock Text="Home Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="19,170,635,222" RenderTransformOrigin="0.494,-1.899"/>
+        <TextBox x:Name="homeAddressTextBox" Text="{Binding CustomerAddress}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="264" Height="25" Margin="156,172,0,0" />
+        <Button Content="Place Order" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="101,261,0,0"  VerticalAlignment="Top" Width="179" Height="44" Click="ConfirmOrder_Click"/>
+    </Grid>
 </Window>

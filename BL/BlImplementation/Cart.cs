@@ -172,7 +172,7 @@ internal class Cart:ICart
         {
             throw new BO.InternalProblem("Dal layer is inaccessible");
         }
-        foreach (BO.OrderItem? item in myCart.Items) //Creating order items based om the items in the cart
+        foreach (BO.OrderItem? item in myCart.Items) //Creating order items based on the items in the cart
         {
             DO.OrderItem doOrderItem = new DO.OrderItem()
             {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BO;
+using PL.Order;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,47 @@ namespace PL.Cart
     /// </summary>
     public partial class OrderConfirmationWindow : Window
     {
-        public OrderConfirmationWindow()
+        BlApi.IBl bl = BlApi.Factory.Get()!;
+
+        public static readonly DependencyProperty CartDependency =
+                DependencyProperty.Register(nameof(FinalCart),
+                                        typeof(BO.Cart),
+                                        typeof(CartWindow));
+        public BO.Cart FinalCart
         {
+            get => (BO.Cart)GetValue(CartDependency);
+            private set => SetValue(CartDependency, value);
+        }
+
+        public OrderConfirmationWindow(BO.Cart myCart)
+        {
+            FinalCart = myCart;
             InitializeComponent();
+            //DataContext = FinalCart;    
+        }
+
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerAddress { get; set; }
+
+
+        private void ConfirmOrder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FinalCart.CustomerName = CustomerName;
+                FinalCart.CustomerEmail = CustomerEmail;
+                FinalCart.CustomerAddress = CustomerAddress;
+
+                bl.Cart.CartConfirmation(FinalCart);
+                MessageBox.Show("Thanks for shopping with us. Your order has been successfully placed.");
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

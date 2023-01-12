@@ -38,7 +38,6 @@ namespace PL.Cart
         }
 
 
-       // public ObservableCollection<OrderItem> CartItems = new ObservableCollection<OrderItem>();
 
 
 

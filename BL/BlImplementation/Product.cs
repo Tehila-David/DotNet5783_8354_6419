@@ -55,7 +55,7 @@ internal class Product : BlApi.IProduct
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
                 Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Count(),
-                IsAvailable = product?.InStock == 0 ? true : false,
+                IsAvailable = (product?.InStock > 0) ? true : false
             }).OrderBy(item => item.ID);
         }
         else
@@ -68,7 +68,7 @@ internal class Product : BlApi.IProduct
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
                 Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Count(),
-                IsAvailable = product?.InStock == 0 ? true : false,
+                IsAvailable = (product?.InStock > 0) ? true : false
             }).OrderBy(item => item.ID);
         }
     }

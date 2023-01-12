@@ -42,7 +42,7 @@ namespace PL
         public CatalogWindow(BO.Cart myCart)
         {
             myLovelyCart = myCart;
-            var items = bl.Product.GetListProductItem();
+            var items = bl.Product.GetListProductItem(myLovelyCart);
             Products = items == null ? new() : new(items);
             InitializeComponent();
             DataContext = Products;
@@ -83,7 +83,7 @@ namespace PL
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var temp = myCategory == BO.Category.NO_ONE ?
-           bl.Product.GetListProductItem() : bl.Product.GetListProductItem().Where(item => item.Category == myCategory);
+           bl.Product.GetListProductItem(myLovelyCart) : bl.Product.GetListProductItem(myLovelyCart).Where(item => item.Category == myCategory);
             Products = temp == null ? new() : new(temp);
         }
 
