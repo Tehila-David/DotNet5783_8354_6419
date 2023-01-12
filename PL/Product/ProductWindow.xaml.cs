@@ -31,7 +31,7 @@ namespace PL
         public BO.Product? Product { get => (BO.Product)GetValue(ProductDependency); private set => SetValue(ProductDependency, value); }
 
         Action<BO.ProductForList> ActionProduct;
-        public ProductWindow( Action<BO.ProductForList> addProduct1, int id = 0)
+        public ProductWindow( Action<BO.ProductForList> ActProduct, int id = 0)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace PL
                 Close();
                 MessageBox.Show(ex.Message, "Failure getting entity", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            ActionProduct = addProduct1;
+            ActionProduct = ActProduct;
         }
        
         /// <summary>
@@ -107,7 +107,14 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-
+            BO.ProductForList productForList = new ProductForList
+            {
+                Price = Product.Price,
+                ID = Product.ID,
+                Category = Product.Category,
+                Name = Product.Name,
+            };
+            ActionProduct(productForList);
         }
 
         

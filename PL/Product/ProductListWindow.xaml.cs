@@ -91,8 +91,7 @@ namespace PL
                 BO.ProductForList? product = new BO.ProductForList();
                 product = listBox.SelectedItem as BO.ProductForList;
                 new ProductWindow(addProduct, product.ID).Show();
-                var item = bl.Product.GetListedProducts();
-                Products = item == null ? new() : new(item);
+                Products.Remove(product);
             }
             catch (FormatException)
             {
@@ -104,9 +103,10 @@ namespace PL
             }
         }
         public void addProduct(BO.ProductForList product)=> Products?.Add(product);
-        
 
-        
+      
+
+
     }
 
 
