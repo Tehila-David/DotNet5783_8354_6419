@@ -10,50 +10,32 @@
     <Window.Resources>
         <local:CategoryColorConverter
          x:Key="CategoryColor" />
-        <Style TargetType="Button">
-            <Setter Property="Foreground" Value="Blue">
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Red"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
     </Window.Resources>
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="152*"/>
-            <ColumnDefinition Width="141*"/>
-            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="31*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="3" Margin="0,0,0,547" Grid.RowSpan="2">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
-            <!--<ComboBox Name="CategorySelector"  SelectedItem="{Binding  Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />-->
-            <Label Content="Products" Grid.Column="0"  FontFamily="Impact" FontSize="24" />
-            <Label Content="Please select a category => " Grid.Row="0"  Margin="319,4,262,6" FontSize="16" Grid.ColumnSpan="2" FontFamily="Impact"  />
+            </Grid.ColumnDefinitions>
         </Grid>
-        <Label Content="" FontSize="16" Margin="6,11,4,537" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="Transparent"/>
+        <Label Content="Products" Grid.Column="0" Background="#FFF390A5" FontFamily="Impact" FontSize="24" />
+        <Label Content="Please select a category => " Grid.Row="0"  Margin="10,4,229,6" Grid.Column="1" Background="#FF90CBF3" />
+        <Label Content="" FontSize="16" Margin="6,11,4,537" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="Transparent"/>
         <ComboBox FontSize="16" SelectedIndex="0" Margin="279,5,29,5" Grid.Row="0"
                       SelectionChanged="CategorySelector_SelectionChanged"
                       ItemsSource="{Binding CategoryArray}"
-                      SelectedItem="{Binding  Category}" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Bahnschrift SemiLight SemiCondensed" >
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="#FFF1A5A5" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-        </ComboBox>
+                      SelectedItem="{Binding  Category}" Grid.Column="1" />
 
-        <ListView Background="#FF85D0D2" ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Black"  >
+        <ListView  Background="#FF85D0D2" ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="2" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Black"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="Auto"  Header="ID">
@@ -84,36 +66,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
                 </GridView>
             </ListView.View>
-
-            <!--<ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander IsExpanded="True">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" FontWeight="DemiBold" Foreground="DarkSlateGray" FontSize="20" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="18" Foreground="Gray" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text=" item(s)" FontSize="16" Foreground="Gray" FontStyle="Italic" VerticalAlignment="Bottom" />
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListView.GroupStyle>-->
         </ListView>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="54,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click" Width="120" Grid.Column="2"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="336,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click" Width="120" Grid.Column="1"/>
     </Grid>
 
 </Window>

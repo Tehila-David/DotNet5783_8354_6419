@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Product"
-        xmlns:PL.Convert ="clr-namespace:PL.Converters"
+        xmlns:local ="clr-namespace:PL.Converters"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ProductWindow" Height="450" Width="800" >
@@ -18,7 +17,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+        <local:notVisibilityConverterById x:Key="VisibilityButtenUpdate"/>
+        <local:VisibilityConverterById x:Key="VisibilityButtenAdd"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

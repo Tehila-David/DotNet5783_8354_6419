@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace PL
 {
@@ -66,7 +67,7 @@ namespace PL
         {
             try 
             {
-                new ProductWindow().Show(); 
+                new ProductWindow(addProduct).Show(); 
             }
             catch (FormatException )
             {
@@ -89,7 +90,7 @@ namespace PL
                 ListBox listBox = sender as ListBox;
                 BO.ProductForList? product = new BO.ProductForList();
                 product = listBox.SelectedItem as BO.ProductForList;
-                new ProductWindow(product.ID).Show();
+                new ProductWindow(addProduct, product.ID).Show();
                 var item = bl.Product.GetListedProducts();
                 Products = item == null ? new() : new(item);
             }
@@ -102,7 +103,7 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
+        public void addProduct(BO.ProductForList product)=> Products?.Add(product);
         
 
         

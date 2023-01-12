@@ -26,8 +26,28 @@
                     <Setter Property="CornerRadius" Value="15"/>
                 </Style>
             </Style.Resources>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.300" Storyboard.TargetProperty="FontSize" To="28" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.800" Storyboard.TargetProperty="FontSize" To="18" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
-      
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,7 +59,7 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Manager" Content="Manager"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="45,111,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="195" ClickMode="Press" Click="Manager_Click" />
+        <Button x:Name="Manager" Content="Manager"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="45,111,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="195"  Click="Manager_Click" />
         <Button x:Name="New_Order" Content="New Order"  Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,173,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="36" Width="196" Click="NewOrder_Click"/>
         <Button x:Name="Order_Tracking" Content="Order Tracking"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,237,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="196" Click="OrderTracking_Click"/>
         <Button x:Name="Products_List"  Content="Products List"    Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="293,141,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="42" Width="171" Click="ProductsList_Click" />

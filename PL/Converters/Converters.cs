@@ -82,4 +82,48 @@ namespace PL.Converters
             throw new NotImplementedException();
 
     }
+    public class notVisibilityConverterById : IValueConverter
+    {
+        //convert from source property type to target property type
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+           int Id = (int)value;
+            if (Id==0)
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            throw new NotImplementedException();
+
+    }
+
+    public class VisibilityConverterById : IValueConverter
+    {
+        //convert from source property type to target property type
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int Id = (int)value;
+            if (Id == 0)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Hidden;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            throw new NotImplementedException();
+
+    }
+
 }
