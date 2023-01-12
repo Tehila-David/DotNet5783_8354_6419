@@ -52,7 +52,15 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <ListView ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Rounded MT Bold" FontSize="14"   >
+        <ListView ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Rounded MT Bold" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="{x:Null}"   >
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="5"/>
+                </TransformGroup>
+            </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="Auto"  Header="ID">
@@ -112,7 +120,7 @@
                 </GroupStyle>
             </ListView.GroupStyle>-->
         </ListView>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="54,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click" Width="120" Grid.Column="2"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="54,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="Button_Click" Width="136" Grid.Column="2" FontFamily="Arial Rounded MT Bold" FontWeight="Bold"/>
     </Grid>
 
 </Window>
