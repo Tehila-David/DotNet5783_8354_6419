@@ -19,6 +19,7 @@ namespace PL
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
+
         public static readonly DependencyProperty ProductsDependency =
         DependencyProperty.Register(nameof(Products),
                                 typeof(ObservableCollection<ProductForList?>),
@@ -65,15 +66,14 @@ namespace PL
         {
             try 
             {
-                new ProductWindow().Show();
-                var item = bl.Product.GetListedProducts();
-                Products = item == null ? new() : new(item);
+                new ProductWindow().Show(); 
             }
             catch (FormatException )
             {
                 MessageBox.Show("Check your input and try again");
             }
-           
+            var item = bl.Product.GetListedProducts();
+            Products = item == null ? new() : new(item);
 
         }
 

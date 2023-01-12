@@ -38,15 +38,7 @@ namespace PL.Order
             private set => SetValue(OrderItemDependency, value);
         }
 
-        // public static readonly DependencyProperty OrderDependency =
-        //DependencyProperty.Register(nameof(Order1),
-        //                      typeof(BO.Order),
-        //                      typeof(OrderItemWindow));
-        // public BO.Order? Order1
-        // {
-        //     get => (BO.Order)GetValue(OrderDependency);
-        //     private set => SetValue(OrderDependency, value);
-        // }
+
 
         public BO.Order Order1 = new BO.Order();
         /// <summary>
@@ -59,15 +51,17 @@ namespace PL.Order
             OrderID = OrderId;
             Order1 = bl.Order.GetByID(OrderId);
         }
-        public OrderItemWindow(int OrderId, int OrderItemId)//!!!???? לא מצליחה לעדכן מוצר שקיים בהזמנה איך עושים את זה
-        {
-            InitializeComponent();
-            OrderID = OrderId;
-            OrderItem = bl.Order.GetByID(OrderID).Items.FirstOrDefault(item => item.ID == OrderItemId);
-            Order1 = bl.Order.GetByID(OrderId);
-        }
 
-        private void UpdateItem_Click(object sender, RoutedEventArgs e)
+
+            public OrderItemWindow(int OrderId, int OrderItemId) //!!!???? לא מצליחה לעדכן מוצר שקיים בהזמנה איך עושים את זה
+            {
+                InitializeComponent();
+                OrderID = OrderId;
+                OrderItem = bl.Order.GetByID(OrderID).Items.FirstOrDefault(item => item.ID == OrderItemId);
+                Order1 = bl.Order.GetByID(OrderId);
+            }
+
+        public void UpdateItem_Click(object sender, RoutedEventArgs e)
         {
 
             try
@@ -88,9 +82,10 @@ namespace PL.Order
             Close();
 
 
-
-
         }
+
+            
+        
     }
 }
 

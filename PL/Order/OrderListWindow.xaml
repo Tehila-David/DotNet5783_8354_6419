@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Order"
+        xmlns:local="clr-namespace:PL.Converters"
         mc:Ignorable="d"
         Title="OrderListWindow" Height="450" Width="800"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <local:StatusColorConverter
+         x:Key="StatusColor" />
+        
+    </Window.Resources>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -17,14 +22,66 @@
            VerticalAlignment="Stretch" Width="auto">
             <Label Content="Orders" Grid.Column="0"/>
         </Grid>
-        <ComboBox Name="StatusSelector"  SelectedItem="{Binding  Status}" ItemsSource="{Binding StatusArray}" SelectionChanged="StatusSelector_SelectionChanged" Margin="562,0,0,0"  />
-        <ListView Grid.Row="1" x:Name="OrdersList"  ItemsSource="{Binding Orders}" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick" SelectionChanged="OrdersList_SelectionChanged"   >
+        <ComboBox Name="StatusSelector" SelectedItem="{Binding  Status}" ItemsSource="{Binding StatusArray}" SelectionChanged="StatusSelector_SelectionChanged" Margin="562,0,0,0" >
+            <ComboBox.Style>
+            <Style  TargetType="ComboBox">
+                <Setter Property="Foreground" Value="Blue"></Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </Trigger>
+                </Style.Triggers>
+            </Style>
+            </ComboBox.Style>
+        </ComboBox>
+        <!--<ListView Grid.Row="1" x:Name="OrdersList"  ItemsSource="{Binding Orders}" d:ItemsSource="{d:SampleData ItemCount=5}"  MouseDoubleClick="OrdersList_MouseDoubleClick" SelectionChanged="OrdersList_SelectionChanged"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+        </ListView>-->
+        <ListView ItemsSource="{Binding Orders}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="OrdersList_MouseDoubleClick" Grid.ColumnSpan="2" Margin="0,43,0,0" Grid.RowSpan="2"   >
+           
+            <ListView.View>
+            <GridView>
+                    <GridViewColumn Width="Auto" Header="ID">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock Margin="-5,-1"  Text="{Binding ID}" TextAlignment="Center" Padding="5" Width="auto"  />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Width="Auto" Header=" Client Name">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock Margin="-5,-1" Text="{Binding  CustomerName}" TextAlignment="Center" Padding="5"  Width="auto" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Width="Auto" Header="Amount Of Items">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock Margin="-5,-1" Text="{Binding AmountOfItems}" TextAlignment="Center" Padding="5" Width="auto"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn  Width="Auto" Header="Total Price">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Margin="-5,-1" Text="{Binding  TotalPrice}" TextAlignment="Center" Padding="5" Width="60"  />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                    <GridViewColumn  Width="Auto" Header="Status">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-5,-1"  Text="{Binding  Status}" TextAlignment="Center" Padding="5" Background="{Binding Status, Converter={StaticResource StatusColor}}" Width="100" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+        </ListView.View>
         </ListView>
-
     </Grid>
 </Window>

@@ -41,7 +41,7 @@ internal class Product : BlApi.IProduct
 
     }
 
-    public IEnumerable<BO.ProductItem> GetListProductItem(Func<DO.Product?, bool>? predicate = null)
+    public IEnumerable<BO.ProductItem> GetListProductItem(Func<DO.Product?, bool>? predicate = null , BO.Cart myCart)
     {
 
         if (predicate == null)
@@ -54,8 +54,8 @@ internal class Product : BlApi.IProduct
                 Name = product?.Name,
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
-                Amount = product?.InStock ?? 0,
-                IsAvailable = product?.InStock == 0 ? false :true,
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
+                IsAvailable = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
             }).OrderBy(item => item.ID);
         }
         else
@@ -67,11 +67,10 @@ internal class Product : BlApi.IProduct
                 Name = product?.Name,
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
-                Amount = product?.InStock ?? 0,
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
                 IsAvailable = product?.InStock == 0 ? true : false,
             }).OrderBy(item => item.ID);
         }
-
     }
 
     public BO.Product GetById(int id)
@@ -93,7 +92,6 @@ internal class Product : BlApi.IProduct
         {
             throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
         }
-
     }
     public BO.ProductItem GetById1(int id, BO.Cart myCart)
     {

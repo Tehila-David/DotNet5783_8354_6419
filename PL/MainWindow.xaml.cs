@@ -16,8 +16,8 @@ namespace PL
         public MainWindow()
         {
            InitializeComponent();
-           Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
-           Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
+           //Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
+           //Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
         }
         BlApi.IBl? bl = BlApi.Factory.Get();
 
@@ -28,11 +28,11 @@ namespace PL
         /// <param name="e"></param>
         private void Manager_Click(object sender, RoutedEventArgs e)
         {
-            Manager.Visibility = Visibility.Hidden;//hide butten of Manager
-            New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
-            Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
-            Orders_List.Visibility = Visibility.Visible;//Show butten of Orderslist
-            Products_List.Visibility = Visibility.Visible;//Show butten of Productslist
+            //Manager.Visibility = Visibility.Hidden;//hide butten of Manager
+            //New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
+            //Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
+            //Orders_List.Visibility = Visibility.Visible;//Show butten of Orderslist
+            //Products_List.Visibility = Visibility.Visible;//Show butten of Productslist
         }
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
@@ -52,13 +52,13 @@ namespace PL
         private void ProductsList_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().Show();
-            Close();
+           
         }
 
         private void OrdersList_Click(object sender, RoutedEventArgs e)
         {
             new OrderListWindow().Show();
-            Close ();
+            
         }
     }
 }
