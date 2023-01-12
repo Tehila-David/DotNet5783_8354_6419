@@ -57,6 +57,7 @@ namespace PL
         /// <param name="e"></param>
         private void ShowCart_Click(object sender, RoutedEventArgs e)
         {
+            Close();
             new CartWindow(myLovelyCart).Show();
         }
 

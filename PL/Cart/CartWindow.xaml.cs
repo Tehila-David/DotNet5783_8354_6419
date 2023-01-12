@@ -86,13 +86,58 @@ namespace PL.Cart
 
         }
        // public int Amount { get; set; }
-        private void UpdateProduct_Click(object sender, RoutedEventArgs e)
+        
+
+        private void EmptyCart_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var item in CartItems) //removing all items from cart by settong their amount to zero
+            {
+                bl.Cart.UpdateProductAmount(Cart, item.ProductID, 0);
+            }
+        }
+        
+        private void BackToCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            new CatalogWindow(Cart).Show();
+        }
+
+        private void OrderItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void cmdUp_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
                 BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
-                bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, orderItem. Amount);
+                bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) + 1);
+                var items = bl.Cart.cartItems(Cart); //returning list of cart items 
+                CartItems = items == null ? new() : new(items);
+                DataContext = CartItems;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Check your input and try again");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+        private void cmdDown_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
+                bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) - 1);
+                var items = bl.Cart.cartItems(Cart); //returning list of cart items 
+                CartItems = items == null ? new() : new(items);
+                DataContext = CartItems;
             }
             catch (FormatException)
             {
@@ -104,52 +149,10 @@ namespace PL.Cart
             }
         }
 
-
-
-        private void EmptyCart_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(var item in CartItems) //removing all items from cart by settong their amount to zero
-            {
-                bl.Cart.UpdateProductAmount(Cart, item.ProductID, 0);
-            }
-        }
         private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-        private void BackToCatalog_Click(object sender, RoutedEventArgs e)
-        {
             Close();
-        }
-
-        private void OrderItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void cmdUp_Click(object sender, RoutedEventArgs e)
-        {
-            BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
-            bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) + 1);
-            var items = bl.Cart.cartItems(Cart); //returning list of cart items 
-            CartItems = items == null ? new() : new(items);
-            //InitializeComponent();
-            DataContext = CartItems;
-
-
-        }
-        private void cmdDown_Click(object sender, RoutedEventArgs e)
-        {
-            BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
-            bl.Cart.UpdateProductAmount(Cart, orderItem. ProductID, (orderItem. Amount) - 1);
-            var items = bl.Cart.cartItems(Cart); //returning list of cart items 
-            CartItems = items == null ? new() : new(items);
-            //InitializeComponent();
-            DataContext = CartItems;
+            new OrderConfirmationWindow(Cart).Show();
         }
 
 

@@ -1,0 +1,31 @@
+﻿<Window x:Class="PL.Cart.OrderConfirmationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Cart"
+        mc:Ignorable="d"
+        Title="OrderConfirmationWindow" Height="450" Width="800">
+    <Grid>
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="99*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Dear customer, please enter the following details:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin=" 50,50,0,0">
+            </TextBlock>
+            <TextBlock Text="Name:"  FontSize="18" FontWeight="Bold" FontStyle="Italic">
+            </TextBlock>
+            <TextBox x:Name="nameTextBox" Text="{Binding customerName}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+
+            <TextBlock Text="Email Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic">
+            </TextBlock>
+            <TextBox x:Name="emailTextBox" Text="{Binding customerEmail}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+
+            <TextBlock Text="Home Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic">
+            </TextBlock>
+            <TextBox x:Name="homeAddressTextBox" Text="{Binding customerAddress}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
+
+        </Grid>
+</Window>

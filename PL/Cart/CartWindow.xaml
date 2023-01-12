@@ -38,12 +38,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnUpdate" Content="Update Product" HorizontalAlignment="Left" Margin="180,292,0,0" VerticalAlignment="Top" Width="100" Click="UpdateProduct_Click" Height="19"/>
-        <Button x:Name="btnRem" Content="Remove Product" HorizontalAlignment="Left" Margin="447,291,0,0" VerticalAlignment="Top" Width="75" Click="RemoveProduct_Click"/>
+        <Button x:Name="emptyCart" Content="Empty Cart" HorizontalAlignment="Left" Margin="45,120,0,0" VerticalAlignment="Top" Width="97" Click="EmptyCart_Click" Height="34"  Background ="Plum" Foreground="Blue" />
+        <Button x:Name="confirmOrder" Content="Place Order" HorizontalAlignment="Left" Margin="528,298,0,0" VerticalAlignment="Top" Width="103" Click="OrderConfirmation_Click" Background ="Plum" Foreground="Blue" RenderTransformOrigin="0.505,0.152"/>
+        <Button x:Name="BackToCatalog" Content="Back To Catalog" HorizontalAlignment="Left" Margin="44,64,0,0" VerticalAlignment="Top" Width="97" Click="BackToCatalog_Click" Height="37" Background ="Plum" Foreground="Blue"/>
+        <TextBlock Text="Total Price: " Margin="57,300,681,115"/>
+        
     </Grid>
-
 </Window>
