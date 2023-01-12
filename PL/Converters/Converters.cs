@@ -27,14 +27,46 @@ namespace PL.Converters
             throw new NotImplementedException();
     }
 
-    public class NotBooleanToVisibilityConverter : IValueConverter
+    public class VisibilityConverter : IValueConverter
     {
         //convert from source property type to target property type
-       
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-                (bool)value ? Visibility.Hidden : Visibility.Visible;
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-                throw new NotImplementedException();
-       
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool boolValue = (bool)value;
+            if (boolValue)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Hidden;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            throw new NotImplementedException();
+
+    }
+    public class notVisibilityConverter : IValueConverter
+    {
+        //convert from source property type to target property type
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool boolValue = (bool)value;
+            if (boolValue)
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            throw new NotImplementedException();
+
     }
 }
