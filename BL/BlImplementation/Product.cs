@@ -41,7 +41,7 @@ internal class Product : BlApi.IProduct
 
     }
 
-    public IEnumerable<BO.ProductItem> GetListProductItem(Func<DO.Product?, bool>? predicate = null , BO.Cart myCart)
+    public IEnumerable<BO.ProductItem?> GetListProductItem( BO.Cart myCart , Func<DO.Product?, bool>? predicate = null  )
     {
 
         if (predicate == null)
