@@ -54,6 +54,7 @@ namespace PL.Cart
                 FinalCart.CustomerAddress = CustomerAddress;
 
                 bl.Cart.CartConfirmation(FinalCart);
+                Close();
                 MessageBox.Show("Thanks for shopping with us. Your order has been successfully placed.");
 
             }

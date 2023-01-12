@@ -92,7 +92,7 @@ internal sealed class DataSource
         {
             var orderItem = new OrderItem()
             {
-                ID = Config.NextOrderID,
+                ID = Config.NextOrderItemID,
                 ProductID = random.Next(222221, 222232),
                 OrderID = random.Next(100000, Config.NextOrderItemID),
                 Amount = random.Next(1, 3)
