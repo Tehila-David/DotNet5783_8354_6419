@@ -37,10 +37,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <!--<ComboBox Name="CategorySelector"  SelectedItem="{Binding  Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged" />-->
-            <Label Content="Products" Grid.Column="0"  FontFamily="Impact" FontSize="24" />
-            <Label Content="Please select a category => " Grid.Row="0"  Margin="319,4,262,6" FontSize="16" Grid.ColumnSpan="2" FontFamily="Impact"  />
+            <Label Content="Products" Grid.Column="0"  FontFamily="Franklin Gothic Heavy" FontSize="18" Foreground="#FFDE2323" Height="80" BorderBrush="#FF5C1919" Background="Transparent"  />
+
         </Grid>
-        <Label Content="" FontSize="16" Margin="6,11,4,537" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="Transparent"/>
         <ComboBox FontSize="16" SelectedIndex="0" Margin="279,5,29,5" Grid.Row="0"
                       SelectionChanged="CategorySelector_SelectionChanged"
                       ItemsSource="{Binding CategoryArray}"
@@ -53,7 +52,7 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <ListView Background="#FF85D0D2" ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Black"  >
+        <ListView ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductsList_MouseDoubleClick" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Rounded MT Bold" FontSize="14"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="Auto"  Header="ID">
@@ -80,7 +79,7 @@
                     <GridViewColumn  Width="Auto" Header="Category">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Margin="-5,-1"  Text="{Binding  Category}" TextAlignment="Center" Padding="5" Background="{Binding Category, Converter={StaticResource CategoryColor}}" />
+                                <TextBox Margin="-5,-1"  Text="{Binding  Category}" TextAlignment="Center" Padding="5" Background="{Binding Category, Converter={StaticResource CategoryColor}}" Width="130" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
