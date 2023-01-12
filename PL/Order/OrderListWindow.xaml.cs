@@ -52,12 +52,7 @@ namespace PL.Order
             Close();
         }
 
-        private void OrdersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-
-        }
-
+      
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var temp = Status == BO.OrderStatus.Default ?

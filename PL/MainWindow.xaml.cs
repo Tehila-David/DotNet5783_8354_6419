@@ -52,13 +52,13 @@ namespace PL
         private void ProductsList_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().Show();
-            Close();
+           
         }
 
         private void OrdersList_Click(object sender, RoutedEventArgs e)
         {
             new OrderListWindow().Show();
-            Close ();
+            
         }
     }
 }

@@ -20,7 +20,7 @@ public interface IProduct
     ///  for the manager and customer , return list of ProductItem
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<BO.ProductItem> GetListProductItem(Func<DO.Product?, bool>? predicate = null);
+    public IEnumerable<BO.ProductItem?> GetListProductItem(Func<DO.Product?, bool>? predicate = null , BO.Cart myCart);
     /// <summary>
     /// for the manager , return details of product
     /// </summary>
