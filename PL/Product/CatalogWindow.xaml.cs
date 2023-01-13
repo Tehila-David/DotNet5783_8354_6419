@@ -34,18 +34,19 @@ namespace PL
             private set => SetValue(ProductsDependency, value);
         }
 
+      
 
-       public BO.Category myCategory { get; set; } = BO.Category.NO_ONE;
+        public BO.Category myCategory { get; set; } = BO.Category.NO_ONE;
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
         BO.Cart myLovelyCart;
         public CatalogWindow(BO.Cart myCart)
         {
+           
             myLovelyCart = myCart;
             var items = bl.Product.GetListProductItem(myLovelyCart);
             Products = items == null ? new() : new(items);
             InitializeComponent();
-            DataContext = Products;
         }
 
 
@@ -75,30 +76,24 @@ namespace PL
             
         }
 
-        /// <summary>
-        /// Filter - list products by category
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var temp = myCategory == BO.Category.NO_ONE ?
-           bl.Product.GetListProductItem(myLovelyCart) : bl.Product.GetListProductItem(myLovelyCart).Where(item => item.Category == myCategory);
-            Products = temp == null ? new() : new(temp);
-        }
-
-        private void ProductItemListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
+       
 
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
 
             try
             {
+                
                 BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
-                bl.Cart.AddProduct(myLovelyCart, productItem.ID);
+                if (productItem.IsAvailable == true)
+                {
+                    bl.Cart.AddProduct(myLovelyCart, productItem.ID);
+                    var temp = bl.Product.GetListProductItem(myLovelyCart);
+                    Products = temp == null ? new() : new(temp);
+                }
+                else
+                    throw new Exception("We sorry this product out of stock");
             }
             catch (FormatException)
             {
@@ -109,13 +104,35 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //private void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //    try
+        //    {
+        //        BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
+        //        bl.Cart.UpdateProductAmount(myLovelyCart, productItem.ID, productItem.Amount - 1);
+        //        var temp = bl.Product.GetListProductItem(myLovelyCart);
+        //        Products = temp == null ? new() : new(temp);
+        //    }
+        //    catch (FormatException)
+        //    {
+        //        MessageBox.Show("Check your input and try again");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
-                bl.Cart.UpdateProductAmount(myLovelyCart, productItem.ID, 0);
+                bl.Cart.UpdateProductAmount(myLovelyCart, productItem.ID, productItem.Amount - 1);
+                var temp = bl.Product.GetListProductItem(myLovelyCart);
+                Products = temp == null ? new() : new(temp);
             }
             catch (FormatException)
             {
@@ -127,8 +144,21 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Filter - list productItems by category
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CatagorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var temp = myCategory == BO.Category.NO_ONE ?
+            bl.Product.GetListProductItem(myLovelyCart) : bl.Product.GetListProductItem(myLovelyCart).Where(item => item.Category == myCategory);
+            Products = temp == null ? new() : new(temp);
+        }
 
-    
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }

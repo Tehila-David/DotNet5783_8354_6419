@@ -53,7 +53,7 @@ namespace PL.Converters
             }
             else
             {
-                return Visibility.Hidden;
+                return Visibility.Collapsed;
             }
         }
 
@@ -70,7 +70,7 @@ namespace PL.Converters
             bool boolValue = (bool)value;
             if (boolValue)
             {
-                return Visibility.Hidden;
+                return Visibility.Collapsed;
             }
             else
             {
@@ -91,7 +91,7 @@ namespace PL.Converters
            int Id = (int)value;
             if (Id==0)
             {
-                return Visibility.Hidden;
+                return Visibility.Collapsed;
             }
             else
             {
@@ -117,7 +117,7 @@ namespace PL.Converters
             }
             else
             {
-                return Visibility.Hidden;
+                return Visibility.Collapsed;
             }
         }
 

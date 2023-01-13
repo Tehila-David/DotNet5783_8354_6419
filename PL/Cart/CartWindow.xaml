@@ -20,9 +20,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button x:Name="cmdDown" Margin="1" Content="˅" Click="cmdDown_Click" />
+                                <Button x:Name="cmdDown" Margin="1" Content="˅" Click="cmdDown_Click" FontWeight="Bold" FontSize="12" />
                                 <TextBox x:Name="txtNum" Margin="1" Width="Auto" Text="{Binding Amount}" />
-                                <Button x:Name="cmdUp" Margin="1" Content="˄" Click="cmdUp_Click" />
+                                <Button x:Name="cmdUp" Margin="1" Content="˄" Click="cmdUp_Click" FontWeight="Bold" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
