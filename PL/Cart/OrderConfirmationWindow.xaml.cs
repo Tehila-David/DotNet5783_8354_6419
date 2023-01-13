@@ -37,22 +37,14 @@ namespace PL.Cart
         {
             FinalCart = myCart;
             InitializeComponent();
-            //DataContext = FinalCart;    
+            DataContext = FinalCart;    
         }
-
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
-        public string CustomerAddress { get; set; }
 
 
         private void ConfirmOrder_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                FinalCart.CustomerName = CustomerName;
-                FinalCart.CustomerEmail = CustomerEmail;
-                FinalCart.CustomerAddress = CustomerAddress;
-
                 bl.Cart.CartConfirmation(FinalCart);
                 Close();
                 MessageBox.Show("Thanks for shopping with us. Your order has been successfully placed.");
