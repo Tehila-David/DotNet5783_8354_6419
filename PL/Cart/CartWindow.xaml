@@ -7,7 +7,7 @@
         xmlns:bo="clr-namespace:PL.Cart" 
         mc:Ignorable="d"
         Title="CartWindow" Height="450" Width="800">
-
+        
     <Grid >
         <DataGrid x:Name="OrderItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="207,62,172,172" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="OrderItem_SelectionChanged" RenderTransformOrigin="0.777,0.52">
             <DataGrid.Columns>
@@ -43,7 +43,8 @@
         <Button x:Name="emptyCart" Content="Empty Cart" HorizontalAlignment="Left" Margin="45,120,0,0" VerticalAlignment="Top" Width="97" Click="EmptyCart_Click" Height="34"  Background ="Plum" Foreground="Blue" />
         <Button x:Name="confirmOrder" Content="Place Order" HorizontalAlignment="Left" Margin="528,298,0,0" VerticalAlignment="Top" Width="103" Click="OrderConfirmation_Click" Background ="Plum" Foreground="Blue" RenderTransformOrigin="0.505,0.152"/>
         <Button x:Name="BackToCatalog" Content="Back To Catalog" HorizontalAlignment="Left" Margin="44,64,0,0" VerticalAlignment="Top" Width="97" Click="BackToCatalog_Click" Height="37" Background ="Plum" Foreground="Blue"/>
-        <TextBlock Text="Total Price: " FontSize ="16" HorizontalAlignment="Left" Margin="44,196,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.505,4.772" Height="27"/>
+        <TextBlock Text="Total Price: " FontSize ="16" HorizontalAlignment="Left" Margin="26,288,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.505,4.772" Height="27"/>
+        
         <Grid DataContext="{Binding RelativeSource={RelativeSource Self}}">  
         <TextBlock x:Name="cartPrice"  Text="{Binding Cart.TotalPrice}" HorizontalAlignment="Left"  Margin="45,236,0,0" VerticalAlignment="Top" Width="98"  Height="40" FontWeight="Bold" />
         </Grid>
