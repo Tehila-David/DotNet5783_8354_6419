@@ -48,7 +48,6 @@ namespace PL.Order
         private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
-            //new MainWindow().Show();
         }
 
     }
