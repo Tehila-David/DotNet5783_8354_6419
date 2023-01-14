@@ -31,7 +31,9 @@ namespace PL
             private set => SetValue(ProductsDependency, value);
         }
        
-
+        /// <summary>
+        /// for Enum Category
+        /// </summary>
         public BO.Category Category { get; set; } = BO.Category.NO_ONE;
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
@@ -102,9 +104,9 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-        public void addProduct(BO.ProductForList product)=> Products?.Add(product);
+        public void addProduct(BO.ProductForList product)=> Products?.Add(product);//Add product to Products-ObservableCollection
 
-      
+
 
 
     }

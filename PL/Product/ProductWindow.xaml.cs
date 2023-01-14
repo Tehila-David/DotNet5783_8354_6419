@@ -25,12 +25,17 @@ namespace PL
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
-        public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
+      
 
         public static readonly DependencyProperty ProductDependency = DependencyProperty.Register(nameof(Product), typeof(BO.Product), typeof(Window));
         public BO.Product? Product { get => (BO.Product)GetValue(ProductDependency); private set => SetValue(ProductDependency, value); }
 
-        Action<BO.ProductForList> ActionProduct;
+        Action<BO.ProductForList> ActionProduct;//Add product to Products-ObservableCollection
+        /// <summary>
+        /// Constructor of ProductWindow
+        /// </summary>
+        /// <param name="ActProduct"></param>
+        /// <param name="id"></param>
         public ProductWindow( Action<BO.ProductForList> ActProduct, int id = 0)
         {
             try

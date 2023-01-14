@@ -42,7 +42,7 @@
                     <GridViewColumn Width="Auto"  Header="Product ID">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Margin="-5,-1"   Text="{Binding ID}" TextAlignment="Center" Padding="5" RenderTransformOrigin="0.411,0.621"/>
+                                <TextBlock Margin="-5,-1"   Text="{Binding ProductID}" TextAlignment="Center" Padding="5" RenderTransformOrigin="0.411,0.621"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

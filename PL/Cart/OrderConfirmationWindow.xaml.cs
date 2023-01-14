@@ -37,7 +37,7 @@ namespace PL.Cart
         {
             FinalCart = myCart;
             InitializeComponent();
-            DataContext = FinalCart;    
+            //DataContext = FinalCart;    
         }
 
 
@@ -46,6 +46,7 @@ namespace PL.Cart
             try
             {
                 bl.Cart.CartConfirmation(FinalCart);
+                FinalCart = null;
                 Close();
                 MessageBox.Show("Thanks for shopping with us. Your order has been successfully placed.");
 

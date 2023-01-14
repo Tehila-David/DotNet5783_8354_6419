@@ -77,7 +77,11 @@ namespace PL
         }
 
        
-       
+       /// <summary>
+       /// click on butten Add product to cart 
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
 
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
@@ -104,25 +108,11 @@ namespace PL
             }
         }
 
-        //private void RemoveProduct_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //    try
-        //    {
-        //        BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
-        //        bl.Cart.UpdateProductAmount(myLovelyCart, productItem.ID, productItem.Amount - 1);
-        //        var temp = bl.Product.GetListProductItem(myLovelyCart);
-        //        Products = temp == null ? new() : new(temp);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        MessageBox.Show("Check your input and try again");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
+        /// <summary>
+        /// click on butten Remove product from cart 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
