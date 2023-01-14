@@ -27,6 +27,7 @@
                 </Style>
             </Style.Resources>
             <Style.Triggers>
+
                 <EventTrigger RoutedEvent="MouseEnter">
                     <EventTrigger.Actions>
                         <BeginStoryboard>
@@ -51,9 +52,14 @@
     </Window.Resources>
     <Grid>
         <Grid.Resources>
-            
+            <Storyboard x:Key="HideButtonStoryboard">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Manager" Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Collapsed}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
         </Grid.Resources>
-              
+
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="373*"/>
             <ColumnDefinition Width="27*"/>
@@ -63,6 +69,7 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Button x:Name="Back" Content="Back"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="338,341,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="25" Width="78"   Background="#FFFB5151" Click="Back_Click" />
         <Button x:Name="Manager" Content="Manager"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="45,111,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204"  Click="Manager_Click" />
         <Button x:Name="New_Order" Content="New Order"  Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,173,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="36" Width="204" Click="NewOrder_Click"/>
         <Button x:Name="Order_Tracking" Content="Order Tracking"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="46,237,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="208" Click="OrderTracking_Click"/>

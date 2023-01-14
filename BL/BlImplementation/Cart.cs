@@ -50,17 +50,21 @@ internal class Cart:ICart
                     throw new BO.notEnoughInStock("There are not enough product items in stock");
                 }
             }
+            else if (newAmount ==0)
+            {
+                myCart.Items?.Remove(newItem);
+                myCart.TotalPrice -= newItem.Amount * newItem.Price;
+
+            }
             else if (newAmount < newItem?.Amount)
             {
+                
+
+
                 int amountDiff = newItem.Amount - newAmount;
                 newItem.Amount = newAmount;
                 newItem.TotalPrice = newAmount * newItem.Price;
                 myCart.TotalPrice -= amountDiff * newItem.Price;
-            }
-            else if (newAmount == 0)
-            {
-                myCart.Items?.Remove(newItem);
-                myCart.TotalPrice -= newItem.Amount * newItem.Price;
             }
         }
         return myCart;

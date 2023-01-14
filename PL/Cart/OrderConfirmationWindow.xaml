@@ -15,16 +15,16 @@
 
         <TextBlock Text="Dear customer, please enter the following details:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="21,27,342,360">
         </TextBlock>
-        <TextBlock Text="Name:"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="23,82,704,309" RenderTransformOrigin="0.5,0.5">
+        <TextBlock Text="Name:"  FontSize="18" FontWeight="Bold" Width="140" FontStyle="Italic" Margin="23,82,704,309" RenderTransformOrigin="0.5,0.5">
         </TextBlock>
-        <TextBox x:Name="nameTextBox" Text="{Binding Path = CustomerName}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="192" Height="23" Margin="95,89,0,0" />
+        <TextBox x:Name="nameTextBox" Text="{Binding Path = CustomerName}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="190" Height="25" Margin="160,90,0,0" />
 
-        <TextBlock Text="Email Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="20,125,632,266" RenderTransformOrigin="0.507,-1.537">
+        <TextBlock Text="Email Address:" FontSize="18" FontWeight="Bold" Width="140" FontStyle="Italic" Margin="20,125,632,266" RenderTransformOrigin="0.507,-1.537">
         </TextBlock>
-        <TextBox x:Name="emailTextBox" Text="{Binding Path = CustomerEmail}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="194" Height="27" Margin="161,129,0,0" RenderTransformOrigin="0.529,0.562" />
+        <TextBox x:Name="emailTextBox" Text="{Binding Path = CustomerEmail}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="190" Height="25" Margin="160,130,0,0" RenderTransformOrigin="0.529,0.562" />
 
-        <TextBlock Text="Home Address:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="19,170,635,222" RenderTransformOrigin="0.494,-1.899"/>
-        <TextBox x:Name="homeAddressTextBox" Text="{Binding Path = CustomerAddress }" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="264" Height="25" Margin="156,172,0,0" />
+        <TextBlock Text="Home Address:" FontSize="18" FontWeight="Bold" Width="140" FontStyle="Italic" Margin="19,170,635,222" RenderTransformOrigin="0.494,-1.899"/>
+        <TextBox x:Name="homeAddressTextBox" Text="{Binding Path = CustomerAddress }" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="190" Height="25" Margin="160,170,0,0" />
         <Button Content="Place Order" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="101,261,0,0"  VerticalAlignment="Top" Width="179" Height="44" Click="ConfirmOrder_Click"/>
     </Grid>
 </Window>

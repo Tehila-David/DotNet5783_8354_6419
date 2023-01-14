@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="CatalogWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    
     <Window.Resources>
         <local:CategoryColorConverter
          x:Key="CategoryColor1" />

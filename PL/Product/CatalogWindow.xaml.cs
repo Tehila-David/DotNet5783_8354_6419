@@ -84,7 +84,6 @@ namespace PL
 
             try
             {
-                
                 BO.ProductItem productItem = (BO.ProductItem)((sender as Button)!.DataContext!);
                 if (productItem.IsAvailable == true)
                 {

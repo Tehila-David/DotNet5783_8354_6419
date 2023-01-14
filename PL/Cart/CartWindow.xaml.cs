@@ -39,9 +39,6 @@ namespace PL.Cart
 
 
 
-
-
-
         public static readonly DependencyProperty CartDependency =
                 DependencyProperty.Register(nameof(Cart),
                                         typeof(BO.Cart),
@@ -60,10 +57,10 @@ namespace PL.Cart
             var items = bl.Cart.cartItems(myCart); //returning list of cart items 
             CartItems = items == null ? new() : new(items);
             InitializeComponent();
-            DataContext = CartItems;
-         }
+           
+        }
 
-      //  public int ProductID { get; set; }
+        //  public int ProductID { get; set; }
 
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -71,8 +68,10 @@ namespace PL.Cart
             {
                 BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
                 bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, 0);
-                
-                
+                var items = bl.Cart.cartItems(Cart);
+                CartItems = items == null ? new() : new(items);
+               
+
             }
             catch (FormatException)
             {
@@ -84,17 +83,21 @@ namespace PL.Cart
             }
 
         }
-       // public int Amount { get; set; }
-        
+        // public int Amount { get; set; }
+
 
         private void EmptyCart_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var item in CartItems) //removing all items from cart by settong their amount to zero
+            foreach (var item in CartItems) //removing all items from cart by settong their amount to zero
             {
                 bl.Cart.UpdateProductAmount(Cart, item.ProductID, 0);
             }
+            var items = bl.Cart.cartItems(Cart);
+            CartItems = items == null ? new() : new(items);
+
+           
         }
-        
+
         private void BackToCatalog_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -110,11 +113,12 @@ namespace PL.Cart
         {
             try
             {
-                BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
-                bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) + 1);
+               BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
+                var myCart = bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) + 1);
                 var items = bl.Cart.cartItems(Cart); //returning list of cart items 
                 CartItems = items == null ? new() : new(items);
-                DataContext = CartItems;
+                Cart = myCart;
+                //DataContext = CartItems;
             }
             catch (FormatException)
             {
@@ -132,11 +136,14 @@ namespace PL.Cart
         {
             try
             {
+                
                 BO.OrderItem orderItem = (BO.OrderItem)((sender as Button)!.DataContext!);
                 bl.Cart.UpdateProductAmount(Cart, orderItem.ProductID, (orderItem.Amount) - 1);
                 var items = bl.Cart.cartItems(Cart); //returning list of cart items 
                 CartItems = items == null ? new() : new(items);
-                DataContext = CartItems;
+                Cart.Items = items == null ? new() : new(items);
+
+                //DataContext = CartItems;
             }
             catch (FormatException)
             {

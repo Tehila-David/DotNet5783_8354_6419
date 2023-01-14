@@ -54,7 +54,7 @@ internal class Product : BlApi.IProduct
                 Name = product?.Name,
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
-                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Count(),
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Sum(item=>item.Amount),
                 IsAvailable = (product?.InStock > 0) ? true : false
             }).OrderBy(item => item.ID);
         }
@@ -67,7 +67,7 @@ internal class Product : BlApi.IProduct
                 Name = product?.Name,
                 Price = product?.Price ?? 0d,
                 Category = (BO.Category)product?.Category,
-                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Count(),
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Sum(item => item.Amount),
                 IsAvailable = (product?.InStock > 0) ? true : false
             }).OrderBy(item => item.ID);
         }
@@ -115,7 +115,7 @@ internal class Product : BlApi.IProduct
                 Name = product.Name,
                 Price = product.Price,
                 Category = (BO.Category)(product.Category), /*?? throw new BO.InternalProblemException("Missing product category")),*/
-                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Count(),
+                Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == id).Sum(item => item.Amount),
                 IsAvailable = (product.InStock > 0) ? true : false,
             };
             return productItem;
