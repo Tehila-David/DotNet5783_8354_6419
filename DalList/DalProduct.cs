@@ -52,16 +52,6 @@ internal class DalProduct : IProduct
     public void Delete(int ID)
     {
 
-        //foreach (var item in _dataSource.ProductList)
-        //{  // Checking if th id in the list is equal to the id the user entered
-        //    if (item?.ID == ID)
-        //    {
-
-        //        _dataSource.ProductList.Remove(item);
-        //        return;
-
-        //    }
-        //}
         var product = (from item in _dataSource.ProductList
                        where item?.ID == ID
                        select item).FirstOrDefault();
@@ -80,17 +70,7 @@ internal class DalProduct : IProduct
     /// </summary>
     public void Update(Product myProduct)
     {
-        //int index = 0;
-        //foreach (var item in _dataSource.ProductList)
-        //{
-        //    if (item?.ID == myProduct.ID) ///updating the order
-        //    {
-        //        _dataSource.ProductList.RemoveAt(index);
-        //        _dataSource.ProductList.Insert(index, myProduct);
-        //        return;
-        //    }
-        //    index++;
-        //}
+        
         var product = (from item in _dataSource.ProductList
                        where item?.ID == myProduct.ID
                        select item).FirstOrDefault();
