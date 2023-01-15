@@ -19,6 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cart\**" />
+    <EmbeddedResource Remove="Cart\**" />
+    <None Remove="Cart\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
     <ProjectReference Include="..\DalList\DalList.csproj" />
   </ItemGroup>
