@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Orders>
+	<Order>
+		<ID>1</ID>
+		<CustomerName>Customer_1</CustomerName>
+		<CustomerEmail>1@gmail.com</CustomerEmail>
+		<CustomerAddress>100</CustomerAddress>
+		<Category>address_1</Category>
+		
+    </Order>
+</Orders>
