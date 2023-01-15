@@ -10,11 +10,5 @@ using DO;
 
 namespace Dal
 {
-    internal sealed class DalXml : IDal
-    {
-        public static IDal Instance { get; } = new DalXml();
-        public IOrder Order { get; }
-        public IProduct Product { get; }
-        public IOrderItem OrderItem { get; }
-    }
+    
 }
