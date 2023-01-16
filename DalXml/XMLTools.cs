@@ -10,7 +10,9 @@ namespace Dal;
 static class XMLTools
 {
 
+
     const string s_dir = @"..\xml\";
+
     static XMLTools()
     {
         if (!Directory.Exists(s_dir))
