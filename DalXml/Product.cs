@@ -32,7 +32,7 @@ namespace Dal
         {
             yield return new XElement("ID", product.ID);
             yield return new XElement("Price", product.Price);
-            yield return new XElement("Instock", product.InStock);
+            yield return new XElement("InStock", product.InStock);
             if (product.Name is not null)
                 yield return new XElement("Name", product.Name);          
             if (product.Category is not null)
