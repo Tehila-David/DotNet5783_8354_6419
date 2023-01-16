@@ -5,7 +5,8 @@
 		<CustomerName></CustomerName>
 		<CustomerEmail></CustomerEmail>
 		<CustomerAddress></CustomerAddress>
-		<Category></Category>
-		
-    </Order>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
 </Orders>

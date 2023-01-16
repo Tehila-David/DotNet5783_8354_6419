@@ -3,8 +3,8 @@
 	<Product>
 		<ID></ID>
 		<Name></Name>
+	    <Category></Category>
 		<Price></Price>
 		<Instock></Instock>
-		<Category></Category>
 	</Product>
 </products1>

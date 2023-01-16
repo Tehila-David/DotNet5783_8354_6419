@@ -22,10 +22,17 @@
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>6666</ID>
-    <Price>67</Price>
-    <Instock>78</Instock>
-    <Name>check</Name>
+    <ID>324</ID>
+    <Price>80</Price>
+    <Instock>10</Instock>
+    <Name>lap top</Name>
+    <Category>LAPTOP</Category>
+  </Product>
+  <Product>
+    <ID>222444</ID>
+    <Price>800</Price>
+    <Instock>50</Instock>
+    <Name>myPhone</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
