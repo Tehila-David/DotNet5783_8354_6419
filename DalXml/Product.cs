@@ -26,6 +26,7 @@ namespace Dal
             InStock = (int)s.ToIntNullable("InStock"),
             Category = s.ToEnumNullable<DO.Category>("Category"),
         };
+#pragma warning restore CS8604 // Possible null reference argument.
 
         static IEnumerable<XElement> createProductElement(DO.Product product)
         {
