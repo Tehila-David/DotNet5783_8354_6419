@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products1>
-  <Student>
-    <ID>11111</ID>
+	<Product>
+		<ID>11111</ID>
     <Price>3</Price>
     <Instock>34</Instock>
     <Name>2222ref</Name>
     <Category>SCREEN</Category>
-  </Student>
-  <Student>
+		</Product>
+		<Product>
     <ID>77777</ID>
     <Price>78</Price>
     <Instock>0</Instock>
     <Name>בדיקה</Name>
     <Category>NO_ONE</Category>
-  </Student>
+  </Productt>
   <Product>
     <ID>2222</ID>
     <Price>34</Price>
@@ -64,3 +64,4 @@
     <Category>SMART_WATCH</Category>
   </Product>
 </products1>
+<products1 />
