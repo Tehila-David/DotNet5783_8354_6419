@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,10 +30,15 @@ namespace Dal
             //DalMissingIdException(id, "Lecturer");
             ?? throw new Exception("missing id");
 
-        public OrderItem GetById(Func<DO.OrderItem?, bool>? predicate)
+        public DO.OrderItem? GetById(Func<DO.OrderItem?, bool>? predicate)
         {
-            //return XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems).FirstOrDefault(predicate);
-            ////    ?? throw new NotExists("Sorry ,this order does not exist in the List ");
+            var orderItemList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems)!;
+            if(orderItemList.FirstOrDefault(predicate)==null)
+            {
+                throw new Exception("Order Item not Exsits");
+            }
+           return orderItemList.FirstOrDefault(predicate);
+            
         }
 
         public int Add(DO.OrderItem orderItem)
@@ -42,7 +48,7 @@ namespace Dal
             if (orderItemsList.Exists(lec => lec?.ID == orderItem.ID))
                 throw new Exception("id already exist");//DalAlreadyExistIdException(lecturer.ID, "Lecturer");
 
-            List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer<ImportentNumbers>(configPath);
+            List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);
 
             ImportentNumbers runningNum = (from number in runningList
                                            where (number.typeOfnumber == "OrderItem Running Number")
@@ -56,7 +62,7 @@ namespace Dal
             runningList.Add(runningNum);
             orderItemsList.Add(orderItem);
 
-            XMLTools.SaveListToXMLSerializer(runningList, configPath);
+            XMLTools.SaveListToXMLSerializer1(runningList, configPath);
             XMLTools.SaveListToXMLSerializer(orderItemsList, s_orderItems);
 
             return orderItem.ID;

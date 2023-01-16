@@ -6,10 +6,10 @@ using System;
 
 namespace Dal;
 
-internal class DalProduct : IProduct
+public class DalProduct : IProduct
 {
     DataSource _dataSource = DataSource.s_instance;
-   public Product GetById(Func<Product?, bool>? predicate)
+    public Product? GetById(Func<Product?, bool>? predicate)
     {
         return _dataSource.ProductList?.FirstOrDefault(predicate)
             ?? throw new NotExists("Sorry ,this product does not exist in the List ");

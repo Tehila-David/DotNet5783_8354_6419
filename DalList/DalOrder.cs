@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 
 namespace Dal;
 
-internal class DalOrder : IOrder
+public class DalOrder : IOrder
 {
     DataSource _dataSource = DataSource.s_instance;
-    public Order GetById(Func<Order?, bool>? predicate)
+    public Order? GetById(Func<Order?, bool>? predicate)
     {
         return _dataSource.OrderList?.FirstOrDefault(predicate)
             ?? throw new NotExists("Sorry ,this order does not exist in the List ");

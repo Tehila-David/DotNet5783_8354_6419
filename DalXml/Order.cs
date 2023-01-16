@@ -35,11 +35,18 @@ namespace Dal
             //DalMissingIdException(id, "Lecturer");
             ?? throw new Exception("missing id");
 
-        public Order GetById(Func<Order?, bool>? predicate)
+        public DO.Order? GetById(Func<DO.Order?, bool>? predicate)
         {
-            return XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefaultr(predicate);
-            //    ?? throw new NotExists("Sorry ,this order does not exist in the List ");
+            var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders)!;
+            if (ordersList.FirstOrDefault(predicate) == null)
+            {
+                throw new Exception("Product not Exsits");
+            }
+            return ordersList.FirstOrDefault(predicate);
+
         }
+
+
 
         public int Add(DO.Order order)
         {
@@ -48,7 +55,7 @@ namespace Dal
             if (ordersList.Exists(lec => lec?.ID == order.ID))
                 throw new Exception("id already exist");//DalAlreadyExistIdException(lecturer.ID, "Lecturer");
 
-            List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer<ImportentNumbers>(configPath);
+            List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);
 
             ImportentNumbers runningNum = (from number in runningList
                                            where (number.typeOfnumber == "Order Running Number")
@@ -62,7 +69,7 @@ namespace Dal
             runningList.Add(runningNum);
             ordersList.Add(order);
 
-            XMLTools.SaveListToXMLSerializer(runningList, configPath);
+            XMLTools.SaveListToXMLSerializer1(runningList, configPath);
             XMLTools.SaveListToXMLSerializer(ordersList, s_orders);
 
             return order.ID;

@@ -22,20 +22,20 @@ namespace Dal
         {
             ID = (int)s.Element("ID")!,
             Name = (string?)s.Element("FirstName"),
-            Price = s.ToDoubleNullable("Price"),
+            Price = (double)s.Element("Price"),
             InStock = (int)s.Element("InStock")!,
             Category = s.ToEnumNullable<DO.Category>("Category"),
            
         };
 
-        static IEnumerable<XElement> createStudentElement(DO.Product product)
+        static IEnumerable<XElement> createProductElement(DO.Product product)
         {
             yield return new XElement("ID", product.ID);
             if (product.Name is not null)
                 yield return new XElement("Name", product.Name);          
             if (product.Category is not null)
                 yield return new XElement("Category", product.Category);
-            if (product.Price is not null)
+            
                 yield return new XElement("Price", product.Price);
             
                 yield return new XElement("Instock", product.InStock);
@@ -52,27 +52,29 @@ namespace Dal
             // fix to: throw new DalMissingIdException(id);
             ?? throw new Exception("missing id"))!;
 
+        public DO.Product? GetById(Func<DO.Product?, bool>? predicate)
+        {
+            var productsList = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products)!;
+            if (productsList.FirstOrDefault(predicate) == null)
+            {
+                throw new Exception("Product not Exsits");
+            }
+            return productsList.FirstOrDefault(predicate);
 
-        //public DO.Product GetById(Func<Product?, bool>? predicate)// איך עושים עם Predicate???
-        //{
-        //   // (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
-        //   // .FirstOrDefault(predicate)
-        //   //// fix to: throw new DalMissingIdException(id);
-        //   ?? throw new Exception("missing id"));
-        //}
-        
+        }
+
 
         public int Add(DO.Product product)
         {
-            XElement studentsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+            XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
 
             if (XMLTools.LoadListFromXMLElement(s_products)?.Elements()
                 .FirstOrDefault(st => st.ToIntNullable("ID") == product.ID) is not null)
                 // fix to: throw new DalMissingIdException(id);;
                 throw new Exception("id already exist");
 
-            studentsRootElem.Add(new XElement("Student", createStudentElement(product)));
-            XMLTools.SaveListToXMLElement(studentsRootElem, s_products);
+            productsRootElem.Add(new XElement("Student", createProductElement(product)));
+            XMLTools.SaveListToXMLElement(productsRootElem, s_products);
 
             return product.ID; ;
         }

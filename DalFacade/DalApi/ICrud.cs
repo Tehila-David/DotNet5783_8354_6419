@@ -6,7 +6,7 @@ namespace DalApi
     {
         int Add(T item);
         T GetById(int id);
-        T GetById(Func<T?, bool>? predicate);
+        T? GetById(Func<T?, bool>? predicate);
         void Update(T item); 
         void Delete(int id);    
         IEnumerable<T?> GetAll(Func<T?, bool>? predicate = null);   
