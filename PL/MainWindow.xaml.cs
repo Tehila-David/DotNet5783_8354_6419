@@ -16,8 +16,8 @@ namespace PL
         public MainWindow()
         {
            InitializeComponent();
-            //Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
-            //Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
+           // Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
+           // Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
         }
         BlApi.IBl? bl = BlApi.Factory.Get();
 
