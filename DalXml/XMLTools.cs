@@ -24,8 +24,8 @@ static class XMLTools
     public static DateTime? ToDateTimeNullable(this XElement element, string name) =>
         DateTime.TryParse((string)element.Element(name), out var result) ? (DateTime?)result : null;
 
-    public static double? ToDoubleNullable(this XElement element, string name) =>
-        double.TryParse((string)element.Element(name), out var result) ? (double)result : default;
+    public static double? ToDoubleNullable(this XElement element, string name) => 
+        !double.TryParse((string)element.Element(name), out var result) ? default : (double)result;
 
     public static int? ToIntNullable(this XElement element, string name) =>
         int.TryParse((string)element.Element(name), out var result) ? (int)result : default;

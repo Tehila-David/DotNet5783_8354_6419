@@ -17,6 +17,7 @@ namespace Dal
     internal class Product : IProduct
     {
         const string s_products = "products1";
+#pragma warning disable CS8604 // Possible null reference argument.
         static DO.Product? getProduct(XElement s) =>
         s.ToIntNullable("ID") is null ? null : new DO.Product()
         {
@@ -27,6 +28,7 @@ namespace Dal
             Category = s.ToEnumNullable<DO.Category>("Category"),
            
         };
+#pragma warning restore CS8604 // Possible null reference argument.
 
         static IEnumerable<XElement> createProductElement(DO.Product product)
         {
