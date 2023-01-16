@@ -123,18 +123,18 @@ namespace PL
             };
             ActionProduct(productForList);
         }
-        private void Remove_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                bl.Product.Delete(Product.ID);
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //private void Remove_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        bl.Product.Delete(Product.ID);
+        //        Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
     }
 }
