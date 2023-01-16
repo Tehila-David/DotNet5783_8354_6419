@@ -102,9 +102,7 @@ namespace PL.Order
             new OrderItemWindow(Order.ID,orderItem.ID).Show();
             
         }
-       
-        
 
-       
+        
     }
 }

@@ -15,9 +15,9 @@ namespace BlApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<OrderForList?> GetListedOrders(Func<DO.Order?, bool>? predicate = null);
-       /// <summary>
-       /// for the manager and customer , retrun details of Order
-       /// </summary>
+        /// <summary>
+        /// for the manager and customer , retrun details of Order
+        /// </summary>
         public BO.Order GetByID(int id);
         /// <summary>
         /// func for help,get id of order and return list of BO.OrderItem
@@ -45,6 +45,7 @@ namespace BlApi
         /// <param name="amount"></param>
         public BO.OrderItem UpdateItems(BO.Order Order, int productId, int amount);
 
+       
 
     }
 }
