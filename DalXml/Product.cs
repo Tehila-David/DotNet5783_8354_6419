@@ -9,14 +9,14 @@ using System.IO;
 using static System.Net.WebRequestMethods;
 using System.Text;
 
-//implement IStudent with xelement
+//implement IProduct with xelement
 namespace Dal
 {
    
 
     internal class Product : IProduct
     {
-        string s_products = @"products1";
+        string s_products = "products1";
         static DO.Product? getProduct(XElement s) =>
         s.ToIntNullable("ID") is null ? null : new DO.Product()
         {
@@ -71,7 +71,7 @@ namespace Dal
                 // fix to: throw new DalMissingIdException(id);;
                 throw new Exception("id already exist");
 
-            productsRootElem.Add(new XElement("Student", createProductElement(product)));
+            productsRootElem.Add(new XElement("Product", createProductElement(product)));
             XMLTools.SaveListToXMLElement(productsRootElem, s_products);
 
             return product.ID; ;
@@ -79,14 +79,14 @@ namespace Dal
 
         public void Delete(int id)
         {
-            XElement studentsRootElem = XMLTools.LoadListFromXMLElement(s_products);
+            XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
 
-            (studentsRootElem.Elements()
+            (productsRootElem.Elements()
                 // fix to: throw new DalMissingIdException(id);
                 .FirstOrDefault(st => (int?)st.Element("ID") == id) ?? throw new Exception("missing id"))
                 .Remove();
 
-            XMLTools.SaveListToXMLElement(studentsRootElem, s_products);
+            XMLTools.SaveListToXMLElement(productsRootElem, s_products);
         }
 
         public void Update(DO.Product product)

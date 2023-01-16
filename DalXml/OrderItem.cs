@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-//implement IStudent with linq to XML
+//implement IProduct with linq to XML
 namespace Dal
 {
 

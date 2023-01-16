@@ -14,4 +14,18 @@
     <Name>2222ref</Name>
     <Category>SCREEN</Category>
   </Student>
+  <Student>
+    <ID>77777</ID>
+    <Price>78</Price>
+    <Instock>0</Instock>
+    <Name>בדיקה</Name>
+    <Category>NO_ONE</Category>
+  </Student>
+  <Product>
+    <ID>2222</ID>
+    <Price>34</Price>
+    <Instock>45</Instock>
+    <Name>rrrrr</Name>
+    <Category>PHONE</Category>
+  </Product>
 </products1>
