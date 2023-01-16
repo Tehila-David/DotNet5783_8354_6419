@@ -45,7 +45,7 @@ namespace Dal
             filter is null
             ? XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s))
             : XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s)).Where(filter);
-
+        
         public DO.Product GetById( int id) =>
             (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
             .FirstOrDefault(st => st.ToIntNullable("ID") == id)

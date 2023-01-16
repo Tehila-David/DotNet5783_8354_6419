@@ -28,4 +28,18 @@
     <Name>rrrrr</Name>
     <Category>PHONE</Category>
   </Product>
+  <Product>
+    <ID>324</ID>
+    <Price>80</Price>
+    <Instock>10</Instock>
+    <Name>lap top</Name>
+    <Category>LAPTOP</Category>
+  </Product>
+  <Product>
+    <ID>222444</ID>
+    <Price>800</Price>
+    <Instock>50</Instock>
+    <Name>myPhone</Name>
+    <Category>PHONE</Category>
+  </Product>
 </products1>

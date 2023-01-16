@@ -2,8 +2,8 @@
 <OrderItems>
 	<OrderItem>
 		<ID></ID>
-		<ProductID></ProductID>
 		<OrderID></OrderID>
+		<ProductID></ProductID>
 		<Price></Price>
 		<Amount></Amount>
 
