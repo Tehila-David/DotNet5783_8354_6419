@@ -29,6 +29,7 @@ namespace PL
 
         public static readonly DependencyProperty ProductDependency = DependencyProperty.Register(nameof(Product), typeof(BO.Product), typeof(Window));
         public BO.Product? Product { get => (BO.Product)GetValue(ProductDependency); private set => SetValue(ProductDependency, value); }
+        public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
 
         Action<BO.ProductForList> ActionProduct;//Add product to Products-ObservableCollection
         /// <summary>
@@ -86,6 +87,7 @@ namespace PL
                 ID = Product.ID,
                 Category = Product.Category,
                 Name = Product.Name,
+               
             };
             ActionProduct(productForList);
            
