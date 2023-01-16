@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<products1>
+  <Student>
+    <ID>11111</ID>
+    <Name>2222</Name>
+    <Category>NO_ONE</Category>
+    <Price>3</Price>
+    <Instock>3</Instock>
+  </Student>
+</products1>

@@ -1,57 +1,141 @@
 ﻿<Window x:Class="PL.CatalogWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL.Converters"
         mc:Ignorable="d"
-        Title="CatalogWindow" Height="450" Width="800">
-
-    <Grid >
-        <DataGrid x:Name="ProductItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="36,27,30,113" RowDetailsVisibilityMode="VisibleWhenSelected"  RenderTransformOrigin="0.777,0.52">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="ProductID" Binding="{Binding ID}" Header="Product ID:" Width="Auto"/>
-                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name:" Width="Auto"/>
-                <DataGridTextColumn x:Name="Category" Binding="{Binding Category}" Header="Category:" Width="Auto"/>
-                <DataGridTextColumn x:Name="Price" Binding="{Binding Price}" Header="Price:" Width="Auto"/>
-                <DataGridTextColumn x:Name="Amount" Binding="{Binding Amount}" Header="Amount In Cart:" Width="Auto"/>
-
-                <DataGridTemplateColumn Header="Is Available:" Width="Auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="Is Available:"
-                            IsEnabled="False"
-                            IsChecked="{Binding Path=IsAvailable}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+        Title="CatalogWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    
+    <Window.Resources>
+        <local:CategoryColorConverter
+         x:Key="CategoryColor1" />
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="Blue">
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
 
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="152*"/>
+            <ColumnDefinition Width="141*"/>
+            <ColumnDefinition Width="107*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="3" Margin="0,0,0,547" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <Label Content="Catalog" Grid.Column="0"  FontFamily="Franklin Gothic Heavy" FontSize="18" Foreground="#FFDE2323" Height="80" BorderBrush="#FF5C1919" Background="Transparent"  />
+        </Grid>
+        <ComboBox FontSize="16" SelectedIndex="0" Margin="279,5,29,5" Grid.Row="0"
+                      ItemsSource="{Binding CategoryArray}"
+                      SelectedItem="{Binding  myCategory}" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Bahnschrift SemiLight SemiCondensed" SelectionChanged="CatagorySelector_SelectionChanged" >
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFF1A5A5" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
 
-                <DataGridTemplateColumn Header="Add:">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="Add" Content="Add" Foreground="Green" Click="AddToCart_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+        <ListView ItemsSource="{Binding Products}"  d:ItemsSource="{d:SampleData ItemCount=5}"  Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="2" FontFamily="Arial Rounded MT Bold" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="{x:Null}"   >
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="5"/>
+                </TransformGroup>
+            </ListView.RenderTransform>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto"  Header="Product ID">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-5,-1"   Text="{Binding ID}" TextAlignment="Center" Padding="5" RenderTransformOrigin="0.411,0.621"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="Auto" Header="Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-5,-1" Text="{Binding  Name}" TextAlignment="Center" Padding="5"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="Auto" Header="Price">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-5,-1" Text="{Binding Price}" TextAlignment="Center" Padding="5"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn  Width="Auto" Header="Category">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="-5,-1"  Text="{Binding  Category}" TextAlignment="Center" Padding="5" Background="{Binding Category, Converter={StaticResource CategoryColor1}}" Width="130" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn  Width="Auto" Header="Amount In Cart">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Margin="-5,-1" TextAlignment="Center" Text="{Binding  Amount}"  Foreground="Green"  FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn  Width="Auto" Header="Is Available:">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Margin="-5,-1"  Width="Auto"   Padding="5"  IsEnabled="False"  IsChecked="{Binding Path=IsAvailable}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn  Width="Auto" Header="Add">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="Add" Content="Add" Foreground="Green" Click="AddToCart_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn  Width="Auto" Header="Remove">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="Remove" Content="Remove" Foreground="Red" Click="RemoveProduct_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
 
 
-                <DataGridTemplateColumn Header="Remove:">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="Remove" Content="X" Foreground="Red" Click="RemoveProduct_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
 
 
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="showCart" Content="Cart" HorizontalAlignment="Left" Margin="180,347,0,0" VerticalAlignment="Top" Width="98" Click="ShowCart_Click" Height="38"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+
+
+        <Button x:Name="showCart" Content="Cart" HorizontalAlignment="Left" Margin="18,339,0,0" VerticalAlignment="Top" Width="98" Click="ShowCart_Click" Height="38" RenderTransformOrigin="0.491,0.562" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 
 </Window>

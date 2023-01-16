@@ -6,11 +6,11 @@ using System.Reflection;
 
 namespace Dal;
 
-internal class DalOrderItem : IOrderItem
+public class DalOrderItem : IOrderItem
 
 {
     DataSource _dataSource = DataSource.s_instance;
-    public OrderItem GetById(Func<OrderItem?, bool>? predicate)
+    public OrderItem? GetById(Func<OrderItem?, bool>? predicate)
     {
         return _dataSource.OrderItemList?.FirstOrDefault(predicate)
             ?? throw new NotExists("Sorry ,this item does not exist in the List ");
