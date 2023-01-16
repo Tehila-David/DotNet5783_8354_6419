@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products1>
   <Student>
-    <ID>11111</ID>
-    <Name>2222</Name>
+    <ID>222222</ID>
+    <Price>5</Price>
+    <Instock>4</Instock>
+    <Name>rrrrrr</Name>
     <Category>NO_ONE</Category>
+  </Student>
+  <Student>
+    <ID>11111</ID>
     <Price>3</Price>
-    <Instock>3</Instock>
+    <Instock>34</Instock>
+    <Name>2222ref</Name>
+    <Category>SCREEN</Category>
   </Student>
 </products1>

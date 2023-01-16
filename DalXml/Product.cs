@@ -16,31 +16,29 @@ namespace Dal
 
     internal class Product : IProduct
     {
-        const string s_products = "products1";
-#pragma warning disable CS8604 // Possible null reference argument.
+        string s_products = @"products1";
         static DO.Product? getProduct(XElement s) =>
         s.ToIntNullable("ID") is null ? null : new DO.Product()
         {
-            ID = (int)s.Element("ID")!,
-            Name = (string?)s.Element("FirstName"),
-            Price = (double)s.Element("Price"),
-            InStock = (int)s.Element("InStock")!,
+            ID = (int)s.ToIntNullable("ID")!,
+            Name = (string?)s.Element("Name"),
+            Price = (double)s.ToDoubleNullable("Price"),
+            InStock = (int)s.ToIntNullable("InStock"),
             Category = s.ToEnumNullable<DO.Category>("Category"),
-           
         };
 #pragma warning restore CS8604 // Possible null reference argument.
 
         static IEnumerable<XElement> createProductElement(DO.Product product)
         {
             yield return new XElement("ID", product.ID);
+            yield return new XElement("Price", product.Price);
+            yield return new XElement("Instock", product.InStock);
             if (product.Name is not null)
                 yield return new XElement("Name", product.Name);          
             if (product.Category is not null)
                 yield return new XElement("Category", product.Category);
             
-                yield return new XElement("Price", product.Price);
-            
-                yield return new XElement("Instock", product.InStock);
+                
         }
 
         public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? filter = null) =>
@@ -62,7 +60,6 @@ namespace Dal
                 throw new Exception("Product not Exsits");
             }
             return productsList.FirstOrDefault(predicate);
-
         }
 
 

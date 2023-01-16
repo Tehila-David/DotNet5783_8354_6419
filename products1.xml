@@ -1,73 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Products>
 	<Product>
-		<ID>222222</ID>
-		<Name>IPHONE 14</Name>
-		<Price>4000</Price>
-		<Instock>100</Instock>
-		<Category>PHONE</Category>
-	</Product>
-	<Product>
-		<ID>222223</ID>
-		<Name>IPHONE 13</Name>
-		<Price>2800</Price>
-		<Instock>100</Instock>
-		<Category>PHONE</Category>
-	</Product>
-	<Product>
-		<ID>222224</ID>
-		<Name>IPHONE 12</Name>
-		<Price>2000</Price>
-		<Instock>100</Instock>
-		<Category>PHONE</Category>
-	</Product>
-	<Product>
-		<ID>222225</ID>
-		<Name>Ipad Air 2022</Name>
-		<Price>2500</Price>
-		<Instock>100</Instock>
-		<Category>TABLET</Category>
-	</Product>
-	<Product>
-		<ID>222226</ID>
-		<Name>Samsung smart TV</Name>
-		<Price>2800</Price>
-		<Instock>100</Instock>
-		<Category>SCREEN</Category>
-	</Product>
-	<Product>
-		<ID>222227</ID>
-		<Name>Apple Watch 2022</Name>
-		<Price>4000</Price>
-		<Instock>100</Instock>
-		<Category>SMART_WATCH</Category>
-	</Product>
-	<Product>
-		<ID>222228</ID>
-		<Name>HP laptop i7</Name>
-		<Price>4000</Price>
-		<Instock>100</Instock>
-		<Category>LAPTOP</Category>
-	</Product>
-	<Product>
-		<ID>222229</ID>
-		<Name>Macbook air</Name>
-		<Price>4000</Price>
-		<Instock>150</Instock>
-		<Category>LAPTOP</Category>
-	</Product>
-	<Product>
-		<ID>222230</ID>
-		<Name>LG screen</Name>
-		<Price>2000</Price>
-		<Instock>150</Instock>
-		<Category>SCREEN</Category>
-	</Product>
-	<Product>
-		<ID>222231</ID>
-		<Name>Air pods</Name>
-		<Price>400</Price>
-		<Instock>0</Instock>
-		<Category>PHONE</Category>
+		<ID></ID>
+		<Name></Name>
+		<Price></Price>
+		<Instock></Instock>
+		<Category></Category>
 	</Product>
 </Products>
