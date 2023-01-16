@@ -1,2 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<products1 />
+<products1>
+  <Product>
+    <ID>111111</ID>
+    <Price>45</Price>
+    <InStock>3</InStock>
+    <Name>iphone 13</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>111112</ID>
+    <Price>34</Price>
+    <InStock>2</InStock>
+    <Name>Iphone12</Name>
+    <Category>PHONE</Category>
+  </Product>
+</products1>
