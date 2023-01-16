@@ -49,4 +49,18 @@
     <Name>rrrrrr</Name>
     <Category>PHONE</Category>
   </Product>
+  <Product>
+    <ID>123892</ID>
+    <Price>200</Price>
+    <Instock>0</Instock>
+    <Name>screen</Name>
+    <Category>SCREEN</Category>
+  </Product>
+  <Product>
+    <ID>8910</ID>
+    <Price>500</Price>
+    <InStock>10</InStock>
+    <Name>watch</Name>
+    <Category>SMART_WATCH</Category>
+  </Product>
 </products1>

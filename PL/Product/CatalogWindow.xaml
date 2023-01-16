@@ -102,7 +102,7 @@
                     <GridViewColumn  Width="Auto" Header="Is Available:">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox Margin="-5,-1"  Width="Auto"   Padding="5"  IsEnabled="False"  IsChecked="{Binding Path=IsAvailable}" />
+                                <CheckBox Margin="-5,-1"  Width="Auto"   Padding="5"  IsEnabled="False"  IsChecked="{Binding Path =  IsAvailable}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
