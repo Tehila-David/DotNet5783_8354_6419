@@ -38,6 +38,7 @@
         <TextBox  Text="{Binding Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
         <Button x:Name="Add" Content="Add"  HorizontalAlignment="Left" Margin="209,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Add_Click" RenderTransformOrigin="2.463,0.513"/>
         <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="118,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Update_Click" />
+       
      
     </Grid>
 </Window>

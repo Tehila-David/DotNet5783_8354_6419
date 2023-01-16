@@ -124,7 +124,6 @@ namespace PL
             ActionProduct(productForList);
         }
 
-        
-
+      
     }
 }

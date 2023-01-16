@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products1>
   <Student>
-    <ID>222222</ID>
-    <Price>5</Price>
-    <Instock>4</Instock>
-    <Name>rrrrrr</Name>
-    <Category>NO_ONE</Category>
-  </Student>
-  <Student>
     <ID>11111</ID>
     <Price>3</Price>
     <Instock>34</Instock>
@@ -33,6 +26,20 @@
     <Price>67</Price>
     <Instock>78</Instock>
     <Name>check</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>222223</ID>
+    <Price>45</Price>
+    <Instock>3</Instock>
+    <Name>tttt</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>222222</ID>
+    <Price>5</Price>
+    <Instock>0</Instock>
+    <Name>rrrrrr</Name>
     <Category>PHONE</Category>
   </Product>
 </products1>

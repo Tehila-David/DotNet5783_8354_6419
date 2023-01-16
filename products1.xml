@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Products>
+<products1>
 	<Product>
 		<ID></ID>
 		<Name></Name>
@@ -7,4 +7,4 @@
 		<Instock></Instock>
 		<Category></Category>
 	</Product>
-</Products>
+</products1>
