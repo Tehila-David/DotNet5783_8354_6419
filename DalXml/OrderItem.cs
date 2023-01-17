@@ -10,13 +10,17 @@ using System.Threading.Tasks;
 namespace Dal
 {
 
+    public struct ImportentNumbers
+    {
+        public double numberSaved { get; set; }
+        public string typeOfnumber { get; set; }
+    }
 
     internal class OrderItem : IOrderItem
     {
-
-
+       
         const string s_orderItems = @"OrderItems";
-        string configPath = @"config.xml";
+        string configPath = @"config";
 
         public IEnumerable<DO.OrderItem?> GetAll(Func<DO.OrderItem?, bool>? filter = null)
         {

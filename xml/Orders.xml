@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <ID>100009</ID>
+    <CustomerName>Tehila David</CustomerName>
+    <CustomerEmail>tehila@gmail.com</CustomerEmail>
+    <CustomerAddress>Reuven 23 Gedera</CustomerAddress>
+    <OrderDate>2023-01-17T21:54:08.3031691+02:00</OrderDate>
+    <ShipDate>2023-01-17T21:54:16.2553738+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>100011</ID>
+    <CustomerName>Tehila levi</CustomerName>
+    <CustomerEmail>tehilu@gmail.com</CustomerEmail>
+    <CustomerAddress>lalli 24</CustomerAddress>
+    <OrderDate>2023-01-17T21:58:23.8686999+02:00</OrderDate>
+    <ShipDate>2023-01-17T21:58:32.8855223+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>100013</ID>
+    <CustomerName>sivan levi</CustomerName>
+    <CustomerEmail>sivan@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven29 </CustomerAddress>
+    <OrderDate>2023-01-17T22:03:46.619751+02:00</OrderDate>
+    <ShipDate>2023-01-17T22:04:34.6573424+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>100015</ID>
+    <CustomerName>Please Work!!!</CustomerName>
+    <CustomerEmail>ww@gmail.com</CustomerEmail>
+    <CustomerAddress>dde</CustomerAddress>
+    <OrderDate>2023-01-17T22:19:44.1648365+02:00</OrderDate>
+    <ShipDate>2023-01-17T22:20:17.0795815+02:00</ShipDate>
+    <DeliveryDate>2023-01-17T22:24:02.449303+02:00</DeliveryDate>
+  </Order>
+</ArrayOfOrder>

@@ -14,7 +14,7 @@ namespace Dal
     static internal class XMLTools
     {
 
-        static string? s_dir = Directory.GetParent(System.IO.Directory.GetCurrentDirectory())?.FullName + @"\xml\";
+        static string? s_dir =  @"..\xml\";
 
         static XMLTools()
         {
@@ -71,22 +71,20 @@ namespace Dal
         #endregion
 
         #region SaveLoadWithXMLSerializer
-        //static readonly bool s_writing = false;
+        static readonly bool s_writing = true;
         public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct
         {
             string filePath = $"{s_dir + entity}.xml";
             try
             {
-                var xmlWriterSettings = new XmlWriterSettings() {  NewLineOnAttributes = true, Indent = true };
                 using FileStream file = new(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
                 using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { Indent = true });
-                {
-                    XmlSerializer serializer = new(typeof(List<T>));
-                    //if (s_writing)
-                    //    serializer.Serialize(writer, list);
-                    //else
-                        serializer.Serialize(file, list);
-                }
+
+                XmlSerializer serializer = new(typeof(List<T?>));
+                if (s_writing)
+                    serializer.Serialize(writer, list);
+                else
+                    serializer.Serialize(file, list);
             }
             catch (Exception ex)
             {
@@ -94,7 +92,8 @@ namespace Dal
                 throw new Exception($"fail to create xml file: {filePath}", ex);
             }
         }
-       
+
+
         public static List<T?> LoadListFromXMLSerializer<T>(string entity) where T : struct
         {
             string filePath = $"{s_dir + entity}.xml";
@@ -138,10 +137,10 @@ namespace Dal
                 using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { NewLineOnAttributes = true, Indent = true });
                 {
                     XmlSerializer serializer = new(typeof(List<T>));
-                    //if (s_writing)
-                    //    serializer.Serialize(writer, list);
-                    //else
-                    serializer.Serialize(file, list);
+                    if (s_writing)
+                        serializer.Serialize(writer, list);
+                    else
+                        serializer.Serialize(file, list);
                 }
             }
             catch (Exception ex)

@@ -11,14 +11,11 @@ using System.Runtime.Intrinsics.Arm;
 namespace Dal
 {
 
-    public struct ImportentNumbers
-    {
-        public double numberSaved { get; set; }
-        public string typeOfnumber { get; set; }
-    }
+  
 
     internal class Order : IOrder
     {
+       
 
         const string s_orders = @"Orders";
         string configPath = @"config";
@@ -87,6 +84,17 @@ namespace Dal
         public void Update(DO.Order order)
         {
             Delete(order.ID);
+            List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);
+
+            ImportentNumbers runningNum = (from number in runningList
+                                           where (number.typeOfnumber == "Order Running Number")
+                                           select number).FirstOrDefault();
+            runningList.Remove(runningNum);
+
+            runningNum.numberSaved--;
+            runningList.Add(runningNum);
+
+            XMLTools.SaveListToXMLSerializer1(runningList, configPath);
             Add(order);
         }
 
