@@ -27,15 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{0FF7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{640D7CB3-4AC9-4AF8-A8C0-D1686D8F3B69}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{287AF2B3-1D3C-43B0-97A3-FD717B26B260}"
-	ProjectSection(SolutionItems) = preProject
-		config.xml = config.xml
-		xml\dal-config.xml = xml\dal-config.xml
-		OrderItem.xml = OrderItem.xml
-		Orders.xml = Orders.xml
-		products1.xml = products1.xml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
