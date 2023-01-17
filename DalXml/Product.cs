@@ -92,6 +92,7 @@ namespace Dal
 
         public void Update(DO.Product product)
         {
+
             Delete(product.ID);
             Add(product);
         }
