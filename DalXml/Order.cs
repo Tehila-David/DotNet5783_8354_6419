@@ -47,7 +47,6 @@ namespace Dal
         }
 
 
-
         public int Add(DO.Order order)
         {
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
