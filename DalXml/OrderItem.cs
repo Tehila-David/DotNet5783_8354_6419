@@ -15,7 +15,7 @@ namespace Dal
     {
 
 
-        const string s_orderItems = @"OrderItem";
+        const string s_orderItems = @"OrderItems";
         string configPath = @"config.xml";
 
         public IEnumerable<DO.OrderItem?> GetAll(Func<DO.OrderItem?, bool>? filter = null)
