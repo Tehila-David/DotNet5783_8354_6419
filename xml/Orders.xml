@@ -1,1 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?><ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Orders xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Order>
+		<ID></ID>
+		<CustomerName></CustomerName>
+		<CustomerEmail></CustomerEmail>
+		<CustomerAddress></CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+</Orders>

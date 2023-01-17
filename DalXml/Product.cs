@@ -16,7 +16,7 @@ namespace Dal
 
     internal class Product : IProduct
     {
-        string s_products = @"products1";
+        string s_products = @"Products";
         static DO.Product? getProduct(XElement s) =>
         s.ToIntNullable("ID") is null ? null : new DO.Product()
         {
