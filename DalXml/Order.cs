@@ -21,7 +21,7 @@ namespace Dal
     {
 
         const string s_orders = @"Orders";
-        string configPath = @"config.xml";
+        string configPath = @"config";
 
         public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
         {
@@ -51,7 +51,7 @@ namespace Dal
         {
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
-            if (ordersList.Exists(lec => lec?.ID == order.ID))
+            if (ordersList.Exists(item => item?.ID == order.ID))
                 throw new Exception("id already exist");//DalAlreadyExistIdException(lecturer.ID, "Lecturer");
 
             List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);

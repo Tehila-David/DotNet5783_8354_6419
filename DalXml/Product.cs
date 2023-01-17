@@ -12,8 +12,6 @@ using System.Text;
 //implement IProduct with xelement
 namespace Dal
 {
-   
-
     internal class Product : IProduct
     {
         string s_products = @"Products";

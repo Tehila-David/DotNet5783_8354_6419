@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Products xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Products>
   <Product>
     <ID>222223</ID>
     <Name>IPHONE 13</Name>
@@ -46,21 +46,21 @@
     <ID>222229</ID>
     <Name>Macbook air</Name>
     <Price>4000</Price>
-	  <InStock>150</InStock>
+    <InStock>150</InStock>
     <Category>LAPTOP</Category>
   </Product>
   <Product>
     <ID>222230</ID>
     <Name>LG screen</Name>
     <Price>2000</Price>
-	  <InStock>150</InStock>
+    <InStock>150</InStock>
     <Category>SCREEN</Category>
   </Product>
   <Product>
     <ID>222231</ID>
     <Name>Air pods</Name>
     <Price>400</Price>
-	  <InStock>0</InStock>
+    <InStock>0</InStock>
     <Category>PHONE</Category>
   </Product>
   <Product>
@@ -76,5 +76,19 @@
     <InStock>56</InStock>
     <Name>IPHONE 14</Name>
     <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>11111</ID>
+    <Price>45</Price>
+    <InStock>3</InStock>
+    <Name>tablet</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>33333</ID>
+    <Price>56</Price>
+    <InStock>3</InStock>
+    <Name>34</Name>
+    <Category>TABLET</Category>
   </Product>
 </Products>
