@@ -100,9 +100,13 @@ namespace PL.Order
             orderItem = listBox.SelectedItem as BO.OrderItem;
 
             new OrderItemWindow(Order.ID,orderItem.ID).Show();
-            
+            Order = bl.Order.GetByID(Order.ID);
         }
 
-        
+        private void Add_New_Item_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderItemWindow(Order.ID).Show();
+            Order = bl.Order.GetByID(Order.ID);
+        }
     }
 }

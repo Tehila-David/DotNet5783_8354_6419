@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Products>
   <Product>
-    <ID>222223</ID>
-    <Name>IPHONE 13</Name>
-    <Price>2800</Price>
-    <InStock>100</InStock>
-    <Category>PHONE</Category>
-  </Product>
-  <Product>
     <ID>222224</ID>
     <Name>IPHONE 12</Name>
     <Price>2000</Price>
@@ -64,31 +57,38 @@
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>222232</ID>
-    <Price>5000</Price>
-    <InStock>6</InStock>
-    <Name>IPHONE 15</Name>
+    <ID>33333</ID>
+    <Price>56</Price>
+    <InStock>3</InStock>
+    <Name>34</Name>
+    <Category>TABLET</Category>
+  </Product>
+  <Product>
+    <ID>222223</ID>
+    <Price>2800</Price>
+    <InStock>101</InStock>
+    <Name>IPHONE 13</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
     <ID>222222</ID>
     <Price>4000</Price>
-    <InStock>56</InStock>
+    <InStock>63</InStock>
     <Name>IPHONE 14</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
     <ID>11111</ID>
     <Price>45</Price>
-    <InStock>3</InStock>
+    <InStock>5</InStock>
     <Name>tablet</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>33333</ID>
-    <Price>56</Price>
-    <InStock>3</InStock>
-    <Name>34</Name>
-    <Category>TABLET</Category>
+    <ID>222232</ID>
+    <Price>5000</Price>
+    <InStock>4</InStock>
+    <Name>IPHONE 15</Name>
+    <Category>PHONE</Category>
   </Product>
 </Products>

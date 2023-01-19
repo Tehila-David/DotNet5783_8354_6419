@@ -208,46 +208,133 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-    public BO.OrderItem UpdateItems(BO.Order Order,int productId,int amount,bool flag=true)
+    public BO.Order UpdateItems(BO.Order Order,int productId,int amount,bool flag=true)
     {
         int firstAmount;
+        int numberOrderItem;
         DO.Product product = new DO.Product();
         product=dal.Product.GetById(productId);
-        BO.OrderItem orderItem = new BO.OrderItem();
-        //if (flag == true)//if new iten in Order
-        //{
-        //    return  new BO.OrderItem()
-        //    {
-        //        ID =dal.OrderItem.
-                
-        //    }
-        //}
-        if (product.InStock >= amount )
+        //DO.OrderItem orderItem = new DO.OrderItem();
+        if (flag != true)//ADD new item to Order
         {
-            orderItem = Order.Items.Find(item => item.ProductID == productId);
-            firstAmount = orderItem.Amount;
-            Order.Items.RemoveAll(item => item.ProductID == productId);
-            if(orderItem != null) //Order Item Exsits- עדכון פריט קיים
+            DO.OrderItem DOorderItem = new DO.OrderItem()
             {
-                if (Order.Items.Any(item => item.ProductID == productId))
+                ID = 0,
+                ProductID = productId,
+                Price = product.Price,
+                Amount = amount,
+                OrderID = Order.ID
+            };
+            if (! Order.Items.Exists(item => item.ProductID == DOorderItem.ProductID)) 
+            {
+                try
                 {
-                    orderItem.Amount = amount;
-                    Order.Items.Add(orderItem);
+                    numberOrderItem = dal.OrderItem.Add(DOorderItem);
                 }
+                catch (DO.DalConfigException str)
+                {
+                    throw new BO.InternalProblem("Failed to add orderItem to data tier", str);
+                }
+                product.InStock -= amount;
+                dal.Product.Update(product);
+
+                BO.OrderItem orderItem = new BO.OrderItem
+                {
+                    ID = numberOrderItem,
+                    ProductID = productId,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Amount = amount,
+                    TotalPrice = amount * product.Price
+                };
+                Order.Items.Add(orderItem);
+                return Order;
             }
-            else//new Order Item- הוספת פריט חדש
+            else
             {
-               /* orderItem.ID=dal.*//*NextOrderItemID*/ ///??  שלו  idביצירת פריט חדש איך יודעים מה ה
+                
+                
+                    throw new Exception(" The item exsits in the Order");
+
+               
             }
-           product.InStock -= amount- firstAmount;
-           dal.Product.Update(product);
            
-            return orderItem;
         }
-        else 
-        { throw new BO.InternalProblem("The amount of  products is not available"); }
-       
+        else
+        {
+            if (amount == 0)//delete item
+            {
+                DO.OrderItem DOorderItem = new DO.OrderItem();
+                DOorderItem = dal.OrderItem.GetById(Order.Items.FirstOrDefault(item => item.ProductID == productId).ID);
+                product.InStock += DOorderItem.Amount;
+                dal.Product.Update(product);
+                BO.OrderItem orderItem = new BO.OrderItem
+                {
+                    ID = DOorderItem.ID,
+                    ProductID = productId,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Amount = amount,
+                    TotalPrice = amount * product.Price
+                };
+
+                Order.Items.Remove(orderItem);
+                return Order;
+
+            }
+            else
+            {
+                DO.OrderItem DOorderItem = new DO.OrderItem();
+                DOorderItem = dal.OrderItem.GetById(Order.Items.FirstOrDefault(item => item.ProductID == productId).ID);
+                product.InStock += DOorderItem.Amount;
+                DOorderItem.Amount = amount;
+                product.InStock -= DOorderItem.Amount;
+                BO.OrderItem orderItem = new BO.OrderItem
+                {
+                    ID = DOorderItem.ID,
+                    ProductID = productId,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Amount = amount,
+                    TotalPrice = amount * product.Price
+                };
+                var item = Order.Items.Where(item => item.ID == DOorderItem.ID).FirstOrDefault();
+                Order.Items.Remove(item);
+                Order.Items.Add(orderItem);
+                return Order;
+
+
+            }
+        }
+        //if (product.InStock >= amount)
+        //{
+        //    orderItem = Order.Items.Find(item => item.ProductID == productId);
+        //    firstAmount = orderItem.Amount;
+        //    Order.Items.RemoveAll(item => item.ProductID == productId);
+        //    if (orderItem != null) //Order Item Exsits- עדכון פריט קיים
+        //    {
+        //        if (Order.Items.Any(item => item.ProductID == productId))
+        //        {
+        //            orderItem.Amount = amount;
+        //            Order.Items.Add(orderItem);
+        //        }
+        //    }
+        //    else//new Order Item- הוספת פריט חדש
+        //    {
+        //        /* orderItem.ID=dal.*//*NextOrderItemID*/ ///??  שלו  idביצירת פריט חדש איך יודעים מה ה
+        //    }
+        //    product.InStock -= amount - firstAmount;
+        //    dal.Product.Update(product);
+
+        //    return orderItem;
+        //}
+        //else
+        //{ throw new BO.InternalProblem("The amount of  products is not available"); }
+
     }
+
+
+
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
        

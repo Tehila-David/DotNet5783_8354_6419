@@ -18,7 +18,7 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="End_of_simulation" Content="End of simulation"   HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" Click="NewOrder_Click"/>
+        <Button x:Name="End_of_simulation" Content="End of simulation"   HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" />
         <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="590,250,38,112" Grid.Row="1" Height="40"/>
     </Grid>
 </Window>

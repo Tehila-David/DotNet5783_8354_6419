@@ -36,4 +36,13 @@
     <ShipDate>2023-01-17T22:20:17.0795815+02:00</ShipDate>
     <DeliveryDate>2023-01-17T22:24:02.449303+02:00</DeliveryDate>
   </Order>
+  <Order>
+    <ID>100016</ID>
+    <CustomerName>tehila 3</CustomerName>
+    <CustomerEmail>t@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven23</CustomerAddress>
+    <OrderDate>2023-01-19T14:12:43.6803482+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
 </ArrayOfOrder>
