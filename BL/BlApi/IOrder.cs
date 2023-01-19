@@ -44,6 +44,11 @@ namespace BlApi
         /// <param name="productId"></param>
         /// <param name="amount"></param>
         public BO.OrderItem UpdateItems(BO.Order Order, int productId, int amount);
+        /// <summary>
+        /// for simulator , return the oldest Order
+        /// </summary>
+        /// <returns></returns>
+        public int? OrderForSimulator();
 
        
 

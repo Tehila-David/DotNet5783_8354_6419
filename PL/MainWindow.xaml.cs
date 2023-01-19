@@ -71,5 +71,12 @@ namespace PL
             Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
             Products_List.Visibility = Visibility.Hidden;///hide butten of Productslist
         }
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            SimulatorWindow window = new SimulatorWindow();
+            window.Show();
+           
+        }
     }
 }

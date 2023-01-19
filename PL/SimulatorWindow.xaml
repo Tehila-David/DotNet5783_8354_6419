@@ -1,0 +1,24 @@
+﻿<Window x:Class="PL.SimulatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Closing="Window_Closing"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        
+        Title="SimulatorWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="373*"/>
+            <ColumnDefinition Width="27*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="End_of_simulation" Content="End of simulation"   HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" Click="NewOrder_Click"/>
+        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="590,250,38,112" Grid.Row="1" Height="40"/>
+    </Grid>
+</Window>

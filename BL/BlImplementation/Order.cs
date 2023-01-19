@@ -240,5 +240,28 @@ internal class Order : BlApi.IOrder
         { throw new BO.InternalProblem("The amount of  products is not available"); }
        
     }
-   
+    public int? OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
+    {
+        int? oldest = 0;
+        int i = 0;
+        var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
+                    orderby item.Value.OrderDate
+                    select item;
+        while (order != null)
+        {
+           oldest = order.FirstOrDefault()?.ID;
+           return oldest;
+        }
+        var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
+                    orderby item.Value.DeliveryDate
+                    select item;
+        while (order1 != null)
+        {
+            oldest = order1.FirstOrDefault()?.ID;
+            return oldest;
+        }
+        return null;
+
+    }
+
 }
