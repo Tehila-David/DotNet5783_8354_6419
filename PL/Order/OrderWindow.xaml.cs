@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BO;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,7 +24,17 @@ namespace PL.Order
             private set => SetValue(OrderDependency, value);
         }
 
+        public static readonly DependencyProperty ItemsDependency =
+        DependencyProperty.Register(nameof(Items),
+                                typeof(ObservableCollection<OrderItem?>),
+                                typeof(OrderWindow));
+        public ObservableCollection<OrderItem?> Items
+        {
+            get => (ObservableCollection<OrderItem?>)GetValue(ItemsDependency);
+            private set => SetValue(ItemsDependency, value);
+        }
 
+        
         public BO.OrderStatus Status { get; set; }
 
         public Array StatusArray { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
@@ -35,7 +47,7 @@ namespace PL.Order
         {
             InitializeComponent();
             Order = bl.Order.GetByID(id);
-
+           
 
         }
 
@@ -69,8 +81,7 @@ namespace PL.Order
             {
                 MessageBox.Show(ex.Message);
             }
-
-
+          
         }
 
 
@@ -101,12 +112,13 @@ namespace PL.Order
 
             new OrderItemWindow(Order.ID,orderItem.ID).Show();
             Order = bl.Order.GetByID(Order.ID);
+            Close();
         }
 
         private void Add_New_Item_Click(object sender, RoutedEventArgs e)
         {
             new OrderItemWindow(Order.ID).Show();
-            Order = bl.Order.GetByID(Order.ID);
+           Close();
         }
     }
 }

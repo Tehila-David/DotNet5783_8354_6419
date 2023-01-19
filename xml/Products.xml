@@ -1,20 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Products>
   <Product>
-    <ID>222224</ID>
-    <Name>IPHONE 12</Name>
-    <Price>2000</Price>
-    <InStock>100</InStock>
-    <Category>PHONE</Category>
-  </Product>
-  <Product>
-    <ID>222225</ID>
-    <Name>Ipad Air 2022</Name>
-    <Price>2500</Price>
-    <InStock>100</InStock>
-    <Category>TABLET</Category>
-  </Product>
-  <Product>
     <ID>222226</ID>
     <Name>Samsung smart TV</Name>
     <Price>2800</Price>
@@ -43,13 +29,6 @@
     <Category>LAPTOP</Category>
   </Product>
   <Product>
-    <ID>222230</ID>
-    <Name>LG screen</Name>
-    <Price>2000</Price>
-    <InStock>150</InStock>
-    <Category>SCREEN</Category>
-  </Product>
-  <Product>
     <ID>222231</ID>
     <Name>Air pods</Name>
     <Price>400</Price>
@@ -64,31 +43,52 @@
     <Category>TABLET</Category>
   </Product>
   <Product>
-    <ID>222223</ID>
-    <Price>2800</Price>
-    <InStock>101</InStock>
-    <Name>IPHONE 13</Name>
+    <ID>11111</ID>
+    <Price>45</Price>
+    <InStock>13</InStock>
+    <Name>tablet</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>222230</ID>
+    <Price>2000</Price>
+    <InStock>151</InStock>
+    <Name>LG screen</Name>
+    <Category>SCREEN</Category>
+  </Product>
+  <Product>
+    <ID>222232</ID>
+    <Price>5000</Price>
+    <InStock>6</InStock>
+    <Name>IPHONE 15</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>222225</ID>
+    <Price>2500</Price>
+    <InStock>105</InStock>
+    <Name>Ipad Air 2022</Name>
+    <Category>TABLET</Category>
+  </Product>
+  <Product>
+    <ID>222224</ID>
+    <Price>2000</Price>
+    <InStock>188</InStock>
+    <Name>IPHONE 12</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
     <ID>222222</ID>
     <Price>4000</Price>
-    <InStock>63</InStock>
+    <InStock>17</InStock>
     <Name>IPHONE 14</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>11111</ID>
-    <Price>45</Price>
-    <InStock>5</InStock>
-    <Name>tablet</Name>
-    <Category>PHONE</Category>
-  </Product>
-  <Product>
-    <ID>222232</ID>
-    <Price>5000</Price>
-    <InStock>4</InStock>
-    <Name>IPHONE 15</Name>
+    <ID>222223</ID>
+    <Price>2800</Price>
+    <InStock>0</InStock>
+    <Name>IPHONE 13</Name>
     <Category>PHONE</Category>
   </Product>
 </Products>

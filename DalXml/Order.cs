@@ -29,7 +29,7 @@ namespace Dal
 
         public DO.Order GetById(int id) =>
             XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefault(p => p?.ID == id)
-            //DalMissingIdException(id, "Lecturer");
+        
             ?? throw new Exception("missing id");
 
         public DO.Order? GetById(Func<DO.Order?, bool>? predicate)
@@ -49,7 +49,7 @@ namespace Dal
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
             if (ordersList.Exists(item => item?.ID == order.ID))
-                throw new Exception("id already exist");//DalAlreadyExistIdException(lecturer.ID, "Lecturer");
+                throw new Exception("id already exist");
 
             List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);
 
@@ -76,7 +76,7 @@ namespace Dal
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
             if (ordersList.RemoveAll(p => p?.ID == id) == 0)
-                throw new Exception("missing id"); //new DalMissingIdException(id, "Lecturer");
+                throw new Exception("missing id"); 
 
             XMLTools.SaveListToXMLSerializer(ordersList, s_orders);
         }

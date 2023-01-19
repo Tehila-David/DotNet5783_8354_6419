@@ -71,8 +71,8 @@ namespace PL.Order
             InitializeComponent();
             OrderID = OrderId;
             Order1 = bl.Order.GetByID(OrderId);
-            UpdateItem.Visibility = Visibility.Collapsed;
-            DeleteItem.Visibility = Visibility.Collapsed;
+            UpdateItem.Visibility = Visibility.Hidden;
+            DeleteItem.Visibility = Visibility.Hidden;
 
         }
         public OrderItemWindow(int OrderId, int OrderItemId) //!!!???? לא מצליחה לעדכן מוצר שקיים בהזמנה איך עושים את זה     
@@ -82,6 +82,7 @@ namespace PL.Order
             BO.OrderItem OrderItem = Order1.Items.FirstOrDefault(item => item.ID == OrderItemId);
             Amount = OrderItem?.Amount ?? 0;
             productId = OrderItem?.ProductID ?? 0;
+            AddNewItem.Visibility=Visibility.Hidden;
 
         }
 
@@ -91,9 +92,9 @@ namespace PL.Order
             try
             {
                 BO.Order order = new BO.Order();
-               Order1= bl.Order.UpdateItems(Order1, productId, Amount ,true);
-               
-               
+                Order1= bl.Order.UpdateItems(Order1, productId, Amount ,true);
+                Order1 = bl.Order.GetByID(Order1.ID);
+
             }
             catch (FormatException)
             {
@@ -103,6 +104,7 @@ namespace PL.Order
             {
                 MessageBox.Show(ex.Message);
             }
+            new OrderWindow(Order1.ID).Show();
             Close();
 
 
@@ -113,11 +115,13 @@ namespace PL.Order
             try
             {
                 Order1 = bl.Order.UpdateItems(Order1, productId, Amount, false);
+                Order1 = bl.Order.GetByID(Order1.ID);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            new OrderWindow(Order1.ID).Show();
             Close();
         }
 
@@ -125,13 +129,14 @@ namespace PL.Order
         {
             try
             {
-                Order1=bl.Order.UpdateItems(Order1, productId,0, true);
-                
+                bl.Order.UpdateItems(Order1, productId,0, true);
+                Order1 = bl.Order.GetByID(Order1.ID);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            new OrderWindow(Order1.ID).Show();
             Close();
         }
     }
