@@ -86,7 +86,6 @@ namespace Dal
             int ID=order.ID;
             Delete(order.ID);
             order.ID = ID;
-            //Add(order);
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
             if (ordersList.Exists(item => item?.ID == order.ID))
                 throw new Exception("id already exist");
