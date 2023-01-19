@@ -48,6 +48,7 @@ namespace PL.Order
             InitializeComponent();
             Order = bl.Order.GetByID(id);
            
+           
 
         }
 
@@ -120,5 +121,7 @@ namespace PL.Order
             new OrderItemWindow(Order.ID).Show();
            Close();
         }
+
+       
     }
 }

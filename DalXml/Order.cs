@@ -83,19 +83,15 @@ namespace Dal
 
         public void Update(DO.Order order)
         {
+            int ID=order.ID;
             Delete(order.ID);
-            List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);
-
-            ImportentNumbers runningNum = (from number in runningList
-                                           where (number.typeOfnumber == "Order Running Number")
-                                           select number).FirstOrDefault();
-            runningList.Remove(runningNum);
-
-            runningNum.numberSaved--;
-            runningList.Add(runningNum);
-
-            XMLTools.SaveListToXMLSerializer1(runningList, configPath);
-            Add(order);
+            order.ID = ID;
+            //Add(order);
+            var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
+            if (ordersList.Exists(item => item?.ID == order.ID))
+                throw new Exception("id already exist");
+            ordersList.Add(order);
+            XMLTools.SaveListToXMLSerializer(ordersList, s_orders);
         }
 
     }
