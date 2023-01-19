@@ -71,17 +71,10 @@
     <Amount>8</Amount>
   </OrderItem>
   <OrderItem>
-    <ID>100049</ID>
+    <ID>100052</ID>
     <ProductID>222222</ProductID>
     <OrderID>100015</OrderID>
     <Price>4000</Price>
-    <Amount>80</Amount>
-  </OrderItem>
-  <OrderItem>
-    <ID>100051</ID>
-    <ProductID>222223</ProductID>
-    <OrderID>100015</OrderID>
-    <Price>2800</Price>
-    <Amount>110</Amount>
+    <Amount>10</Amount>
   </OrderItem>
 </ArrayOfOrderItem>

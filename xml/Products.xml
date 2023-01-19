@@ -78,17 +78,17 @@
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>222222</ID>
-    <Price>4000</Price>
-    <InStock>17</InStock>
-    <Name>IPHONE 14</Name>
+    <ID>222223</ID>
+    <Price>2800</Price>
+    <InStock>110</InStock>
+    <Name>IPHONE 13</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>222223</ID>
-    <Price>2800</Price>
-    <InStock>0</InStock>
-    <Name>IPHONE 13</Name>
+    <ID>222222</ID>
+    <Price>4000</Price>
+    <InStock>87</InStock>
+    <Name>IPHONE 14</Name>
     <Category>PHONE</Category>
   </Product>
 </Products>
