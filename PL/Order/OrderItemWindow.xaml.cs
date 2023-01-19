@@ -29,37 +29,41 @@ namespace PL.Order
 
 
         public static readonly DependencyProperty OrderItemDependency =
-       DependencyProperty.Register(nameof(OrderItem),
-                              typeof(BO.OrderItem),
+       DependencyProperty.Register(nameof(Order),
+                              typeof(BO.Order),
                               typeof(OrderItemWindow));
-        public BO.OrderItem? OrderItem
+        public BO.Order? Order
         {
-            get => (BO.OrderItem)GetValue(OrderItemDependency);
+            get => (BO.Order)GetValue(OrderItemDependency);
             private set => SetValue(OrderItemDependency, value);
         }
 
 
 
-        public BO.Order Order1 = new BO.Order();
+
+        public BO.OrderItem OrderItem = new BO.OrderItem();
         /// <summary>
         /// constructor for Adding new item to Order
         /// </summary>
         /// <param name="OrderID"></param>
         public OrderItemWindow(int OrderId)
         {
+
             InitializeComponent();
             OrderID = OrderId;
-            Order1 = bl.Order.GetByID(OrderId);
+            Order = bl.Order.GetByID(OrderId);
+            UpdateItem.Visibility = Visibility.Collapsed;
+            DeleteItem.Visibility = Visibility.Collapsed;
+
         }
+        public OrderItemWindow(int OrderId, int OrderItemId) //!!!???? לא מצליחה לעדכן מוצר שקיים בהזמנה איך עושים את זה     
+        {
+            InitializeComponent();
+            OrderID = OrderId;
+            OrderItem = bl.Order.GetByID(OrderID).Items.FirstOrDefault(item => item.ID == OrderItemId);
+            Order = bl.Order.GetByID(OrderId);
 
-
-            public OrderItemWindow(int OrderId, int OrderItemId) //!!!???? לא מצליחה לעדכן מוצר שקיים בהזמנה איך עושים את זה
-            {
-                InitializeComponent();
-                OrderID = OrderId;
-                OrderItem = bl.Order.GetByID(OrderID).Items.FirstOrDefault(item => item.ID == OrderItemId);
-                Order1 = bl.Order.GetByID(OrderId);
-            }
+        }
 
         public void UpdateItem_Click(object sender, RoutedEventArgs e)
         {
@@ -67,9 +71,9 @@ namespace PL.Order
             try
             {
                 BO.Order order = new BO.Order();
-                OrderItem = bl.Order.UpdateItems(bl.Order.GetByID(OrderID), OrderItem.ProductID, OrderItem.Amount);
-                Order1.Items.RemoveAll(item => item.ID == OrderItem.ID);
-                Order1.Items.Add(OrderItem);
+                OrderItem = bl.Order.UpdateItems(bl.Order.GetByID(OrderID), OrderItem.ProductID, OrderItem.Amount,false);
+                //Order1.Items.RemoveAll(item => item.ID == OrderItem.ID);
+                //Order1.Items.Add(OrderItem);
             }
             catch (FormatException)
             {
@@ -84,8 +88,15 @@ namespace PL.Order
 
         }
 
-            
-        
+        private void AddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

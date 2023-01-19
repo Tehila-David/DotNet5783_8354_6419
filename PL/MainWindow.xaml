@@ -69,8 +69,8 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Back" Content="Back"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="338,341,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="25" Width="78"   Background="#FFFB5151" Click="Back_Click" />
-        <Button x:Name="Manager" Content="Manager"  Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="120,120,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204"  BorderBrush="#FFCA2525" Foreground="#FFDE0909" Click="Manager_Click" >
+        <!--<Button x:Name="Back" Content="Back"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="338,341,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="25" Width="78"   Background="#FFFB5151" Click="Back_Click" />-->
+        <Button x:Name="Manager" Content="Manager"  Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="120,120,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204"  BorderBrush="#FFCA2525" Foreground="#FFDE0909" Click="Manager_Click" FontFamily="Arial Black" >
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="Black" Offset="0"/>
@@ -81,7 +81,7 @@
                 </RadialGradientBrush>
                 </Button.Background>
         </Button>
-        <Button x:Name="Client" Content="Client"  Style="{StaticResource myButtonStyle}"  HorizontalAlignment="Left" Margin="370,120,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204"   BorderBrush="#FFCA2525" Foreground="#FFDE0909" FontWeight="Normal" FontFamily="Arial Black" >
+        <Button x:Name="Client" Content="Client"  Style="{StaticResource myButtonStyle}"  HorizontalAlignment="Left" Margin="370,120,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204"   BorderBrush="#FFCA2525" Foreground="#FFDE0909" FontWeight="Normal" FontFamily="Arial Black" Click="Client_Click" >
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="Black"/>

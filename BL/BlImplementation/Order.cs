@@ -208,12 +208,20 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-    public BO.OrderItem UpdateItems(BO.Order Order,int productId,int amount)
+    public BO.OrderItem UpdateItems(BO.Order Order,int productId,int amount,bool flag=true)
     {
         int firstAmount;
         DO.Product product = new DO.Product();
         product=dal.Product.GetById(productId);
         BO.OrderItem orderItem = new BO.OrderItem();
+        //if (flag == true)//if new iten in Order
+        //{
+        //    return  new BO.OrderItem()
+        //    {
+        //        ID =dal.OrderItem.
+                
+        //    }
+        //}
         if (product.InStock >= amount )
         {
             orderItem = Order.Items.Find(item => item.ProductID == productId);
@@ -240,28 +248,28 @@ internal class Order : BlApi.IOrder
         { throw new BO.InternalProblem("The amount of  products is not available"); }
        
     }
-    public int? OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
+    public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
-        int? oldest = 0;
-        int i = 0;
+       
+       
         var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
-                    orderby item.Value.OrderDate
+                    orderby item?.OrderDate
                     select item;
         while (order != null)
         {
-           oldest = order.FirstOrDefault()?.ID;
-           return oldest;
+            return order.First().Value.ID;
+          
         }
         var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
-                    orderby item.Value.DeliveryDate
+                    orderby item?.DeliveryDate
                     select item;
         while (order1 != null)
         {
-            oldest = order1.FirstOrDefault()?.ID;
-            return oldest;
+            return  order1.First().Value.ID;
         }
-        return null;
+        return 0;
 
     }
+
 
 }

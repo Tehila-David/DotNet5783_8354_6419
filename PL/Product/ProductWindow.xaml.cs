@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using Microsoft.VisualBasic;
 using PL.Order;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -47,6 +49,7 @@ namespace PL
                 if (id == 0)
                 {
                     Update.Visibility=Visibility.Hidden;
+                    Remove.Visibility=Visibility.Hidden;
                 }
                 else
                 {
@@ -121,20 +124,20 @@ namespace PL
                 Category = Product.Category,
                 Name = Product.Name,
             };
-            ActionProduct(productForList);
+            ActionProduct(productForList); //for Automatic window update
         }
-        //private void Remove_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        bl.Product.Delete(Product.ID);
-        //        Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.Product.Delete(Product.ID);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
     }
 }
