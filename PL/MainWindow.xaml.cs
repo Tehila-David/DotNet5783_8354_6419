@@ -16,9 +16,12 @@ namespace PL
         public MainWindow()
         {
            InitializeComponent();
-            Back.Visibility = Visibility.Collapsed;//hide butten of Orderslist
+            
             Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
             Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
+            New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
+            Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
+
         }
         BlApi.IBl? bl = BlApi.Factory.Get();
 
@@ -29,12 +32,12 @@ namespace PL
         /// <param name="e"></param>
         private void Manager_Click(object sender, RoutedEventArgs e)
         {
-            Manager.Visibility = Visibility.Hidden;//hide butten of Manager
+            
+            Orders_List.Visibility = Visibility.Visible;//Show butten of Orderslist
+            Products_List.Visibility = Visibility.Visible;//Show butten of Productslist
             New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
             Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
-            Orders_List.Visibility = Visibility.Visible;//Show butten of Orderslist
-            Products_List.Visibility = Visibility.Visible;///Show butten of Productslist
-            Back.Visibility = Visibility.Visible;//Show butten of Back
+
         }
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
@@ -63,13 +66,21 @@ namespace PL
             
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+      
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
         {
-            Manager.Visibility=Visibility.Visible;//show butten of manager
-            New_Order.Visibility = Visibility.Visible;//show butten of New_Order
+            SimulatorWindow window = new SimulatorWindow();
+            window.Show();
+           
+        }
+
+        private void Client_Click(object sender, RoutedEventArgs e)
+        {
+            New_Order.Visibility = Visibility.Visible;//Show butten of New_Order
             Order_Tracking.Visibility = Visibility.Visible;//Show butten of  Order_Tracking
             Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
-            Products_List.Visibility = Visibility.Hidden;///hide butten of Productslist
+            Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
         }
     }
 }

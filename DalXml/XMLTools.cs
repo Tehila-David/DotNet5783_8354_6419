@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
 using DO;
+using System.Xml;
 
 namespace Dal
 {
     static internal class XMLTools
     {
 
-         const string s_dir = @"..\xml\";
-
+        static string? s_dir =  @"..\xml\";
 
         static XMLTools()
         {
@@ -71,20 +71,20 @@ namespace Dal
         #endregion
 
         #region SaveLoadWithXMLSerializer
-        //static readonly bool s_writing = false;
+        static readonly bool s_writing = true;
         public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct
         {
             string filePath = $"{s_dir + entity}.xml";
             try
             {
                 using FileStream file = new(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
-                //using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { Indent = true });
+                using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { Indent = true });
 
                 XmlSerializer serializer = new(typeof(List<T?>));
-                //if (s_writing)
-                //    serializer.Serialize(writer, list);
-                //else
-                serializer.Serialize(file, list);
+                if (s_writing)
+                    serializer.Serialize(writer, list);
+                else
+                    serializer.Serialize(file, list);
             }
             catch (Exception ex)
             {
@@ -92,26 +92,7 @@ namespace Dal
                 throw new Exception($"fail to create xml file: {filePath}", ex);
             }
         }
-        public static void SaveListToXMLSerializer1<T>(List<T> list, string entity) where T : struct//for running numbers
-        {
-            string filePath = $"{s_dir + entity}.xml";
-            try
-            {
-                using FileStream file = new(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
-                //using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { Indent = true });
 
-                XmlSerializer serializer = new(typeof(List<T>));
-                //if (s_writing)
-                //    serializer.Serialize(writer, list);
-                //else
-                serializer.Serialize(file, list);
-            }
-            catch (Exception ex)
-            {
-                // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {dir + filePath}", ex);            }
-                throw new Exception($"fail to create xml file: {filePath}", ex);
-            }
-        }
 
         public static List<T?> LoadListFromXMLSerializer<T>(string entity) where T : struct
         {
@@ -146,6 +127,62 @@ namespace Dal
                 throw new Exception($"fail to load xml file: {filePath}", ex);
             }
         }
+
+        public static void SaveListToXMLSerializer1<T>(List<T> list, string entity) where T : struct//for running numbers
+        {
+            string filePath = $"{s_dir + entity}.xml";
+            try
+            {
+                using FileStream file = new(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
+                using XmlWriter writer = XmlWriter.Create(file, new XmlWriterSettings() { NewLineOnAttributes = true, Indent = true });
+                {
+                    XmlSerializer serializer = new(typeof(List<T>));
+                    if (s_writing)
+                        serializer.Serialize(writer, list);
+                    else
+                        serializer.Serialize(file, list);
+                }
+            }
+            catch (Exception ex)
+            {
+                // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {dir + filePath}", ex);            }
+                throw new Exception($"fail to create xml file: {filePath}", ex);
+            }
+        }
+
+        // public static List<T> LoadListFromXMLSerializer<T>(string entity) where T : struct
+        //{
+        //    string filePath = $"{s_dir + entity}.xml";
+        //    try
+        //    {
+        //        if (!File.Exists(filePath)) return new();
+        //        using FileStream file = new(filePath, FileMode.Open);
+        //        XmlSerializer x = new(typeof(List<T>));
+        //        return x.Deserialize(file) as List<T> ?? new();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {dir + filePath}", ex);            }
+        //        throw new Exception($"fail to load xml file: {filePath}", ex);
+        //    }
+        //}
+
+        //public static List<T?> LoadListFromXMLSerializer1<T>(string entity) where T : struct// for running numbers
+        //{
+        //    string filePath = $"{s_dir + entity}.xml";
+        //    try
+        //    {
+        //        if (!File.Exists(filePath)) return new();
+        //        using FileStream file = new(filePath, FileMode.Open);
+        //        XmlSerializer x = new(typeof(List<T?>));
+        //        return x.Deserialize(file) as List<T?> ?? new();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {dir + filePath}", ex);            }
+        //        throw new Exception($"fail to load xml file: {filePath}", ex);
+        //    }
+        //}
         #endregion
     }
 }

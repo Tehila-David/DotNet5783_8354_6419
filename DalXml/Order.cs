@@ -11,17 +11,14 @@ using System.Runtime.Intrinsics.Arm;
 namespace Dal
 {
 
-    public struct ImportentNumbers
-    {
-        public double numberSaved { get; set; }
-        public string typeOfnumber { get; set; }
-    }
+  
 
     internal class Order : IOrder
     {
+       
 
         const string s_orders = @"Orders";
-        string configPath = @"config.xml";
+        string configPath = @"config";
 
         public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
         {
@@ -32,7 +29,7 @@ namespace Dal
 
         public DO.Order GetById(int id) =>
             XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefault(p => p?.ID == id)
-            //DalMissingIdException(id, "Lecturer");
+        
             ?? throw new Exception("missing id");
 
         public DO.Order? GetById(Func<DO.Order?, bool>? predicate)
@@ -51,8 +48,8 @@ namespace Dal
         {
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
-            if (ordersList.Exists(lec => lec?.ID == order.ID))
-                throw new Exception("id already exist");//DalAlreadyExistIdException(lecturer.ID, "Lecturer");
+            if (ordersList.Exists(item => item?.ID == order.ID))
+                throw new Exception("id already exist");
 
             List<ImportentNumbers> runningList = XMLTools.LoadListFromXMLSerializer1<ImportentNumbers>(configPath);
 
@@ -79,15 +76,20 @@ namespace Dal
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
 
             if (ordersList.RemoveAll(p => p?.ID == id) == 0)
-                throw new Exception("missing id"); //new DalMissingIdException(id, "Lecturer");
+                throw new Exception("missing id"); 
 
             XMLTools.SaveListToXMLSerializer(ordersList, s_orders);
         }
 
         public void Update(DO.Order order)
         {
+          
             Delete(order.ID);
-            Add(order);
+            var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
+            if (ordersList.Exists(item => item?.ID == order.ID))
+                throw new Exception("id already exist");
+            ordersList.Add(order);
+            XMLTools.SaveListToXMLSerializer(ordersList, s_orders);
         }
 
     }

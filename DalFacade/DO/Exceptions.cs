@@ -24,7 +24,7 @@ namespace DO
         }
 
     }
-
+    
     [Serializable]
     public class DalConfigException : Exception
     {

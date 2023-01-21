@@ -12,8 +12,6 @@ using System.Text;
 //implement IProduct with xelement
 namespace Dal
 {
-   
-
     internal class Product : IProduct
     {
         string s_products = @"Products";
@@ -92,6 +90,7 @@ namespace Dal
 
         public void Update(DO.Product product)
         {
+
             Delete(product.ID);
             Add(product);
         }

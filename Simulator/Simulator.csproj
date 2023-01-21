@@ -1,10 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
 	  <BaseOutputPath>$(SolutionDir)\bin\</BaseOutputPath>
 	<OutputPath>$(SolutionDir)\bin\</OutputPath>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -16,21 +15,10 @@
 	  
     <BaseOutputPath>$(SolutionDir)\bin\</BaseOutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="logo.jpg" />
-    <None Remove="צילום מסך 2023-01-08 234608.png" />
-    <None Remove="צילום מסך 2023-01-11 094323.png" />
-  </ItemGroup>
+	
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
-    <ProjectReference Include="..\Simulator\Simulator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="צילום מסך 2023-01-08 234608.png" />
-    <Resource Include="צילום מסך 2023-01-11 094323.png" />
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,7 @@ internal class Order : BlApi.IOrder
     {
         if (predicate == null)
         {
-   
+
             return from item in dal?.Order.GetAll()
                    where item != null
                    orderby item?.ID
@@ -29,11 +29,11 @@ internal class Order : BlApi.IOrder
                        ID = order?.ID ?? throw new NullReferenceException("Missing ID"),
                        CustomerName = order?.CustomerName,
                        Status = order?.DeliveryDate != null ? BO.OrderStatus.Deliverded : order?.ShipDate != null ? BO.OrderStatus.shipped
-                       :  BO.OrderStatus.Confirmed ,
-                       AmountOfItems = dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
-                       TotalPrice = (dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
+                       : BO.OrderStatus.Confirmed,
+                       AmountOfItems = dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
+                       TotalPrice = (dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
                    };
-                   
+
 
         }
         else
@@ -47,7 +47,7 @@ internal class Order : BlApi.IOrder
                        ID = item?.ID ?? throw new NullReferenceException("Missing ID"),
                        CustomerName = item?.CustomerName,
                        Status = item?.DeliveryDate != null ? BO.OrderStatus.Deliverded : item?.ShipDate != null ? BO.OrderStatus.shipped
-                       :  BO.OrderStatus.Confirmed ,
+                       : BO.OrderStatus.Confirmed,
                        AmountOfItems = dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Amount ?? 0),
                        TotalPrice = (dal.OrderItem.GetAll(item => item?.OrderID == order?.ID).Sum(orderItem => orderItem?.Price * orderItem?.Amount ?? 0))
                    };
@@ -70,10 +70,10 @@ internal class Order : BlApi.IOrder
                 CustomerEmail = order.CustomerEmail,
                 CustomerAddress = order.CustomerAddress,
                 Status = order.DeliveryDate != null ? BO.OrderStatus.Deliverded : order.ShipDate != null ? BO.OrderStatus.shipped
-            :    BO.OrderStatus.Confirmed,
+            : BO.OrderStatus.Confirmed,
                 OrderDate = order.OrderDate,
-                ShipDate= order.ShipDate,
-                DeliveryDate= order.DeliveryDate,
+                ShipDate = order.ShipDate,
+                DeliveryDate = order.DeliveryDate,
                 Items = getDoOrderItem(order.ID),
                 TotalPrice = getDoOrderItem(order.ID).Sum(item => item?.TotalPrice ?? 0)
             };
@@ -88,7 +88,7 @@ internal class Order : BlApi.IOrder
         List<BO.OrderItem?> listForBo = new List<BO.OrderItem>();
         //it is creating new list of orderItem and adding orderItem
 
-        foreach (var item in dal.OrderItem.GetAll(item => item?.OrderID==id))
+        foreach (var item in dal.OrderItem.GetAll(item => item?.OrderID == id))
         {
             listForBo.Add(new BO.OrderItem
             {
@@ -199,7 +199,7 @@ internal class Order : BlApi.IOrder
             {
                 ID = order.ID,
                 Status = order.DeliveryDate != null ? BO.OrderStatus.Deliverded : order.ShipDate != DateTime.MinValue ? BO.OrderStatus.shipped
-            :   order.OrderDate != null ? BO.OrderStatus.Confirmed : null,
+            : order.OrderDate != null ? BO.OrderStatus.Confirmed : null,
                 Tracking = TrackingForHelp
             };
         }
@@ -208,37 +208,142 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-    public BO.OrderItem UpdateItems(BO.Order Order,int productId,int amount)
+    public BO.Order UpdateItems(BO.Order Order, int productId, int amount, bool flag = true)
     {
+
+
         int firstAmount;
+        int numberOrderItem;
         DO.Product product = new DO.Product();
-        product=dal.Product.GetById(productId);
-        BO.OrderItem orderItem = new BO.OrderItem();
-        if (product.InStock >= amount )
+        product = dal.Product.GetById(productId);
+        //DO.OrderItem orderItem = new DO.OrderItem();
+        if (flag != true)//ADD new item to Order
         {
-            orderItem = Order.Items.Find(item => item.ProductID == productId);
-            firstAmount = orderItem.Amount;
-            Order.Items.RemoveAll(item => item.ProductID == productId);
-            if(orderItem != null) //Order Item Exsits- עדכון פריט קיים
+            DO.OrderItem DOorderItem = new DO.OrderItem()
             {
-                if (Order.Items.Any(item => item.ProductID == productId))
+                ID = 0,
+                ProductID = productId,
+                Price = product.Price,
+                Amount = amount,
+                OrderID = Order.ID
+            };
+            if (!Order.Items.Exists(item => item.ProductID == DOorderItem.ProductID))
+            {
+                try
                 {
-                    orderItem.Amount = amount;
-                    Order.Items.Add(orderItem);
+                    numberOrderItem = dal.OrderItem.Add(DOorderItem);
                 }
+                catch (DO.DalConfigException str)
+                {
+                    throw new BO.InternalProblem("Failed to add orderItem to data tier", str);
+                }
+                if (amount <= product.InStock)
+                {
+                    product.InStock -= amount;
+                    dal.Product.Update(product);
+                    BO.OrderItem orderItem = new BO.OrderItem
+                    {
+                        ID = numberOrderItem,
+                        ProductID = productId,
+                        Name = product.Name,
+                        Price = product.Price,
+                        Amount = amount,
+                        TotalPrice = amount * product.Price
+                    };
+                    return Order;
+                }
+                throw new Exception("Not enough products in stock");
             }
-            else//new Order Item- הוספת פריט חדש
+            else
             {
-               /* orderItem.ID=dal.*//*NextOrderItemID*/ ///??  שלו  idביצירת פריט חדש איך יודעים מה ה
+
+
+                throw new Exception(" The item exsits in the Order");
+
+
             }
-           product.InStock -= amount- firstAmount;
-           dal.Product.Update(product);
-           
-            return orderItem;
+
         }
-        else 
-        { throw new BO.InternalProblem("The amount of  products is not available"); }
-       
+        else
+        {
+            if (amount == 0)//delete item
+            {
+                DO.OrderItem DOorderItem = new DO.OrderItem();
+                DOorderItem = dal.OrderItem.GetById(Order.Items.FirstOrDefault(item => item.ProductID == productId).ID);
+                product.InStock += DOorderItem.Amount;
+                dal.Product.Update(product);
+                dal.OrderItem.Delete(DOorderItem.ID);
+                BO.OrderItem orderItem = new BO.OrderItem
+                {
+                    ID = DOorderItem.ID,
+                    ProductID = productId,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Amount = DOorderItem.Amount,
+                    TotalPrice = DOorderItem.Price * DOorderItem.Amount
+                };
+
+                Order.Items.Remove(orderItem);
+                return Order;
+
+            }
+            else// to change exsits item
+            {
+                DO.OrderItem DOorderItem = new DO.OrderItem();
+                DOorderItem = dal.OrderItem.GetById(Order.Items.FirstOrDefault(item => item.ProductID == productId).ID);
+                product.InStock += DOorderItem.Amount;
+                DOorderItem.Amount = amount;
+                if (amount <= product.InStock)
+                {
+                    product.InStock -= DOorderItem.Amount;
+                    dal.Product.Update(product);
+                    BO.OrderItem orderItem = new BO.OrderItem
+                    {
+                        ID = DOorderItem.ID,
+                        ProductID = productId,
+                        Name = product.Name,
+                        Price = product.Price,
+                        Amount = amount,
+                        TotalPrice = amount * product.Price
+                    };
+                    var item = Order.Items.Where(item => item.ID == DOorderItem.ID).FirstOrDefault();
+                    dal.OrderItem.Update(DOorderItem);
+                    return Order;
+                }
+                throw new Exception("Not enough products in stock");
+
+            }
+        }
+
+
     }
-   
+
+
+
+
+
+    public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
+    {
+
+
+        var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
+                    orderby item?.OrderDate
+                    select item;
+        while (order != null)
+        {
+            return order.First().Value.ID;
+
+        }
+        var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
+                     orderby item?.DeliveryDate
+                     select item;
+        while (order1 != null)
+        {
+            return order1.First().Value.ID;
+        }
+        return 0;
+
+    }
+
+
 }
