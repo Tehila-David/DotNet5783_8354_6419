@@ -83,9 +83,8 @@ namespace Dal
 
         public void Update(DO.Order order)
         {
-            int ID=order.ID;
+          
             Delete(order.ID);
-            order.ID = ID;
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
             if (ordersList.Exists(item => item?.ID == order.ID))
                 throw new Exception("id already exist");

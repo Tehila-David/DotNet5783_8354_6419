@@ -1,4 +1,5 @@
 ﻿using DalApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,7 +86,11 @@ namespace Dal
         public void Update(DO.OrderItem orderItem)
         {
             Delete(orderItem.ID);
-            Add(orderItem);
+            var ordersList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
+            if (ordersList.Exists(item => item?.ID == orderItem.ID))
+                throw new Exception("id already exist");
+            ordersList.Add(orderItem);
+            XMLTools.SaveListToXMLSerializer(ordersList, s_orderItems);
         }
 
     }
