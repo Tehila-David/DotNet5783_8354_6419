@@ -5,6 +5,7 @@ using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using System.Runtime.ConstrainedExecution;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace BlImplementation;
 
@@ -12,11 +13,13 @@ internal class Cart:ICart
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
     //This function updates the amount of a product in the cart
+    [MethodImpl(MethodImplOptions.Synchronized)]
 
     public IEnumerable<BO.OrderItem> cartItems(BO.Cart myCart)
     {
         return myCart.Items;
     }
+    [MethodImpl(MethodImplOptions.Synchronized)]
 
     public BO.Cart UpdateProductAmount(BO.Cart myCart, int productId, int newAmount)
     {
@@ -69,7 +72,7 @@ internal class Cart:ICart
         }
         return myCart;
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Cart AddProduct(BO.Cart myCart, int productId)
     {
         if(myCart.Items == null)
@@ -125,7 +128,7 @@ internal class Cart:ICart
         }
         return myCart;
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void CartConfirmation(BO.Cart myCart)
     {
         DO.Product doProduct;

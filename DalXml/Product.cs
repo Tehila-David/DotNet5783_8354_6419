@@ -8,6 +8,7 @@ using System.Linq;
 using System.IO;
 using static System.Net.WebRequestMethods;
 using System.Text;
+using System.Runtime.CompilerServices;
 
 //implement IProduct with xelement
 namespace Dal
@@ -15,6 +16,7 @@ namespace Dal
     internal class Product : IProduct
     {
         string s_products = @"Products";
+        [MethodImpl(MethodImplOptions.Synchronized)]
         static DO.Product? getProduct(XElement s) =>
         s.ToIntNullable("ID") is null ? null : new DO.Product()
         {
@@ -25,7 +27,7 @@ namespace Dal
             Category = s.ToEnumNullable<DO.Category>("Category"),
         };
 #pragma warning restore CS8604 // Possible null reference argument.
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         static IEnumerable<XElement> createProductElement(DO.Product product)
         {
             yield return new XElement("ID", product.ID);
@@ -38,18 +40,18 @@ namespace Dal
             
                 
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? filter = null) =>
             filter is null
             ? XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s))
             : XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s)).Where(filter);
-        
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Product GetById( int id) =>
             (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
             .FirstOrDefault(st => st.ToIntNullable("ID") == id)
             // fix to: throw new DalMissingIdException(id);
             ?? throw new Exception("missing id"))!;
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Product? GetById(Func<DO.Product?, bool>? predicate)
         {
             var productsList = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products)!;
@@ -60,7 +62,7 @@ namespace Dal
             return productsList.FirstOrDefault(predicate);
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int Add(DO.Product product)
         {
             XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
@@ -75,7 +77,7 @@ namespace Dal
 
             return product.ID; ;
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Delete(int id)
         {
             XElement productsRootElem = XMLTools.LoadListFromXMLElement(s_products);
@@ -87,7 +89,7 @@ namespace Dal
 
             XMLTools.SaveListToXMLElement(productsRootElem, s_products);
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update(DO.Product product)
         {
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,19 +23,19 @@ namespace Dal
        
         const string s_orderItems = @"OrderItems";
         string configPath = @"config";
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.OrderItem?> GetAll(Func<DO.OrderItem?, bool>? filter = null)
         {
             var orderItemsList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems)!;
             return filter == null ? orderItemsList.OrderBy(lec => ((DO.OrderItem)lec!).ID)
                                   : orderItemsList.Where(filter).OrderBy(lec => ((DO.OrderItem)lec!).ID);
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.OrderItem GetById(int id) =>
             XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems).FirstOrDefault(p => p?.ID == id)
             //DalMissingIdException(id, "Lecturer");
             ?? throw new Exception("missing id");
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.OrderItem? GetById(Func<DO.OrderItem?, bool>? predicate)
         {
             var orderItemList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems)!;
@@ -45,7 +46,7 @@ namespace Dal
            return orderItemList.FirstOrDefault(predicate);
             
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int Add(DO.OrderItem orderItem)
         {
             var orderItemsList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -72,7 +73,7 @@ namespace Dal
 
             return orderItem.ID;
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Delete(int id)
         {
             var orderItemsList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -82,7 +83,7 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(orderItemsList, s_orderItems);
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update(DO.OrderItem orderItem)
         {
             Delete(orderItem.ID);

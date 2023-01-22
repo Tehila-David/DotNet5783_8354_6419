@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
@@ -14,7 +15,7 @@ namespace BlImplementation;
 internal class Order : BlApi.IOrder
 {
     DalApi.IDal dal = DalApi.Factory.Get()!;
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.OrderForList> GetListedOrders(Func<DO.Order?, bool>? predicate = null)
     {
         if (predicate == null)
@@ -53,7 +54,7 @@ internal class Order : BlApi.IOrder
                    };
         }
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order GetByID(int id)
     {
         try
@@ -83,6 +84,7 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public List<BO.OrderItem?> getDoOrderItem(int id)
     {
         List<BO.OrderItem?> listForBo = new List<BO.OrderItem>();
@@ -102,7 +104,7 @@ internal class Order : BlApi.IOrder
         }
         return listForBo;
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateShipDate(int id)
     {
         try
@@ -135,7 +137,7 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateDelivery(int id)
     {
         try
@@ -171,7 +173,7 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderTracking followOrder(int id)
     {
 
@@ -208,6 +210,7 @@ internal class Order : BlApi.IOrder
             throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
         }
     }
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateItems(BO.Order Order, int productId, int amount, bool flag = true)
     {
 
@@ -321,7 +324,7 @@ internal class Order : BlApi.IOrder
 
 
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
 
