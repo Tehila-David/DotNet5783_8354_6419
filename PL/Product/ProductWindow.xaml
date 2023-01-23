@@ -9,7 +9,8 @@
         Title="ProductWindow" Height="450" Width="800" >
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Foreground" Value="Blue">               
+
+            <Setter Property="Foreground" Value="Blue">
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -17,28 +18,32 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <local:notVisibilityConverterById x:Key="VisibilityButtenUpdate"/>
-        <local:VisibilityConverterById x:Key="VisibilityButtenAdd"/>
     </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF7BC2FF" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="61*"/>
             <ColumnDefinition Width="99*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Id :" HorizontalAlignment="Left" Margin="94,50,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
-        <Label Content="Category :" HorizontalAlignment="Left" Margin="94,80,0,0" VerticalAlignment="Top" Width="65" Height="28"/>
-        <Label Content="Name :" HorizontalAlignment="Left" Margin="94,110,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
-        <Label Content="Price :" HorizontalAlignment="Left" Margin="94,140,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
-        <Label Content="In Stock :" HorizontalAlignment="Left" Margin="94,170,0,0" VerticalAlignment="Top" Width="65" Height="25"/>
+        <Label Content="Id :" HorizontalAlignment="Left" Margin="94,50,0,0" VerticalAlignment="Top" Width="65" Height="25" FontFamily="Arial Black"/>
+        <Label Content="Category :" HorizontalAlignment="Left" Margin="94,80,0,0" VerticalAlignment="Top" Width="77" Height="28" FontFamily="Arial Black"/>
+        <Label Content="Name :" HorizontalAlignment="Left" Margin="94,110,0,0" VerticalAlignment="Top" Width="65" Height="25" FontFamily="Arial Black"/>
+        <Label Content="Price :" HorizontalAlignment="Left" Margin="94,140,0,0" VerticalAlignment="Top" Width="65" Height="25" FontFamily="Arial Black"/>
+        <Label Content="In Stock :" HorizontalAlignment="Left" Margin="94,170,0,0" VerticalAlignment="Top" Width="73" Height="25" FontFamily="Arial Black"/>
 
-        <TextBox Text="{Binding Product.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"  />
-        <ComboBox Name="CategorySelector"  SelectedItem="{Binding Product.Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25"  />
-        <TextBox  Text="{Binding Product.Name}" MaxLength="9" HorizontalAlignment="Left" Margin="200,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" />
-        <TextBox Text="{Binding Product.Price}" MaxLength="9" HorizontalAlignment="Left" Margin="200,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
-        <TextBox  Text="{Binding Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25"/>
-        <Button x:Name="Add" Content="Add"  HorizontalAlignment="Left" Margin="183,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Add_Click" RenderTransformOrigin="2.463,0.513"/>
-        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="118,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Update_Click" />
-        <Button x:Name="Remove" Content="Remove" HorizontalAlignment="Left" Margin="244,223,0,0"  VerticalAlignment="Top" Width="51" Height="22" Click="Remove_Click"  />
+        <TextBox Text="{Binding Product.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" FontFamily="Arial Nova Cond" />
+        <ComboBox Name="CategorySelector"  SelectedItem="{Binding Product.Category}" ItemsSource="{Binding CategoryArray}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="200,80,0,0" Width="100" Height="25" FontFamily="Arial Nova Cond"  />
+        <TextBox  Text="{Binding Product.Name}" MaxLength="9" HorizontalAlignment="Left" Margin="200,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" FontFamily="Arial Nova Cond"/>
+        <TextBox Text="{Binding Product.Price}" MaxLength="9" HorizontalAlignment="Left" Margin="200,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" FontFamily="Arial Nova Cond"/>
+        <TextBox  Text="{Binding Product.InStock}" MaxLength="9" HorizontalAlignment="Left" Margin="200,170,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" FontFamily="Arial Nova Cond"/>
+        <Button x:Name="Add" Content="Add"  HorizontalAlignment="Left" Margin="183,223,0,0"  VerticalAlignment="Top" Width="44" Height="22" Click="Add_Click" RenderTransformOrigin="2.463,0.513" FontFamily="Arial Black"  Grid.Row="1"/>
+        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="118,223,0,0"  VerticalAlignment="Top" Width="53" Height="22" Click="Update_Click" FontFamily="Arial Black" Grid.Row="1"/>
+        <Button x:Name="Remove" Content="Remove" HorizontalAlignment="Left" Margin="238,223,0,0"  VerticalAlignment="Top" Width="57" Height="22" Click="Remove_Click" FontFamily="Arial Black"/>
 
 
     </Grid>

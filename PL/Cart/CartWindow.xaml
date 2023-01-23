@@ -91,52 +91,10 @@
             </ListView.View>
         </ListView>
 
-        <Button x:Name="emptyCart" Content="Empty Cart" HorizontalAlignment="Left" Margin="126,371,0,0" VerticalAlignment="Top" Width="97" Click="EmptyCart_Click" Height="34"  Background ="Plum" Foreground="Blue" Grid.Row="1" />
-        <Button x:Name="confirmOrder" Content="Place Order" HorizontalAlignment="Left" Margin="235,370,0,0" VerticalAlignment="Top" Width="101" Click="OrderConfirmation_Click" Background ="Plum" Foreground="Blue" RenderTransformOrigin="0.505,0.152" Height="34" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Button x:Name="BackToCatalog" Content="Back To Catalog" HorizontalAlignment="Left" Margin="16,372,0,0" VerticalAlignment="Top" Width="100" Click="BackToCatalog_Click" Height="32" Background ="Plum" Foreground="Blue" Grid.Row="1"/>
-        <TextBlock Text="Total Price: " FontSize ="16" HorizontalAlignment="Left" Margin="136,514,0,0" VerticalAlignment="Top" Width="83" RenderTransformOrigin="0.505,4.772" Height="26" Grid.Row="1"/>
-        <TextBox x:Name="cartPrice"  Text="{Binding TotalPrice}" HorizontalAlignment="Left"  Margin="228,510,0,0" VerticalAlignment="Top" Width="91"  Height="30" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1" Background="#FFD4E6F2" />
-        <!--<Grid >
-        <DataGrid x:Name="OrderItem" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="207,62,172,172" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="OrderItem_SelectionChanged" RenderTransformOrigin="0.777,0.52">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="ProductID" Binding="{Binding ProductID}" Header="Product ID:" Width="Auto"/>
-                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name:" Width="Auto"/>
-
-                <DataGridTemplateColumn Header="Amount:" Width="Auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="cmdDown" Margin="1" Content="˅" Click="cmdDown_Click" FontWeight="Bold" FontSize="12" />
-                                <TextBox x:Name="txtNum" Margin="1" Width="Auto" Text="{Binding Amount}" />
-                                <Button x:Name="cmdUp" Margin="1" Content="˄" Click="cmdUp_Click" FontWeight="Bold" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <DataGridTextColumn x:Name="Price" Binding="{Binding Price}" Header="Price:" Width="Auto"/>
-                <DataGridTextColumn x:Name="TotalPrice" Binding="{Binding TotalPrice}" Header="Total Price:" Width="Auto"/>
-                <DataGridTemplateColumn Header="Remove:">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Name="Remove" Content="X" Foreground="Red" Click="RemoveProduct_Click" FontWeight="Bold" FontFamily="Franklin Gothic Demi" >
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="emptyCart" Content="Empty Cart" HorizontalAlignment="Left" Margin="45,120,0,0" VerticalAlignment="Top" Width="97" Click="EmptyCart_Click" Height="34"  Background ="Plum" Foreground="Blue" />
-        <Button x:Name="confirmOrder" Content="Place Order" HorizontalAlignment="Left" Margin="528,298,0,0" VerticalAlignment="Top" Width="103" Click="OrderConfirmation_Click" Background ="Plum" Foreground="Blue" RenderTransformOrigin="0.505,0.152"/>
-        <Button x:Name="BackToCatalog" Content="Back To Catalog" HorizontalAlignment="Left" Margin="44,64,0,0" VerticalAlignment="Top" Width="97" Click="BackToCatalog_Click" Height="37" Background ="Plum" Foreground="Blue"/>
-        <TextBlock Text="Total Price: " FontSize ="16" HorizontalAlignment="Left" Margin="26,288,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.505,4.772" Height="27"/>
-        
-        <Grid DataContext="{Binding RelativeSource={RelativeSource Self}}">  
-        <TextBlock x:Name="cartPrice"  Text="{Binding TotalPrice}" HorizontalAlignment="Left"  Margin="45,236,0,0" VerticalAlignment="Top" Width="98"  Height="40" FontWeight="Bold" />
-        </Grid>
-
-    </Grid>-->
+        <Button x:Name="emptyCart" Content="Empty Cart" HorizontalAlignment="Left" Margin="26,356,0,0" VerticalAlignment="Top" Width="97" Click="EmptyCart_Click" Height="34" Foreground="#FF121212" Grid.Row="1" FontFamily="Arial Black" FontSize="14" Background="#FFF31335" />
+        <Button x:Name="confirmOrder" Content="Place Order" HorizontalAlignment="Left" Margin="155,356,0,0" VerticalAlignment="Top" Width="101" Click="OrderConfirmation_Click" Background ="#FF23A5F2" Foreground="Black" RenderTransformOrigin="0.505,0.152" Height="34" Grid.Row="1" FontSize="14" FontFamily="Arial Black"/>
+        <Button x:Name="BackToCatalog" Content="Back To Catalog" Margin="32,443,151,0" VerticalAlignment="Top" Click="BackToCatalog_Click" Height="32" Background ="#FFA0DDA3" Foreground="#FF161618" Grid.Row="1" FontFamily="Arial Black"/>
+        <TextBlock Text="Total Price: " FontSize ="16" HorizontalAlignment="Left" Margin="112,515,0,0" VerticalAlignment="Top" Width="103" RenderTransformOrigin="0.505,4.772" Height="26" Grid.Row="1" FontFamily="Arial Black"/>
+        <TextBox x:Name="cartPrice"  Text="{Binding TotalPrice}" HorizontalAlignment="Left"  Margin="228,510,0,0" VerticalAlignment="Top" Width="auto"  Height="30" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1" Background="#FFEAE81C"   FontSize="18"/>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using BO;
+﻿
+using BO;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace PL.Order
             {
                 
                 OrderTracking orderTracking = bl.Order.followOrder(id);
-                new OrderWindow(id,true).Show();
+                new ShowTrackingWindow(id).Show();
                 Close();
             }
 

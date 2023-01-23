@@ -7,7 +7,25 @@
         mc:Ignorable="d"
         Title="OrderTrackingWindow" Height="450" Width="800"
          DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <Style TargetType="Button">
+
+            <Setter Property="Foreground" Value="Black">
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2F7D8F"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="373*"/>
             <ColumnDefinition Width="27*"/>
@@ -17,12 +35,11 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="ID:"  Grid.Row="1" RenderTransformOrigin="2.463,0.513"  HorizontalAlignment="Left" Margin="231,143,0,0"   VerticalAlignment="Top" Width="45" Height="25" />
-        <TextBox x:Name="idTextBox" Text="{Binding id}" MaxLength="9" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="282,147,0,0" />
-        <Label Content="Enter an order ID :" FontSize="30" RenderTransformOrigin="2.463,0.513"  Grid.Row="1"  HorizontalAlignment="Left" Margin="216,72,0,0"   VerticalAlignment="Top" Width="257" Height="52"/>
+        <Label Content="ID :"  Grid.Row="1" RenderTransformOrigin="2.463,0.513"  HorizontalAlignment="Left" Margin="231,143,0,0"   VerticalAlignment="Top" Width="45" Height="36" FontSize="20" FontFamily="Arial Black" />
+        <TextBox x:Name="idTextBox" Text="{Binding id}" MaxLength="9" HorizontalAlignment="Center"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="0,147,0,0" />
+        <Label Content="Enter an order ID :" FontSize="35" RenderTransformOrigin="2.463,0.513"  Grid.Row="1"  HorizontalAlignment="Left" Margin="201,79,0,0"   VerticalAlignment="Top" Width="328" Height="52" FontFamily="Arial Rounded MT Bold"/>
 
-        <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="232,196,0,0"  VerticalAlignment="Top" Width="223" Height="52" Grid.Row="1" Click="OrderTracking_Click"/>
-        <Button Content="Back To Main Window" RenderTransformOrigin="2.463,0.513" FontSize="20"   HorizontalAlignment="Left" Margin="30,22,0,0"  VerticalAlignment="Top" Width="210" Height="35" Grid.Row="1" Click="BackToMainWindow_Click"/>
+        <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="232,200,0,0"  VerticalAlignment="Top" Width="223" Height="52" Grid.Row="1" Click="OrderTracking_Click" FontFamily="Arial Nova Cond Light" Background="#FF2CA9E1"/>
 
 
     </Grid>

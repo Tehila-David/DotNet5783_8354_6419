@@ -133,9 +133,8 @@
 
 
 
-
-
-        <Button x:Name="showCart" Content="Cart" HorizontalAlignment="Left" Margin="18,339,0,0" VerticalAlignment="Top" Width="98" Click="ShowCart_Click" Height="38" RenderTransformOrigin="0.491,0.562" Grid.Column="1" Grid.Row="1"/>
+        <MediaElement x:Name="PLAY" LoadedBehavior="Stop" />
+        <Button x:Name="showCart" Content="Cart" HorizontalAlignment="Left" Margin="17,469,0,0" VerticalAlignment="Top" Width="98" Click="ShowCart_Click" Height="38" RenderTransformOrigin="0.491,0.562" Grid.Column="1" Grid.Row="1" FontFamily="Arial Black" FontSize="20" Background="#FFADBFE6"/>
     </Grid>
 
 </Window>

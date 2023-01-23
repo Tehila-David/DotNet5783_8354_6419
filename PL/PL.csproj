@@ -24,12 +24,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <COMReference Include="WMPDXMLib">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>73f0dd5c-d071-46b6-a8bf-897c84eaac49</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
     <ProjectReference Include="..\Simulator\Simulator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="צילום מסך 2023-01-08 234608.png" />
+    <Resource Include="Images+Music\צילום מסך 2023-01-08 234608.png" />
+    <Resource Include="Images+Music\צילום מסך 2023-01-11 094323.png" />
     <Resource Include="צילום מסך 2023-01-11 094323.png" />
   </ItemGroup>
 

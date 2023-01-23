@@ -185,13 +185,17 @@ internal class Product : BlApi.IProduct
         try
         {
             DO.Product product = dal?.Product.GetById(id) ?? throw new DO.NotExists("Sorry ,this product does not exist in the List of products");
-            var item = from order in dal.Order.GetAll()
-                       from orderItem in dal.OrderItem.GetAll(item => item?.OrderID == order?.ID)
-                       where orderItem?.ProductID == id
-                       select orderItem;
-            if (item != null) { throw new BO.InternalProblem("The product already ordered"); }
-            //delete from data
+           
+            foreach(DO.Order? order in dal?.Order.GetAll())       
+            {
+                if(dal.OrderItem.GetAll(item=> item?.OrderID == order?.ID).Any(orderItem=>orderItem?.ProductID==id))
+                {
+                    throw new BO.InternalProblem("The product already ordered");
+                }
+            }
+            
             dal.Product.Delete(id);
+            return;
         }
         catch (DO.NotExists ex)
         {

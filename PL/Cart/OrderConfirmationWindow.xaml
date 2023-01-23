@@ -8,12 +8,23 @@
         Title="OrderConfirmationWindow" Height="450" Width="800"
          DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid  >
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF2796C1" Offset="1"/>
+                <GradientStop Color="#FFE0E5E7" Offset="0.173"/>
+                <GradientStop Color="#FFF9F9FF"/>
+                <GradientStop Color="#FFF16363" Offset="0.547"/>
+                <GradientStop Color="#FFCFDDE3" Offset="0"/>
+                <GradientStop Color="#FFD0DDE3" Offset="0.138"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Dear customer, please enter the following details:" FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="21,27,342,360">
+        <TextBlock Text="Dear customer, please enter the following details:" FontSize="20" FontWeight="Bold" FontStyle="Italic" Margin="17,33,302,354">
         </TextBlock>
         <TextBlock Text="Name:"  FontSize="18" FontWeight="Bold" Width="140" FontStyle="Italic" Margin="23,82,704,309" RenderTransformOrigin="0.5,0.5">
         </TextBlock>
@@ -25,6 +36,6 @@
 
         <TextBlock Text="Home Address:" FontSize="18" FontWeight="Bold" Width="140" FontStyle="Italic" Margin="19,170,635,222" RenderTransformOrigin="0.494,-1.899"/>
         <TextBox x:Name="homeAddressTextBox" Text="{Binding  FinalCart.CustomerAddress }" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="190" Height="25" Margin="160,170,0,0" />
-        <Button Content="Place Order" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="101,261,0,0"  VerticalAlignment="Top" Width="179" Height="44" Click="ConfirmOrder_Click"/>
+        <Button Content="Place Order" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="58,275,0,0"  VerticalAlignment="Top" Width="211" Height="44" Click="ConfirmOrder_Click" FontFamily="Arial Black" Background="#FF9FD8D6"/>
     </Grid>
 </Window>

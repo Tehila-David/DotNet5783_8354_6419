@@ -8,8 +8,7 @@
         Title="OrderListWindow" Height="450" Width="800"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Resources>
-        <local:StatusColorConverter
-         x:Key="StatusColor" />
+        <local:StatusColorConverter x:Key="StatusColor" />
         
     </Window.Resources>
     <Grid Name="MainGrid">

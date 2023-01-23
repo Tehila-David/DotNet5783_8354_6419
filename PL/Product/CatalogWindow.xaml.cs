@@ -12,7 +12,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace PL
@@ -34,7 +33,15 @@ namespace PL
             private set => SetValue(ProductsDependency, value);
         }
 
-      
+        MediaPlayer player = new MediaPlayer();
+
+
+        private void PlaySound(string filePath)
+        {
+            player.Open(new Uri(filePath));
+            PLAY.Source = player.Source;
+            player.Play();
+        }
 
         public BO.Category myCategory { get; set; } = BO.Category.NO_ONE;
 
@@ -47,6 +54,7 @@ namespace PL
             var items = bl.Product.GetListProductItem(myLovelyCart);
             Products = items == null ? new() : new(items);
             InitializeComponent();
+            
         }
 
 
@@ -106,6 +114,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            PlaySound("C:\\Users\\tehil\\source\\repos\\tehila859\\DotNet5783_8354_6419\\PL\\Images+Music\\mixkit-gold-coin-prize-1999.wav");
         }
 
         /// <summary>

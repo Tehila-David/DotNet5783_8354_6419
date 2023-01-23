@@ -8,8 +8,8 @@
         Title="OrderItemWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <TextBlock Text="Order Item:" Grid.Row="0"/>
-        <Label  Content="Product ID :" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" Width="66" Height="25"/>
+        <TextBlock Text="Order Item:" Grid.Row="0"   />
+        <Label  Content="Product ID :" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" Width="66" Height="25"  />
         <Label  Content="Amount :" HorizontalAlignment="Left" Margin="20,130,0,0" VerticalAlignment="Top" Width="66" Height="25"/>
         <TextBox x:Name="txtProductID" Text="{Binding productId}" MaxLength="9" HorizontalAlignment="Left" Margin="130,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
         <TextBox x:Name="txtAmount" Text="{Binding Amount}" MaxLength="9" HorizontalAlignment="Left" Margin="130,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />

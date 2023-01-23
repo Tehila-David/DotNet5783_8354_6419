@@ -27,7 +27,7 @@ public partial class SimulatorWindow : Window
     static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     BackgroundWorker worker;
     //Simulator.Simulator;
-    Stopwatch stopwatch;    
+    Stopwatch stopwatch;
     private bool isTimerRun;
 
     public SimulatorWindow()
@@ -44,21 +44,21 @@ public partial class SimulatorWindow : Window
     }
 
 
-    public endSimulatorObserver(Object sender, AccountEventArgs args)
-    {
-        t.ValueChanged += this.ValueChangeFunc;
-    }
-    public updateSimulatorObserver(Object sender, AccountEventArgs args)
-    {
-        t.ValueChanged += this.ValueChangeFunc;
-    }
-    private void Observer(Object sender, AccountEventArgs args)
-    {
-        Update(args.cancelAsync == false);
-    }
-    void windowAccountObserver(object sender, AccountEventArgs args) =>
-                 updateBalanceThreadSafe(args.Balance);
-   
+    //public endSimulatorObserver(Object sender, AccountEventArgs args)
+    //{
+    //    //t.ValueChanged += this.ValueChangeFunc;
+    //}
+    //public updateSimulatorObserver(Object sender, AccountEventArgs args)
+    //{
+    //    t.ValueChanged += this.ValueChangeFunc;
+    //}
+    //private void Observer(Object sender, AccountEventArgs args)
+    //{
+    //    Update(args.cancelAsync == false);
+    //}
+    //void windowAccountObserver(object sender, AccountEventArgs args) =>
+    //             updateBalanceThreadSafe(args.Balance);
+
 
 
 
@@ -96,24 +96,24 @@ public partial class SimulatorWindow : Window
 
     private void Worker_DoWork(object? sender, DoWorkEventArgs e)
     {
-        Simulator.Simulator sim = new Simulator();
-        sim.Activate(); //starting the simulator
-                        //Simulator.RegisterToUpdateEvent();
-        int length = (int)e.Argument;
+        //Simulator.Simulator sim = new Simulator();
+        //sim.Activate(); //starting the simulator
+        //                //Simulator.RegisterToUpdateEvent();
+        //int length = (int)e.Argument;
 
-        for (int i = 1; i <= length; i++)
-        {
-            if (worker.CancellationPending == true)
-            {
-                e.Cancel = true;
-                break;
-            }
-            else
-            {
-                System.Threading.Thread.Sleep(1000);
-                worker.ReportProgress(i * 100 / length);
-            }
-        }
+        //for (int i = 1; i <= length; i++)
+        //{
+        //    if (worker.CancellationPending == true)
+        //    {
+        //        e.Cancel = true;
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        System.Threading.Thread.Sleep(1000);
+        //        worker.ReportProgress(i * 100 / length);
+        //    }
+        //}
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

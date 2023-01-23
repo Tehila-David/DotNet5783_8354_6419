@@ -2,6 +2,10 @@
 using PL.Order;
 using System.Windows;
 using System;
+using System.Media;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Numerics;
 
 
 namespace PL
@@ -11,8 +15,16 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private void MainWindow_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
-
+        MediaPlayer player = new MediaPlayer();
+      
+        
+        private void PlaySound(string filePath)
+        {
+            player.Open(new Uri(filePath));
+            PLAY.Source = player.Source;
+            player.Play();
+        }
+       
         public MainWindow()
         {
            InitializeComponent();
@@ -21,10 +33,11 @@ namespace PL
             Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
             New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
             Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
+            PlaySound(@"C:\Users\tehil\source\repos\tehila859\DotNet5783_8354_6419\PL\Images+Music\dreams.mp3");
 
         }
         BlApi.IBl? bl = BlApi.Factory.Get();
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -37,6 +50,8 @@ namespace PL
             Products_List.Visibility = Visibility.Visible;//Show butten of Productslist
             New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
             Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
+
+           
 
         }
 
@@ -81,6 +96,19 @@ namespace PL
             Order_Tracking.Visibility = Visibility.Visible;//Show butten of  Order_Tracking
             Orders_List.Visibility = Visibility.Hidden;//hide butten of Orderslist
             Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
+        }
+
+        private void StopMusic_Click(object sender, RoutedEventArgs e)
+        {
+
+          player.Stop();
+
+
+        }
+
+        private void StartMusic_Click(object sender, RoutedEventArgs e)
+        {
+            player.Play();
         }
     }
 }

@@ -52,26 +52,7 @@ namespace PL.Order
 
         }
 
-        /// <summary>
-        /// constructor for Client
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="flag"></param>
-        public OrderWindow(int id, bool flag)
-        {
-            InitializeComponent();
-            Order = bl.Order.GetByID(id);
-
-
-        }
-
-        //private void Update_Items_Click(object sender, RoutedEventArgs e)
-        //{
-        //    bl.Order.UpdateShipDate(Order.ID);
-        //    bl.Order.UpdateDelivery(Order.ID);
-        //    new OrderItemWindow(Order.ID).Show();
-        //}
-
+    
         private void Update_DeliveryDate_Click(object sender, RoutedEventArgs e)
         {
             try

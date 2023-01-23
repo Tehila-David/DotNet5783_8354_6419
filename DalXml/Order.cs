@@ -27,8 +27,8 @@ namespace Dal
             return filter == null ? ordersList.OrderBy(lec => ((DO.Order)lec!).ID)
                                   : ordersList.Where(filter).OrderBy(lec => ((DO.Order)lec!).ID);
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Order GetById(int id) =>
             XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefault(p => p?.ID == id)
         
