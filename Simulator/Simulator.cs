@@ -6,76 +6,82 @@ using static System.Math;
 using BlApi;
 using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
+using DO;
 
-namespace Simulator;
+namespace Simulation;
 
 public static class Simulator
 {
     static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
-
     private static readonly Random random = new Random();
-    //Func<bool> report;
     static volatile bool Active;
-    Func<string> Report(Status curStatus, oldTime, newStatus, newTime);
-    public static void Register(observer, Func<string> report)//for Event registration לרישום אירוע
+
+    //public static event Action Stop;
+    //public static event Func<OrderStatus, DateTime, OrderStatus, DateTime, bool> report;
+    //public static void RegisterEndSimulator(Func<OrderStatus, DateTime, OrderStatus, DateTime, bool> observer)//for Event registration לרישום אירוע
+
+    public delegate void SimulatorDone();
+    public static event SimulatorDone EndSimulator;
+
+    public delegate void Report(int ID, OrderStatus oldStatus, DateTime oldTime, OrderStatus newStatus, DateTime newTime);
+    public static event Report ReportProgress;
+
+    public static void RegisterEndSimulator(SimulatorDone handler)//for Event registration לרישום אירוע
     {
-        report += observer;
+        EndSimulator += handler;
     }
-    public static void UnRegister(observer, Func<string> report)//Event cancellation לביטול אירוע
+    public static void UnRegisterEndSimulator (SimulatorDone handler) 
     {
-        report += observer;
+        EndSimulator -= handler;
     }
 
 
-    //public event EventHandler<AccountEventArgs>? AccountClosed;
-   // void accountClosedHandler(int result) => AccountClosed?.Invoke(this, new AccountEventArgs(result));
+    public static void RegisterReport(Report handler)//for Event registration לרישום אירוע
+    {
+        ReportProgress += handler;
+    }
+    public static void UnRegisterReport(Report handler)
+    {
+        ReportProgress -= handler;
+    }
 
-   // public delegate void report();
-    private delegate void endSimulation();
-    private delegate void update();
-    //report rep;
-    //endSimulation endSim;
-    //update upd;
-    //public void ToReport(report rep)
-    //{
-    //    this.rep += rep;
-    //}
-
-    // איזה משתנים יש ??
     public static void Activate()
     {
 
         new Thread(() =>
         {
             Active = true;
-            while (!Active)
+            while (Active)
             {
                 int OrderID = bl.Order.OrderForSimulator();
+                DateTime estimatedTime = new DateTime();
                 if (OrderID != 0)// not null
                 {
                     
                     BO.Order order = bl.Order.GetByID(OrderID);
                     int delay = random.Next(3,11);
-                    DateTime time = DateTime.Now + new TimeSpan(delay * 1000);
-                    report(order.Status, DateTime.Now, time);
+                    estimatedTime = DateTime.Now + new TimeSpan(0,0,delay);
+                    OrderStatus ?oldStatus = order.Status;
+                    ReportProgress(order.ID, oldStatus?? throw new Exception("null"), DateTime.Now,
+                    order.Status == OrderStatus.Default ? OrderStatus.shipped : OrderStatus.Deliverded, estimatedTime);
                     Thread.Sleep(delay*1000);
-                    //report(); צריך לדווח שהסתיים! 
 
-                    if (order.ShipDate == null)
+                    if (order.Status ==  OrderStatus.Confirmed)
                     {
                         bl.Order.UpdateShipDate(OrderID);
                     }
-                    else
+                    else if(order.Status == OrderStatus.shipped)   
+                    {
                         bl.Order.UpdateDelivery(OrderID);
-
+                    }
                 }
                 else //there are no such orders
                 {
-                    Thread.Sleep(1000);
+                    ReportProgress(0, 0, DateTime.Now, 0, estimatedTime);
                 }
                 Thread.Sleep(1000); //stop one second before each iteration
             }
-            //report(finished);
+            EndSimulator();
         }).Start();
     }
 
@@ -84,8 +90,13 @@ public static class Simulator
     {
         if(Active)
         {
-            Simulator.Stop();
             Active = false;
+
+            //if (Simulator.Stop != null)
+            //{
+            //    Simulator.Stop();
+            //    Active = false;
+            //}
         }
     }
 
