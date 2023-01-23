@@ -20,6 +20,7 @@ namespace Dal
 
         const string s_orders = @"Orders";
         string configPath = @"config";
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
         {
