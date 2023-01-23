@@ -16,96 +16,109 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for Simulator.xaml
+/// </summary>
+/// 
+public partial class SimulatorWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for Simulator.xaml
-    /// </summary>
-    /// 
-    public partial class SimulatorWindow : Window
+    static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
+    BackgroundWorker worker;
+    //Simulator.Simulator;
+    Stopwatch stopwatch;    
+    private bool isTimerRun;
+
+    public SimulatorWindow()
     {
-        BlApi.IBl bl = BlApi.Factory.Get()!;
-        private Simulator.Simulator.report();
-        private bool isTimerRun;
-        BackgroundWorker worker;
+        InitializeComponent();
+        worker = new BackgroundWorker();
+        stopwatch = new Stopwatch();
+        worker.RunWorkerAsync();
+        worker.DoWork += Worker_DoWork;
+        worker.ProgressChanged += Worker_ProgressChanged;
+        worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+        worker.WorkerReportsProgress = true;
+        worker.WorkerSupportsCancellation = true;
+    }
 
-        public SimulatorWindow()
+
+    public endSimulatorObserver(Object sender, AccountEventArgs args)
+    {
+        t.ValueChanged += this.ValueChangeFunc;
+    }
+    public updateSimulatorObserver(Object sender, AccountEventArgs args)
+    {
+        t.ValueChanged += this.ValueChangeFunc;
+    }
+    private void Observer(Object sender, AccountEventArgs args)
+    {
+        Update(args.cancelAsync == false);
+    }
+    void windowAccountObserver(object sender, AccountEventArgs args) =>
+                 updateBalanceThreadSafe(args.Balance);
+   
+
+
+
+    private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+    {
+
+    }
+
+    private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+    {
+        switch (e.ProgressPercentage)
         {
-            InitializeComponent();
-             worker = new BackgroundWorker();
-            worker.RunWorkerAsync();
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
+            case 0:
+                {
+
+                    break;
+                }
+            case 1:
+                {
+
+                    break;
+                }
+            case 2:
+                {
+
+                    break;
+                }
+            case 3:
+                {
+
+                    break;
+                }
         }
+    }
 
+    private void Worker_DoWork(object? sender, DoWorkEventArgs e)
+    {
+        Simulator.Simulator sim = new Simulator();
+        sim.Activate(); //starting the simulator
+                        //Simulator.RegisterToUpdateEvent();
+        int length = (int)e.Argument;
 
-        public endSimulatorObserver(MyValue t)
+        for (int i = 1; i <= length; i++)
         {
-            t.ValueChanged += this.ValueChangeFunc;
-        }
-        public updateSimulatorObserver(MyValue t)
-        {
-            t.ValueChanged += this.ValueChangeFunc;
-        }
-        private void Observer(Object sender, NTAccountEventArgs args)
-        {
-            Update(args.cancelAsync == false);
-        }
-
-
-
-        private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
-        {
-
-        }
-
-        private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
-        {
-            switch (e.ProgressPercentage)
+            if (worker.CancellationPending == true)
             {
-                case 0:
-                    {
-
-                        break;
-                    }
-                case 1:
-                    {
-
-                        break;
-                    }
-                case 2:
-                    {
-
-                        break;
-                    }
-                case 3:
-                    {
-
-                        break;
-                    }
+                e.Cancel = true;
+                break;
             }
-        }
-
-        private void Worker_DoWork(object? sender, DoWorkEventArgs e)
-        {
-            Simulator.RegisterToUpdateEvent();
-            Simulator.Simulatorr sim;
-            Simulator.Activate(); //starting the simulator
-
-            while (worker.CancellationPending == true)
+            else
             {
                 System.Threading.Thread.Sleep(1000);
-                worker.ReportProgress();
+                worker.ReportProgress(i * 100 / length);
             }
         }
+    }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            MessageBox.Show("You can't close this window!");
-        }
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        e.Cancel = true;
+        MessageBox.Show("You can't close this window!");
     }
 }

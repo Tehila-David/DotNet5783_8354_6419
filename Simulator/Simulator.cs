@@ -16,14 +16,30 @@ public static class Simulator
     private static readonly Random random = new Random();
     //Func<bool> report;
     static volatile bool Active;
+    Func<string> Report(Status curStatus, oldTime, newStatus, newTime);
+    public static void Register(observer, Func<string> report)//for Event registration לרישום אירוע
+    {
+        report += observer;
+    }
+    public static void UnRegister(observer, Func<string> report)//Event cancellation לביטול אירוע
+    {
+        report += observer;
+    }
 
-    private delegate void report();
+
+    //public event EventHandler<AccountEventArgs>? AccountClosed;
+   // void accountClosedHandler(int result) => AccountClosed?.Invoke(this, new AccountEventArgs(result));
+
+   // public delegate void report();
     private delegate void endSimulation();
     private delegate void update();
-    public ToReport(report rep)
-    {
-
-    }
+    //report rep;
+    //endSimulation endSim;
+    //update upd;
+    //public void ToReport(report rep)
+    //{
+    //    this.rep += rep;
+    //}
 
     // איזה משתנים יש ??
     public static void Activate()
@@ -41,7 +57,7 @@ public static class Simulator
                     BO.Order order = bl.Order.GetByID(OrderID);
                     int delay = random.Next(3,11);
                     DateTime time = DateTime.Now + new TimeSpan(delay * 1000);
-                    //report() לא מובן איזה משתנים צריך להכניס??
+                    report(order.Status, DateTime.Now, time);
                     Thread.Sleep(delay*1000);
                     //report(); צריך לדווח שהסתיים! 
 
@@ -61,18 +77,6 @@ public static class Simulator
             }
             //report(finished);
         }).Start();
-
-        //public static void Register()//for Event registration לרישום אירוע
-        //{
-        //    //report += observer
-
-        //}
-        //public static void UnRegister()//Event cancellation לביטול אירוע
-        //{
-        //    //report += observer
-
-        //}
-
     }
 
 
@@ -80,7 +84,7 @@ public static class Simulator
     {
         if(Active)
         {
-            //Stopwatch.stop();
+            Simulator.Stop();
             Active = false;
         }
     }

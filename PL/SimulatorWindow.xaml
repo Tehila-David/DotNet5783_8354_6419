@@ -19,6 +19,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Button x:Name="End_of_simulation" Content="End of simulation"   HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" />
-        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="590,250,38,112" Grid.Row="1" Height="40"/>
+        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="330,32,291,330" Grid.Row="1" RenderTransformOrigin="0.254,0.297"/>
+        <TextBlock x:Name="curOrder" Text="Current Order" FontSize="40" Margin="260,97,211,250" Grid.Row="1"/>
+        <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="185,182,416,190" Grid.Row="1"/>
+        <TextBlock x:Name="nextStatus" Text="Next status:" FontSize="20" Margin="465,177,171,195" Grid.Row="1"/>
+        <TextBlock x:Name="begTime" Text="Begin time:" FontSize="20" Margin="185,227,451,145" Grid.Row="1" RenderTransformOrigin="0.476,0.665"/>
+        <TextBlock x:Name="endTime" Text="Estimated end time:" FontSize="20" Margin="465,222,96,145" Grid.Row="1"/>
+
     </Grid>
 </Window>
