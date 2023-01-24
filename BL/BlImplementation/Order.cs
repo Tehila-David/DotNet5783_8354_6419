@@ -356,27 +356,31 @@ internal class Order : BlApi.IOrder
    [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
+        return 0;
 
-        lock (dal)
-        {
+       // lock (dal)
+       // {
             var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
                         orderby item?.OrderDate
                         select item;
             if (order != null)
             {
-                return order.First().Value.ID;
-
+                return order.First()?.ID ?? throw new Exception("There are no orders to be shipped");
             }
-            var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
+
+
+      // }
+        var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
                          orderby item?.DeliveryDate
                          select item;
 
             if(order1 != null)
+            if (order1 != null)
             {
-                return order1.First().Value.ID;
+                return order1.First()?.ID ?? throw new Exception("There are no orders to be delivered");
             }
             return 0;
-        }
+
 
     }
 

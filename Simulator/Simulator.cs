@@ -6,6 +6,7 @@ using static System.Math;
 using BlApi;
 using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
+using System.Timers;
 //using DO;
 
 namespace Simulation;
@@ -24,7 +25,7 @@ public static class Simulator
     public static event SimulatorDone EndSimulator;
 
     public delegate void Report(int ID, OrderStatus oldStatus, DateTime oldTime, OrderStatus newStatus, DateTime newTime);
-    public static event Report ReportProgress;
+    public static event Report ReportMyProgress;
 
     public static void RegisterEndSimulator(SimulatorDone handler)//for Event registration לרישום אירוע
     {
@@ -38,11 +39,11 @@ public static class Simulator
 
     public static void RegisterReport(Report handler)//for Event registration לרישום אירוע
     {
-        ReportProgress += handler;
+        ReportMyProgress += handler;
     }
     public static void UnRegisterReport(Report handler)
     {
-        ReportProgress -= handler;
+        ReportMyProgress -= handler;
     }
 
     public static void Activate()
@@ -54,15 +55,16 @@ public static class Simulator
             while (Active)
             {
                 int OrderID = bl.Order.OrderForSimulator();
-                DateTime estimatedTime = new DateTime();
+                DateTime estimatedTime = DateTime.Now;
                 if (OrderID != 0)// not null
                 {
 
-                    BO.Order order = bl.Order.GetByID(OrderID);
+                    BO.Order order = (bl.Order.GetByID(OrderID))?? throw new Exception();
                     int delay = random.Next(3, 11);
-                    estimatedTime = DateTime.Now + new TimeSpan(0, 0, delay);
+                    estimatedTime = DateTime.Now + new TimeSpan(delay * 10000000);
+                    //estimatedTime = DateTime.Now + new TimeSpan(0, 0, delay);
                     OrderStatus? oldStatus = order.Status;
-                    ReportProgress(order.ID, oldStatus ?? throw new Exception("null"), DateTime.Now,
+                    ReportMyProgress(order.ID, oldStatus ?? throw new Exception("null"), DateTime.Now,
                     order.Status == OrderStatus.Default ? OrderStatus.shipped : OrderStatus.Deliverded, estimatedTime);
                     Thread.Sleep(delay * 1000);
 
@@ -77,7 +79,7 @@ public static class Simulator
                 }
                 else //there are no such orders
                 {
-                    ReportProgress(0, 0, DateTime.Now, 0, estimatedTime);
+                    ReportMyProgress(0, OrderStatus.Default, DateTime.Now, OrderStatus.Default, estimatedTime);
                 }
                 Thread.Sleep(1000); //stop one second before each iteration
             }

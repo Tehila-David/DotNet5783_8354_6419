@@ -106,13 +106,13 @@ public partial class SimulatorWindow : Window
 
     private void OrderUpdated(int ID, BO.OrderStatus curStatus, DateTime now, BO.OrderStatus nextStatus, DateTime future)
     {
-        ArrayList arrayList = new ArrayList();
-        arrayList.Add(ID);
-        arrayList.Add(curStatus);
-        arrayList.Add(now);
-        arrayList.Add(nextStatus);
-        arrayList.Add(future);
-        worker.ReportProgress(ID, arrayList);
+        ArrayList myList = new ArrayList();
+        myList.Add(ID);
+        myList.Add(curStatus);
+        myList.Add(now);
+        myList.Add(nextStatus);
+        myList.Add(future);
+        worker.ReportProgress(ID, myList);
     }
 
     private void OrderCompleted()
@@ -135,11 +135,7 @@ public partial class SimulatorWindow : Window
 
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
-
-        //int progress = e.ProgressPercentage;
-        //resultLabel.Content = (progress + "%");
-        //resultProgressBar.Value = progress;4
-        if (e.ProgressPercentage == 3)
+        if (e.ProgressPercentage == 3) 
         {
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
@@ -147,12 +143,12 @@ public partial class SimulatorWindow : Window
         }
         else if (e.ProgressPercentage >= 100000)
         {
-            ArrayList arrayList = (ArrayList)e.UserState!;
+            ArrayList myList = (ArrayList)e.UserState!;
             ID = e.ProgressPercentage;
-            curStatus = (BO.OrderStatus)arrayList[1];
-            oldTime = ((DateTime)arrayList[2]!).ToString();
-            finalStatus = (BO.OrderStatus)arrayList[3];
-            newTime = ((DateTime)arrayList[4]!).ToString();
+            curStatus = (BO.OrderStatus)myList[1];
+            oldTime = ((DateTime)myList[2]!).ToString();
+            finalStatus = (BO.OrderStatus)myList[3];
+            newTime = ((DateTime)myList[4]!).ToString();
         }
         else
         {         
@@ -185,5 +181,4 @@ public partial class SimulatorWindow : Window
             e.Cancel = true;
             MessageBox.Show("You can't close this window!");
         }
-    
 }
