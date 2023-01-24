@@ -101,19 +101,19 @@
   </Order>
   <Order>
     <ID>100012</ID>
-    <CustomerName>lalalal</CustomerName>
-    <CustomerEmail>la@gmail.com</CustomerEmail>
-    <CustomerAddress>54 blablabla</CustomerAddress>
-    <OrderDate>2023-01-24T19:54:26.386839+02:00</OrderDate>
+    <CustomerName>Ayala</CustomerName>
+    <CustomerEmail>ayala@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven24</CustomerAddress>
+    <OrderDate>2023-01-24T18:35:08.0452338+02:00</OrderDate>
     <ShipDate xsi:nil="true" />
     <DeliveryDate xsi:nil="true" />
   </Order>
   <Order>
     <ID>100013</ID>
-    <CustomerName>Project</CustomerName>
-    <CustomerEmail>prog@gmail.com</CustomerEmail>
-    <CustomerAddress>5783 yerushalayim</CustomerAddress>
-    <OrderDate>2023-01-24T19:55:34.237348+02:00</OrderDate>
+    <CustomerName>Check</CustomerName>
+    <CustomerEmail>check@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven23</CustomerAddress>
+    <OrderDate>2023-01-24T20:41:03.1612402+02:00</OrderDate>
     <ShipDate xsi:nil="true" />
     <DeliveryDate xsi:nil="true" />
   </Order>
