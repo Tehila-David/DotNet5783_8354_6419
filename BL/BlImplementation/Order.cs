@@ -388,12 +388,17 @@ internal class Order : BlApi.IOrder
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
         if (orders != null)
         {
+            var ordersForOrderDate = orders.Where(item => item.Value.OrderDate != null);
+           
+            
+
+            
             DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
             DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
 
-                if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
+                if(minOrderD?.OrderDate != null && minShipD?.ShipDate != null)
                  {
-                return (int)(minShipD?.ID!);
+                 return (int)(minShipD?.ID!);
                  }
                 else if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
                 {
