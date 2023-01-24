@@ -141,22 +141,23 @@ public partial class SimulatorWindow : Window
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
         ArrayList list = (ArrayList)e.UserState! ?? new ArrayList { 0 };
-        int ID = (int)list[0]!;
+        int id = (int)list[0]!;
 
-        if (e.ProgressPercentage ==0)
+        if (e.ProgressPercentage == 0 )
         {
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.txtClock.Text = timerText;
+            ID = 0;
         }
-        else if (ID >= 100000)
+        else if (id >= 100000)
         {
             if (isCompleted)
             {
                 isCompleted = false;
             }
             ArrayList myList = (ArrayList)e.UserState!;
-            ID = e.ProgressPercentage;
+            ID = id;
             curStatus = (BO.OrderStatus)myList[1];
             oldTime = ((DateTime)myList[2]!).ToString();
             finalStatus = (BO.OrderStatus)myList[3];
