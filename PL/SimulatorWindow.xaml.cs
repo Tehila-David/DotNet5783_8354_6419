@@ -56,10 +56,8 @@ public partial class SimulatorWindow : Window
     public static readonly DependencyProperty IdDependency =
                 DependencyProperty.Register(nameof(ID), typeof(int), typeof(SimulatorWindow));
     public int ID
-    {
-        get => (int)GetValue(IdDependency);
-        private set => SetValue(IdDependency, value);
-    }
+    { get => (int)GetValue(IdDependency);
+        private set => SetValue(IdDependency, value); }
 
 
 
@@ -165,37 +163,36 @@ public partial class SimulatorWindow : Window
 
         //        }
         //    }
-        //}}
-
+        //}
     }
 
 
 
 
-    private void Worker_DoWork(object sender, DoWorkEventArgs e)
-    {
-        Simulator.RegisterReport(OrderUpdated);
-        Simulator.RegisterEndSimulator(OrderCompleted);
-        Simulator.Activate(); //starting the simulator
-
-        while (worker.CancellationPending == false)
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(1000);
-            worker.ReportProgress(3);
+            Simulator.RegisterReport(OrderUpdated);
+            Simulator.RegisterEndSimulator(OrderCompleted);
+            Simulator.Activate(); //starting the simulator
+
+            while (worker.CancellationPending == false)
+            {
+                Thread.Sleep(1000);
+                worker.ReportProgress(3);
+            }
         }
-    }
 
 
-    private void SimulatorStop_Click(object sender, EventArgs e)
-    {
-        Simulator.stopSimulator();
-        worker.CancelAsync();
-    }
+        private void SimulatorStop_Click(object sender, EventArgs e)
+        {
+            Simulator.stopSimulator();
+            worker.CancelAsync();
+        }
 
-    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-        e.Cancel = true;
-        MessageBox.Show("You can't close this window!");
-    }
-
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            MessageBox.Show("You can't close this window!");
+        }
+    
 }
