@@ -17,7 +17,7 @@ internal class Order : BlApi.IOrder
     DalApi.IDal dal = DalApi.Factory.Get()!;
 
 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
    
   
     public IEnumerable<BO.OrderForList> GetListedOrders(Func<DO.Order?, bool>? predicate = null)
@@ -98,7 +98,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public List<BO.OrderItem?> getDoOrderItem(int id)
     {
         lock (dal)
@@ -122,7 +122,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateShipDate(int id)
     {
         lock (dal)
@@ -159,11 +159,11 @@ internal class Order : BlApi.IOrder
         }
     }
 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateDelivery(int id)
     {
-       // lock (dal)
-       // {
+        lock (dal)
+        {
             try
             {
                 if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
@@ -196,9 +196,9 @@ internal class Order : BlApi.IOrder
             {
                 throw new BO.InternalProblem("Sorry ,this order does not exist in the List ", ex);
             }
-       // }
+        }
     }
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+   [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderTracking followOrder(int id)
     {
         lock (dal)
@@ -237,7 +237,7 @@ internal class Order : BlApi.IOrder
             }
         }
     }
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateItems(BO.Order Order, int productId, int amount, bool flag = true)
     {
 
@@ -353,7 +353,7 @@ internal class Order : BlApi.IOrder
 
 
 
-  //  [MethodImpl(MethodImplOptions.Synchronized)]
+   [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
         return 0;
@@ -373,6 +373,8 @@ internal class Order : BlApi.IOrder
         var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
                          orderby item?.DeliveryDate
                          select item;
+
+            if(order1 != null)
             if (order1 != null)
             {
                 return order1.First()?.ID ?? throw new Exception("There are no orders to be delivered");

@@ -91,18 +91,6 @@ public class DalOrderItem : IOrderItem
     //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(OrderItem myOrderItem)
     {
-
-        //int index = 0;
-        //foreach (var item in _dataSource.OrderItemList)
-        //{
-        //    if (item?.ID == myOrderItem.ID) ///updating the order
-        //    {
-        //        _dataSource.OrderItemList.RemoveAt(index);
-        //        _dataSource.OrderItemList.Insert(index, myOrderItem);
-        //        return;
-        //    }
-        //    index++;
-        //}
         var orderItem = (from item in _dataSource.OrderItemList
                          where item?.ID == myOrderItem.ID
                          select item).FirstOrDefault();
@@ -119,53 +107,6 @@ public class DalOrderItem : IOrderItem
 
 }
 
-    //!!!predicate בשלב 3 היינו צריכות למחוק את הפונקציות הללו כי הן מיותרות אחרי שלמדנו 
-
-
-
-    /// <summary>
-    /// This function receives an order id and a product id and returns the matching order item
-    /// </summary>
-    //public OrderItem getOrderItem(int idOrder, int idProduct)//צריכות למחוק את הפונקציה הזאת!!!
-    //{
-
-    //    //OrderItem orderItem = new OrderItem();
-    //    //foreach (OrderItem item in _dataSource.OrderItemList)
-    //    //{
-    //    //    ///checking if an orderitem has the same product and order id's as the on e the user entered 
-    //    //    if (item.ProductID == idProduct && item.OrderID == idOrder)
-    //    //    {
-    //    //        ///The correct order item based on the user input
-    //    //        orderItem = item;
-    //    //        return orderItem;
-    //    //    }
-    //    //}
-    //    ////If the order item being looked for is not found in the list
-    //    //throw new NotExists("Sorry ,this item does not exist in the list ");
-
-    //    return GetById(item => item?.ProductID == idProduct && item?.OrderID == idOrder);
-    //}
-
-
-    /// <summary>
-    /// This function returns an array of all of the order items with the order id the user entered
-    /// </summary>
-    //public IEnumerable <OrderItem?> getListOrderItems(int idOrder)// צריכות למחוק את הפונקציה הזאת!!!
-    //{
-    //    //creating an list with all of the order items that have the same order id as the one the user entered
-    //    //Func<OrderItem, bool>? predicate = item =>
-    //    //{
-    //    //    bool b1 = item.OrderID == idOrder;
-    //    //    return b1;
-    //    //};
-    //    //OrderItem orderItem=
-
-    //    ////If no order items arec found with the order id the user entered
-    //    //throw new NotExists("No order items found with the entered order id");
-    //    return GetAll(item => item?.OrderID == idOrder) ??
-    //    throw new NotExists("No order items found with the entered order id");
-
-    //}
-
+ 
 
 

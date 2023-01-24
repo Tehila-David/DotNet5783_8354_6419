@@ -31,6 +31,11 @@ namespace BlApi
         /// </summary>
         /// <param name="myCart"></param>
         public void CartConfirmation(BO.Cart myCart);
+        /// <summary>
+        /// return cart Items
+        /// </summary>
+        /// <param name="myCart"></param>
+        /// <returns></returns>
 
         public IEnumerable<BO.OrderItem> cartItems(BO.Cart myCart);
 

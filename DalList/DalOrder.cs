@@ -61,15 +61,7 @@ public class DalOrder : IOrder
    // [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
-        //foreach (var item in _dataSource.OrderList)
-        //{
-        //    if (item?.ID == id)
-        //    {
-        //        _dataSource.OrderList.Remove(item);
-        //        return;
-
-        //    }
-        //}
+        
         var order = (from item in _dataSource.OrderList
                      where item?.ID == id
                      select item).FirstOrDefault();
@@ -91,17 +83,7 @@ public class DalOrder : IOrder
    // [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Order myOrder)
     {
-        //int index = 0;
-        //foreach (Order item in _dataSource.OrderList)
-        //{
-        //    if (item.ID == myOrder.ID) ///updating the order
-        //    {
-        //        _dataSource.OrderList.RemoveAt(index);
-        //        _dataSource.OrderList.Insert(index, myOrder);
-        //        return;
-        //    }
-        //    index++;
-        //}
+       
         var order= (from item in _dataSource.OrderList
                         where item?.ID == myOrder.ID
                         select item).FirstOrDefault();

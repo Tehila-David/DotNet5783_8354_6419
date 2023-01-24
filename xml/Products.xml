@@ -36,20 +36,6 @@
     <Category>PHONE</Category>
   </Product>
   <Product>
-    <ID>33333</ID>
-    <Price>56</Price>
-    <InStock>3</InStock>
-    <Name>34</Name>
-    <Category>TABLET</Category>
-  </Product>
-  <Product>
-    <ID>11111</ID>
-    <Price>45</Price>
-    <InStock>13</InStock>
-    <Name>tablet</Name>
-    <Category>PHONE</Category>
-  </Product>
-  <Product>
     <ID>222230</ID>
     <Price>2000</Price>
     <InStock>151</InStock>
