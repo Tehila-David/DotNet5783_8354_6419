@@ -34,8 +34,8 @@
         <Label  Content="Amount :" HorizontalAlignment="Left" Margin="20,130,0,0" VerticalAlignment="Top" Width="80" Height="25" FontFamily="Arial Black"/>
         <TextBox x:Name="txtProductID" Text="{Binding productId}" MaxLength="9" HorizontalAlignment="Left" Margin="130,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
         <TextBox x:Name="txtAmount" Text="{Binding Amount}" MaxLength="9" HorizontalAlignment="Left" Margin="130,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1"  />
-        <Button x:Name="UpdateItem" Content="Update Item"  VerticalAlignment="Top"  HorizontalAlignment="Left"   Margin="20,170,0,0" Width="112" Height="27" Click="UpdateItem_Click"/>
-        <Button x:Name="DeleteItem" Content="Delete Item"    VerticalAlignment="Top"  HorizontalAlignment="Left"   Margin="160,170,0,0" Width="112" Height="27" Click="DeleteItem_Click" />
-        <Button x:Name="AddNewItem" Content="Add New Item"   VerticalAlignment="Top" HorizontalAlignment="Left"   Margin="63,228,0,0" Width="130" Click="AddNewItem_Click" Height="32" />
+        <Button x:Name="UpdateItem" Content="Update Item"  VerticalAlignment="Top"  HorizontalAlignment="Left"   Margin="20,170,0,0" Width="112" Height="27" Click="UpdateItem_Click" FontFamily="Arial Black"/>
+        <Button x:Name="DeleteItem" Content="Delete Item"    VerticalAlignment="Top"  HorizontalAlignment="Left"   Margin="160,170,0,0" Width="112" Height="27" Click="DeleteItem_Click" FontFamily="Arial Black"/>
+        <Button x:Name="AddNewItem" Content="Add New Item"   VerticalAlignment="Top" HorizontalAlignment="Left"   Margin="63,228,0,0" Width="130" Click="AddNewItem_Click" Height="32" FontFamily="Arial Black" />
     </Grid>
 </Window>
