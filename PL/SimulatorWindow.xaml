@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         
-        Title="SimulatorWindow" Height="450" Width="800">
+        Title="SimulatorWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="373*"/>
@@ -19,12 +21,20 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Button x:Name="End_of_simulation" Content="End of simulation"   HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" />
-        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="330,32,291,330" Grid.Row="1" RenderTransformOrigin="0.254,0.297"/>
-        <TextBlock x:Name="curOrder" Text="Current Order" FontSize="40" Margin="260,97,211,250" Grid.Row="1"/>
-        <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="185,182,416,190" Grid.Row="1"/>
-        <TextBlock x:Name="nextStatus" Text="Next status:" FontSize="20" Margin="465,177,171,195" Grid.Row="1"/>
-        <TextBlock x:Name="begTime" Text="Begin time:" FontSize="20" Margin="185,227,451,145" Grid.Row="1" RenderTransformOrigin="0.476,0.665"/>
-        <TextBlock x:Name="endTime" Text="Estimated end time:" FontSize="20" Margin="465,222,96,145" Grid.Row="1"/>
+        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="330,12,291,325" Grid.Row="1" RenderTransformOrigin="0.254,0.297"/>
+        <TextBlock x:Name="curOrder" Text="Current Order:" FontSize="40" Margin="185,82,251,245" Grid.Row="1"/>
+        <TextBox x:Name="orderIDTextBox" Text="{Binding  ID}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="65" Margin="515,82,0,0" Grid.Row="1" />
+        <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="95,167,501,175" Grid.Row="1"/>
+        <TextBox x:Name="prevStatusTextBox" Text="{Binding  curStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" Height="50" Margin="260,167,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" />
+
+        <TextBlock x:Name="nextStatus" Text="Next status:" FontSize="20" Margin="415,172,196,185" Grid.Row="1"/>
+        <TextBox x:Name="nextStatusTextBox" Text="{Binding  finalStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" Height="45" Margin="600,172,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" Grid.ColumnSpan="2" />
+
+        <TextBlock x:Name="begTime" Text="Begin time:" FontSize="20" Margin="95,242,536,95" Grid.Row="1" RenderTransformOrigin="0.476,0.665"/>
+        <TextBox x:Name="begTimeTextBox" Text="{Binding  oldTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="170" Height="45" Margin="225,232,0,0" Grid.Row="1" />
+
+        <TextBlock x:Name="endTime" Text="Estimated end time:" FontSize="20" Margin="410,227,136,110" Grid.Row="1"/>
+        <TextBox x:Name="endTimeTextBox" Text="{Binding  newTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="155" Height="50" Margin="630,227,0,0" Grid.Row="1" Grid.ColumnSpan="2" />
 
     </Grid>
 </Window>

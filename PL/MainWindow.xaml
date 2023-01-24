@@ -93,7 +93,7 @@
         <Button x:Name="Order_Tracking" Content="Order Tracking"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="370,230,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Width="204" Click="OrderTracking_Click"/>
         <Button x:Name="Products_List"  Content="Products List"    Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="120,180,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204" Click="ProductsList_Click" />
         <Button x:Name="Orders_List" Content="Orders List" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="120,230,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="38" Width="204" Click="OrdersList_Click" RenderTransformOrigin="0.625,0.411" />
-        <!--<Button x:Name="Simulator" Content="Simulator" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="585,328,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="39" Width="133"  RenderTransformOrigin="0.625,0.411" Background="#FFF7FB51" Click="Simulator_Click" />-->
+        <Button x:Name="Simulator" Content="Simulator" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="585,328,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="39" Width="133"  RenderTransformOrigin="0.625,0.411" Background="#FFF7FB51" Click="Simulator_Click" />
         <Image Name="image1" Margin="180,20,192,296" Source="/צילום מסך 2023-01-11 094323.png" RenderTransformOrigin="0.238,0.478" Grid.RowSpan="2"/>
         <Image HorizontalAlignment="Left" Height="4" Margin="539,372,0,0" Grid.Row="1" VerticalAlignment="Top" Width="30"/>
         <MediaElement x:Name="PLAY" LoadedBehavior="Stop" />
