@@ -19,7 +19,7 @@ internal class Order : BlApi.IOrder
 
    // [MethodImpl(MethodImplOptions.Synchronized)]
    
-   
+  
     public IEnumerable<BO.OrderForList> GetListedOrders(Func<DO.Order?, bool>? predicate = null)
     {
         lock (dal)
@@ -64,7 +64,7 @@ internal class Order : BlApi.IOrder
 
 
 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+   [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order GetByID(int id)
     {
         lock (dal)

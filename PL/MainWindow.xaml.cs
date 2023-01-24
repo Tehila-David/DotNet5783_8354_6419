@@ -81,13 +81,13 @@ namespace PL
             
         }
 
-      
+
 
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
             SimulatorWindow window = new SimulatorWindow();
             window.Show();
-           
+
         }
 
         private void Client_Click(object sender, RoutedEventArgs e)

@@ -123,7 +123,7 @@ namespace Dal
             {
                 if (!File.Exists(filePath)) return new();
                 using FileStream file = new(filePath, FileMode.Open);
-                XmlSerializer x = new(typeof(List<T>));
+                XmlSerializer x = new(typeof(List<T?>));
                 return x.Deserialize(file) as List<T?> ?? new();
             }
             catch (Exception ex)

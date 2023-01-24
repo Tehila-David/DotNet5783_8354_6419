@@ -30,7 +30,7 @@ public static class Simulator
     {
         EndSimulator += handler;
     }
-    public static void UnRegisterEndSimulator (SimulatorDone handler) 
+    public static void UnRegisterEndSimulator(SimulatorDone handler)
     {
         EndSimulator -= handler;
     }
@@ -57,20 +57,20 @@ public static class Simulator
                 DateTime estimatedTime = new DateTime();
                 if (OrderID != 0)// not null
                 {
-                    
-                    BO.Order order = bl.Order.GetByID(OrderID);
-                    int delay = random.Next(3,11);
-                    estimatedTime = DateTime.Now + new TimeSpan(0,0,delay);
-                    OrderStatus ?oldStatus = order.Status;
-                    ReportProgress(order.ID, oldStatus?? throw new Exception("null"), DateTime.Now,
-                    order.Status == OrderStatus.Default ? OrderStatus.shipped : OrderStatus.Deliverded, estimatedTime);
-                    Thread.Sleep(delay*1000);
 
-                    if (order.Status ==  OrderStatus.Confirmed)
+                    BO.Order order = bl.Order.GetByID(OrderID);
+                    int delay = random.Next(3, 11);
+                    estimatedTime = DateTime.Now + new TimeSpan(0, 0, delay);
+                    OrderStatus? oldStatus = order.Status;
+                    ReportProgress(order.ID, oldStatus ?? throw new Exception("null"), DateTime.Now,
+                    order.Status == OrderStatus.Default ? OrderStatus.shipped : OrderStatus.Deliverded, estimatedTime);
+                    Thread.Sleep(delay * 1000);
+
+                    if (order.Status == OrderStatus.Confirmed)
                     {
                         bl.Order.UpdateShipDate(OrderID);
                     }
-                    else if(order.Status == OrderStatus.shipped)   
+                    else if (order.Status == OrderStatus.shipped)
                     {
                         bl.Order.UpdateDelivery(OrderID);
                     }
@@ -87,7 +87,7 @@ public static class Simulator
 
     public static void stopSimulator()
     {
-        if(Active)
+        if (Active)
         {
             Active = false;
 

@@ -34,7 +34,9 @@ namespace Dal
             XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefault(p => p?.ID == id)
         
             ?? throw new Exception("missing id");
-      //  [MethodImpl(MethodImplOptions.Synchronized)]
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         public DO.Order? GetById(Func<DO.Order?, bool>? predicate)
         {
