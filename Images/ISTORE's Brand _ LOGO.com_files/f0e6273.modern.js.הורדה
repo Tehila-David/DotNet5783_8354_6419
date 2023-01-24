@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[398],{1089:function(t){t.exports=JSON.parse('{"meta":{"title":"{{ logo.wordmark }}\'s Brand","description":""},"page_name":"View Logo","title":"{{ logo.wordmark }}\'s Brand","intro_text":"<p>Got a new idea or just want to refresh your old brand?</p>","show_intro":true,"buttons":[{"text":"Edit this logo","id":"edit","style":"Primary","size":"Default"},{"text":"Get this logo","id":"get","style":"Primary","size":"Default"}]}')}}]);
-//# sourceMappingURL=f0e6273.modern.js.map
