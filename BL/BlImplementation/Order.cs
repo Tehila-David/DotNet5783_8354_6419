@@ -388,8 +388,8 @@ internal class Order : BlApi.IOrder
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
         if (orders != null)
         {
-            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
-            DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
+            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate != null);
+            DO.Order? minShipD = orders.MinBy(item => item?.ShipDate != null);
 
                 if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
                  {
@@ -398,6 +398,10 @@ internal class Order : BlApi.IOrder
                 else if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
                 {
                 return (int)(minOrderD?.ID!);
+                 }
+                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate == null)
+               {
+                return 0;
                  }
             else if (minOrderD?.OrderDate < minShipD?.ShipDate)
                 {
@@ -433,33 +437,3 @@ internal class Order : BlApi.IOrder
 
     }
 }
-
-    
-
-
-
-    
-
-
-
-
-
-
-//         var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
-//                     orderby item?.OrderDate
-//                     select item;
-//         if (order != null)
-//         {
-//             return order.First()?.ID ?? throw new Exception("There are no orders to be shipped");
-//         }
-
-//var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
-//                      orderby item?.DeliveryDate
-//                      select item;
-
-//         if(order1 != null)
-//         if (order1 != null)
-//         {
-//             return order1.First()?.ID ?? throw new Exception("There are no orders to be delivered");
-//         }
-//         return 0;
