@@ -1,11 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
-    <ID>100004</ID>
-    <CustomerName>tehila david</CustomerName>
-    <CustomerEmail>tehila859@gmail.com</CustomerEmail>
-    <CustomerAddress>reuven24</CustomerAddress>
-    <OrderDate>2023-01-24T00:10:05.6161233+02:00</OrderDate>
+    <ID>100005</ID>
+    <CustomerName>Ayala</CustomerName>
+    <CustomerEmail>ayala@gmail.com</CustomerEmail>
+    <CustomerAddress>Israel</CustomerAddress>
+    <OrderDate>2023-01-24T08:38:27.5833219+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>100006</ID>
+    <CustomerName>Tehila DAVID</CustomerName>
+    <CustomerEmail>re2@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven23</CustomerAddress>
+    <OrderDate>2023-01-24T08:43:59.7156077+02:00</OrderDate>
     <ShipDate xsi:nil="true" />
     <DeliveryDate xsi:nil="true" />
   </Order>

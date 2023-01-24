@@ -12,7 +12,7 @@ namespace BlImplementation;
 internal class Product : BlApi.IProduct
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductForList> GetListedProducts(Func<DO.Product?, bool>? predicate = null)
     {
 
@@ -42,7 +42,7 @@ internal class Product : BlApi.IProduct
         }
 
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductItem?> GetListProductItem( BO.Cart myCart , Func<DO.Product?, bool>? predicate = null  )
     {
 
@@ -74,7 +74,7 @@ internal class Product : BlApi.IProduct
             }).OrderBy(item => item.ID);
         }
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Product GetById(int id)
     {
         try
@@ -95,7 +95,7 @@ internal class Product : BlApi.IProduct
             throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
         }
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public BO.ProductItem GetById1(int id, BO.Cart myCart)
     {
         try
@@ -128,7 +128,7 @@ internal class Product : BlApi.IProduct
             throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
         }
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Add(BO.Product product)
     {
         try
@@ -153,7 +153,7 @@ internal class Product : BlApi.IProduct
             throw new BO.InternalProblem("The product already exists", ex);
         }
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(BO.Product product)
     {
         try
@@ -179,7 +179,7 @@ internal class Product : BlApi.IProduct
         }
 
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         try
