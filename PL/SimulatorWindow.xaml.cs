@@ -35,7 +35,6 @@ public partial class SimulatorWindow : Window
     Stopwatch stopwatch;
 
     bool isTimerRun = true;
-
     bool isCompleted = false;
     bool isFinished = false;
 

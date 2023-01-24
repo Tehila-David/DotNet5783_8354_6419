@@ -388,30 +388,46 @@ internal class Order : BlApi.IOrder
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
         if (orders != null)
         {
+            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
+            DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
 
-            DO.Order? minOrderDate = orders.MinBy(item => item?.OrderDate);
-            DO.Order? minShipDate = orders.MinBy(item => item?.ShipDate);
-            if (minOrderDate?.ShipDate != null)
-            {
-                if (minOrderDate?.ShipDate < minShipDate?.ShipDate)
-                    return minOrderDate.Value.ID;
-                else
-                    return minShipDate.Value.ID;
-            }
-            else
-            {
-                if (minOrderDate?.ShipDate != null)
+                if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
+                 {
+                return (int)(minShipD?.ID!);
+                 }
+                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
                 {
-                    if (minOrderDate?.OrderDate < minShipDate?.ShipDate)
-                    {
-                        return minOrderDate.Value.ID;
-                    }
-                    else
-                    {
-                        return minShipDate.Value.ID;
-                    }
+                return (int)(minOrderD?.ID!);
+                 }
+            else if (minOrderD?.OrderDate < minShipD?.ShipDate)
+                {
+                return (int)(minOrderD?.ID!);
+
                 }
-            }
+                else if(minShipD?.ShipDate < minOrderD?.OrderDate)
+                 {
+                return (int)(minShipD?.ID!);
+                 }
+
+            //if (minOrderD?.ShipDate != null )
+            //{
+            //    if (minOrderD?.ShipDate < minShipD?.ShipDate)
+            //        return (int)(minOrderD?.ID!);
+            //    else
+            //        return (int)(minShipD?.ID!);
+            //}
+            //else
+            //{
+            //    if (minOrderD?.OrderDate < minShipD?.ShipDate)
+            //    {
+            //        return (int)(minOrderD?.ID!);
+            //    }
+            //    else
+            //    {
+            //        return minShipD?.ID ?? 0;// throw new BO.EntityNotExist("no ID");
+            //    }
+            //}
+
         }
         return 0;
 
