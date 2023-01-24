@@ -47,7 +47,7 @@ namespace Dal
         #endregion
 
         #region SaveLoadWithXElement
-        [MethodImpl(MethodImplOptions.Synchronized)]
+        //[MethodImpl(MethodImplOptions.Synchronized)]
 
         public static void SaveListToXMLElement(XElement rootElem, string entity)
         {
@@ -63,7 +63,7 @@ namespace Dal
             }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static XElement LoadListFromXMLElement(string entity)
         {
@@ -86,7 +86,7 @@ namespace Dal
 
         #region SaveLoadWithXMLSerializer
         static readonly bool s_writing = true;
-        [MethodImpl(MethodImplOptions.Synchronized)]
+      //  [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct
         {
@@ -109,7 +109,12 @@ namespace Dal
             }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
 
         public static List<T?> LoadListFromXMLSerializer<T>(string entity) where T : struct
         {
@@ -128,7 +133,7 @@ namespace Dal
             }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+      //  [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static List<T> LoadListFromXMLSerializer1<T>(string entity) where T : struct// for running numbers
         {
@@ -147,7 +152,7 @@ namespace Dal
             }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+      //  [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static void SaveListToXMLSerializer1<T>(List<T> list, string entity) where T : struct//for running numbers
         {

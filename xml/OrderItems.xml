@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrderItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OrderItem>
-    <ID>100006</ID>
-    <ProductID>222229</ProductID>
-    <OrderID>100004</OrderID>
-    <Price>4000</Price>
+    <ID>100008</ID>
+    <ProductID>33333</ProductID>
+    <OrderID>100005</OrderID>
+    <Price>56</Price>
     <Amount>1</Amount>
   </OrderItem>
 </ArrayOfOrderItem>

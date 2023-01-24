@@ -10,7 +10,7 @@ namespace Dal;
 public class DalProduct : IProduct
 {
     DataSource _dataSource = DataSource.s_instance;
-    [MethodImpl(MethodImplOptions.Synchronized)]
+   // [MethodImpl(MethodImplOptions.Synchronized)]
     public Product? GetById(Func<Product?, bool>? predicate)
     {
         return _dataSource.ProductList?.FirstOrDefault(predicate)
@@ -20,7 +20,7 @@ public class DalProduct : IProduct
     /// This function adds an Product
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+   // [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Product myProduct)
     {
         if(_dataSource.ProductList.Exists(p => p?.ID== myProduct.ID))
@@ -33,7 +33,7 @@ public class DalProduct : IProduct
     /// This function returns a product based on the useer input id
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+   // [MethodImpl(MethodImplOptions.Synchronized)]
     public Product GetById(int id)
     {
         
@@ -46,7 +46,7 @@ public class DalProduct : IProduct
     /// This function returns all of the products
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+   // [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? predicate=null )
     {
         ///looking for all of the products that have their details filed in and returning them
@@ -58,7 +58,7 @@ public class DalProduct : IProduct
     /// This function deletes a product from the list of products
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int ID)
     {
 
@@ -79,7 +79,7 @@ public class DalProduct : IProduct
     /// This function receives a product and updates an existing product with it
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Product myProduct)
     {
         

@@ -21,7 +21,7 @@ namespace Dal
         const string s_orders = @"Orders";
         string configPath = @"config";
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
         {
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders)!;
@@ -29,12 +29,12 @@ namespace Dal
                                   : ordersList.Where(filter).OrderBy(lec => ((DO.Order)lec!).ID);
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Order GetById(int id) =>
             XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefault(p => p?.ID == id)
         
             ?? throw new Exception("missing id");
-        [MethodImpl(MethodImplOptions.Synchronized)]
+      //  [MethodImpl(MethodImplOptions.Synchronized)]
 
         public DO.Order? GetById(Func<DO.Order?, bool>? predicate)
         {
@@ -47,7 +47,7 @@ namespace Dal
 
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         public int Add(DO.Order order)
         {
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -74,7 +74,7 @@ namespace Dal
 
             return order.ID;
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         public void Delete(int id)
         {
             var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -84,7 +84,7 @@ namespace Dal
 
             XMLTools.SaveListToXMLSerializer(ordersList, s_orders);
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update(DO.Order order)
         {
           
