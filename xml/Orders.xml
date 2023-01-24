@@ -99,4 +99,22 @@
     <ShipDate>2023-01-24T17:50:08.3113196+02:00</ShipDate>
     <DeliveryDate>2023-01-24T17:50:14.3433386+02:00</DeliveryDate>
   </Order>
+  <Order>
+    <ID>100012</ID>
+    <CustomerName>Ayala</CustomerName>
+    <CustomerEmail>ayala@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven24</CustomerAddress>
+    <OrderDate>2023-01-24T18:35:08.0452338+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>100013</ID>
+    <CustomerName>Check</CustomerName>
+    <CustomerEmail>check@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven23</CustomerAddress>
+    <OrderDate>2023-01-24T20:41:03.1612402+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
 </ArrayOfOrder>

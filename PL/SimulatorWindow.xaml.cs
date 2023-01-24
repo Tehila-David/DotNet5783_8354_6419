@@ -34,7 +34,7 @@ public partial class SimulatorWindow : Window
     BackgroundWorker worker;
     Stopwatch stopwatch;
 
-    volatile bool isTimerRun = true;
+    bool isTimerRun = true;
 
     bool isCompleted = false;
     bool isFinished = false;
@@ -144,13 +144,13 @@ public partial class SimulatorWindow : Window
         ArrayList list = (ArrayList)e.UserState! ?? new ArrayList { 0 };
         int ID = (int)list[0]!;
 
-        if (e.ProgressPercentage == 0)
+        if (ID == 0)
         {
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.txtClock.Text = timerText;
         }
-        else if (e.ProgressPercentage >= 100000)
+        else if (ID >= 100000)
         {
             if (isCompleted)
             {
