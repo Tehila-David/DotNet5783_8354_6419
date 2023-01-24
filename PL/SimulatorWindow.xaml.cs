@@ -136,38 +136,29 @@ public partial class SimulatorWindow : Window
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
 
-        //    //int progress = e.ProgressPercentage;
-        //    //resultLabel.Content = (progress + "%");
-        //    //resultProgressBar.Value = progress;4
-        //   if (e.ProgressPercentage == 3)
-        //    {
-        //        string timerText = stopwatch.Elapsed.ToString();
-        //        timerText = timerText.Substring(0, 8);
-        //        this.txtClock.Text = timerText;
-        //    }
-        //    else if (e.ProgressPercentage >= 100000)
-        //    {
-        //        ArrayList arrayList = (ArrayList)e.UserState!;
-        //        ID = e.ProgressPercentage;
-        //        curStatus = (BO.OrderStatus)arrayList[1];
-        //        oldTime = ((DateTime)arrayList[2]!).ToString();
-        //        finalStatus = (BO.OrderStatus)arrayList[3];
-        //        newTime = ((DateTime)arrayList[4]!).ToString();
-        //    }
-        //    else
-        //    {
-        //        Completed = true;
-        //        if (finished)
-        //        {
-        //            worker.CancelAsync();
-
-        //        }
-        //    }
-        //}
+        //int progress = e.ProgressPercentage;
+        //resultLabel.Content = (progress + "%");
+        //resultProgressBar.Value = progress;4
+        if (e.ProgressPercentage == 3)
+        {
+            string timerText = stopwatch.Elapsed.ToString();
+            timerText = timerText.Substring(0, 8);
+            this.txtClock.Text = timerText;
+        }
+        else if (e.ProgressPercentage >= 100000)
+        {
+            ArrayList arrayList = (ArrayList)e.UserState!;
+            ID = e.ProgressPercentage;
+            curStatus = (BO.OrderStatus)arrayList[1];
+            oldTime = ((DateTime)arrayList[2]!).ToString();
+            finalStatus = (BO.OrderStatus)arrayList[3];
+            newTime = ((DateTime)arrayList[4]!).ToString();
+        }
+        else
+        {         
+            worker.CancelAsync();
+        }
     }
-
-
-
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {

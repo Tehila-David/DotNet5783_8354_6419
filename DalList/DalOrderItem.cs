@@ -11,7 +11,7 @@ public class DalOrderItem : IOrderItem
 
 {
     DataSource _dataSource = DataSource.s_instance;
-    [MethodImpl(MethodImplOptions.Synchronized)]
+  //  [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderItem? GetById(Func<OrderItem?, bool>? predicate)
     {
         return _dataSource.OrderItemList?.FirstOrDefault(predicate)
@@ -20,7 +20,7 @@ public class DalOrderItem : IOrderItem
     /// <summary>
     /// This function adds an order item
     /// </summary>
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(OrderItem myOrderItem)
     {
         if (myOrderItem.ID == 0)
@@ -34,7 +34,7 @@ public class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns the details of an order item based on an id
     /// </summary>
-    [MethodImpl(MethodImplOptions.Synchronized)]
+  //  [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderItem GetById(int id)
     {
 
@@ -46,7 +46,7 @@ public class DalOrderItem : IOrderItem
     /// <summary>
     /// This function returns the list with all of the order items
     /// </summary>
-    [MethodImpl(MethodImplOptions.Synchronized)]
+   // [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? predicate = null)
     {
         ///looking for all of the products that have their details filed in and returning them
@@ -58,7 +58,7 @@ public class DalOrderItem : IOrderItem
     /// This function receives an id of an ordre item and deletes the order item witn the same id
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
 
@@ -88,7 +88,7 @@ public class DalOrderItem : IOrderItem
     /// This function receives an order item and updates the order item in the list that has the same id
     /// </summary>
     /// 
-    [MethodImpl(MethodImplOptions.Synchronized)]
+    //[MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(OrderItem myOrderItem)
     {
 
