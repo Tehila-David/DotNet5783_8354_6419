@@ -363,22 +363,22 @@ internal class Order : BlApi.IOrder
         {
             DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
             DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
-            if (minOrderD?.ShipDate != null)
+            if (minOrderD?.ShipDate != null )
             {
                 if (minOrderD?.ShipDate < minShipD?.ShipDate)
-                    return minOrderD.Value.ID;
+                    return (int)(minOrderD?.ID!);
                 else
-                    return minShipD?.ID ?? throw new Exception("no ID");
+                    return (int)(minShipD?.ID!);
             }
             else
             {
                 if (minOrderD?.OrderDate < minShipD?.ShipDate)
                 {
-                    return minOrderD.Value.ID;
+                    return (int)(minOrderD?.ID!);
                 }
                 else
                 {
-                    return minShipD.Value.ID;
+                    return minShipD?.ID ?? 0;// throw new BO.EntityNotExist("no ID");
                 }
             }
             

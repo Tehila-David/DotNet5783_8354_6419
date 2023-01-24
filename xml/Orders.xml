@@ -90,4 +90,13 @@
     <ShipDate>2023-01-24T14:21:36.8454083+02:00</ShipDate>
     <DeliveryDate>2023-01-24T14:21:45.8848386+02:00</DeliveryDate>
   </Order>
+  <Order>
+    <ID>100011</ID>
+    <CustomerName>Tehila</CustomerName>
+    <CustomerEmail>tehila@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven23</CustomerAddress>
+    <OrderDate>2023-01-24T17:48:53.1216626+02:00</OrderDate>
+    <ShipDate>2023-01-24T17:50:08.3113196+02:00</ShipDate>
+    <DeliveryDate>2023-01-24T17:50:14.3433386+02:00</DeliveryDate>
+  </Order>
 </ArrayOfOrder>

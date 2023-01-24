@@ -65,7 +65,7 @@ public static class Simulator
                     estimatedTime = DateTime.Now + new TimeSpan(delay * 10000000);
                     //estimatedTime = DateTime.Now + new TimeSpan(0, 0, delay);
                     OrderStatus? oldStatus = order.Status;
-                    ReportMyProgress(order.ID, oldStatus ?? throw new Exception("null"), DateTime.Now,
+                    ReportMyProgress?.Invoke(order.ID, oldStatus ?? throw new Exception("null"), DateTime.Now,
                     order.Status == OrderStatus.Default ? OrderStatus.shipped : OrderStatus.Deliverded, estimatedTime);
                     Thread.Sleep(delay * 1000);
 
@@ -80,7 +80,11 @@ public static class Simulator
                 }
                 else //there are no such orders
                 {
-                    ReportMyProgress(0, defaultStatus, estimatedTime, defaultStatus, estimatedTime);
+                    ReportMyProgress?.Invoke(0, defaultStatus, estimatedTime, defaultStatus, estimatedTime);
+                //    if(ReportMyProgress != null)
+                //    {
+                //        ReportMyProgress(0, defaultStatus, estimatedTime, defaultStatus, estimatedTime);
+                //    }
                 }
                 Thread.Sleep(1000); //stop one second before each iteration
             }

@@ -77,4 +77,11 @@
     <Name>IPHONE 14</Name>
     <Category>PHONE</Category>
   </Product>
+  <Product>
+    <ID>566567</ID>
+    <Price>666</Price>
+    <InStock>777</InStock>
+    <Name>stam</Name>
+    <Category>SCREEN</Category>
+  </Product>
 </Products>

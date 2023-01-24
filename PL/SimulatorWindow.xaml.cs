@@ -33,7 +33,9 @@ public partial class SimulatorWindow : Window
     static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     BackgroundWorker worker;
     Stopwatch stopwatch;
-    bool isTimerRun=true;
+
+    volatile bool isTimerRun = true;
+
     bool isCompleted = false;
     bool isFinished = false;
 
@@ -58,8 +60,10 @@ public partial class SimulatorWindow : Window
     public static readonly DependencyProperty IdDependency =
                 DependencyProperty.Register(nameof(ID), typeof(int), typeof(SimulatorWindow));
     public int ID
-    { get => (int)GetValue(IdDependency);
-        private set => SetValue(IdDependency, value); }
+    {
+        get => (int)GetValue(IdDependency);
+        private set => SetValue(IdDependency, value);
+    }
 
 
 
@@ -114,7 +118,7 @@ public partial class SimulatorWindow : Window
         myList.Add(now);
         myList.Add(nextStatus);
         myList.Add(future);
-        worker.ReportProgress(ID, myList);
+        worker.ReportProgress(0, myList);
     }
 
     private void OrderCompleted()
@@ -137,7 +141,10 @@ public partial class SimulatorWindow : Window
 
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
-        if (e.ProgressPercentage == 3) 
+        ArrayList list = (ArrayList)e.UserState! ?? new ArrayList { 0 };
+        int ID = (int)list[0]!;
+
+        if (e.ProgressPercentage == 0)
         {
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
@@ -156,10 +163,10 @@ public partial class SimulatorWindow : Window
             finalStatus = (BO.OrderStatus)myList[3];
             newTime = ((DateTime)myList[4]!).ToString();
         }
-        else 
-        {         
+        else
+        {
             isCompleted = true;
-            isTimerRun=false;
+            isTimerRun = false;
             if (isFinished == true)
             {
                 worker.CancelAsync();
@@ -167,23 +174,27 @@ public partial class SimulatorWindow : Window
         }
     }
 
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Simulator.RegisterReport(OrderUpdated);
-            Simulator.RegisterEndSimulator(OrderCompleted);
-            Simulator.Activate(); //starting the simulator
+    private void Worker_DoWork(object sender, DoWorkEventArgs e)
+    {
+        Simulator.RegisterReport(OrderUpdated);
+        Simulator.RegisterEndSimulator(OrderCompleted);
+        Simulator.Activate(); //starting the simulator
 
-            while (!worker.CancellationPending)
-            {
-                Thread.Sleep(1000);
-                worker.ReportProgress(3);
-            }
+        while (!worker.CancellationPending)
+        {
+            Thread.Sleep(1000);
+            worker.ReportProgress(1);
         }
+    }
 
 
-        private void SimulatorStop_Click(object sender, EventArgs e)
-        {
-         Simulator.stopSimulator();
+    private void End_of_simulation_Click(object sender, RoutedEventArgs e)
+    {
+        Simulator.stopSimulator();
+
+        Simulator.UnRegisterReport(OrderUpdated);
+        Simulator.UnRegisterEndSimulator(OrderCompleted);
+
         if (!isTimerRun)
         {
             worker.CancelAsync();
@@ -194,15 +205,14 @@ public partial class SimulatorWindow : Window
         }
         //Close();
 
-       }
+    }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
 
-            e.Cancel = isTimerRun;
-        if(isTimerRun == true)
+        e.Cancel = isTimerRun;
+        if (isTimerRun == true)
             MessageBox.Show("You can't close this window!");
-        }
+    }
 
-  
 }

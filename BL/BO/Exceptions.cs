@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,14 +12,30 @@ namespace BO
         public InternalProblem(string message) : base(message) { }
         public InternalProblem(string message, Exception inner) : base(message, inner) { }
     }
-    public class EntityNotExist : Exception
+
+    [Serializable]
+    internal class EntityNotExist : Exception
     {
-        public EntityNotExist(string message, Exception ex) : base(message) { }
+        public EntityNotExist()
+        {
+        }
+
+        public EntityNotExist(string? message) : base(message)
+        {
+        }
+
+        public EntityNotExist(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+
+        protected EntityNotExist(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
     public class notEnoughInStock : Exception
     {
         public notEnoughInStock(string message) : base(message) { }
-        
+
     }
     public class IncorrectName : Exception
     {
@@ -42,4 +59,4 @@ namespace BO
     }
 
 }
-    
+
