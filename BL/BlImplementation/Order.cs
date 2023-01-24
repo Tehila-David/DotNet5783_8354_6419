@@ -18,8 +18,8 @@ internal class Order : BlApi.IOrder
 
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-   
-  
+
+
     public IEnumerable<BO.OrderForList> GetListedOrders(Func<DO.Order?, bool>? predicate = null)
     {
         lock (dal)
@@ -64,7 +64,7 @@ internal class Order : BlApi.IOrder
 
 
 
-   [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order GetByID(int id)
     {
         lock (dal)
@@ -198,7 +198,7 @@ internal class Order : BlApi.IOrder
             }
         }
     }
-   [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderTracking followOrder(int id)
     {
         lock (dal)
@@ -353,36 +353,63 @@ internal class Order : BlApi.IOrder
 
 
 
-   [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
+
+        DO.Order order = new DO.Order();
+        IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
+        if (orders != null)
+        {
+            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
+            DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
+            if (minOrderD?.ShipDate != null)
+            {
+                if (minOrderD?.ShipDate < minShipD?.ShipDate)
+                    return minOrderD.Value.ID;
+                else
+                    return minShipD.Value.ID;
+            }
+            else
+            {
+                if (minOrderD?.OrderDate < minShipD?.ShipDate)
+                {
+                    return minOrderD.Value.ID;
+                }
+                else
+                {
+                    return minShipD.Value.ID;
+                }
+            }
+            
+        }
         return 0;
-
-       // lock (dal)
-       // {
-            var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
-                        orderby item?.OrderDate
-                        select item;
-            if (order != null)
-            {
-                return order.First()?.ID ?? throw new Exception("There are no orders to be shipped");
-            }
-
-
-      // }
-        var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
-                         orderby item?.DeliveryDate
-                         select item;
-
-            if(order1 != null)
-            if (order1 != null)
-            {
-                return order1.First()?.ID ?? throw new Exception("There are no orders to be delivered");
-            }
-            return 0;
-
-
     }
-
-
 }
+
+
+    
+
+
+
+
+
+
+//         var order = from item in dal.Order.GetAll(item => item?.ShipDate == null)
+//                     orderby item?.OrderDate
+//                     select item;
+//         if (order != null)
+//         {
+//             return order.First()?.ID ?? throw new Exception("There are no orders to be shipped");
+//         }
+
+//var order1 = from item in dal.Order.GetAll(item => item?.DeliveryDate == null)
+//                      orderby item?.DeliveryDate
+//                      select item;
+
+//         if(order1 != null)
+//         if (order1 != null)
+//         {
+//             return order1.First()?.ID ?? throw new Exception("There are no orders to be delivered");
+//         }
+//         return 0;

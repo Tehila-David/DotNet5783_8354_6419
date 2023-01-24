@@ -13,9 +13,9 @@
             <Setter Property="Foreground" Value="Blue">
             </Setter>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Red"/>
-                </Trigger>
+                <DataTrigger>
+                    <Setter Property="Foreground" Value="Green" />
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>

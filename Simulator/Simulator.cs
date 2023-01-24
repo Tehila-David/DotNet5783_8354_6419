@@ -93,11 +93,6 @@ public static class Simulator
         {
             Active = false;
 
-            //if (Simulator.Stop != null)
-            //{
-            //    Simulator.Stop();
-            //    Active = false;
-            //}
         }
     }
 
