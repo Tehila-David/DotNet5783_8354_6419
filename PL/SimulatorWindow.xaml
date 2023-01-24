@@ -18,7 +18,7 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="End_of_simulation" Content="End of simulation"   HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" />
+        <Button x:Name="End_of_simulation" Content="End of simulation"  HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" />
         <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="330,32,291,330" Grid.Row="1" RenderTransformOrigin="0.254,0.297"/>
         <TextBlock x:Name="curOrder" Text="Current Order" FontSize="40" Margin="260,97,211,250" Grid.Row="1"/>
         <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="185,182,416,190" Grid.Row="1"/>
