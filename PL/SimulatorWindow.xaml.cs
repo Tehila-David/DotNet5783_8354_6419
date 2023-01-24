@@ -34,6 +34,8 @@ public partial class SimulatorWindow : Window
     BackgroundWorker worker;
     Stopwatch stopwatch;
     bool isTimerRun;
+    bool isCompleted = false;
+    bool isFinished = false;
 
 
 
@@ -123,7 +125,7 @@ public partial class SimulatorWindow : Window
 
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        if (worker.CancellationPending == false)
+        if (!worker.CancellationPending)
         {
             Simulator.UnRegisterEndSimulator(OrderCompleted);
             Simulator.UnRegisterReport(OrderUpdated);
@@ -143,6 +145,10 @@ public partial class SimulatorWindow : Window
         }
         else if (e.ProgressPercentage >= 100000)
         {
+            if (isCompleted)
+            {
+                isCompleted = false;
+            }
             ArrayList myList = (ArrayList)e.UserState!;
             ID = e.ProgressPercentage;
             curStatus = (BO.OrderStatus)myList[1];
@@ -150,9 +156,13 @@ public partial class SimulatorWindow : Window
             finalStatus = (BO.OrderStatus)myList[3];
             newTime = ((DateTime)myList[4]!).ToString();
         }
-        else
+        else if (e.ProgressPercentage == 1)
         {         
-            worker.CancelAsync();
+            isCompleted = true;
+            if (isFinished == true)
+            {
+                worker.CancelAsync();
+            }
         }
     }
 
@@ -162,7 +172,7 @@ public partial class SimulatorWindow : Window
             Simulator.RegisterEndSimulator(OrderCompleted);
             Simulator.Activate(); //starting the simulator
 
-            while (worker.CancellationPending == false)
+            while (!worker.CancellationPending)
             {
                 Thread.Sleep(1000);
                 worker.ReportProgress(3);
@@ -172,13 +182,23 @@ public partial class SimulatorWindow : Window
 
         private void SimulatorStop_Click(object sender, EventArgs e)
         {
-            Simulator.stopSimulator();
+         Simulator.stopSimulator();
+        if (isCompleted)
+        {
             worker.CancelAsync();
         }
+        else
+        {
+            isFinished = true;
+        }
+       }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
+            e.Cancel = isTimerRun;
+
             MessageBox.Show("You can't close this window!");
         }
+
+  
 }

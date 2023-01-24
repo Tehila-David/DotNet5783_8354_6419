@@ -356,6 +356,7 @@ internal class Order : BlApi.IOrder
     [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
+        return 0;
 
         DO.Order order = new DO.Order();
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
@@ -368,7 +369,7 @@ internal class Order : BlApi.IOrder
                 if (minOrderD?.ShipDate < minShipD?.ShipDate)
                     return minOrderD.Value.ID;
                 else
-                    return minShipD.Value.ID;
+                    return minShipD?.ID ?? throw new Exception("no ID");
             }
             else
             {

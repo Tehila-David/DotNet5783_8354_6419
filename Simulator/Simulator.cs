@@ -56,6 +56,7 @@ public static class Simulator
             {
                 int OrderID = bl.Order.OrderForSimulator();
                 DateTime estimatedTime = DateTime.Now;
+                OrderStatus defaultStatus = OrderStatus.Default;
                 if (OrderID != 0)// not null
                 {
 
@@ -79,7 +80,7 @@ public static class Simulator
                 }
                 else //there are no such orders
                 {
-                    ReportMyProgress(0, OrderStatus.Default, DateTime.Now, OrderStatus.Default, estimatedTime);
+                    ReportMyProgress(0, defaultStatus, estimatedTime, defaultStatus, estimatedTime);
                 }
                 Thread.Sleep(1000); //stop one second before each iteration
             }
