@@ -143,7 +143,7 @@ public partial class SimulatorWindow : Window
         ArrayList list = (ArrayList)e.UserState! ?? new ArrayList { 0 };
         int ID = (int)list[0]!;
 
-        if (ID == 0)
+        if (e.ProgressPercentage ==0)
         {
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);

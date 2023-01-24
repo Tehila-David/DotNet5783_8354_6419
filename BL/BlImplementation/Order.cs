@@ -357,80 +357,39 @@ internal class Order : BlApi.IOrder
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
 
-        /*DO.Order order = new DO.Order()*/
-        ;
-        //IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
-        //if (orders != null)
-        //{
-        //    DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
-        //    DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
-        //    if (minOrderD?.ShipDate != null )
-        //    {
-        //        if (minOrderD?.ShipDate < minShipD?.ShipDate)
-        //            return (int)(minOrderD?.ID!);
-        //        else
-        //            return (int)(minShipD?.ID!);
-        //    }
-        //    else
-        //    {
-        //        if (minOrderD?.OrderDate < minShipD?.ShipDate)
-        //        {
-        //            return (int)(minOrderD?.ID!);
-        //        }
-        //        else
-        //        {
-        //            return (int)(minShipD?.ID!); // throw new BO.EntityNotExist("no ID");
-        //        }
-        //    }
 
-        //}
 
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
         if (orders != null)
         {
-            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate != null);
-            DO.Order? minShipD = orders.MinBy(item => item?.ShipDate != null);
 
-                if(minOrderD?.OrderDate != null && minShipD?.ShipDate != null)
-                 {
-                 return (int)(minShipD?.ID!);
-                 }
-                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
-                {
-                return (int)(minOrderD?.ID!);
-                 }
-                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate == null)
-               {
-                return 0;
-                 }
-            else if (minOrderD?.OrderDate < minShipD?.ShipDate)
-                {
-                return (int)(minOrderD?.ID!);
 
-                }
-                else if(minShipD?.ShipDate < minOrderD?.OrderDate)
-                 {
+            DO.Order? minOrderD = orders.Where(x => x?.ShipDate == null && x?.OrderDate != null).MinBy(item => item?.OrderDate);
+            DO.Order? minShipD = orders.Where(x => x?.ShipDate != null).MinBy(item => item?.ShipDate);
+
+            if (minOrderD == null && minShipD != null)
+            {
                 return (int)(minShipD?.ID!);
-                 }
+            }
+            else if (minOrderD != null && minShipD == null)
+            {
+                return (int)(minOrderD?.ID!);
+            }
+            else if (minOrderD == null && minShipD == null)
+            {
+                return 0;
+            }
+            else if (minOrderD?.OrderDate < minShipD?.ShipDate)
+            {
+                return (int)(minOrderD?.ID!);
 
-            //if (minOrderD?.ShipDate != null )
-            //{
-            //    if (minOrderD?.ShipDate < minShipD?.ShipDate)
-            //        return (int)(minOrderD?.ID!);
-            //    else
-            //        return (int)(minShipD?.ID!);
-            //}
-            //else
-            //{
-            //    if (minOrderD?.OrderDate < minShipD?.ShipDate)
-            //    {
-            //        return (int)(minOrderD?.ID!);
-            //    }
-            //    else
-            //    {
-            //        return minShipD?.ID ?? 0;// throw new BO.EntityNotExist("no ID");
-            //    }
-            //}
+            }
+            else if (minShipD?.ShipDate < minOrderD?.OrderDate)
+            {
+                return (int)(minShipD?.ID!);
+            }
+
+
 
         }
         return 0;
