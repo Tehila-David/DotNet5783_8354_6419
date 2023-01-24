@@ -29,11 +29,11 @@
         </Grid.RowDefinitions>
         <Label  Content="Order ID :" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="98" Height="25" Grid.Row="1" FontFamily="Arial Black" FontSize="16"/>
         <Label Content="Status :" HorizontalAlignment="Left" Margin="24,58,0,0" VerticalAlignment="Top" Width="78" Height="28" Grid.Row="1" FontFamily="Arial Black" FontSize="16"/>
-        <Label Content="Tracking :" HorizontalAlignment="Left" Margin="21,150,0,0" VerticalAlignment="Top" Width="96" Height="26" Grid.Row="1" FontFamily="Arial Black" FontSize="16"/>
-        <TextBox x:Name="OrderID" Text="{Binding Tracking.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="140,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1" FontFamily="Arial Black"  />
-        <TextBox x:Name="ClientName" Text="{Binding Tracking.Status }" MaxLength="9" HorizontalAlignment="Left" Margin="140,60,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1" FontFamily="Arial Black" />
-        <TextBox x:Name="ClientEmail" Text="{Binding Tracking.Tracking}" MaxLength="9" HorizontalAlignment="Left" Margin="130,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Height="72" Grid.Row="1" FontFamily="Arial Black" />
+        <Label Content="Tracking :" HorizontalAlignment="Left" Margin="21,150,0,0" VerticalAlignment="Top" Width="105" Height="35" Grid.Row="1" FontFamily="Arial Black" FontSize="16"/>
+        <TextBox Text="{Binding tracking.ID}" MaxLength="9" HorizontalAlignment="Left" Margin="140,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1" FontFamily="Arial Black"  />
+        <TextBox  Text="{Binding tracking.Status }" MaxLength="9" HorizontalAlignment="Left" Margin="140,60,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="25" Grid.Row="1" FontFamily="Arial Black" />
 
+        <ListView    ItemsSource="{Binding tracking.Tracking}" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="127,137,370,155" Grid.Row="1"/>
     </Grid>
 </Window>
 

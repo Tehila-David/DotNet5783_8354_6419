@@ -26,6 +26,6 @@
     <ProductID>222222</ProductID>
     <OrderID>100005</OrderID>
     <Price>4000</Price>
-    <Amount>82</Amount>
+    <Amount>24</Amount>
   </OrderItem>
 </ArrayOfOrderItem>
