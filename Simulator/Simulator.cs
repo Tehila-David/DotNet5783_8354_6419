@@ -84,7 +84,7 @@ public static class Simulator
                 }
                 Thread.Sleep(1000); //stop one second before each iteration
             }
-            EndSimulator();
+            EndSimulator?.Invoke();
         }).Start();
     }
 
@@ -93,7 +93,7 @@ public static class Simulator
         if (Active)
         {
             Active = false;
-
+           
         }
     }
 

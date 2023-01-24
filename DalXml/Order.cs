@@ -24,7 +24,7 @@ namespace Dal
        // [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? filter = null)
         {
-            var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders)!;
+            var ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
             return filter == null ? ordersList.OrderBy(lec => ((DO.Order)lec!).ID)
                                   : ordersList.Where(filter).OrderBy(lec => ((DO.Order)lec!).ID);
         }

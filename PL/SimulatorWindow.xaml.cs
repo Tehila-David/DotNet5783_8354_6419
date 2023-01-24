@@ -33,7 +33,7 @@ public partial class SimulatorWindow : Window
     static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     BackgroundWorker worker;
     Stopwatch stopwatch;
-    bool isTimerRun;
+    bool isTimerRun=true;
     bool isCompleted = false;
     bool isFinished = false;
 
@@ -131,7 +131,7 @@ public partial class SimulatorWindow : Window
             Simulator.UnRegisterReport(OrderUpdated);
             stopwatch.Stop();
             isTimerRun = false;
-            Close();
+            this.Close();
         }
     }
 
@@ -156,9 +156,10 @@ public partial class SimulatorWindow : Window
             finalStatus = (BO.OrderStatus)myList[3];
             newTime = ((DateTime)myList[4]!).ToString();
         }
-        else if (e.ProgressPercentage == 1)
+        else 
         {         
             isCompleted = true;
+            isTimerRun=false;
             if (isFinished == true)
             {
                 worker.CancelAsync();
@@ -183,7 +184,7 @@ public partial class SimulatorWindow : Window
         private void SimulatorStop_Click(object sender, EventArgs e)
         {
          Simulator.stopSimulator();
-        if (isCompleted)
+        if (!isTimerRun)
         {
             worker.CancelAsync();
         }
@@ -191,12 +192,15 @@ public partial class SimulatorWindow : Window
         {
             isFinished = true;
         }
+        //Close();
+
        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = isTimerRun;
 
+            e.Cancel = isTimerRun;
+        if(isTimerRun == true)
             MessageBox.Show("You can't close this window!");
         }
 
