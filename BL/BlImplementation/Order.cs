@@ -363,25 +363,44 @@ internal class Order : BlApi.IOrder
         {
             DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
             DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
-            if (minOrderD?.ShipDate != null )
-            {
-                if (minOrderD?.ShipDate < minShipD?.ShipDate)
-                    return (int)(minOrderD?.ID!);
-                else
-                    return (int)(minShipD?.ID!);
-            }
-            else
-            {
-                if (minOrderD?.OrderDate < minShipD?.ShipDate)
+
+                if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
+                 {
+                return (int)(minShipD?.ID!);
+                 }
+                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
                 {
-                    return (int)(minOrderD?.ID!);
-                }
-                else
+                return (int)(minOrderD?.ID!);
+                 }
+            else if (minOrderD?.OrderDate < minShipD?.ShipDate)
                 {
-                    return minShipD?.ID ?? 0;// throw new BO.EntityNotExist("no ID");
+                return (int)(minOrderD?.ID!);
+
                 }
-            }
-            
+                else if(minShipD?.ShipDate < minOrderD?.OrderDate)
+                 {
+                return (int)(minShipD?.ID!);
+                 }
+
+            //if (minOrderD?.ShipDate != null )
+            //{
+            //    if (minOrderD?.ShipDate < minShipD?.ShipDate)
+            //        return (int)(minOrderD?.ID!);
+            //    else
+            //        return (int)(minShipD?.ID!);
+            //}
+            //else
+            //{
+            //    if (minOrderD?.OrderDate < minShipD?.ShipDate)
+            //    {
+            //        return (int)(minOrderD?.ID!);
+            //    }
+            //    else
+            //    {
+            //        return minShipD?.ID ?? 0;// throw new BO.EntityNotExist("no ID");
+            //    }
+            //}
+
         }
         return 0;
     }

@@ -34,8 +34,7 @@ public partial class SimulatorWindow : Window
     BackgroundWorker worker;
     Stopwatch stopwatch;
 
-    volatile bool isTimerRun = true;
-
+    bool isTimerRun = true;
     bool isCompleted = false;
     bool isFinished = false;
 
