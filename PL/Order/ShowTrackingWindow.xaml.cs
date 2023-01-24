@@ -22,10 +22,10 @@ namespace PL.Order
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
        public static readonly DependencyProperty TrackingDependency =
-       DependencyProperty.Register(nameof(Tracking),
+       DependencyProperty.Register(nameof(tracking),
                              typeof(BO.OrderTracking),
                              typeof(ShowTrackingWindow));
-        public BO.OrderTracking? Tracking
+        public BO.OrderTracking? tracking
         {
             get => (BO.OrderTracking)GetValue(TrackingDependency);
             private set => SetValue(TrackingDependency, value);
@@ -33,7 +33,7 @@ namespace PL.Order
         public ShowTrackingWindow(int Id)
         {
             InitializeComponent();
-            Tracking=bl.Order.followOrder(Id);
+            tracking=bl.Order.followOrder(Id);
 
         }
     }
