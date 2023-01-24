@@ -356,46 +356,17 @@ internal class Order : BlApi.IOrder
     [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
-
-        /*DO.Order order = new DO.Order()*/
-        ;
-        //IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
-        //if (orders != null)
-        //{
-        //    DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate);
-        //    DO.Order? minShipD = orders.MinBy(item => item?.ShipDate);
-        //    if (minOrderD?.ShipDate != null )
-        //    {
-        //        if (minOrderD?.ShipDate < minShipD?.ShipDate)
-        //            return (int)(minOrderD?.ID!);
-        //        else
-        //            return (int)(minShipD?.ID!);
-        //    }
-        //    else
-        //    {
-        //        if (minOrderD?.OrderDate < minShipD?.ShipDate)
-        //        {
-        //            return (int)(minOrderD?.ID!);
-        //        }
-        //        else
-        //        {
-        //            return (int)(minShipD?.ID!); // throw new BO.EntityNotExist("no ID");
-        //        }
-        //    }
-
-        //}
-
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
         if (orders != null)
         {
-            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate != null);
+            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate != null && item?.ShipDate == null);
             DO.Order? minShipD = orders.MinBy(item => item?.ShipDate != null);
 
                 if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
                  {
                 return (int)(minShipD?.ID!);
                  }
-                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
+                else if(minOrderD?.OrderDate != null && minShipD?.ShipDate == null)
                 {
                 return (int)(minOrderD?.ID!);
                  }
@@ -412,26 +383,6 @@ internal class Order : BlApi.IOrder
                  {
                 return (int)(minShipD?.ID!);
                  }
-
-            //if (minOrderD?.ShipDate != null )
-            //{
-            //    if (minOrderD?.ShipDate < minShipD?.ShipDate)
-            //        return (int)(minOrderD?.ID!);
-            //    else
-            //        return (int)(minShipD?.ID!);
-            //}
-            //else
-            //{
-            //    if (minOrderD?.OrderDate < minShipD?.ShipDate)
-            //    {
-            //        return (int)(minOrderD?.ID!);
-            //    }
-            //    else
-            //    {
-            //        return minShipD?.ID ?? 0;// throw new BO.EntityNotExist("no ID");
-            //    }
-            //}
-
         }
         return 0;
 
