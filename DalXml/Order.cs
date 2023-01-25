@@ -33,7 +33,7 @@ namespace Dal
         public DO.Order GetById(int id) =>
             XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders).FirstOrDefault(p => p?.ID == id)
         
-            ?? throw new Exception("missing id");
+            ?? throw new Exception(" The order does not exist in the list");
 
 
         [MethodImpl(MethodImplOptions.Synchronized)]

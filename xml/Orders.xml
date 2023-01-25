@@ -144,4 +144,13 @@
     <ShipDate>2023-01-24T22:17:35.760368+02:00</ShipDate>
     <DeliveryDate>2023-01-24T22:17:50.0606474+02:00</DeliveryDate>
   </Order>
+  <Order>
+    <ID>100021</ID>
+    <CustomerName>check6</CustomerName>
+    <CustomerEmail>check6@gmail.com</CustomerEmail>
+    <CustomerAddress>reuven23</CustomerAddress>
+    <OrderDate>2023-01-25T17:35:17.5428057+02:00</OrderDate>
+    <ShipDate>2023-01-25T17:41:10.8289454+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
 </ArrayOfOrder>
