@@ -32,7 +32,7 @@ public partial class SimulatorWindow : Window
 {
     static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     BackgroundWorker worker;
-    Stopwatch stopwatch;
+    Stopwatch stopwatch; //to represent the timer of the simulator
 
     bool isTimerRun = true;
     bool isCompleted = false;
@@ -50,12 +50,12 @@ public partial class SimulatorWindow : Window
         worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
         worker.WorkerReportsProgress = true;
         worker.WorkerSupportsCancellation = true;
-        worker.RunWorkerAsync();
+        worker.RunWorkerAsync(); //starting the background worker
         stopwatch.Restart();
     }
 
 
-
+    //Dependecy property for the order ID of the order being taken care of currently
     public static readonly DependencyProperty IdDependency =
                 DependencyProperty.Register(nameof(ID), typeof(int), typeof(SimulatorWindow));
     public int ID
@@ -65,7 +65,7 @@ public partial class SimulatorWindow : Window
     }
 
 
-
+    //Dependecy property for the current status of the order being taken care of currently
     public static readonly DependencyProperty curStatusDependency =
                 DependencyProperty.Register(nameof(curStatus), typeof(BO.OrderStatus), typeof(SimulatorWindow));
     public BO.OrderStatus curStatus
@@ -74,7 +74,7 @@ public partial class SimulatorWindow : Window
         private set => SetValue(curStatusDependency, value);
     }
 
-
+    //Dependecy property for the next status of the order being taken care of currently
     public static readonly DependencyProperty nextStatusDependency =
                 DependencyProperty.Register(nameof(finalStatus), typeof(BO.OrderStatus), typeof(SimulatorWindow));
     public BO.OrderStatus finalStatus
@@ -84,9 +84,7 @@ public partial class SimulatorWindow : Window
     }
 
 
-
-
-
+    //Dependecy property for the start time of the current order simulation
     public static readonly DependencyProperty oldTimeDependency =
                 DependencyProperty.Register(nameof(oldTime), typeof(string), typeof(SimulatorWindow));
     public string oldTime
@@ -96,7 +94,7 @@ public partial class SimulatorWindow : Window
     }
 
 
-
+    //Dependecy property for the end time of the current order simulation
     public static readonly DependencyProperty newTimeDependency =
                 DependencyProperty.Register(nameof(newTime), typeof(string), typeof(SimulatorWindow));
     public string newTime
@@ -108,8 +106,9 @@ public partial class SimulatorWindow : Window
 
 
 
-
-    private void OrderUpdated(int ID, BO.OrderStatus curStatus, DateTime now, BO.OrderStatus nextStatus, DateTime future)
+    // "OrderUpdated" and "OrderCompleted" are observer functions for the simulator events
+    //An observer for updating the simulation
+    private void ReportMyProgress(int ID, BO.OrderStatus curStatus, DateTime now, BO.OrderStatus nextStatus, DateTime future)
     {
         ArrayList myList = new ArrayList();
         myList.Add(ID);
@@ -117,12 +116,12 @@ public partial class SimulatorWindow : Window
         myList.Add(now);
         myList.Add(nextStatus);
         myList.Add(future);
-        worker.ReportProgress(0, myList);
+        worker.ReportProgress(0, myList); //Passing the correct information to be displayed through the "percentProgress" and "userState" properties
     }
-
-    private void OrderCompleted()
+    //An observaer for the end of the simulation
+    private void EndOfSimulator()
     {
-        worker.ReportProgress(1);
+        worker.ReportProgress(1); //Activating the "Worker_ProgressChanged" to stop the simulator
     }
 
 
@@ -130,39 +129,40 @@ public partial class SimulatorWindow : Window
     {
         if (!worker.CancellationPending)
         {
-            Simulator.UnRegisterEndSimulator(OrderCompleted);
-            Simulator.UnRegisterReport(OrderUpdated);
-            stopwatch.Stop();
+            //Unsubscribing the observer methods to the simulator events
+            Simulator.UnRegisterEndSimulator(EndOfSimulator);
+            Simulator.UnRegisterReport(ReportMyProgress);
+            stopwatch.Stop(); //Stopping the stopwatch
             isTimerRun = false;
-            this.Close();
+            this.Close(); //Closing the window                                                                                                                                                                                                                                                 
         }
     }
 
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+        //ProgressPercentage - type of update, updating order or ending simulator
+        //userState = Id, status, time of order, for updating order
     {
-        ArrayList list = (ArrayList)e.UserState! ?? new ArrayList { 0 };
-        int ID = (int)list[0]!;
-
-        if (e.ProgressPercentage == 0)
+  
+        if (e.ProgressPercentage == 2) //DoWork wants to continue the simulator
         {
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.txtClock.Text = timerText;
         }
-        else if (e.ProgressPercentage >= 100000)
+        else if (e.ProgressPercentage == 0) //Updating the status of an event
         {
             if (isCompleted)
             {
                 isCompleted = false;
             }
             ArrayList myList = (ArrayList)e.UserState!;
-            ID = e.ProgressPercentage;
-            curStatus = (BO.OrderStatus)myList[1];
+            ID = (int)myList[0]!;
+            curStatus = (BO.OrderStatus)myList[1]!;
             oldTime = ((DateTime)myList[2]!).ToString();
-            finalStatus = (BO.OrderStatus)myList[3];
+            finalStatus = (BO.OrderStatus)myList[3]!;
             newTime = ((DateTime)myList[4]!).ToString();
         }
-        else
+        else if(e.ProgressPercentage == 1) //  a request to end the simulator is received
         {
             isCompleted = true;
             isTimerRun = false;
@@ -175,43 +175,40 @@ public partial class SimulatorWindow : Window
 
     private void Worker_DoWork(object sender, DoWorkEventArgs e)
     {
-        Simulator.RegisterReport(OrderUpdated);
-        Simulator.RegisterEndSimulator(OrderCompleted);
+        //subscribing the oberver methods to the simulator events
+        Simulator.RegisterReport(ReportMyProgress);
+        Simulator.RegisterEndSimulator(EndOfSimulator);
         Simulator.Activate(); //starting the simulator
 
-        while (!worker.CancellationPending)
+        while (!worker.CancellationPending) //While there is no request to stop the simulation
         {
-            Thread.Sleep(1000);
-            worker.ReportProgress(1);
+            worker.ReportProgress(2); //Reporting the correct stopwatch progress - by
+                                      //Calling the "Worker_ProgressChanged" method
+            Thread.Sleep(1000); //suspending the threשd for one second
+
         }
     }
 
 
-    private void End_of_simulation_Click(object sender, RoutedEventArgs e)
+    private void End_of_simulation_Click(object sender, RoutedEventArgs e) //button to end the simulation
     {
         Simulator.stopSimulator();
-
-        //Simulator.UnRegisterReport(OrderUpdated);
-        //Simulator.UnRegisterEndSimulator(OrderCompleted);
-
-        if (!isTimerRun)
-        {
-            worker.CancelAsync();
-        }
+         if (worker.WorkerSupportsCancellation == true)
+         {
+             worker.CancelAsync();
+         }
         else
         {
             isFinished = true;
         }
-        //Close();
-
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //this function diables the closing of the simulator window by pressing on the "x" sign
     {
-
         e.Cancel = isTimerRun;
-        if (isTimerRun == true)
-            MessageBox.Show("You can't close this window!");
+        if (isTimerRun == true) //if the stopwatch is still running
+            MessageBox.Show("This window does not close by pressing the 'X' button.");
     }
 
 }

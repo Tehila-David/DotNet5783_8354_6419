@@ -15,60 +15,58 @@ public static class Simulator
 {
     static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
     private static readonly Random random = new Random();
-    static volatile bool Active;
+    static volatile bool Active; // comdition that reprsents that the simulator is active
 
-    //public static event Action Stop;
-    //public static event Func<OrderStatus, DateTime, OrderStatus, DateTime, bool> report;
-    //public static void RegisterEndSimulator(Func<OrderStatus, DateTime, OrderStatus, DateTime, bool> observer)//for Event registration לרישום אירוע
-
-    public delegate void SimulatorDone();
-    public static event SimulatorDone EndSimulator;
-
+  
+    //An event delegate property for stopping the simulator
+    public delegate void SimulatorDone(); 
+    public static event SimulatorDone? EndSimulator;
+    //An event delegate property for updating the progress of the simulation
     public delegate void Report(int ID, OrderStatus oldStatus, DateTime oldTime, OrderStatus newStatus, DateTime newTime);
-    public static event Report ReportMyProgress;
+    public static event Report?  ReportMyProgress;
 
-    public static void RegisterEndSimulator(SimulatorDone handler)//for Event registration לרישום אירוע
+    public static void RegisterEndSimulator(SimulatorDone handler) //for event subscription
     {
-        EndSimulator += handler;
+        EndSimulator += handler; // attaching the event handler to the event
     }
-    public static void UnRegisterEndSimulator(SimulatorDone handler)
+    public static void UnRegisterEndSimulator(SimulatorDone handler)//for event unsubscription
     {
         EndSimulator -= handler;
     }
 
 
-    public static void RegisterReport(Report handler)//for Event registration לרישום אירוע
+    public static void RegisterReport(Report handler)//for event subscription
     {
         ReportMyProgress += handler;
     }
-    public static void UnRegisterReport(Report handler)
+    public static void UnRegisterReport(Report handler) //for event unsubscription
     {
         ReportMyProgress -= handler;
     }
 
-    public static void Activate()
+    public static void Activate() //function that starts the simulator
     {
 
-        new Thread(() =>
+        new Thread(() => //creating a thread that performs the simulation
         {
             Active = true;
             while (Active)
             {
-                int OrderID = bl.Order.OrderForSimulator();
+                int OrderID = bl.Order.OrderForSimulator(); //receiving the next order to be taken care of
                 DateTime estimatedTime = DateTime.Now;
                 OrderStatus defaultStatus = OrderStatus.Default;
-                if (OrderID != 0)// not null
+                if (OrderID != 0)// there is an order to be taken care of
                 {
 
                     BO.Order order = (bl.Order.GetByID(OrderID))?? throw new Exception();
                     int delay = random.Next(3, 11);
-                    estimatedTime = DateTime.Now + new TimeSpan(delay * 10000000);
-                    //estimatedTime = DateTime.Now + new TimeSpan(0, 0, delay);
+                    estimatedTime = DateTime.Now + new TimeSpan(delay * 1000);
                     OrderStatus? oldStatus = order.Status;
+                    //Reporting to the PL that an order was received bi initiating the "ReportMyProgress" event
                     ReportMyProgress?.Invoke(order.ID, oldStatus ?? throw new Exception("null"), DateTime.Now,
                     order.Status == OrderStatus.Default ? OrderStatus.shipped : OrderStatus.Deliverded, estimatedTime);
                     Thread.Sleep(delay * 1000);
-
+                    //updating the order status
                     if (order.Status == OrderStatus.Confirmed)
                     {
                         bl.Order.UpdateShipDate(OrderID);
@@ -88,11 +86,11 @@ public static class Simulator
                 }
                 Thread.Sleep(1000); //stop one second before each iteration
             }
-            EndSimulator?.Invoke();
+            EndSimulator?.Invoke(); //stopping the simulator
         }).Start();
     }
 
-    public static void stopSimulator()
+    public static void stopSimulator() //function that stops the simulation
     {
         if (Active)
         {
