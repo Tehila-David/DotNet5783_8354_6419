@@ -168,4 +168,11 @@
     <Price>2000</Price>
     <Amount>1</Amount>
   </OrderItem>
+  <OrderItem>
+    <ID>100025</ID>
+    <ProductID>222224</ProductID>
+    <OrderID>100016</OrderID>
+    <Price>2000</Price>
+    <Amount>4</Amount>
+  </OrderItem>
 </ArrayOfOrderItem>
