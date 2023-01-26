@@ -356,33 +356,41 @@ internal class Order : BlApi.IOrder
     [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
     {
+
+
+
         IEnumerable<DO.Order?> orders = dal.Order.GetAll(item => item?.DeliveryDate == null);
         if (orders != null)
         {
-            DO.Order? minOrderD = orders.MinBy(item => item?.OrderDate != null && item?.ShipDate == null);
-            DO.Order? minShipD = orders.MinBy(item => item?.ShipDate != null);
 
-                if(minOrderD?.OrderDate == null && minShipD?.ShipDate != null)
-                 {
+
+            DO.Order? minOrderD = orders.Where(x => x?.ShipDate == null && x?.OrderDate != null).MinBy(item => item?.OrderDate);
+            DO.Order? minShipD = orders.Where(x => x?.ShipDate != null).MinBy(item => item?.ShipDate);
+
+            if (minOrderD == null && minShipD != null)
+            {
                 return (int)(minShipD?.ID!);
-                 }
-                else if(minOrderD?.OrderDate != null && minShipD?.ShipDate == null)
-                {
+            }
+            else if (minOrderD != null && minShipD == null)
+            {
                 return (int)(minOrderD?.ID!);
-                 }
-                else if(minOrderD?.OrderDate == null && minShipD?.ShipDate == null)
-               {
+            }
+            else if (minOrderD == null && minShipD == null)
+            {
                 return 0;
-                 }
+            }
             else if (minOrderD?.OrderDate < minShipD?.ShipDate)
-                {
+            {
                 return (int)(minOrderD?.ID!);
 
-                }
-                else if(minShipD?.ShipDate < minOrderD?.OrderDate)
-                 {
+            }
+            else if (minShipD?.ShipDate < minOrderD?.OrderDate)
+            {
                 return (int)(minShipD?.ID!);
-                 }
+            }
+
+
+
         }
         return 0;
 
