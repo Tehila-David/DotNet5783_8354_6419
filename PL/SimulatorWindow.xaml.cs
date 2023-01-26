@@ -148,6 +148,7 @@ public partial class SimulatorWindow : Window
             string timerText = stopwatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.txtClock.Text = timerText;
+            ID = 0;
         }
         else if (e.ProgressPercentage == 0) //Updating the status of an event
         {

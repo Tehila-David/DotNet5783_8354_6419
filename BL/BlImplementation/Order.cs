@@ -205,7 +205,8 @@ internal class Order : BlApi.IOrder
         {
             try
             {
-                if (id < 0) { throw new BO.InternalProblem("ID not positive"); }
+                if (id < 0) { throw new BO.InternalProblem("ID can't be Negative"); }
+                if(id<100000) { throw new BO.InternalProblem("ID cannot be under 6 digits"); }
                 DO.Order order = dal?.Order.GetById(id) ?? throw new DO.NotExists("Got null order");
                 List<Tuple<DateTime?, string?>>? TrackingForHelp = new List<Tuple<DateTime?, string?>>();
                 //add status and dateTime to list-TrackingForHelp
