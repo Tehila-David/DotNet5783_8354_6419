@@ -31,10 +31,10 @@
         <TextBlock x:Name="curOrder" Text="Current Order:" FontSize="40" Margin="173,81,263,246" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
         <TextBox x:Name="orderIDTextBox" Text="{Binding  ID}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="191" Height="55" Margin="474,82,0,0" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
         <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="45,165,551,177" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
-        <TextBox x:Name="prevStatusTextBox" Text="{Binding  curStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" Height="50" Margin="207,158,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" />
+        <TextBox x:Name="prevStatusTextBox" Text="{Binding  curStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" Height="50" Margin="207,158,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532"  FontFamily="Arial Rounded MT Bold"/>
 
         <TextBlock x:Name="nextStatus" Text="Next status:" FontSize="20" Margin="406,172,196,185" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
-        <TextBox x:Name="nextStatusTextBox" Text="{Binding  finalStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="179" Height="45" Margin="570,163,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" FontFamily="Arial Rounded MT Bold" />
+        <TextBox x:Name="nextStatusTextBox" Text="{Binding  finalStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="153" Height="45" Margin="596,163,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" FontFamily="Arial Rounded MT Bold" />
 
         <TextBlock x:Name="begTime" Text="Begin time:" FontSize="20" Margin="44,233,587,104" Grid.Row="1" RenderTransformOrigin="0.476,0.665" FontFamily="Arial Rounded MT Bold"/>
         <TextBox x:Name="begTimeTextBox" Text="{Binding  oldTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Height="54" Margin="209,227,0,0" Grid.Row="1" FontFamily="Arial Rounded MT Bold" />
