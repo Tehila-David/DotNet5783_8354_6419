@@ -16,6 +16,12 @@ namespace Dal
     internal class Product : IProduct
     {
         string s_products = @"Products";
+
+        /// <summary>
+        /// Create the xelement of Product
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         static DO.Product? getProduct(XElement s) =>
         s.ToIntNullable("ID") is null ? null : new DO.Product()
@@ -26,7 +32,16 @@ namespace Dal
             InStock = (int)s.ToIntNullable("InStock"),
             Category = s.ToEnumNullable<DO.Category>("Category"),
         };
+
+
+
+
 #pragma warning restore CS8604 // Possible null reference argument.
+        /// <summary>
+        /// Create the List xelement of Product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         static IEnumerable<XElement> createProductElement(DO.Product product)
         {
@@ -40,17 +55,43 @@ namespace Dal
             
                 
         }
+
+
+
+        /// <summary>
+        /// Return list of products by Filter
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? filter = null) =>
             filter is null
             ? XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s))
             : XMLTools.LoadListFromXMLElement(s_products).Elements().Select(s => getProduct(s)).Where(filter);
+
+
+
+        /// <summary>
+        /// Return product by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Product GetById( int id) =>
             (DO.Product)getProduct(XMLTools.LoadListFromXMLElement(s_products)?.Elements()
             .FirstOrDefault(st => st.ToIntNullable("ID") == id)
             // fix to: throw new DalMissingIdException(id);
             ?? throw new Exception("missing id"))!;
+
+
+
+        /// <summary>
+        /// Return product by Predicate
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Product? GetById(Func<DO.Product?, bool>? predicate)
         {
@@ -61,6 +102,15 @@ namespace Dal
             }
             return productsList.FirstOrDefault(predicate);
         }
+
+
+
+        /// <summary>
+        /// Add product to list
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public int Add(DO.Product product)
@@ -77,6 +127,14 @@ namespace Dal
 
             return product.ID; ;
         }
+
+
+
+        /// <summary>
+        /// Delete  product from list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <exception cref="Exception"></exception>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Delete(int id)
         {
@@ -89,6 +147,13 @@ namespace Dal
 
             XMLTools.SaveListToXMLElement(productsRootElem, s_products);
         }
+
+
+
+        /// <summary>
+        ///  Update product from List
+        /// </summary>
+        /// <param name="product"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update(DO.Product product)
         {

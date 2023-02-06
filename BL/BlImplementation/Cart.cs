@@ -20,6 +20,8 @@ internal class Cart:ICart
     {
         return myCart.Items;
     }
+
+
     [MethodImpl(MethodImplOptions.Synchronized)]
 
     public BO.Cart UpdateProductAmount(BO.Cart myCart, int productId, int newAmount)
@@ -73,7 +75,9 @@ internal class Cart:ICart
         }
         return myCart;
     }
-    //[MethodImpl(MethodImplOptions.Synchronized)]
+
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Cart AddProduct(BO.Cart myCart, int productId)
     {
         if(myCart.Items == null)
@@ -129,6 +133,8 @@ internal class Cart:ICart
         }
         return myCart;
     }
+
+
     [MethodImpl(MethodImplOptions.Synchronized)]
     public void CartConfirmation(BO.Cart myCart)
     {

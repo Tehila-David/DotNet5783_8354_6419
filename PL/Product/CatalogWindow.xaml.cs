@@ -36,7 +36,7 @@ namespace PL
         MediaPlayer player = new MediaPlayer();
 
 
-        private void PlaySound(string filePath)
+        private void PlaySound(string filePath)//For music
         {
             player.Open(new Uri(filePath));
             PLAY.Source = player.Source;
@@ -47,6 +47,12 @@ namespace PL
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
         BO.Cart myLovelyCart;
+
+
+        /// <summary>
+        /// Constructor for displayong the catalog
+        /// </summary>
+        /// <param name="myCart"></param>
         public CatalogWindow(BO.Cart myCart)
         {
            
@@ -114,7 +120,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-            PlaySound("C:\\Users\\tehil\\source\\repos\\tehila859\\DotNet5783_8354_6419\\PL\\Images+Music\\mixkit-gold-coin-prize-1999.wav");
+            PlaySound("C:\\Users\\tehil\\source\\repos\\tehila859\\DotNet5783_8354_6419\\PL\\Images+Music\\mixkit-gold-coin-prize-1999.wav");//play sound
         }
 
         /// <summary>
@@ -122,7 +128,6 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             try

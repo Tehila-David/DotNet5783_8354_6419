@@ -59,8 +59,6 @@ namespace PL.Order
         }
 
         
-
-        //public BO.OrderItem OrderItem = new BO.OrderItem();
         /// <summary>
         /// constructor for Adding new item to Order
         /// </summary>
@@ -75,6 +73,12 @@ namespace PL.Order
             DeleteItem.Visibility = Visibility.Hidden;
 
         }
+
+        /// <summary>
+        /// constructor for Updating exsits item from Order
+        /// </summary>
+        /// <param name="OrderId"></param>
+        /// <param name="OrderItemId"></param>
         public OrderItemWindow(int OrderId, int OrderItemId) //!!!???? לא מצליחה לעדכן מוצר שקיים בהזמנה איך עושים את זה     
         {
             InitializeComponent();
@@ -86,7 +90,7 @@ namespace PL.Order
 
         }
 
-        public void UpdateItem_Click(object sender, RoutedEventArgs e)
+        public void UpdateItem_Click(object sender, RoutedEventArgs e)// Update button
         {
 
             try
@@ -110,7 +114,7 @@ namespace PL.Order
 
         }
 
-        private void AddNewItem_Click(object sender, RoutedEventArgs e)
+        private void AddNewItem_Click(object sender, RoutedEventArgs e)//Add Button
         {
             try
             {
@@ -125,7 +129,7 @@ namespace PL.Order
             Close();
         }
 
-        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)//delete Button
         {
             try
             {
@@ -182,42 +186,4 @@ namespace PL.Order
 
 
 
-//private void UpdateItem_Click(object sender, RoutedEventArgs e)
-//{
-//    BO.Product product = new BO.Product();
-//    product = bl.Product.GetById(OrderItem.ProductID);
-//    try
-//    {
-//        if (product.InStock >= OrderItem.Amount)
-//        {
-//            Order1.Items.RemoveAll(item => item.ID == OrderItem.ID);
-//            OrderItem.Name = bl.Product.GetById(OrderItem.ProductID).Name;
-//            OrderItem.Price = bl.Product.GetById(OrderItem.ProductID).Price;
-//            OrderItem.TotalPrice = OrderItem.Amount * OrderItem.Price;
-//            Order1.Items.Add(OrderItem);
-//            product.InStock-=OrderItem.Amount-firstAmount;
-//            bl.Product.Update(product);
-
-//        }
-//        else
-//        {
-//            throw new Exception("The amount of  products is not available");
-//        }
-//    }
-//    catch (FormatException)
-//    {
-//        MessageBox.Show("Check your input and try again");
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message);
-//    }
-
-//    //new OrderWindow(OrderID).Show();
-//    Close();
-
-
-
-
-//}
 

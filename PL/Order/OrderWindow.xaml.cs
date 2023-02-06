@@ -39,8 +39,9 @@ public partial class OrderWindow : Window
 
     public Array StatusArray { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
 
+
     /// <summary>
-    /// constructor for Manager
+    /// Constructor for displaying one order for manager
     /// </summary>
     /// <param name="id"></param>
     public OrderWindow(int id)
@@ -48,12 +49,10 @@ public partial class OrderWindow : Window
         InitializeComponent();
         Order = bl.Order.GetByID(id);
        
-       
-
     }
 
 
-    private void Update_DeliveryDate_Click(object sender, RoutedEventArgs e)
+    private void Update_DeliveryDate_Click(object sender, RoutedEventArgs e)//Update_DeliveryDate Butten
     {
         try
         {
@@ -68,7 +67,7 @@ public partial class OrderWindow : Window
 
 
 
-    private void Update_ShipDate_Click(object sender, RoutedEventArgs e)
+    private void Update_ShipDate_Click(object sender, RoutedEventArgs e)//Update_ShipDate Button
     {
         try
         {
@@ -82,11 +81,11 @@ public partial class OrderWindow : Window
     }
 
     /// <summary>
-    /// Update item in Order
+    /// Update  item in Order
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void Click_Items_List(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void Click_Items_List(object sender, System.Windows.Input.MouseButtonEventArgs e)//Update Button
     {
         ListBox listBox = sender as ListBox;
         BO.OrderItem orderItem = new BO.OrderItem();
@@ -97,9 +96,12 @@ public partial class OrderWindow : Window
         Close();
     }
 
-    
-
-    private void Add_New_Item_Click_1(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Add new item to Order
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Add_New_Item_Click_1(object sender, RoutedEventArgs e)//Add Button
     {
         new OrderItemWindow(Order.ID).Show();
         Close();

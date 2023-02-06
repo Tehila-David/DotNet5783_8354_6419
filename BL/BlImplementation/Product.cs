@@ -13,6 +13,7 @@ internal class Product : BlApi.IProduct
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
 
+
     [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductForList> GetListedProducts(Func<DO.Product?, bool>? predicate = null)
     {
@@ -29,7 +30,7 @@ internal class Product : BlApi.IProduct
                 Category = (BO.Category)product?.Category,
             }).OrderBy(item => item.ID);
         }
-        else
+        else//if Predicate !=null
         {
             return from item in dal.Product.GetAll(predicate)
                    orderby item?.Name //מיון לפי אב
@@ -59,9 +60,9 @@ internal class Product : BlApi.IProduct
                 Category = (BO.Category)product?.Category,
                 Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Sum(item=>item.Amount),
                 IsAvailable = (product?.InStock > 0) ? true : false
-            }).OrderBy(item => item.ID);
+            }).OrderBy(item => item.ID);//sort by ID
         }
-        else
+        else //if Predicate !=null
         {
             return dal.Product.GetAll(predicate).Select(product => new BO.ProductItem
             {
@@ -72,7 +73,7 @@ internal class Product : BlApi.IProduct
                 Category = (BO.Category)product?.Category,
                 Amount = myCart.Items == null ? 0 : myCart.Items.FindAll(orderItem => orderItem.ProductID == product?.ID).Sum(item => item.Amount),
                 IsAvailable = (product?.InStock > 0) ? true : false
-            }).OrderBy(item => item.ID);
+            }).OrderBy(item => item.ID);//sort by ID
         }
     }
     [MethodImpl(MethodImplOptions.Synchronized)]
@@ -91,9 +92,9 @@ internal class Product : BlApi.IProduct
                 InStock = product.InStock
             };
         }
-        catch (DO.NotExists ex)
+        catch (DO.NotExists ex)// not exists
         {
-            throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
+            throw new BO.InternalProblem("Sorry ,this product does not exists in the List ", ex);
         }
     }
     [MethodImpl(MethodImplOptions.Synchronized)]
@@ -117,7 +118,7 @@ internal class Product : BlApi.IProduct
             };
             return productItem;
         }
-        catch (DO.NotExists ex)
+        catch (DO.NotExists ex)// not exists
         {
             throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
         }
@@ -142,11 +143,13 @@ internal class Product : BlApi.IProduct
                 InStock = product.InStock
             });
         }
-        catch (DO.AlreadyExists ex)
+        catch (DO.AlreadyExists ex)//order exists
         {
-            throw new BO.InternalProblem("The product already exists", ex);
+            throw new BO.InternalProblem("The order already exists", ex);
         }
     }
+
+
     [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(BO.Product product)
     {
@@ -167,12 +170,14 @@ internal class Product : BlApi.IProduct
                 InStock = product.InStock
             });
         }
-        catch (DO.NotExists ex)
+        catch (DO.NotExists ex) // not exists
         {
             throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
         }
 
     }
+
+
     [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
@@ -191,7 +196,7 @@ internal class Product : BlApi.IProduct
             dal.Product.Delete(id);
             return;
         }
-        catch (DO.NotExists ex)
+        catch (DO.NotExists ex) // not exists
         {
             throw new BO.InternalProblem("Sorry ,this product does not exist in the List ", ex);
         }

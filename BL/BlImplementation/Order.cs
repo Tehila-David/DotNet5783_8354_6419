@@ -17,9 +17,9 @@ internal class Order : BlApi.IOrder
     DalApi.IDal dal = DalApi.Factory.Get()!;
 
 
+
+
     [MethodImpl(MethodImplOptions.Synchronized)]
-
-
     public IEnumerable<BO.OrderForList> GetListedOrders(Func<DO.Order?, bool>? predicate = null)
     {
         lock (dal)
@@ -33,7 +33,7 @@ internal class Order : BlApi.IOrder
                        let order = item
                        select new BO.OrderForList
                        {
-                           ID = order?.ID ?? throw new NullReferenceException("Missing ID"),
+                           ID = order?.ID ?? throw new NullReferenceException("Missing ID"),//ID not exsists
                            CustomerName = order?.CustomerName,
                            Status = order?.DeliveryDate != null ? BO.OrderStatus.Deliverded : order?.ShipDate != null ? BO.OrderStatus.shipped
                            : BO.OrderStatus.Confirmed,
@@ -43,7 +43,7 @@ internal class Order : BlApi.IOrder
 
 
             }
-            else
+            else//predicate not null
             {
                 return from item in dal.Order.GetAll(predicate)
                        where item != null
@@ -238,8 +238,10 @@ internal class Order : BlApi.IOrder
             }
         }
     }
+
+
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public BO.Order UpdateItems(BO.Order Order, int productId, int amount, bool flag = true)
+    public BO.Order UpdateItems(BO.Order Order, int productId, int amount, bool flag = true)// update OrderItems of Order
     {
 
         lock (dal)
@@ -269,7 +271,7 @@ internal class Order : BlApi.IOrder
                     {
                         throw new BO.InternalProblem("Failed to add orderItem to data tier", str);
                     }
-                    if (amount <= product.InStock)
+                    if (amount <= product.InStock)//if there is enough products in stock
                     {
                         product.InStock -= amount;
                         dal.Product.Update(product);
@@ -355,7 +357,7 @@ internal class Order : BlApi.IOrder
 
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public int OrderForSimulator()// צריך להחזיר את ההזמנה עם הסטטוס הישן
+    public int OrderForSimulator()// For simulator , returns the order with the oldest Status
     {
 
 

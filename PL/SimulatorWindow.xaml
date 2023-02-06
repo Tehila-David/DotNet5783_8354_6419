@@ -11,6 +11,12 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF99E3EE"/>
+                <GradientStop Color="#FFE2F7FA" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
@@ -20,21 +26,21 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height ="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="End_of_simulation" Content="End of simulation"  HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" Click="End_of_simulation_Click" />
-        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="305,14,355,323" Grid.Row="1" RenderTransformOrigin="0.254,0.297"/>
-        <TextBlock x:Name="curOrder" Text="Current Order:" FontSize="40" Margin="185,82,251,245" Grid.Row="1"/>
-        <TextBox x:Name="orderIDTextBox" Text="{Binding  ID}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="191" Height="55" Margin="474,82,0,0" Grid.Row="1" />
-        <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="45,165,551,177" Grid.Row="1"/>
-        <TextBox x:Name="prevStatusTextBox" Text="{Binding  curStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" Height="50" Margin="202,169,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" />
+        <Button x:Name="End_of_simulation" Content="End of simulation"  HorizontalAlignment="Left" Margin="568,338,0,0" Grid.Row="1" VerticalAlignment="Top"  Height="43" Width="146" Click="End_of_simulation_Click" FontFamily="Arial Rounded MT Bold" />
+        <TextBlock x:Name="txtClock" Text="00:00:00"  FontSize="30" Margin="305,14,355,323" Grid.Row="1" RenderTransformOrigin="0.254,0.297" FontFamily="Arial Rounded MT Bold"/>
+        <TextBlock x:Name="curOrder" Text="Current Order:" FontSize="40" Margin="173,81,263,246" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
+        <TextBox x:Name="orderIDTextBox" Text="{Binding  ID}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="191" Height="55" Margin="474,82,0,0" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
+        <TextBlock x:Name="prevStatus" Text="Previous status:" FontSize="20" Margin="45,165,551,177" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
+        <TextBox x:Name="prevStatusTextBox" Text="{Binding  curStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" Height="50" Margin="207,158,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" />
 
-        <TextBlock x:Name="nextStatus" Text="Next status:" FontSize="20" Margin="406,172,196,185" Grid.Row="1"/>
-        <TextBox x:Name="nextStatusTextBox" Text="{Binding  finalStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="179" Height="45" Margin="570,163,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" />
+        <TextBlock x:Name="nextStatus" Text="Next status:" FontSize="20" Margin="406,172,196,185" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
+        <TextBox x:Name="nextStatusTextBox" Text="{Binding  finalStatus}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="179" Height="45" Margin="570,163,0,0" Grid.Row="1" RenderTransformOrigin="0.486,0.532" FontFamily="Arial Rounded MT Bold" />
 
-        <TextBlock x:Name="begTime" Text="Begin time:" FontSize="20" Margin="49,238,582,99" Grid.Row="1" RenderTransformOrigin="0.476,0.665"/>
-        <TextBox x:Name="begTimeTextBox" Text="{Binding  oldTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Height="54" Margin="202,232,0,0" Grid.Row="1" />
+        <TextBlock x:Name="begTime" Text="Begin time:" FontSize="20" Margin="44,233,587,104" Grid.Row="1" RenderTransformOrigin="0.476,0.665" FontFamily="Arial Rounded MT Bold"/>
+        <TextBox x:Name="begTimeTextBox" Text="{Binding  oldTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Height="54" Margin="209,227,0,0" Grid.Row="1" FontFamily="Arial Rounded MT Bold" />
 
-        <TextBlock x:Name="endTime" Text="Estimated end time:" FontSize="20" Margin="410,227,136,110" Grid.Row="1"/>
-        <TextBox x:Name="endTimeTextBox" Text="{Binding  newTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="155" Height="50" Margin="597,223,0,0" Grid.Row="1" />
+        <TextBlock x:Name="endTime" Text="Estimated end time:" FontSize="20" Margin="395,228,151,109" Grid.Row="1" FontFamily="Arial Rounded MT Bold"/>
+        <TextBox x:Name="endTimeTextBox" Text="{Binding  newTime}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="155" Height="50" Margin="597,223,0,0" Grid.Row="1" FontFamily="Arial Rounded MT Bold" />
 
     </Grid>
 </Window>

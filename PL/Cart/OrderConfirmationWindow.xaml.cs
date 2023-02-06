@@ -36,12 +36,11 @@ namespace PL.Cart
         public OrderConfirmationWindow(BO.Cart myCart)
         {
             FinalCart = myCart;
-            InitializeComponent();
-            //DataContext = FinalCart;    
+            InitializeComponent();   
         }
 
 
-        private void ConfirmOrder_Click(object sender, RoutedEventArgs e)
+        private void ConfirmOrder_Click(object sender, RoutedEventArgs e)//ConfirmOrder Button
         {
             try
             {

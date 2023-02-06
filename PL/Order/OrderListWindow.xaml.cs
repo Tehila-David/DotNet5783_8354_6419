@@ -23,6 +23,7 @@ namespace PL.Order
     {
         BlApi.IBl bl = BlApi.Factory.Get()!;
 
+
         public static readonly DependencyProperty OrdersDependency =
        DependencyProperty.Register(nameof(Orders),
                                typeof(ObservableCollection<OrderForList?>),
@@ -36,6 +37,11 @@ namespace PL.Order
 
         public BO.OrderStatus Status { get; set; }= OrderStatus.Default;
         public Array StatusArray { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
+
+
+        /// <summary>
+        /// constructor for Orders List
+        /// </summary>
         public OrderListWindow()
         {
             InitializeComponent();
@@ -43,7 +49,8 @@ namespace PL.Order
             Orders = item == null ? new() : new(item);
         }
 
-        private void OrdersList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        private void OrdersList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)// click on Order from list
         {
             ListBox listBox = sender as ListBox;
             BO.OrderForList order = new BO.OrderForList();
@@ -53,7 +60,7 @@ namespace PL.Order
         }
 
       
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)//Sort by status
         {
             var temp = Status == BO.OrderStatus.Default ?
            bl.Order.GetListedOrders() : bl.Order.GetListedOrders().Where(item => item.Status == Status);

@@ -25,11 +25,10 @@ namespace PL.Order
         BlApi.IBl bl = BlApi.Factory.Get()!;
         public OrderTrackingWindow()
         {
-            InitializeComponent();
-            
+            InitializeComponent();  
         }
         public int id { get; set; }
-        private void OrderTracking_Click(object sender, RoutedEventArgs e)
+        private void OrderTracking_Click(object sender, RoutedEventArgs e)//OrderTracking Button
         {
             try
             {
@@ -45,11 +44,6 @@ namespace PL.Order
             }
         }
 
-
-        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
     }
 }

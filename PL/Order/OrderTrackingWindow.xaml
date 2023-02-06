@@ -38,7 +38,6 @@
         <Label Content="ID :"  Grid.Row="1" RenderTransformOrigin="2.463,0.513"  HorizontalAlignment="Left" Margin="231,143,0,0"   VerticalAlignment="Top" Width="45" Height="36" FontSize="20" FontFamily="Arial Black" />
         <TextBox x:Name="idTextBox" Text="{Binding id}" MaxLength="9" HorizontalAlignment="Center"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="138" Height="25" Grid.Row="1" Margin="0,147,0,0" />
         <Label Content="Enter an order ID :" FontSize="35" RenderTransformOrigin="2.463,0.513"  Grid.Row="1"  HorizontalAlignment="Left" Margin="201,79,0,0"   VerticalAlignment="Top" Width="328" Height="52" FontFamily="Arial Rounded MT Bold"/>
-
         <Button x:Name="orderTrackingButton" Content="Order Tracking" RenderTransformOrigin="2.463,0.513" FontSize="30"   HorizontalAlignment="Left" Margin="232,200,0,0"  VerticalAlignment="Top" Width="223" Height="52" Grid.Row="1" Click="OrderTracking_Click" FontFamily="Arial Nova Cond Light" Background="#FF2CA9E1"/>
 
 

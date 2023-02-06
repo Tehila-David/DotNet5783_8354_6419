@@ -38,6 +38,9 @@ namespace PL
 
         public Array CategoryArray { get { return Enum.GetValues(typeof(BO.Category)); } }
 
+        /// <summary>
+        /// constructor for Products List
+        /// </summary>
         public ProductListWindow()
         {
            InitializeComponent();

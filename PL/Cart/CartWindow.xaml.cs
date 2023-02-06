@@ -50,7 +50,10 @@ namespace PL.Cart
         }
 
         public BO.Cart Cart = new BO.Cart();
-        
+        /// <summary>
+        /// Constructor for cart
+        /// </summary>
+        /// <param name="myCart"></param>
         public CartWindow(BO.Cart myCart)
         {
             Cart = myCart;
@@ -61,9 +64,9 @@ namespace PL.Cart
            
         }
 
-        //  public int ProductID { get; set; }
+      
 
-        private void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        private void RemoveProduct_Click(object sender, RoutedEventArgs e)// Remove product Butten
         {
             try
             {
@@ -84,7 +87,7 @@ namespace PL.Cart
             }
 
         }
-        // public int Amount { get; set; }
+       
 
 
         private void EmptyCart_Click(object sender, RoutedEventArgs e)
@@ -99,7 +102,7 @@ namespace PL.Cart
 
         }
 
-        private void BackToCatalog_Click(object sender, RoutedEventArgs e)
+        private void BackToCatalog_Click(object sender, RoutedEventArgs e)//Ctalog button
         {
             Close();
             new CatalogWindow(Cart).Show();
@@ -110,7 +113,7 @@ namespace PL.Cart
 
         }
 
-        private void cmdUp_Click(object sender, RoutedEventArgs e)
+        private void cmdUp_Click(object sender, RoutedEventArgs e)//cmdUp Button 
         {
             try
             {
@@ -134,7 +137,7 @@ namespace PL.Cart
 
 
         }
-        private void cmdDown_Click(object sender, RoutedEventArgs e)
+        private void cmdDown_Click(object sender, RoutedEventArgs e)//cmdDown Button 
         {
             try
             {
@@ -144,8 +147,6 @@ namespace PL.Cart
                 var items = bl.Cart.cartItems(Cart); //returning list of cart items 
                 CartItems = items == null ? new() : new(items);
                 TotalPrice = Cart.TotalPrice;
-
-                //DataContext = CartItems;
             }
             catch (FormatException)
             {
@@ -157,7 +158,7 @@ namespace PL.Cart
             }
         }
 
-        private void OrderConfirmation_Click(object sender, RoutedEventArgs e)
+        private void OrderConfirmation_Click(object sender, RoutedEventArgs e)//OrderConfirmation Button 
         {
             Close();
             new OrderConfirmationWindow(Cart).Show();

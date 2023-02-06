@@ -47,9 +47,9 @@ namespace Dal
         #endregion
 
         #region SaveLoadWithXElement
-        //[MethodImpl(MethodImplOptions.Synchronized)]
+        
 
-        public static void SaveListToXMLElement(XElement rootElem, string entity)
+        public static void SaveListToXMLElement(XElement rootElem, string entity)// Save List by XMLElement 
         {
             string filePath = $"{s_dir + entity}.xml";
             try
@@ -63,9 +63,8 @@ namespace Dal
             }
         }
 
-       // [MethodImpl(MethodImplOptions.Synchronized)]
-
-        public static XElement LoadListFromXMLElement(string entity)
+       
+        public static XElement LoadListFromXMLElement(string entity) // load List by XMLElement
         {
             string filePath = $"{s_dir + entity}.xml";
             try
@@ -78,7 +77,6 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                //new DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {dir + filePath}", ex);
                 throw new Exception($"fail to load xml file: {filePath}", ex);
             }
         }
@@ -86,9 +84,9 @@ namespace Dal
 
         #region SaveLoadWithXMLSerializer
         static readonly bool s_writing = true;
-      //  [MethodImpl(MethodImplOptions.Synchronized)]
+     
 
-        public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct
+        public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct // save list<T?> by XMLSerializer
         {
             string filePath = $"{s_dir + entity}.xml";
             try
@@ -104,19 +102,11 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {dir + filePath}", ex);            }
                 throw new Exception($"fail to create xml file: {filePath}", ex);
             }
         }
 
-        /// <summary>
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-
-        public static List<T?> LoadListFromXMLSerializer<T>(string entity) where T : struct
+        public static List<T?> LoadListFromXMLSerializer<T>(string entity) where T : struct //load list<T?> by XMLSerializer
         {
             string filePath = $"{s_dir + entity}.xml";
             try
@@ -128,14 +118,12 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {dir + filePath}", ex);            }
                 throw new Exception($"fail to load xml file: {filePath}", ex);
             }
         }
 
-      //  [MethodImpl(MethodImplOptions.Synchronized)]
-
-        public static List<T> LoadListFromXMLSerializer1<T>(string entity) where T : struct// for running numbers
+     
+        public static List<T> LoadListFromXMLSerializer1<T>(string entity) where T : struct// for running numbers , load list<T> by XMLSerializer
         {
             string filePath = $"{s_dir + entity}.xml";
             try
@@ -152,9 +140,9 @@ namespace Dal
             }
         }
 
-      //  [MethodImpl(MethodImplOptions.Synchronized)]
+      
 
-        public static void SaveListToXMLSerializer1<T>(List<T> list, string entity) where T : struct//for running numbers
+        public static void SaveListToXMLSerializer1<T>(List<T> list, string entity) where T : struct//for running numbers , save list<T> by XMLSerializer
         {
             string filePath = $"{s_dir + entity}.xml";
             try

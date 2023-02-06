@@ -30,6 +30,11 @@ namespace PL.Order
             get => (BO.OrderTracking)GetValue(TrackingDependency);
             private set => SetValue(TrackingDependency, value);
         }
+
+        /// <summary>
+        /// Constructor for  displaying orderTracking
+        /// </summary>
+        /// <param name="Id"></param>
         public ShowTrackingWindow(int Id)
         {
             InitializeComponent();

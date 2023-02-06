@@ -9,7 +9,7 @@ namespace Dal;
 public class DalOrder : IOrder
 {
     DataSource _dataSource = DataSource.s_instance;
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Order? GetById(Func<Order?, bool>? predicate)
     {
         return _dataSource.OrderList?.FirstOrDefault(predicate)
@@ -19,7 +19,7 @@ public class DalOrder : IOrder
     /// This function adds an order to list
     /// </summary>
     /// 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Order myOrder)
     {
         if (myOrder.ID == 0)
@@ -34,7 +34,7 @@ public class DalOrder : IOrder
     /// <summary>
     /// This function returns the details of an order based on an id
     /// </summary>
-  // [MethodImpl(MethodImplOptions.Synchronized)]
+   [MethodImpl(MethodImplOptions.Synchronized)]
     public Order GetById(int id)
     {
         return _dataSource.OrderList?.FirstOrDefault(s => s?.ID == id)
@@ -48,17 +48,19 @@ public class DalOrder : IOrder
     /// This function returns the array with all of the order items
     /// </summary>
     /// <returns></returns> array of orders
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+   [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? predicate = null)
     {
         ///looking for all of the products that have their details filed in and returning them
         if (predicate == null) { return _dataSource.OrderList.AsEnumerable(); }
         return _dataSource.OrderList.Where(predicate)?? _dataSource.OrderList.AsEnumerable();
     }
+
+
     /// <summary>
     /// This function receives an id of an order and deletes the order witn the same id
     /// </summary>
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         
@@ -80,7 +82,7 @@ public class DalOrder : IOrder
     /// This function receives an order and updates the order in the array that has the same id
     /// </summary>
     /// 
-   // [MethodImpl(MethodImplOptions.Synchronized)]
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Order myOrder)
     {
        

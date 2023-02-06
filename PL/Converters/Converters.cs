@@ -11,7 +11,7 @@ using BO;
 
 namespace PL.Converters
 {
-    public class CategoryColorConverter : IValueConverter
+    public class CategoryColorConverter : IValueConverter  //Colors the category types
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
             value == null ? Brushes.White : (Category)value switch
@@ -26,7 +26,7 @@ namespace PL.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
             throw new NotImplementedException();
     }
-    public class StatusColorConverter : IValueConverter
+    public class StatusColorConverter : IValueConverter //Colors the status types
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
             value == null ? Brushes.White : (OrderStatus)value switch
@@ -38,92 +38,6 @@ namespace PL.Converters
             };
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
             throw new NotImplementedException();
-    }
-
-    public class VisibilityConverter : IValueConverter
-    {
-        //convert from source property type to target property type
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            bool boolValue = (bool)value;
-            if (boolValue)
-            {
-                return Visibility.Visible;
-            }
-            else
-            {
-                return Visibility.Collapsed;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-            throw new NotImplementedException();
-
-    }
-    public class notVisibilityConverter : IValueConverter
-    {
-        //convert from source property type to target property type
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            bool boolValue = (bool)value;
-            if (boolValue)
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-            throw new NotImplementedException();
-
-    }
-    public class notVisibilityConverterById : IValueConverter
-    {
-        //convert from source property type to target property type
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-           int Id = (int)value;
-            if (Id==0)
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-            throw new NotImplementedException();
-
-    }
-
-    public class VisibilityConverterById : IValueConverter
-    {
-        //convert from source property type to target property type
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            int Id = (int)value;
-            if (Id == 0)
-            {
-                return Visibility.Visible;
-            }
-            else
-            {
-                return Visibility.Collapsed;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-            throw new NotImplementedException();
-
     }
 
 }
