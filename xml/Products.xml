@@ -73,15 +73,22 @@
   <Product>
     <ID>222222</ID>
     <Price>4000</Price>
-    <InStock>58</InStock>
+    <InStock>5</InStock>
     <Name>IPHONE 14</Name>
+    <Category>PHONE</Category>
+  </Product>
+  <Product>
+    <ID>999999</ID>
+    <Price>4000</Price>
+    <InStock>50</InStock>
+    <Name>phone14</Name>
     <Category>PHONE</Category>
   </Product>
   <Product>
     <ID>566567</ID>
     <Price>666</Price>
     <InStock>777</InStock>
-    <Name>stam</Name>
+    <Name>screen Asus</Name>
     <Category>SCREEN</Category>
   </Product>
 </Products>

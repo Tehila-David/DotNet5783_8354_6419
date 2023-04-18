@@ -15,16 +15,9 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        MediaPlayer player = new MediaPlayer();
-      
         
-        private void PlaySound(string filePath)//BackGround Music
-        {
-            player.Open(new Uri(filePath));
-            PLAY.Source = player.Source;
-            player.Play();
-        }
-       
+      
+     
         public MainWindow()
         {
            InitializeComponent();
@@ -33,7 +26,6 @@ namespace PL
             Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
             New_Order.Visibility = Visibility.Hidden;//hide butten of New_Order
             Order_Tracking.Visibility = Visibility.Hidden;//hide butten of  Order_Tracking
-            PlaySound(@"C:\Users\tehil\source\repos\tehila859\DotNet5783_8354_6419\PL\Images+Music\dreams.mp3");
 
         }
         BlApi.IBl? bl = BlApi.Factory.Get();
@@ -91,17 +83,5 @@ namespace PL
             Products_List.Visibility = Visibility.Hidden;//hide butten of Productslist
         }
 
-        private void StopMusic_Click(object sender, RoutedEventArgs e)// Stop Music Button
-        {
-
-          player.Stop();
-
-
-        }
-
-        private void StartMusic_Click(object sender, RoutedEventArgs e)// Start Music Button
-        {
-            player.Play();
-        }
     }
 }
