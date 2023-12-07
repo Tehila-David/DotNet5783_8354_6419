@@ -1,2 +1,9 @@
-# DotNet5783_8354_6419
-Management of an information system for a store that offers products from different categories
+# Description
+Development of an application for an electronics store that includes an admin interface and a user interface.
+# Technology
+- Visual Studio
+- C#
+- XML
+- .NET
+- WPF
+- Github
